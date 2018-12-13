@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getBooks(String id) {
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("type", "caijing");
-//        params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", "caijing");
+        params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
 
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-//                .getBookListByPost(params)
-                .getBookListByGet()
+                .getBookListByPost(params)
+//                .getBookListByGet()   //get请求样例
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CrecgObserverAdapter<ResultModel<DataWrapper<DataModel>>>() {
