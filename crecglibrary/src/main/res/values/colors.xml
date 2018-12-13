@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F4F3F4</color>
+    <color name="colorPrimaryDark">#F4F3F4</color>
+    <color name="colorAccent">#47A768</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="black_little">#151515</color>
+    <color name="gray_toast_666">#666666</color>
+    <color name="gray_text_CCC">#CCCCCC</color>
+    <color name="gray_deep_CECECE">#CECECE</color>
+    <color name="gray_division_DFDFDF">#DFDFDF</color>
+    <color name="gray_line_E5E5E5">#E5E5E5</color>
+    <color name="gray_EBEBEB">#EBEBEB</color>
+    <color name="gray_common_bg">#F4F3F4</color>
+    <color name="gray_f0f0f0">#F0F0F0</color>
+    <color name="gray_F6FBF7">#F6FBF7</color>
+    <color name="gray_F8F8F8">#F8F8F8</color>
+    <color name="gray_F8F9F8">#F8F9F8</color>
+    <color name="gray_deep_85CCCCCC">#85cccccc</color>
+
+    <color name="green_btn_47A768">#47A768</color>
+
+    <color name="red_tv_E02D03">#E02D03</color>
+    <color name="red_tv_00002C">#00002C</color>
+    <color name="green_tv_47A768">#47A768</color>
+    <color name="black_tv_5A5E66">#5A5E66</color>
+
+    <color name="common_text_color">#333333</color>
+    <color name="common_text_color_gray">#999999</color>
+    <color name="common_hint_color_999">#999999</color>
+    <color name="alpha_gray">#89999999</color>
+
+    <color name="common_blue">#5166B9</color>
+</resources>
