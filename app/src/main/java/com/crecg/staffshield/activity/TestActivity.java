@@ -1,7 +1,7 @@
-package com.crecg.staffshield;
+package com.crecg.staffshield.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +13,7 @@ import com.crecg.crecglibrary.network.model.DataModel;
 import com.crecg.crecglibrary.network.model.DataWrapper;
 import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.staffshield.R;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,14 +23,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class MainActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity {
     private TextView textView;
     private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
 
         textView = findViewById(R.id.tv);
         imageView = findViewById(R.id.iv);
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
                             textView.setText(list.get(1).category);
 
-                            Glide.with(MainActivity.this)
+                            Glide.with(TestActivity.this)
                                     .load(list.get(0).thumbnail_pic_s)
                                     .into(imageView);
                         }

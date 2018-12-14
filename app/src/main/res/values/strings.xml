@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">StaffShield</string>
+    <string name="app_name">中铁员工宝</string>
+
+    <!-- 主页 -->
+    <string name="home_exit_hint">再按一次退出</string>
+    <string name="home_nav_financing">理财</string>
+    <string name="home_nav_found">发现</string>
+    <string name="home_nav_me">我的</string>
 </resources>
