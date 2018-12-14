@@ -5,6 +5,7 @@ android {
     buildToolsVersion "${buildToolsVersion}"
 
     defaultConfig {
+        applicationId "com.crecg.staffshield"
         minSdkVersion "${minVersion}"
         targetSdkVersion "${targetVersion}"
         versionCode Integer.parseInt(project.property("versionCode"))
@@ -15,6 +16,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

@@ -1,7 +1,12 @@
 package com.crecg.staffshield.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -26,6 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 public class TestActivity extends AppCompatActivity {
     private TextView textView;
     private ImageView imageView;
+    private String MESSAGE_RECEIVED_ACTION = "com.crecg.staffshield.MESSAGE_RECEIVED_ACTION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,17 @@ public class TestActivity extends AppCompatActivity {
         imageView = findViewById(R.id.iv);
 
         getBooks("");
+
+        registerMessageReceiver();
+
+        Intent intent = getIntent();
+        if (null != intent) {
+            Bundle bundle = intent.getExtras();
+            String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
+            String content = bundle.getString(JPushInterface.EXTRA_ALERT);
+            ToastUtil.showCustom(title);
+            ToastUtil.showCustom(content);
+        }
     }
 
     private void getBooks(String id) {
@@ -70,5 +88,26 @@ public class TestActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void registerMessageReceiver() {
+        MyMsgReceiver receiver = new MyMsgReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        registerReceiver(receiver, filter);
+    }
+
+    public class MyMsgReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                String msg = intent.getStringExtra("msg");
+                String extras = intent.getStringExtra("extra");
+                ToastUtil.showCustom(msg);
+                ToastUtil.showCustom(extras);
+                Log.i("aaa", "msg: " + msg);
+                Log.i("aaa", "extra: " + extras);
+            }
+        }
     }
 }
