@@ -1,0 +1,98 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:baselineAligned="false"
+              android:paddingTop="3dp"
+              android:paddingBottom="3dp"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/ll_tab_financing"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_tab_financing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dip"
+            android:scaleType="fitXY"
+            android:src="@mipmap/financing_tab_icon_normal"/>
+
+        <TextView
+            android:id="@+id/tv_tab_financing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dip"
+            android:text="@string/home_tab_financing"
+            android:textSize="12sp"
+            android:textColor="#666666"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tab_found"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_tab_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dip"
+            android:scaleType="fitXY"
+            android:src="@mipmap/found_tab_icon_normal"/>
+
+        <TextView
+            android:id="@+id/tv_tab_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dip"
+            android:text="@string/home_tab_found"
+            android:textSize="12sp"
+            android:textColor="#666666"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tab_me"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_tab_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dip"
+                android:scaleType="fitXY"
+                android:src="@mipmap/me_tab_icon_normal"/>
+
+            <TextView
+                android:id="@+id/tv_tab_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dip"
+                android:text="@string/home_tab_me"
+                android:textSize="12sp"
+                android:textColor="#666666"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
