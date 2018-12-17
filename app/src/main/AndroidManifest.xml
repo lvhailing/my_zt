@@ -46,6 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.TestActivity" />
+        <activity android:name=".common.BaseActivity" />
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

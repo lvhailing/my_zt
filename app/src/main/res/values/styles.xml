@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- TitleBar -->
+    <style name="TitleBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_bar_height_new</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="TitleBar_Menu_New">
+        <item name="android:windowEnterAnimation">@anim/anim_titlemenu_in_new</item>
+        <item name="android:windowExitAnimation">@anim/anim_titlemenu_out_new</item>
+    </style>
+
 </resources>
