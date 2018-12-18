@@ -4,6 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!-- 临时写的颜色 -->
+    <color name="gray_light">#F2F2F2</color>
+    <color name="white">#ffffff</color>
+
+    <color name="bg_line">#eaeaea</color>
+
+    <color name="txt_black_333333">#333333</color>
+    <color name="txt_black_999999">#999999</color>
+    <color name="txt_red_ff4c4c">#ffff4c4c</color>
     <color name="financing_tv_unslected_ff999999">#ff999999</color>
     <color name="financing_tv_slected_66000000">#66000000</color>
 </resources>
