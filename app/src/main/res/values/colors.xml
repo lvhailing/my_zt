@@ -15,4 +15,5 @@
     <color name="txt_red_ff4c4c">#ffff4c4c</color>
     <color name="financing_tv_unslected_ff999999">#ff999999</color>
     <color name="financing_tv_slected_66000000">#66000000</color>
+    <color name="bg_red_orange">#ff0200</color>
 </resources>

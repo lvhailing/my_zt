@@ -24,11 +24,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/ic_launcher"
+                android:visibility="visible"
+                />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/iv"
                 android:layout_marginLeft="35dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -52,6 +63,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="40dp"
+                android:layout_below="@id/iv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:background="@color/bg_line"/>
@@ -60,8 +72,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_below="@id/iv"
                 android:layout_marginRight="35dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -86,18 +99,22 @@
 
         </RelativeLayout>
 
+        <!--热卖中 状态 start-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/home_tv_top_product_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
                 android:text="热卖中"
                 android:textColor="@color/txt_black_999999"
                 android:textSize="12sp"/>
@@ -107,7 +124,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:id="@+id/home_tv_surplus_amount"
@@ -120,18 +138,49 @@
 
                 <com.crecg.staffshield.widget.MyProgressBar
                     android:id="@+id/ProgressBar"
-                    android:layout_below="@id/home_tv_surplus_amount"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
+                    android:layout_below="@id/home_tv_surplus_amount"
                     android:layout_centerHorizontal="true"
                     android:max="100"
                     android:progress="0"
                     android:progressDrawable="@drawable/progressbar_color"/>
             </RelativeLayout>
         </LinearLayout>
-
+        <!--热卖中 状态 end-->
     </LinearLayout>
+
+    <!--即将开卖 状态  start-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/home_tv_center_product_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="即将开卖"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/home_tv_center_sales_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:text="2018-11-28  14:00"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+    </LinearLayout>
+    <!--即将开卖 状态  end-->
 
     <View
         android:layout_width="match_parent"

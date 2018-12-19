@@ -9,4 +9,21 @@
     <string name="home_tab_found">发现</string>
     <string name="home_tab_me">我的</string>
     <string name="home_btn_transfer_immediately">立即转入</string>
+
+    <!-- 我的 -->
+    <string name="me_total_assets">总资产(元)</string>
+    <string name="me_yesterday_profit">昨日收益(元)</string>
+    <string name="me_accumulated_income">累计收益(元)</string>
+    <string name="me_my_account">我的账户</string>
+    <string name="me_my_account_type_bank">银行存管</string>
+    <string name="me_available_balance">可用余额</string>
+    <string name="me_to_change_into">转入</string>
+    <string name="me_turn_out">转出</string>
+    <string name="me_salary_treasure">工资宝</string>
+    <string name="me_total_holdings">持仓总额(元)</string>
+    <string name="me_regular_product">定期</string>
+    <string name="me_uncollected_revenue">待收收益(元)</string>
+    <string name="me_invite_workmate">邀请同事</string>
+    <string name="me_customer_service_center">客服中心</string>
+
 </resources>
