@@ -28,6 +28,6 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':crecglibrary')
-
-    
+    implementation files('libs/umeng-analytics-7.5.4.jar')
+    implementation files('libs/umeng-common-1.5.4.jar')
 }

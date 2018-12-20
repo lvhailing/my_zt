@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.crecg.crecglibrary.network.model.DataWrapper;
 import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.common.BaseActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,31 +32,42 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends BaseActivity implements View.OnClickListener {
     private TextView textView;
     private ImageView imageView;
     private String MESSAGE_RECEIVED_ACTION = "com.crecg.staffshield.MESSAGE_RECEIVED_ACTION";
+    private Button btn_um;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        initView();
+        initData();
+    }
+
+    private void initView() {
+        btn_um = findViewById(R.id.btn_um);
         textView = findViewById(R.id.tv);
         imageView = findViewById(R.id.iv);
 
-        getBooks("");
+        btn_um.setOnClickListener(this);
 
         registerMessageReceiver();
 
-        Intent intent = getIntent();
-        if (null != intent) {
-            Bundle bundle = intent.getExtras();
-            String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
-            String content = bundle.getString(JPushInterface.EXTRA_ALERT);
-            ToastUtil.showCustom(title);
-            ToastUtil.showCustom(content);
-        }
+//        Intent intent = getIntent();
+//        if (null != intent) {
+//            Bundle bundle = intent.getExtras();
+//            String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
+//            String content = bundle.getString(JPushInterface.EXTRA_ALERT);
+//            ToastUtil.showCustom(title);
+//            ToastUtil.showCustom(content);
+//        }
+    }
+
+    private void initData() {
+        getBooks("");
     }
 
     private void getBooks(String id) {
@@ -61,33 +75,27 @@ public class TestActivity extends AppCompatActivity {
         params.put("type", "caijing");
         params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
 
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getBookListByPost(params)
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getBookListByPost(params)
 //                .getBookListByGet()   //get请求样例
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CrecgObserverAdapter<ResultModel<DataWrapper<DataModel>>>() {
-                    @Override
-                    public void onMyError(Throwable e) {
-                        //server取单据失败
-                        ToastUtil.showCustom("调接口失败");
-                    }
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CrecgObserverAdapter<ResultModel<DataWrapper<DataModel>>>() {
+            @Override
+            public void onMyError(Throwable e) {
+                //server取单据失败
+                ToastUtil.showCustom("调接口失败");
+            }
 
-                    @Override
-                    public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
-                        //server取单据成功
-                        if (result != null && result.result != null
-                                && result.result.data != null && result.result.data.size() > 0) {
-                            List<DataModel> list = result.result.data;
+            @Override
+            public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
+                //server取单据成功
+                if (result != null && result.result != null && result.result.data != null && result.result.data.size() > 0) {
+                    List<DataModel> list = result.result.data;
 
-                            textView.setText(list.get(1).category);
+                    textView.setText(list.get(1).category);
 
-                            Glide.with(TestActivity.this)
-                                    .load(list.get(0).thumbnail_pic_s)
-                                    .into(imageView);
-                        }
-                    }
-                });
+                    Glide.with(TestActivity.this).load(list.get(0).thumbnail_pic_s).into(imageView);
+                }
+            }
+        });
     }
 
     public void registerMessageReceiver() {
@@ -95,6 +103,15 @@ public class TestActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         filter.addAction(MESSAGE_RECEIVED_ACTION);
         registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_um:
+                Intent intent = new Intent(this,TestActivity1.class);
+                startActivity(intent);
+        }
     }
 
     public class MyMsgReceiver extends BroadcastReceiver {

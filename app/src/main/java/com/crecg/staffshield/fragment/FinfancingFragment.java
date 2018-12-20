@@ -1,6 +1,7 @@
 package com.crecg.staffshield.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,16 +9,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.TestActivity;
 
 /**
  * Created by junde on 2018/12/15.
  */
 
-public class FinfancingFragment extends Fragment {
+public class FinfancingFragment extends Fragment implements View.OnClickListener {
 
 
     private View mView;
@@ -26,6 +29,7 @@ public class FinfancingFragment extends Fragment {
     private ScrollView scrollView;
     private LinearLayout ll_vp;
     private LinearLayout ll_point_container;
+    private Button home_btn_transfer_immediately; // 立即转入
 
     @Nullable
     @Override
@@ -55,6 +59,9 @@ public class FinfancingFragment extends Fragment {
         scrollView = (ScrollView) mView.findViewById(R.id.scrollView);
         ll_vp = (LinearLayout) mView.findViewById(R.id.ll_vp);
         ll_point_container = (LinearLayout) mView.findViewById(R.id.ll_point_container);
+        home_btn_transfer_immediately = mView.findViewById(R.id.home_btn_transfer_immediately);
+
+        home_btn_transfer_immediately.setOnClickListener(this);
     }
 
     /**
@@ -62,5 +69,15 @@ public class FinfancingFragment extends Fragment {
      */
     private void requestHomeData() {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.home_btn_transfer_immediately:
+                Intent intent = new Intent(context, TestActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

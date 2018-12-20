@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.crecg.staffshield.R;
+import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -67,11 +68,13 @@ public class BaseActivity extends FragmentActivity implements SwipeRefreshLayout
     protected void onResume() {
         super.onResume();
         JPushInterface.onResume(this);
+        MobclickAgent.onResume(this); // 基础指标统计，不能遗漏
     }
 
     protected void onPause() {
         super.onPause();
         JPushInterface.onPause(this);
+        MobclickAgent.onPause(this); // 基础指标统计，不能遗漏
     }
 
     public void onStop() {
