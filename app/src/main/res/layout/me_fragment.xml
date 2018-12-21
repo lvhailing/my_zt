@@ -441,8 +441,11 @@
                 android:textSize="10sp"/>
 
             <RelativeLayout
+                android:id="@+id/me_rl_customer_service_center"
+                android:padding="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/me_tv_customer_service_news_num"
                 >
 

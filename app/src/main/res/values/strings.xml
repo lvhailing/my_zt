@@ -3,6 +3,14 @@
 
     <string name="net_fail_text">当前网络不可用，点此检查网络设置</string>
 
+    <!-- 所有页面title -->
+    <string name="title_null"></string>
+    <string name="title_customer_service_center">客服中心</string>
+
+
+
+
+
     <!-- 主页 -->
     <string name="home_exit_hint">再按一次退出</string>
     <string name="home_tab_financing">理财</string>

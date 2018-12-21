@@ -3,6 +3,8 @@ package com.crecg.staffshield;
 import android.app.Application;
 
 import com.crecg.crecglibrary.CrecgLibManager;
+//import com.hyphenate.chat.ChatClient;
+//import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -34,5 +36,15 @@ public class MyApplication extends Application {
 
         // 打开统计SDK调试模式（上线时记得关闭）
         UMConfigure.setLogEnabled(true);
+
+        //Kefu sdk 初始化简写方式：
+//        ChatClient.getInstance().init(this, new ChatClient.Options()
+//                .setAppkey("1424181211061451#kefuchannelapp61589")
+//                .setTenantId("61589") // 设置租户id
+//                .showAgentInputState()  // 坐席输入状态显示功能开关 调用此方法开启
+//                .showVisitorWaitCount() // 显示访客等待数功能开关 调用此方法开启
+//                .showMessagePredict()); // 消息预知功能开关 调用此方法开启
+//        // Kefu EaseUI的初始化
+//        UIProvider.getInstance().init(this);
     }
 }

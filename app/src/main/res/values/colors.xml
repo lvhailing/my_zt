@@ -16,4 +16,7 @@
     <color name="financing_tv_unslected_ff999999">#ff999999</color>
     <color name="financing_tv_slected_66000000">#66000000</color>
     <color name="bg_red_orange">#ff0200</color>
+
+    <color name="gray_d">#ff999999</color>
+    <color name="bg_gray">#F5F5F5</color>
 </resources>

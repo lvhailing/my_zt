@@ -34,13 +34,13 @@ import com.crecg.staffshield.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TitleBar extends RelativeLayout{
+public class TitleBar extends RelativeLayout implements OnClickListener {
 
     public LinearLayout actions;
     private LinearLayout actions_back;
     private ListView menuList;
     private LayoutInflater inflater;
-//    private StickItemWindow menuWindow, titleMenuWindow;
+    //    private StickItemWindow menuWindow, titleMenuWindow;
     private TextView title;// left;
     private ImageView left;
     private TextView more;
@@ -55,15 +55,6 @@ public class TitleBar extends RelativeLayout{
     private String logoName = null;
 
     private Context mContext;
-//    private DisplayImageOptions options;
-    private TextView child;
-    private ImageView iv_right_btn;
-    private String shareId;
-    private String shareTitle; // 分享出去时显示的标题
-    private String shareText; // 分享出去时显示的描述
-    private String flag; //判断搜索、分享
-    private String shareUrl; // 分享时用到的url
-    private String userId = null;
 
     public TitleBar(Context context) {
         super(context);
@@ -78,9 +69,9 @@ public class TitleBar extends RelativeLayout{
     private void init(Context context) {
         mContext = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        RelativeLayout view = (RelativeLayout) inflater.inflate(R.layout.titlebar, this);
+        RelativeLayout view = (RelativeLayout) inflater.inflate(R.layout.titlebar, this);
 //        actions = (LinearLayout) view.findViewById(R.id.ll_search);// action
-//        actions_back = (LinearLayout) view.findViewById(R.id.title_back);// 大块返回，包括Title文字
+        actions_back = (LinearLayout) view.findViewById(R.id.title_back);// 大块返回，包括Title文字
 //        tv_groupcount = (TextView) view.findViewById(R.id.top_groupcount);// 返回中的Title右侧文字
 //        more = (TextView) view.findViewById(R.id.top_title_rightbtn);// 右侧
         // 更多菜单
@@ -90,7 +81,7 @@ public class TitleBar extends RelativeLayout{
 
         // left = (TextView) view.findViewById(R.id.top_title_leftbtn);
 //        left = (ImageView) view.findViewById(R.id.top_title_leftbtn);// 返回中的logo图标
-//        title = (TextView) view.findViewById(R.id.top_title);// 返回中的Title左侧文字
+        title = (TextView) view.findViewById(R.id.top_title);// 返回中的Title左侧文字
 //        leftImg = (ImageView) view.findViewById(R.id.top_title_leftview);// 返回中最左侧的回去图标
 //        top_title_menu = (TextView) view.findViewById(R.id.top_title_menu);// 有下拉菜单按钮的Title
 //        rl_top_title_menu = (RelativeLayout) findViewById(R.id.rl_top_title_menu);
@@ -98,15 +89,12 @@ public class TitleBar extends RelativeLayout{
 //        tv_center = (TextView) findViewById(R.id.title_center);// 中间文字
 //        iv_right_btn = (ImageView) findViewById(R.id.iv_right_btn);
 
-//        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.move_rightlittle);
-//        animation.setFillAfter(true);
-    //    leftImg.startAnimation(animation);// 为左侧回去图标设置动来动去的动画
-        // setAnimationLeft(R.anim.left_title_first);
-        //       actions_back.setBackgroundResource(R.drawable.title_selector);// 设置大块返回点击给用户反应
-        // --变身灰色
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.move_rightlittle);
+        animation.setFillAfter(true);
+        leftImg.startAnimation(animation);// 为左侧回去图标设置动来动去的动画
 
-//        actions_back.setOnClickListener(this);
-//        left.setOnClickListener(this);
+        actions_back.setOnClickListener(this);
+        left.setOnClickListener(this);
         // title.setOnClickListener(this);
         // leftImg.setOnClickListener(this);
 //        more.setOnClickListener(this);
@@ -114,7 +102,6 @@ public class TitleBar extends RelativeLayout{
 
 //        options = ImageLoaderManager.initDisplayImageOptions(R.mipmap.logo, R.mipmap.logo, R.mipmap.logo);
     }
-
 
 
     /**
@@ -139,7 +126,84 @@ public class TitleBar extends RelativeLayout{
         return TitleBar.this;
     }
 
+    /**
+     * 设置LOGO显示图片及是否显示
+     *
+     * @param id
+     * @param b
+     * @return
+     */
+    public TitleBar setLogo(int id, boolean b) {
+        if (b) {
+            left.setImageResource(id);
+        } else {
+            left.setVisibility(View.GONE);
+        }
+        return TitleBar.this;
+    }
+
+    /**
+     * 设置最左侧的指示图标资源
+     *
+     * @param r
+     * @return
+     */
+    public TitleBar setIndicator(int r) {
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.move_rightlittle);
+        animation.setFillAfter(true);
+        //      leftImg.startAnimation(animation);
+        leftImg.setImageResource(r);
+        return TitleBar.this;
+    }
+
+    public TitleBar setCenterText(String text) {
+        tv_center.setText(text);
+        return TitleBar.this;
+    }
+
+    /**
+     * 设置是否显示菜单按钮
+     *
+     * @param isShow
+     * @return
+     */
+    public TitleBar showMore(boolean isShow) {
+        more.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        if (!isShow) {
+            LayoutParams p = ((LayoutParams) actions.getLayoutParams());
+            p.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        }
+        return TitleBar.this;
+    }
+
+    /**
+     * 设置title中各个控件的点击事件监听
+     *
+     * @param l
+     */
+    public void setOnActionListener(OnActionListener l) {
+        this.mListener = l;
+    }
 
 
+    OnActionListener mListener;
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+        case R.id.title_back:
+            mListener.onBack();
+            break;
+
+        }
+    }
+
+    public interface OnActionListener {
+        void onAction(int id);
+
+        void onMenu(int id);
+
+        void onBack();
+    }
 
 }
