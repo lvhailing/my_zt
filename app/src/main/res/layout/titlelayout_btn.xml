@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.crecg.staffshield.widget.TitleBar
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/titlebar"
-    style="@style/TitleBar"/>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="25dp">
+
+        <ImageView
+            android:id="@+id/iv_find_password_phone"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:src="@mipmap/ic_launcher"/>
+
+        <EditText
+            android:id="@+id/et_find_password_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="25dp"
+            android:layout_toRightOf="@id/iv_find_password_phone"
+            android:background="@color/transparent"
+            android:hint="请输入手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@color/gray_dark"
+            android:textColorHint="@color/gray_d"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_fine_password_delete_phone"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dip">
+
+        <ImageView
+            android:id="@+id/iv_find_password_verify_code"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:src="@mipmap/ic_launcher"/>
+
+        <EditText
+            android:id="@+id/et_find_password_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/iv_find_password_delete_verify_code"
+            android:layout_toRightOf="@id/iv_find_password_verify_code"
+            android:background="@color/white"
+            android:hint="请输入4位验证码"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textColor="@color/gray_dark"
+            android:textColorHint="@color/gray_d"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="14sp"/>
+
+        <View
+            android:id="@+id/iv_verify_code"
+            android:layout_width="2dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_find_password_get_verify_code"
+            android:background="@color/bg_line"/>
+
+        <ImageView
+            android:id="@+id/iv_find_password_delete_verify_code"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_verify_code"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_find_password_get_verify_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/get_verify_code"
+            android:textColor="@color/gray_dark"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/bg_line"/>
+
+    <Button
+        android:id="@+id/btn_find_login_password_sure"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginTop="25dip"
+        android:background="@drawable/login_btn_shape_blue_0087fd"
+        android:text="@string/register_next_step"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+</LinearLayout>

@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="txt_blue">#0087fd</color>
     <color name="colorAccent">#FF4081</color>
 
     <!-- 临时写的颜色 -->
@@ -18,5 +19,6 @@
     <color name="bg_red_orange">#ff0200</color>
 
     <color name="gray_d">#ff999999</color>
+    <color name="gray_dark">#696969</color>
     <color name="bg_gray">#F5F5F5</color>
 </resources>
