@@ -12,9 +12,22 @@
     <string name="login_forget_password">忘记密码 ?</string>
     <string name="login_new_user_sign">新用户注册</string>
     <string name="login_btn">登录</string>
-    <string name="bnt_sure_reset_login_password">确定</string>
+    <string name="btn_sure">确定</string>
     <string name="get_verify_code">获取验证码</string>
     <string name="register_next_step">下一步</string>
+    <string name="register_phone_authentication">手机号认证</string>
+    <string name="register_id_number_authentication">身份认证</string>
+    <string name="register_tips1">1、注册表示同意</string>
+    <string name="registration_agreement">《注册协议》</string>
+    <string name="register_privacy_policy">《隐私策略》</string>
+    <string name="register_tips2">2、本APP为中铁职工专属理财工具，非中铁职工请勿注册</string>
+    <string name="register_done">完成注册</string>
+    <string name="register_tips3">3、如果您的信息与人事暂不匹配，且准备好了工作证明，</string>
+    <string name="register_tips3_upload_proof">请上传工作证明</string>
+    <string name="old_login_password">旧密码</string>
+    <string name="new_login_password">新密码</string>
+    <string name="confirm_login_password">确认密码</string>
+    <string name="id_card">身份证</string>
 
 
 

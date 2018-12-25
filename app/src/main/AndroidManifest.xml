@@ -45,14 +45,37 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.TestActivity"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.TestActivity1"
             android:screenOrientation="portrait"/>
+
         <activity
             android:name=".activity.CustomerServiceCenterActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.FindLoginPasswordActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegisterOneStepActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegisterTwoStepActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.ChangeLoginPasswordActivity"
             android:screenOrientation="portrait"/>
 
 

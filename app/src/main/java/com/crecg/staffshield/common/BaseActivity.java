@@ -30,11 +30,6 @@ public class BaseActivity extends FragmentActivity implements SwipeRefreshLayout
         setContentView(R.layout.base_activity);
         mContext = this;
 
-        initView();
-    }
-
-    private void initView() {
-
     }
 
     private void initSwipeView() {

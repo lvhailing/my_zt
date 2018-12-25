@@ -1,5 +1,6 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,19 +12,20 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- * 注册(第一步)
+ * 注册(第一步：手机号认证)
  * Created by hong on 2018/12/24.
  */
 
 public class RegisterOneStepActivity extends BaseActivity implements View.OnClickListener {
 
-    private EditText et_login_phone; // 手机号
-    private EditText et_login_password; // 登录密码
-    private TextView tv_login_forget_password; // 忘记密码
-    private TextView tv_login_sign; // 新用户注册
-    private Button btn_login; // 登录
-    private ImageView iv_login_delete_phone; // 删除手机号
-    private ImageView iv_login_delete_password; // 删除登录密码
+    private EditText et_register_phone; // 手机号
+    private EditText et_register_verify_code; // 验证码
+    private TextView tv_register_get_verify_code; // 获取验证码
+    private ImageView iv_register_delete_phone; // 删除手机号
+    private ImageView iv_register_delete_verify_code; // 删除验证码
+    private Button btn_register_next_step; // 下一步
+    private TextView tv_registration_agreement; // 注册协议
+    private TextView tv_register_privacy_policy; // 隐私策略
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +36,36 @@ public class RegisterOneStepActivity extends BaseActivity implements View.OnClic
     }
 
     protected void initView() {
-        et_login_phone = findViewById(R.id.et_login_phone);
-        et_login_password = findViewById(R.id.et_login_password);
-        tv_login_forget_password = findViewById(R.id.tv_login_forget_password);
-        tv_login_sign = findViewById(R.id.tv_login_sign);
-        iv_login_delete_phone = findViewById(R.id.iv_fine_password_delete_phone);
-        iv_login_delete_password = findViewById(R.id.iv_login_delete_password);
-        btn_login = findViewById(R.id.btn_login);
+        et_register_phone = findViewById(R.id.et_register_phone);
+        et_register_verify_code = findViewById(R.id.et_register_verify_code);
+        tv_register_get_verify_code = findViewById(R.id.tv_register_get_verify_code);
+        tv_registration_agreement = findViewById(R.id.tv_registration_agreement);
+        tv_register_privacy_policy = findViewById(R.id.tv_register_privacy_policy);
+        iv_register_delete_phone = findViewById(R.id.iv_register_delete_phone);
+        iv_register_delete_verify_code = findViewById(R.id.iv_register_delete_verify_code);
+        btn_register_next_step = findViewById(R.id.btn_register_next_step);
 
-        tv_login_forget_password.setOnClickListener(this);
-        tv_login_sign.setOnClickListener(this);
-        iv_login_delete_phone.setOnClickListener(this);
-        iv_login_delete_password.setOnClickListener(this);
-        btn_login.setOnClickListener(this);
+        iv_register_delete_phone.setOnClickListener(this);
+        iv_register_delete_verify_code.setOnClickListener(this);
+        tv_registration_agreement.setOnClickListener(this);
+        tv_register_privacy_policy.setOnClickListener(this);
+        btn_register_next_step.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_login_forget_password: // 忘记密码
+            case R.id.iv_register_delete_phone: // 删除手机号
                 break;
-            case R.id.iv_fine_password_delete_phone: // 删除手机号
+            case R.id.iv_register_delete_verify_code: // 删除验证码
                 break;
-            case R.id.iv_login_delete_password: // 删除登录密码
+            case R.id.btn_register_next_step: // 下一步
+                Intent intent = new Intent(this, RegisterTwoStepActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.btn_login: // 登录
+            case R.id.tv_registration_agreement: // 注册协议
                 break;
-            case R.id.tv_login_sign: // 新用户注册
+            case R.id.tv_register_privacy_policy: //  隐私策略
                 break;
         }
     }
