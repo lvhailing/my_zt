@@ -5,8 +5,8 @@ android {
     buildToolsVersion "${buildToolsVersion}"
 
     defaultConfig {
-        minSdkVersion "${minVersion}"
-        targetSdkVersion "${targetVersion}"
+        minSdkVersion Integer.parseInt(project.property("minVersion"))
+        targetSdkVersion Integer.parseInt(project.property("targetVersion"))
         versionCode Integer.parseInt(project.property("versionCode"))
         versionName "${versionName}"
     }
