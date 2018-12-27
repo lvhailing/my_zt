@@ -5,13 +5,15 @@ import android.app.Application;
 import com.crecg.crecglibrary.CrecgLibManager;
 //import com.hyphenate.chat.ChatClient;
 //import com.hyphenate.helpdesk.easeui.UIProvider;
+import com.hyphenate.chat.ChatClient;
+import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
 import cn.jpush.android.api.JPushInterface;
 
 /**
- * Created by lvhailing on 2018/12/13.
+ * Created by hong on 2018/12/13.
  */
 
 public class MyApplication extends Application {
@@ -38,13 +40,13 @@ public class MyApplication extends Application {
         UMConfigure.setLogEnabled(true);
 
         //Kefu sdk 初始化简写方式：
-//        ChatClient.getInstance().init(this, new ChatClient.Options()
-//                .setAppkey("1424181211061451#kefuchannelapp61589")
-//                .setTenantId("61589") // 设置租户id
-//                .showAgentInputState()  // 坐席输入状态显示功能开关 调用此方法开启
-//                .showVisitorWaitCount() // 显示访客等待数功能开关 调用此方法开启
-//                .showMessagePredict()); // 消息预知功能开关 调用此方法开启
-//        // Kefu EaseUI的初始化
-//        UIProvider.getInstance().init(this);
+        ChatClient.getInstance().init(this, new ChatClient.Options()
+                .setAppkey("1424181211061451#kefuchannelapp61589")
+                .setTenantId("61589") // 设置租户id
+                .showAgentInputState()  // 坐席输入状态显示功能开关 调用此方法开启
+                .showVisitorWaitCount() // 显示访客等待数功能开关 调用此方法开启
+                .showMessagePredict()); // 消息预知功能开关 调用此方法开启
+        // Kefu EaseUI的初始化
+        UIProvider.getInstance().init(this);
     }
 }

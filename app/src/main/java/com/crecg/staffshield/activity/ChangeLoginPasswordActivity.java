@@ -39,9 +39,9 @@ public class ChangeLoginPasswordActivity extends BaseActivity {
 
     private void initView() {
         et_reset_transaction_password_id_num = findViewById(R.id.et_reset_transaction_password_id_num);
-        et_reset_transaction_password_new = (EditText) findViewById(R.id.et_reset_transaction_password_new);
-        et_reset_transaction_password_verify_code = (EditText) findViewById(R.id.et_reset_transaction_password_verify_code);
-        et_reset_transaction_password_confirm = (EditText) findViewById(R.id.et_reset_transaction_password_confirm);
+        et_reset_transaction_password_new = findViewById(R.id.et_reset_transaction_password_new);
+        et_reset_transaction_password_verify_code = findViewById(R.id.et_reset_transaction_password_verify_code);
+        et_reset_transaction_password_confirm = findViewById(R.id.et_reset_transaction_password_confirm);
 
         iv_reset_transaction_password_delete_id = findViewById(R.id.iv_reset_transaction_password_delete_id);
         iv_reset_transaction_password_delete_verify_code = findViewById(R.id.iv_reset_transaction_password_delete_verify_code);

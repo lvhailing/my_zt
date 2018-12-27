@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.TestActivity;
+import com.crecg.staffshield.activity.TestActivity1;
 
 /**
  * Created by junde on 2018/12/15.
@@ -75,7 +76,7 @@ public class FinfancingFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_btn_transfer_immediately:
-                Intent intent = new Intent(context, TestActivity.class);
+                Intent intent = new Intent(context, TestActivity1.class);
                 startActivity(intent);
                 break;
         }

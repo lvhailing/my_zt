@@ -15,7 +15,7 @@ public class UrlRoot {
         switch (mEnvironment) {
             case ENV_DEV:
                 // 测试环境
-                ROOT_URL = "http://v.juhe.cn/";
+                ROOT_URL = "http://123.126.102.219:30093/";
                 break;
             case ENV_PRODUCT:
                 // 正式环境

@@ -7,14 +7,14 @@
     tools:context="com.crecg.staffshield.activity.MainActivity">
 
 
-    <TextView
-        android:id="@+id/tv"
+    <Button
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"
-        android:text="aaaaaaa" />
+        android:text="登录" />
 
 
 </RelativeLayout>

@@ -23,19 +23,19 @@ public abstract class CrecgObserverAdapter<T extends ResultModel> implements Obs
 
     @Override
     public void onNext(T result) {
-        if (result.error_code == CommonConstants.SUCCESS) {
+        if (result.code == CommonConstants.SUCCESS) {
             onMySuccess(result);
             return;
         }
-        if (!TextUtils.isEmpty(result.reason)) {
+        if (!TextUtils.isEmpty(result.check)) {
             //状态码不为0
-            ToastUtil.showToast(result.reason);
+            ToastUtil.showToast(result.check);
         } else {
             //状态码不为0，error_msg为空，则异常提示
             ToastUtil.showToast(CommonConstants.ERRO_NETWORK_MSG);
         }
         //最终通知各观察者此异常
-        onError(new IllegalArgumentException("error code: " + result.error_code));
+        onError(new IllegalArgumentException("code: " + result.code));
     }
 
     @Override

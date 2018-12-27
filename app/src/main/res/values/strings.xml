@@ -29,8 +29,19 @@
     <string name="confirm_login_password">确认密码</string>
     <string name="id_card">身份证</string>
 
-
-
+    <!-- 常见问题 -->
+    <string name="common_problem">常见问题</string>
+    <string name="common_problem_salary_treasure">工资宝</string>
+    <string name="common_problem_financing">理财</string>
+    <string name="common_problem_others">其他</string>
+    <string name="one_problem">工资宝的收益是如何计算的？</string>
+    <string name="two_problem">工资宝赎回几天可以到账呢？</string>
+    <string name="three_problem">理财产品的收益是如何计算的？</string>
+    <string name="four_problem">如果没有到期赎回，收益是如何计算的？</string>
+    <string name="five_problem">中铁联名卡是否安全</string>
+    <string name="six_problem">跨行往中铁联名卡转账是否有手续费？</string>
+    <string name="online_service">在线客服</string>
+    <string name="phone_service">电话客服</string>
 
 
     <!-- 主页 -->

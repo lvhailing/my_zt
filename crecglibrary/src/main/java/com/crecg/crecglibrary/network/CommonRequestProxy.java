@@ -4,6 +4,8 @@ package com.crecg.crecglibrary.network;
 import com.crecg.crecglibrary.network.model.DataModel;
 import com.crecg.crecglibrary.network.model.DataWrapper;
 import com.crecg.crecglibrary.network.model.ResultModel;
+import com.crecg.crecglibrary.network.model.ResultUserLoginBean;
+import com.crecg.crecglibrary.network.model.ResultUserLoginContentBean;
 
 import java.util.Map;
 
@@ -25,6 +27,10 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("toutiao/index")
     Observable<ResultModel<DataWrapper<DataModel>>> getBookListByPost(@FieldMap Map<String, Object> params);
+    //测试接口
+    @FormUrlEncoded
+    @POST("android/login")
+    Observable<ResultModel<ResultUserLoginContentBean>> getLoginByPost(@FieldMap Map<String, Object> params);
 
     //测试接口
     @POST("shop/mattersna/v1/getcreatestatus")
