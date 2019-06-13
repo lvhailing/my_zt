@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="28dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tv_register_one_step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_shape_circle_blue"
+                android:gravity="center"
+                android:text="√"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <View
+                android:id="@+id/v_center_line"
+                android:layout_width="140dp"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_toRightOf="@id/tv_register_one_step"
+                android:background="@color/txt_gray_ccc"/>
+
+            <TextView
+                android:id="@+id/tv_register_two_step"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/v_center_line"
+                android:background="@drawable/register_shape_circle_white"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/txt_blue_4A67F5"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_register_phone_authentication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="@string/register_phone_authentication"
+                android:textColor="@color/txt_blue_4A67F5"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="65dp"
+                android:layout_toRightOf="@id/tv_register_phone_authentication"
+                android:text="@string/register_id_number_authentication"
+                android:textColor="@color/txt_blue_4A67F5"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="18dp">
+
+        <ImageView
+            android:id="@+id/iv_register_two_step_name"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/img_register_name"/>
+
+        <EditText
+            android:id="@+id/et_register_two_step_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/iv_register_two_step_name"
+            android:background="@color/transparent"
+            android:hint="请输入真实姓名"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@color/txt_black_333333"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/iv_register_delete_name"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/bg_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <ImageView
+            android:id="@+id/iv_register_two_step_id"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/img_register_id_card"/>
+
+        <EditText
+            android:id="@+id/et_register_two_step_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/iv_register_two_step_id"
+            android:background="@color/transparent"
+            android:hint="请输入身份证号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@color/txt_black_333333"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/iv_register_delete_id"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/bg_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+
+        <ImageView
+            android:id="@+id/iv_register_two_step_login_password"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/img_login_password"/>
+
+        <EditText
+            android:id="@+id/et_register_two_step_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/iv_register_two_step_login_password"
+            android:background="@color/transparent"
+            android:hint="请设置6-8位登录密码"
+            android:inputType="phone"
+            android:maxLength="8"
+            android:textColor="@color/txt_black_333333"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/iv_register_delete_login_password"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/bg_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/img_error_message"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:text="密码至少包括数字、字母、字符两种组合"
+            android:textColor="@color/txt_black_666666"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_register_next_step"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/login_btn_shape_blue_0087fd"
+        android:text="@string/register_done"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_tips1"
+            android:textColor="@color/txt_black_666666"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_registration_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_agreement"
+            android:textColor="@color/txt_blue_4A67F5"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_register_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_privacy_policy"
+            android:textColor="@color/txt_blue_4A67F5"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/register_tips2"
+        android:textColor="@color/txt_black_666666"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="29dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_tips3"
+            android:textColor="@color/txt_black_666666"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_register_upload_proof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="@string/register_tips3_upload_proof"
+            android:textColor="@color/txt_blue_4A67F5"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+</LinearLayout>
