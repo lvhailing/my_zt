@@ -1,6 +1,6 @@
-package com.rulaibao.uitls.encrypt;
+package com.crecg.staffshield.utils.encrypt;
 
-import com.rulaibao.uitls.CharacterEncoder;
+import com.crecg.staffshield.utils.CharacterEncoder;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -1,4 +1,4 @@
-package com.rulaibao.uitls;
+package com.crecg.staffshield.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.rulaibao.R;
+import com.crecg.staffshield.R;
 
 public class SystemInfo {
     // 请不要手动修改DEBUG值

@@ -9,19 +9,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.crecg.staffshield.R;
-import com.crecg.staffshield.activity.TestActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 
 /**
  * Created by junde on 2018/12/15.
  */
 
-public class FinfancingFragment extends Fragment implements View.OnClickListener {
+public class HomePageFragment extends Fragment implements View.OnClickListener {
 
 
     private View mView;
@@ -30,13 +29,13 @@ public class FinfancingFragment extends Fragment implements View.OnClickListener
     private ScrollView scrollView;
     private LinearLayout ll_vp;
     private LinearLayout ll_point_container;
-    private Button home_btn_transfer_immediately; // 立即转入
+    private TextView home_btn_transfer_immediately; // 立即转入
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.finfancing_fragment, container, false);
+            mView = inflater.inflate(R.layout.fragment_home_page, container, false);
             try {
                 initView(mView);
             } catch (Exception e) {
@@ -60,7 +59,7 @@ public class FinfancingFragment extends Fragment implements View.OnClickListener
         scrollView = (ScrollView) mView.findViewById(R.id.scrollView);
         ll_vp = (LinearLayout) mView.findViewById(R.id.ll_vp);
         ll_point_container = (LinearLayout) mView.findViewById(R.id.ll_point_container);
-        home_btn_transfer_immediately = mView.findViewById(R.id.home_btn_transfer_immediately);
+        home_btn_transfer_immediately = mView.findViewById(R.id.tv_transfer_immediately);
 
         home_btn_transfer_immediately.setOnClickListener(this);
     }
@@ -75,7 +74,7 @@ public class FinfancingFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.home_btn_transfer_immediately:
+            case R.id.tv_transfer_immediately:
                 Intent intent = new Intent(context, TestActivity1.class);
                 startActivity(intent);
                 break;

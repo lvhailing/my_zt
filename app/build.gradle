@@ -29,6 +29,24 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+    /**
+     *  解决如下错误：
+     *  aapt.exe'' finished with non-zero exit value 1
+
+     */
+    configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    //这里写你想统一的版本是多少，前提是你sdk里有
+                    details.useVersion '26.0.2'
+                }
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -36,11 +54,9 @@ dependencies {
     implementation project(':crecglibrary')
     implementation files('libs/umeng-analytics-7.5.4.jar')
     implementation files('libs/umeng-common-1.5.4.jar')
-
     //环信客服SDK
-    compile ('com.hyphenate:kefu-easeui-android:latest.release'){
-        exclude group:'com.android.support:support-v4'
-        exclude group:'com.github.bumptech.glide'
+    compile('com.hyphenate:kefu-easeui-android:latest.release') {
+        exclude group: 'com.android.support:support-v4'
+        exclude group: 'com.github.bumptech.glide'
     }
-
 }

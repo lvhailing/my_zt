@@ -12,13 +12,19 @@
     <color name="bg_line">#eaeaea</color>
 
     <color name="txt_black_333333">#333333</color>
+    <color name="txt_black_666666">#666666</color>
     <color name="txt_black_999999">#999999</color>
-    <color name="txt_red_ff4c4c">#ffff4c4c</color>
+    <color name="txt_blue_4A67F5">#4A67F5</color>
+    <color name="txt_blue_4B67F6">#4B67F6</color>
+    <color name="txt_gray_ccc">#cccccc</color>
+    <color name="txt_red_fc514e">#fc514e</color>
     <color name="financing_tv_unslected_ff999999">#ff999999</color>
     <color name="financing_tv_slected_66000000">#66000000</color>
     <color name="bg_red_orange">#ff0200</color>
 
-    <color name="gray_d">#ff999999</color>
+    <color name="gray_d">#999999</color>
     <color name="gray_dark">#696969</color>
     <color name="bg_gray">#F5F5F5</color>
+    <color name="bg_light_gray">#F9F9F9</color>
+    <color name="bg_light_gray_fe">#FeFeFe</color>
 </resources>

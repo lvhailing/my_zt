@@ -4,7 +4,7 @@
  * author: shiqun.shi@alipay.com
  */
 
-package com.rulaibao.uitls.encrypt;
+package com.crecg.staffshield.utils.encrypt;
 
 public final class AlipayBase64 {
 

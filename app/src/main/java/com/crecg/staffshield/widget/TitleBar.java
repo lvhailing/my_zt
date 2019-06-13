@@ -1,4 +1,4 @@
-package com.rulaibao.widget;
+package com.crecg.staffshield.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,17 +28,16 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.rulaibao.R;
-import com.rulaibao.activity.WebActivity;
-import com.rulaibao.common.Urls;
-import com.rulaibao.dialog.ShareSDKDialog;
-import com.rulaibao.uitls.encrypt.DESUtil;
-import com.rulaibao.uitls.ImageLoaderManager;
-import com.rulaibao.uitls.PreferenceUtil;
-import com.rulaibao.uitls.ShareUtil;
-import com.rulaibao.uitls.SystemInfo;
-import com.rulaibao.uitls.ViewUtils;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+//import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.WebActivity;
+//import com.crecg.staffshield.dialog.ShareSDKDialog;
+//import com.crecg.staffshield.utils.ImageLoaderManager;
+import com.crecg.staffshield.utils.PreferenceUtil;
+import com.crecg.staffshield.utils.ShareUtil;
+import com.crecg.staffshield.utils.SystemInfo;
+import com.crecg.staffshield.utils.ViewUtils;
+import com.crecg.staffshield.utils.encrypt.DESUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,7 +63,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
     private String logoName = null;
 
     private Context mContext;
-    private DisplayImageOptions options;
+//    private DisplayImageOptions options;
     private TextView child;
     private ImageView iv_right_btn;
     private String shareId;
@@ -121,7 +120,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
         more.setOnClickListener(this);
         iv_right_btn.setOnClickListener(this);
 
-        options = ImageLoaderManager.initDisplayImageOptions(R.mipmap.logo, R.mipmap.logo, R.mipmap.logo);
+//        options = ImageLoaderManager.initDisplayImageOptions(R.mipmap.logo, R.mipmap.logo, R.mipmap.logo);
     }
 
     private ImageView red;
@@ -401,27 +400,27 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
      * @param act
      * @return
      */
-    public TitleBar addAction(Action act, Context context) {
-        if (actions.getChildCount() == 3) {
-            throw new RuntimeException("action container is full,limit is 2");
-        }
-        TextView child = new TextView(mContext);
-        child.setPadding(0, 0, 10, 0);
-        child.setGravity(Gravity.CENTER);
-        if (act.id > 0) {
-            child.setId(act.id);
-        }
-        Drawable drawable = getResources().getDrawable(act.background);
-        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        child.setCompoundDrawables(drawable, null, null, null);
-        child.setBackgroundResource(R.drawable.title_selector);
-        child.setOnClickListener(this);
-        child.setVisibility(View.VISIBLE);
-        actions.addView(child, new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        badgeRightbtn = new BadgeView(context, child);
-        badgeRightbtn.setText("0");
-        return TitleBar.this;
-    }
+//    public TitleBar addAction(Action act, Context context) {
+//        if (actions.getChildCount() == 3) {
+//            throw new RuntimeException("action container is full,limit is 2");
+//        }
+//        TextView child = new TextView(mContext);
+//        child.setPadding(0, 0, 10, 0);
+//        child.setGravity(Gravity.CENTER);
+//        if (act.id > 0) {
+//            child.setId(act.id);
+//        }
+//        Drawable drawable = getResources().getDrawable(act.background);
+//        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//        child.setCompoundDrawables(drawable, null, null, null);
+//        child.setBackgroundResource(R.drawable.title_selector);
+//        child.setOnClickListener(this);
+//        child.setVisibility(View.VISIBLE);
+//        actions.addView(child, new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+//        badgeRightbtn = new BadgeView(context, child);
+//        badgeRightbtn.setText("0");
+//        return TitleBar.this;
+//    }
 
     /**
      * 在标题栏中删除一个可点击的button
@@ -447,47 +446,47 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
      * @param mAct
      * @return
      */
-    public TitleBar addMenu(Action mAct) {
-        if (menuWindow == null) {
-            menuWindow = new StickItemWindow((View) getParent(), more);
-            menuList = new ListView(mContext);
-            menuList.setDivider(new ColorDrawable(0xff888888));
-            menuList.setDividerHeight(1);
-            menuList.setAdapter(mAdapter);
-            // menuList.setBackgroundColor(0xffdddddd);
-            menuList.setBackgroundColor(0xff666666);
-            menuList.setVerticalScrollBarEnabled(false);
-            menuList.setSelector(R.color.txt_black1);
-            menuList.setOnItemClickListener(new OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO Auto-generated method stub
-                    if (mListener != null) {
-                        mListener.onMenu(view.getId());
-                        menuWindow.dismiss();
-                    }
-                }
-            });
-            menuWindow.setContentView(menuList);
-            menuWindow.setBelow(true);
-        }
-        // from bing ge
-        Action old = null;
-        for (Action a : menus) {
-            if (a.id == mAct.id) {
-                old = a;
-                break;
-            }
-        }
-        if (old != null) {
-            menus.remove(old);
-        }
-        menus.add(mAct);
-        Collections.sort(menus);
-        mAdapter.notifyDataSetChanged();
-        return TitleBar.this;
-    }
+//    public TitleBar addMenu(Action mAct) {
+//        if (menuWindow == null) {
+//            menuWindow = new StickItemWindow((View) getParent(), more);
+//            menuList = new ListView(mContext);
+//            menuList.setDivider(new ColorDrawable(0xff888888));
+//            menuList.setDividerHeight(1);
+//            menuList.setAdapter(mAdapter);
+//            // menuList.setBackgroundColor(0xffdddddd);
+//            menuList.setBackgroundColor(0xff666666);
+//            menuList.setVerticalScrollBarEnabled(false);
+//            menuList.setSelector(R.color.txt_black1);
+//            menuList.setOnItemClickListener(new OnItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    // TODO Auto-generated method stub
+//                    if (mListener != null) {
+//                        mListener.onMenu(view.getId());
+//                        menuWindow.dismiss();
+//                    }
+//                }
+//            });
+//            menuWindow.setContentView(menuList);
+//            menuWindow.setBelow(true);
+//        }
+//        // from bing ge
+//        Action old = null;
+//        for (Action a : menus) {
+//            if (a.id == mAct.id) {
+//                old = a;
+//                break;
+//            }
+//        }
+//        if (old != null) {
+//            menus.remove(old);
+//        }
+//        menus.add(mAct);
+//        Collections.sort(menus);
+//        mAdapter.notifyDataSetChanged();
+//        return TitleBar.this;
+//    }
 
     /**
      * 为title文字点击添加一个菜单项
@@ -495,52 +494,52 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
      * @param mAct
      * @return
      */
-    public TitleBar addTitleMenu(Action mAct) {
-        if (titleMenuWindow == null) {
-            titleMenuWindow = new StickItemWindow((View) getParent(), more);
-            menuList = new ListView(mContext);
-            menuList.setCacheColorHint(getResources().getColor(R.color.transparent));// 去掉ListView的模糊边缘
-            menuList.setDivider(new ColorDrawable(0xff888888));
-            menuList.setDividerHeight(1);
-            menuList.setAdapter(mTitleAdapter);
-            // menuList.setBackgroundResource(R.drawable.pullmenu_bg);//设置下拉菜单总背景
-            menuList.setBackgroundColor(0xff666666);
-            menuList.setVerticalScrollBarEnabled(false);
-            // menuList.setSelector(R.color.transparent);//设置点击时背景透明
-            menuList.setSelector(R.color.txt_black1);
-            menuList.setOnItemClickListener(new OnItemClickListener() {
-
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    if (mListener != null) {
-                        mListener.onMenu(view.getId());
-                        titleMenuWindow.dismiss();
-                    }
-                }
-
-            });
-            // menuList.setLayoutParams(new AbsListView.LayoutParams(
-            // AbsListView.LayoutParams.MATCH_PARENT,
-            // AbsListView.LayoutParams.MATCH_PARENT));
-            titleMenuWindow.setContentView(menuList);
-            titleMenuWindow.setBelow(true);
-        }
-        // from bing ge
-        Action old = null;
-        for (Action a : titleMenus) {
-            if (a.id == mAct.id) {
-                old = a;
-                break;
-            }
-        }
-        if (old != null) {
-            titleMenus.remove(old);
-        }
-        titleMenus.add(mAct);
-        Collections.sort(titleMenus);
-        mTitleAdapter.notifyDataSetChanged();
-        return TitleBar.this;
-    }
+//    public TitleBar addTitleMenu(Action mAct) {
+//        if (titleMenuWindow == null) {
+//            titleMenuWindow = new StickItemWindow((View) getParent(), more);
+//            menuList = new ListView(mContext);
+//            menuList.setCacheColorHint(getResources().getColor(R.color.transparent));// 去掉ListView的模糊边缘
+//            menuList.setDivider(new ColorDrawable(0xff888888));
+//            menuList.setDividerHeight(1);
+//            menuList.setAdapter(mTitleAdapter);
+//            // menuList.setBackgroundResource(R.drawable.pullmenu_bg);//设置下拉菜单总背景
+//            menuList.setBackgroundColor(0xff666666);
+//            menuList.setVerticalScrollBarEnabled(false);
+//            // menuList.setSelector(R.color.transparent);//设置点击时背景透明
+//            menuList.setSelector(R.color.txt_black1);
+//            menuList.setOnItemClickListener(new OnItemClickListener() {
+//
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    if (mListener != null) {
+//                        mListener.onMenu(view.getId());
+//                        titleMenuWindow.dismiss();
+//                    }
+//                }
+//
+//            });
+//            // menuList.setLayoutParams(new AbsListView.LayoutParams(
+//            // AbsListView.LayoutParams.MATCH_PARENT,
+//            // AbsListView.LayoutParams.MATCH_PARENT));
+//            titleMenuWindow.setContentView(menuList);
+//            titleMenuWindow.setBelow(true);
+//        }
+//        // from bing ge
+//        Action old = null;
+//        for (Action a : titleMenus) {
+//            if (a.id == mAct.id) {
+//                old = a;
+//                break;
+//            }
+//        }
+//        if (old != null) {
+//            titleMenus.remove(old);
+//        }
+//        titleMenus.add(mAct);
+//        Collections.sort(titleMenus);
+//        mTitleAdapter.notifyDataSetChanged();
+//        return TitleBar.this;
+//    }
 
     /**
      * 设置最左侧的指示图标资源
@@ -603,15 +602,15 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
         this.url = url;
         this.logoName = logoName;
 //		Toast.makeText(mContext, "setLogo picture=="+picture+" url=="+url+" logoName=="+logoName, Toast.LENGTH_LONG).show();
-        if (b) {
-            if (picture == null) {
-                left.setImageResource(R.mipmap.logo);
-            } else {
-                left.setImageBitmap(picture);
-            }
-        } else {
-            left.setVisibility(View.GONE);
-        }
+//        if (b) {
+//            if (picture == null) {
+//                left.setImageResource(R.mipmap.logo);
+//            } else {
+//                left.setImageBitmap(picture);
+//            }
+//        } else {
+//            left.setVisibility(View.GONE);
+//        }
         return TitleBar.this;
     }
 
@@ -820,20 +819,20 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (!TextUtils.isEmpty(shareId)) {
-                        ShareSDKDialog dialog = new ShareSDKDialog(mContext, new ShareSDKDialog.OnShare() {
-                            @Override
-                            public void onConfirm(int position) {
-                                   ShareUtil.sharedSDK(mContext, position,shareTitle, shareText, shareUrl);
-                            }
-
-                            @Override
-                            public void onCancel() {
-
-                            }
-                        });
-                        dialog.show();
-                    }
+//                    if (!TextUtils.isEmpty(shareId)) {
+//                        ShareSDKDialog dialog = new ShareSDKDialog(mContext, new ShareSDKDialog.OnShare() {
+//                            @Override
+//                            public void onConfirm(int position) {
+//                                   ShareUtil.sharedSDK(mContext, position,shareTitle, shareText, shareUrl);
+//                            }
+//
+//                            @Override
+//                            public void onCancel() {
+//
+//                            }
+//                        });
+//                        dialog.show();
+//                    }
                     break;
                 case R.id.rl_top_title_menu:
                 case R.id.iv_top_title_menu:
@@ -862,7 +861,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
      * @param title 分享出去显示的标题
      * @param text  分享出去显示的简单描述
      */
-    public void setActivityParameters(String shareUrl,String id, String title, String text) {
+    public void setActivityParameters(String shareUrl, String id, String title, String text) {
         this.shareUrl=shareUrl;
         this.shareId = id;
         this.shareTitle = title;
@@ -881,7 +880,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
 
     MenuAdapter mAdapter = new MenuAdapter();
     private ArrayList<Action> menus = new ArrayList<Action>();
-    private BadgeView badgeRightbtn;
+//    private BadgeView badgeRightbtn;
 
     /**
      * titleBar的更多那儿的下拉菜单
@@ -914,10 +913,10 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
             if (convertView == null) {
                 holder = new Holder();
                 inflater = LayoutInflater.from(mContext);
-                convertView = inflater.inflate(R.layout.titlemenu, null);
-                holder.img = (ImageView) convertView.findViewById(R.id.title_menu_img);
-                holder.text = (TextView) convertView.findViewById(R.id.title_menu_text);
-                holder.redImg = (ImageView) convertView.findViewById(R.id.title_menu_red);
+//                convertView = inflater.inflate(R.layout.titlemenu, null);
+//                holder.img = (ImageView) convertView.findViewById(R.id.title_menu_img);
+//                holder.text = (TextView) convertView.findViewById(R.id.title_menu_text);
+//                holder.redImg = (ImageView) convertView.findViewById(R.id.title_menu_red);
                 holder.redImg.setVisibility(GONE);
                 holder.img.setScaleType(ScaleType.CENTER_INSIDE);
                 holder.text.setGravity(Gravity.CENTER_VERTICAL);
@@ -1026,8 +1025,8 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
 
                 holder = new Holder();
                 inflater = LayoutInflater.from(mContext);
-                convertView = inflater.inflate(R.layout.titlemenu_left, null);
-                holder.text = (TextView) convertView.findViewById(R.id.title_menu_text);
+//                convertView = inflater.inflate(R.layout.titlemenu_left, null);
+//                holder.text = (TextView) convertView.findViewById(R.id.title_menu_text);
                 holder.text.setGravity(Gravity.CENTER);
                 // holder.text.setLayoutParams(new
                 // RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -1037,7 +1036,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
                 holder.text.setTextSize(16);
                 holder.text.setTextColor(Color.WHITE);
                 holder.text.setBackgroundResource(act.background);
-                holder.badgeView = (TextView) convertView.findViewById(R.id.title_menu_badgeView);
+//                holder.badgeView = (TextView) convertView.findViewById(R.id.title_menu_badgeView);
                 convertView.setTag(holder);
                 convertView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, ViewUtils.dip2px(mContext, 49)));
                 convertView.setTag(holder);
@@ -1057,7 +1056,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
                 holder.badgeView.setText("");
             }
             if (act.isTextColorRed) {
-                holder.text.setTextColor(mContext.getResources().getColor(R.color.txt_red));
+//                holder.text.setTextColor(mContext.getResources().getColor(R.color.txt_red));
 
             } else {
                 holder.text.setTextColor(Color.WHITE);

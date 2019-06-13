@@ -1,4 +1,4 @@
-package com.rulaibao.uitls;
+package com.crecg.staffshield.utils;
 
 import android.app.Activity;
 
@@ -6,12 +6,9 @@ import java.util.Stack;
 
 /**
  * activity stack manage
- *
- * @author sxn
  */
 public class ActivityStack {
-    //	private static final String LOGTAG = LogUtil
-//			.makeLogTag(ActivityStack.class);
+    //	private static final String LOGTAG = LogUtil.makeLogTag(ActivityStack.class);
     private static Stack<Activity> actStack = new Stack<Activity>();
     private static ActivityStack instance;
 

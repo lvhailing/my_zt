@@ -1,4 +1,4 @@
-package com.rulaibao.widget;
+package com.crecg.staffshield.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
-import com.rulaibao.R;
+import com.crecg.staffshield.R;
 
 import java.util.ArrayList;
 

@@ -22,12 +22,12 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
     private ImageView iv_find_password_delete_phone; // 删除手机号
     private ImageView iv_find_password_delete_verify_code; // 删除验证码
     private TextView tv_find_password_get_verify_code; // 获取验证码
-    private Button btn_find_login_password_sure; // 确定
+    private Button btn_sure; // 确定
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.find_login_password_activity);
+        setContentView(R.layout.activity_find_login_password);
 
         initView();
     }
@@ -38,12 +38,12 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
         iv_find_password_delete_phone = findViewById(R.id.iv_fine_password_delete_phone);
         iv_find_password_delete_verify_code = findViewById(R.id.iv_find_password_delete_verify_code);
         tv_find_password_get_verify_code = findViewById(R.id.tv_find_password_get_verify_code);
-        btn_find_login_password_sure = findViewById(R.id.btn_find_login_password_sure);
+        btn_sure = findViewById(R.id.btn_sure);
 
         iv_find_password_delete_phone.setOnClickListener(this);
         iv_find_password_delete_verify_code.setOnClickListener(this);
         tv_find_password_get_verify_code.setOnClickListener(this);
-        btn_find_login_password_sure.setOnClickListener(this);
+        btn_sure.setOnClickListener(this);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.tv_find_password_get_verify_code:
                 break;
-            case R.id.btn_find_login_password_sure:
+            case R.id.btn_sure:
                 break;
         }
 

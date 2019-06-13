@@ -2,14 +2,19 @@ package com.crecg.staffshield.common;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.crecg.staffshield.MyApplication;
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.widget.CustomProgressDialog;
 import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
@@ -18,16 +23,16 @@ import cn.jpush.android.api.JPushInterface;
  * Created by junde on 2018/12/15.
  */
 
-public class BaseActivity extends FragmentActivity implements SwipeRefreshLayout.OnRefreshListener {
-
+public class BaseActivity extends FragmentActivity implements MyApplication.NetListener, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipe;
     private BaseActivity mContext;  // Activity 上下文
+    public CustomProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.base_activity);
+        setContentView(R.layout.activity_base);
         mContext = this;
 
     }
@@ -48,6 +53,7 @@ public class BaseActivity extends FragmentActivity implements SwipeRefreshLayout
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe);
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        dialog = new CustomProgressDialog(this, "", R.drawable.frame_loading, ProgressDialog.THEME_HOLO_LIGHT);
         View v = inflater.inflate(layoutResId, null);
         llContent.addView(v);
         initSwipeView();
@@ -76,8 +82,37 @@ public class BaseActivity extends FragmentActivity implements SwipeRefreshLayout
         super.onStop();
     }
 
+    public void startLoading() {
+        if (dialog != null && !dialog.isShowing()) {
+            dialog.show();
+        }
+    }
+
+    public void stopLoading() {
+        if (dialog != null) {
+            dialog.dismiss();
+        }
+    }
+
     @Override
     public void onRefresh() {
 
+    }
+
+    @Override
+    public void onNetWorkChange(String netType) {
+        View netHint = findViewById(R.id.netfail_hint);
+        netHint.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Settings.ACTION_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        if (netHint != null) {
+            boolean netFail = TextUtils.isEmpty(netType);
+            netHint.setVisibility(netFail ? View.VISIBLE : View.GONE);
+        }
     }
 }

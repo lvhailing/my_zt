@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
-import com.crecg.staffshield.fragment.FinfancingFragment;
+import com.crecg.staffshield.fragment.HomePageFragment;
 import com.crecg.staffshield.fragment.FoundFragment;
 import com.crecg.staffshield.fragment.MeFragment;
 
@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import cn.jpush.android.api.InstrumentedActivity;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
@@ -37,20 +36,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private SwipeRefreshLayout swipe_refresh;
     private ViewPager vp;
 
-    private LinearLayout ll_tab_financing;
+    private LinearLayout ll_tab_home;
     private LinearLayout ll_tab_found;
     private LinearLayout ll_tab_me;
 
-    private ImageView iv_tab_financing;
+    private ImageView iv_tab_home_page;
     private ImageView iv_tab_found;
     private ImageView iv_tab_me;
 
-    private TextView tv_tab_financing;
-    private TextView tv_tab_found;
-    private TextView tv_tab_me;
+    private TextView tv_tab_home_page; // 首页
+    private TextView tv_tab_found; // 发现
+    private TextView tv_tab_me; // 我的
 
     private ArrayList<Fragment> tabFragments;
-    private FinfancingFragment financingFragment;
+    private HomePageFragment homePageFragment;
     private FoundFragment foundFragment;
     private MeFragment meFragment;
     private FragmentPagerAdapter fragmentAdapter;
@@ -81,30 +80,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //        swipe_refresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         vp = (ViewPager) findViewById(R.id.vp);
 
-        ll_tab_financing = (LinearLayout) findViewById(R.id.ll_tab_financing);
+        ll_tab_home = (LinearLayout) findViewById(R.id.ll_tab_home);
         ll_tab_found = (LinearLayout) findViewById(R.id.ll_tab_found);
         ll_tab_me = (LinearLayout) findViewById(R.id.ll_tab_me);
 
-        iv_tab_financing = (ImageView) findViewById(R.id.iv_tab_financing);
+        iv_tab_home_page = (ImageView) findViewById(R.id.iv_tab_home_page);
         iv_tab_found = (ImageView) findViewById(R.id.iv_tab_found);
         iv_tab_me = (ImageView) findViewById(R.id.iv_tab_me);
 
-        tv_tab_financing = (TextView) findViewById(R.id.tv_tab_financing);
+        tv_tab_home_page = (TextView) findViewById(R.id.tv_tab_home_page);
         tv_tab_found = (TextView) findViewById(R.id.tv_tab_found);
         tv_tab_me = (TextView) findViewById(R.id.tv_tab_me);
 
-        ll_tab_financing.setOnClickListener(this);
+        ll_tab_home.setOnClickListener(this);
         ll_tab_found.setOnClickListener(this);
         ll_tab_me.setOnClickListener(this);
     }
 
     private void initVP() {
         tabFragments = new ArrayList<>();
-        financingFragment = new FinfancingFragment();
+        homePageFragment = new HomePageFragment();
         foundFragment = new FoundFragment();
         meFragment = new MeFragment();
 
-        tabFragments.add(financingFragment);
+        tabFragments.add(homePageFragment);
         tabFragments.add(foundFragment);
         tabFragments.add(meFragment);
 
@@ -144,7 +143,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_tab_financing: // 理财
+            case R.id.ll_tab_home: // 首页
                 setSelect(0);
                 break;
             case R.id.ll_tab_found: // 发现
@@ -176,16 +175,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         switch (pos) {
             case 0:
-                tv_tab_financing.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
-                iv_tab_financing.setImageResource(R.mipmap.financing_tab_icon_pressed);
+                tv_tab_home_page.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
+                iv_tab_home_page.setImageResource(R.mipmap.tab_home_selected);
                 break;
             case 1:
                 tv_tab_found.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
-                iv_tab_found.setImageResource(R.mipmap.found_tab_icon_pressed);
+                iv_tab_found.setImageResource(R.mipmap.tab_found_selected);
                 break;
             case 2:
                 tv_tab_me.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
-                iv_tab_me.setImageResource(R.mipmap.me_tab_icon_pressed);
+                iv_tab_me.setImageResource(R.mipmap.tab_mine_selected);
                 break;
 
         }
@@ -193,16 +192,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     // 改变底部tab文字颜色
     private void resetTvs() {
-        tv_tab_financing.setTextColor(Color.parseColor("#999999"));
+        tv_tab_home_page.setTextColor(Color.parseColor("#999999"));
         tv_tab_found.setTextColor(Color.parseColor("#999999"));
         tv_tab_me.setTextColor(Color.parseColor("#999999"));
     }
 
     // 给底部tab设置 未选中时的背景图片
     private void resetImages() {
-        iv_tab_financing.setImageResource(R.mipmap.financing_tab_icon_normal);
-        iv_tab_found.setImageResource(R.mipmap.found_tab_icon_normal);
-        iv_tab_me.setImageResource(R.mipmap.me_tab_icon_normal);
+        iv_tab_home_page.setImageResource(R.mipmap.tab_home_normal);
+        iv_tab_found.setImageResource(R.mipmap.tab_found_normal);
+        iv_tab_me.setImageResource(R.mipmap.tab_mine_normal);
     }
 
 

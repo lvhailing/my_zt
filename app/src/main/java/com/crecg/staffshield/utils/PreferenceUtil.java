@@ -1,4 +1,4 @@
-package com.rulaibao.uitls;
+package com.crecg.staffshield.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

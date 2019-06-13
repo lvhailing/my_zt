@@ -1,7 +1,6 @@
 package com.crecg.staffshield.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,7 +14,7 @@ import com.crecg.staffshield.common.BaseActivity;
  * Created by junde on 2018/12/25.
  */
 
-public class ChangeLoginPasswordActivity extends BaseActivity {
+public class ModifyLoginPasswordActivity extends BaseActivity {
 
     private EditText et_reset_transaction_password_id_num; // 身份证号
     private EditText et_reset_transaction_password_verify_code; // 验证码
@@ -32,7 +31,7 @@ public class ChangeLoginPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.change_login_password_activity);
+        setContentView(R.layout.activity_change_login_password);
 
         initView();
     }

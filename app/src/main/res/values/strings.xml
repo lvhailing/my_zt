@@ -6,7 +6,14 @@
     <!-- 所有页面title -->
     <string name="title_null"></string>
     <string name="title_customer_service_center">客服中心</string>
-    
+    <string name="title_home_page">首页</string>
+    <!--<string name="title_mine">我的</string>-->
+    <string name="title_setting">设置</string>
+    <string name="title_find_login_password">找回登录密码</string>
+    <string name="title_work_certificate">申请加入中铁员工宝</string>
+
+
+
     <!-- 用户相关的 -->
     <string name="login_tips">中铁职工专属理财工具</string>
     <string name="login_forget_password">忘记密码 ?</string>
@@ -46,7 +53,7 @@
 
     <!-- 主页 -->
     <string name="home_exit_hint">再按一次退出</string>
-    <string name="home_tab_financing">理财</string>
+    <string name="home_tab_page">首页</string>
     <string name="home_tab_found">发现</string>
     <string name="home_tab_me">我的</string>
     <string name="home_btn_transfer_immediately">立即转入</string>
@@ -57,14 +64,26 @@
     <string name="me_accumulated_income">累计收益(元)</string>
     <string name="me_my_account">我的账户</string>
     <string name="me_my_account_type_bank">银行存管</string>
-    <string name="me_available_balance">可用余额</string>
+    <string name="me_available_balance">可用余额(元)</string>
     <string name="me_to_change_into">转入</string>
     <string name="me_turn_out">转出</string>
     <string name="me_salary_treasure">工资宝</string>
     <string name="me_total_holdings">持仓总额(元)</string>
-    <string name="me_regular_product">定期</string>
+    <string name="me_regular_financial_management">定期理财</string>
     <string name="me_uncollected_revenue">待收收益(元)</string>
     <string name="me_invite_workmate">邀请同事</string>
     <string name="me_customer_service_center">客服中心</string>
+
+    <!-- 设置 相关 -->
+    <string name="phone_number">手机号</string>
+    <string name="modify_login_password">修改登录密码</string>
+    <string name="reset_transaction_password">重置交易密码</string>
+    <string name="clear_local_cache">清空本地缓存</string>
+    <string name="safe_exit">安全退出</string>
+
+
+    <string name="join_immediately">立即加入</string>
+
+
 
 </resources>

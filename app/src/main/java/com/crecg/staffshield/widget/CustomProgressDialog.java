@@ -1,4 +1,4 @@
-package com.rulaibao.widget;
+package com.crecg.staffshield.widget;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rulaibao.R;
+import com.crecg.staffshield.R;
 
 
 /**
@@ -23,7 +23,7 @@ public class CustomProgressDialog extends ProgressDialog {
     private TextView mLoadingTv;
     private int mResid;
 
-    public CustomProgressDialog(Context context, String content, int id,int theme) {
+    public CustomProgressDialog(Context context, String content, int id, int theme) {
         super(context,theme);
         this.mLoadingTip = content;
         this.mResid = id;

@@ -1,6 +1,12 @@
 package com.crecg.staffshield;
 
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.crecg.crecglibrary.CrecgLibManager;
 //import com.hyphenate.chat.ChatClient;
@@ -10,6 +16,8 @@ import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
+import java.util.HashSet;
+
 import cn.jpush.android.api.JPushInterface;
 
 /**
@@ -17,6 +25,12 @@ import cn.jpush.android.api.JPushInterface;
  */
 
 public class MyApplication extends Application {
+    private BroadcastReceiver mReceiver;
+    public String netType;
+    IntentFilter mFilter;
+    HashSet<NetListener> mListeners = new HashSet<NetListener>();
+
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -48,5 +62,75 @@ public class MyApplication extends Application {
                 .showMessagePredict()); // 消息预知功能开关 调用此方法开启
         // Kefu EaseUI的初始化
         UIProvider.getInstance().init(this);
+    }
+
+    public interface NetListener {
+        void onNetWorkChange(String netType);
+    }
+
+    /**
+     * 加入网络监听
+     * @param l
+     * @return
+     */
+    public boolean addNetListener(NetListener l) {
+        boolean rst = false;
+        if (l != null && mListeners != null) {
+            rst = mListeners.add(l);
+        }
+        return rst;
+    }
+
+    /**
+     * 初始化网络监听器
+     */
+    private void initNetReceiver() {
+        mReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
+                    ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo info = manager.getActiveNetworkInfo();
+                    if (info != null && info.isConnected()) {
+                        netType = info.getTypeName();
+                    } else {
+                        netType = "";
+                    }
+                    for (NetListener lis : mListeners) {
+                        if (lis != null) {
+                            lis.onNetWorkChange(netType);
+                        }
+                    }
+                }
+            }
+        };
+        mFilter = new IntentFilter();
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+    }
+
+    /**
+     * 注册网络监听器
+     */
+    public void registReceiver() {
+        try {
+            registerReceiver(mReceiver, mFilter);
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     * 注销网络监听器
+     */
+    public void unRegisterNetListener() {
+        if (mListeners != null) {
+            mListeners.clear();
+        }
+        try {
+            unregisterReceiver(mReceiver);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 }

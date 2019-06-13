@@ -1,4 +1,4 @@
-package com.rulaibao.uitls.encrypt;
+package com.crecg.staffshield.utils.encrypt;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

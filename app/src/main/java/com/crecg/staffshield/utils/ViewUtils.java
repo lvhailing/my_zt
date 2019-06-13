@@ -1,4 +1,4 @@
-package com.rulaibao.uitls;
+package com.crecg.staffshield.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,12 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.rulaibao.R;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.rulaibao.activity.TrainingCircleDetailsActivity;
-import com.rulaibao.base.BaseActivity;
-import com.rulaibao.dialog.CancelNormalDialog;
-import com.rulaibao.dialog.DeleteMessageDialog;
+//import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.crecg.staffshield.R;
+import com.crecg.staffshield.common.BaseActivity;
+//import com.rulaibao.dialog.CancelNormalDialog;
+//import com.rulaibao.dialog.DeleteMessageDialog;
 
 import java.util.HashMap;
 
@@ -169,16 +168,16 @@ public class ViewUtils {
 	 * PullToRefreshListView  上滑加载更多及下拉刷新
 	 * @param listView
 	 */
-	public static void slideAndDropDown(PullToRefreshListView listView) {
+//	public static void slideAndDropDown(PullToRefreshListView listView) {
 		// 下拉刷新
-		listView.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新");
-		listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("更新中...");
-		listView.getLoadingLayoutProxy(true, false).setReleaseLabel("松开更新");
+//		listView.getLoadingLayoutProxy(true, false).setPullLabel("下拉刷新");
+//		listView.getLoadingLayoutProxy(true, false).setRefreshingLabel("更新中...");
+//		listView.getLoadingLayoutProxy(true, false).setReleaseLabel("松开更新");
 		// 上拉加载更多，分页加载
-		listView.getLoadingLayoutProxy(false, true).setPullLabel("上拉加载更多");
-		listView.getLoadingLayoutProxy(false, true).setRefreshingLabel("加载中...");
-		listView.getLoadingLayoutProxy(false, true).setReleaseLabel("松开加载");
-	}
+//		listView.getLoadingLayoutProxy(false, true).setPullLabel("上拉加载更多");
+//		listView.getLoadingLayoutProxy(false, true).setRefreshingLabel("加载中...");
+//		listView.getLoadingLayoutProxy(false, true).setReleaseLabel("松开加载");
+//	}
 
 
 	/**
@@ -189,174 +188,174 @@ public class ViewUtils {
 	 *
 	 */
 
-	public static void setButton(String str1,String str2,Button btn_sign){
-		if(TextUtils.isEmpty(str1)){
-			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-			btn_sign.setClickable(false);
-		}else {
-			if(TextUtils.isEmpty(str2)){
-				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-				btn_sign.setClickable(false);
-			}else{
-				btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
-				btn_sign.setClickable(true);
+//	public static void setButton(String str1, String str2, Button btn_sign){
+//		if(TextUtils.isEmpty(str1)){
+//			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//			btn_sign.setClickable(false);
+//		}else {
+//			if(TextUtils.isEmpty(str2)){
+//				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//				btn_sign.setClickable(false);
+//			}else{
+//				btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
+//				btn_sign.setClickable(true);
+//
+//			}
+//		}
+//	}
 
-			}
-		}
-	}
+//	public static void setButton(String str1, String str2, String str3, Button btn_sign){
+//		if(TextUtils.isEmpty(str1)){
+//			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//			btn_sign.setClickable(false);
+//		}else {
+//			if(TextUtils.isEmpty(str2)){
+//				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//				btn_sign.setClickable(false);
+//			}else{
+//				if(TextUtils.isEmpty(str3)){
+//					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//					btn_sign.setClickable(false);
+//				}else{
+//					btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
+//					btn_sign.setClickable(true);
+//				}
+//			}
+//		}
+//	}
 
-	public static void setButton(String str1,String str2,String str3,Button btn_sign){
-		if(TextUtils.isEmpty(str1)){
-			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-			btn_sign.setClickable(false);
-		}else {
-			if(TextUtils.isEmpty(str2)){
-				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-				btn_sign.setClickable(false);
-			}else{
-				if(TextUtils.isEmpty(str3)){
-					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-					btn_sign.setClickable(false);
-				}else{
-					btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
-					btn_sign.setClickable(true);
-				}
-			}
-		}
-	}
+//	public static void setButton(String str1, String str2, String str3, String str4, Button btn_sign){
+//		if(TextUtils.isEmpty(str1)){
+//			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//			btn_sign.setClickable(false);
+//		}else {
+//			if(TextUtils.isEmpty(str2)){
+//				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//				btn_sign.setClickable(false);
+//			}else{
+//				if(TextUtils.isEmpty(str3)){
+//					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//					btn_sign.setClickable(false);
+//				}else{
+//					if(TextUtils.isEmpty(str4)){
+//						btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//						btn_sign.setClickable(false);
+//					}else{
+//						btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
+//						btn_sign.setClickable(true);
+//					}
+//
+//				}
+//			}
+//		}
+//	}
 
-	public static void setButton(String str1,String str2,String str3,String str4,Button btn_sign){
-		if(TextUtils.isEmpty(str1)){
-			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-			btn_sign.setClickable(false);
-		}else {
-			if(TextUtils.isEmpty(str2)){
-				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-				btn_sign.setClickable(false);
-			}else{
-				if(TextUtils.isEmpty(str3)){
-					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-					btn_sign.setClickable(false);
-				}else{
-					if(TextUtils.isEmpty(str4)){
-						btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-						btn_sign.setClickable(false);
-					}else{
-						btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
-						btn_sign.setClickable(true);
-					}
+//	public static void setButton(String str1, String str2, String str3, String str4, String str5, Button btn_sign){
+//		if(TextUtils.isEmpty(str1)){
+//			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//			btn_sign.setClickable(false);
+//		}else {
+//			if(TextUtils.isEmpty(str2)){
+//				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//				btn_sign.setClickable(false);
+//			}else{
+//				if(TextUtils.isEmpty(str3)){
+//					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//					btn_sign.setClickable(false);
+//				}else{
+//					if(TextUtils.isEmpty(str4)){
+//						btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//						btn_sign.setClickable(false);
+//					}else{
+//						if(TextUtils.isEmpty(str5)){
+//							btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//							btn_sign.setClickable(false);
+//						}else{
+//							btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
+//							btn_sign.setClickable(true);
+//						}
+//					}
+//
+//				}
+//			}
+//		}
+//	}
 
-				}
-			}
-		}
-	}
-
-	public static void setButton(String str1,String str2,String str3,String str4,String str5,Button btn_sign){
-		if(TextUtils.isEmpty(str1)){
-			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-			btn_sign.setClickable(false);
-		}else {
-			if(TextUtils.isEmpty(str2)){
-				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-				btn_sign.setClickable(false);
-			}else{
-				if(TextUtils.isEmpty(str3)){
-					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-					btn_sign.setClickable(false);
-				}else{
-					if(TextUtils.isEmpty(str4)){
-						btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-						btn_sign.setClickable(false);
-					}else{
-						if(TextUtils.isEmpty(str5)){
-							btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-							btn_sign.setClickable(false);
-						}else{
-							btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
-							btn_sign.setClickable(true);
-						}
-					}
-
-				}
-			}
-		}
-	}
-
-	public static void setButton(String str1,String str2,String str3,String str4,String str5,String str6,Button btn_sign){
-		if(TextUtils.isEmpty(str1)){
-			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-			btn_sign.setClickable(false);
-		}else {
-			if(TextUtils.isEmpty(str2)){
-				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-				btn_sign.setClickable(false);
-			}else{
-				if(TextUtils.isEmpty(str3)){
-					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-					btn_sign.setClickable(false);
-				}else{
-					if(TextUtils.isEmpty(str4)){
-						btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-						btn_sign.setClickable(false);
-					}else{
-						if(TextUtils.isEmpty(str5)){
-							btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-							btn_sign.setClickable(false);
-						}else{
-							if(TextUtils.isEmpty(str6)){
-								btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
-								btn_sign.setClickable(false);
-							}else{
-								btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
-								btn_sign.setClickable(true);
-							}
-						}
-					}
-
-				}
-			}
-		}
-	}
+//	public static void setButton(String str1, String str2, String str3, String str4, String str5, String str6, Button btn_sign){
+//		if(TextUtils.isEmpty(str1)){
+//			btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//			btn_sign.setClickable(false);
+//		}else {
+//			if(TextUtils.isEmpty(str2)){
+//				btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//				btn_sign.setClickable(false);
+//			}else{
+//				if(TextUtils.isEmpty(str3)){
+//					btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//					btn_sign.setClickable(false);
+//				}else{
+//					if(TextUtils.isEmpty(str4)){
+//						btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//						btn_sign.setClickable(false);
+//					}else{
+//						if(TextUtils.isEmpty(str5)){
+//							btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//							btn_sign.setClickable(false);
+//						}else{
+//							if(TextUtils.isEmpty(str6)){
+//								btn_sign.setBackgroundResource(R.drawable.shape_center_gray);
+//								btn_sign.setClickable(false);
+//							}else{
+//								btn_sign.setBackgroundResource(R.drawable.shape_gradient_orange);
+//								btn_sign.setClickable(true);
+//							}
+//						}
+//					}
+//
+//				}
+//			}
+//		}
+//	}
 
 
 	//  去认证
 
-	public static void showToSaleCertificationDialog(final Context context, String msg) {
-		CancelNormalDialog dialog = new CancelNormalDialog(context, new CancelNormalDialog.IsCancel() {
-			@Override
-			public void onConfirm() {
-				HashMap<String, Object> map = new HashMap<>();
-				map.put("realName", PreferenceUtil.getUserRealName());
-				map.put("status", PreferenceUtil.getCheckStatus());
-				RlbActivityManager.toSaleCertificationActivity((BaseActivity)context, map, false);
-
-			}
-
-			@Override
-			public void onCancel() {
-
-			}
-		},"去认证");
-		dialog.setTitle(msg);
-		dialog.show();
-	}
+//	public static void showToSaleCertificationDialog(final Context context, String msg) {
+//		CancelNormalDialog dialog = new CancelNormalDialog(context, new CancelNormalDialog.IsCancel() {
+//			@Override
+//			public void onConfirm() {
+//				HashMap<String, Object> map = new HashMap<>();
+//				map.put("realName", PreferenceUtil.getUserRealName());
+//				map.put("status", PreferenceUtil.getCheckStatus());
+//				RlbActivityManager.toSaleCertificationActivity((BaseActivity)context, map, false);
+//
+//			}
+//
+//			@Override
+//			public void onCancel() {
+//
+//			}
+//		},"去认证");
+//		dialog.setTitle(msg);
+//		dialog.show();
+//	}
 
 //  删除提示
 
-	public static void showDeleteDialog(final Activity context, String msg) {
-		DeleteMessageDialog dialog = new DeleteMessageDialog(context, new DeleteMessageDialog.IsCancel() {
-			@Override
-			public void onConfirm() {
-				context.finish();
-			}
-
-			@Override
-			public void onCancel() {
-
-			}
-		});
-		dialog.setTitle(msg);
-		dialog.show();
-	}
+//	public static void showDeleteDialog(final Activity context, String msg) {
+//		DeleteMessageDialog dialog = new DeleteMessageDialog(context, new DeleteMessageDialog.IsCancel() {
+//			@Override
+//			public void onConfirm() {
+//				context.finish();
+//			}
+//
+//			@Override
+//			public void onCancel() {
+//
+//			}
+//		});
+//		dialog.setTitle(msg);
+//		dialog.show();
+//	}
 
 }

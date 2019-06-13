@@ -1,4 +1,4 @@
-package com.rulaibao.uitls;
+package com.crecg.staffshield.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -223,7 +223,7 @@ public class PhotoUtils {
      * @param degress
      * @return
      */
-    public static Bitmap rotateBitmap(Bitmap bitmap,int degress) {
+    public static Bitmap rotateBitmap(Bitmap bitmap, int degress) {
         if (bitmap != null) {
             Matrix m = new Matrix();
             m.postRotate(degress);

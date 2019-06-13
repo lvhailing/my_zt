@@ -269,13 +269,14 @@
             android:textColor="@color/txt_blue_4A67F5"
             android:textSize="12sp"/>
 
-        <TextView
-            android:id="@+id/tv_register_privacy_policy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_privacy_policy"
-            android:textColor="@color/txt_blue_4A67F5"
-            android:textSize="12sp"/>
+        <!-- 暂时隐藏，说是后续可能提供 -->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_register_privacy_policy"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/register_privacy_policy"-->
+            <!--android:textColor="@color/txt_blue_4A67F5"-->
+            <!--android:textSize="12sp"/>-->
     </LinearLayout>
 
     <TextView

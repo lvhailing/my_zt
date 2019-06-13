@@ -75,7 +75,19 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.ChangeLoginPasswordActivity"
+            android:name=".activity.ModifyLoginPasswordActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.ResetTransactionPasswordActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.WorkCertificateActivity"
             android:screenOrientation="portrait"/>
 
 

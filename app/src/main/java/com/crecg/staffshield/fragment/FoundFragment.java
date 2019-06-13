@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.FoundFragmentAdapter;
@@ -36,7 +35,7 @@ public class FoundFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) {
-            mView = inflater.inflate(R.layout.found_fragment, container, false);
+            mView = inflater.inflate(R.layout.fragment_found, container, false);
             try {
                 initView(mView);
             } catch (Exception e) {

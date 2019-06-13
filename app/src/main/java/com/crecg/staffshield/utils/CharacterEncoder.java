@@ -1,4 +1,4 @@
-package com.rulaibao.uitls;
+package com.crecg.staffshield.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

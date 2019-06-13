@@ -53,9 +53,12 @@ public class TestActivity1 extends BaseActivity implements View.OnClickListener 
         params.put("password", "a11111");
         RequestUtil.getBasicMap(params);
 
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getLoginByPost(params)
-//                .getBookListByGet()   //get请求样例
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CrecgObserverAdapter<ResultModel<ResultUserLoginContentBean>>() {
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getLoginByPost(params)
+//              .getBookListByGet()   //get请求样例
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CrecgObserverAdapter<ResultModel<ResultUserLoginContentBean>>() {
             @Override
             public void onMyError(Throwable e) {
                 //server取单据失败

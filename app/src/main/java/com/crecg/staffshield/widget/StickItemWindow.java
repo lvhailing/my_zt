@@ -1,4 +1,4 @@
-package com.rulaibao.widget;
+package com.crecg.staffshield.widget;
 
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -7,7 +7,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import com.rulaibao.R;
+import com.crecg.staffshield.R;
+
 
 /**
  * @FileName: ItemWindow.java

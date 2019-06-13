@@ -3,7 +3,7 @@
     android:shape="rectangle" >
 
     <!-- 填充的颜色 -->
-    <solid android:color="#0087fd" />
+    <solid android:color="@color/txt_blue_4A67F5" />
 
     <!--设置渐变-->
     <!--<gradient android:startColor="#fab22c"-->
@@ -13,7 +13,7 @@
     <!--angle控制渐变的方向-->
     <!-- 设置按钮的四个角为弧形 -->
     <!-- android:radius 弧形的半径 -->
-    <corners android:radius="190dp" />
+    <corners android:radius="80dp" />
 
     <!-- padding：Button里面的文字与Button边界的间隔 -->
     <padding

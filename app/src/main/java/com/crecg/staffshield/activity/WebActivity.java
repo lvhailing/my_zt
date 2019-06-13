@@ -1,4 +1,4 @@
-package com.rulaibao.activity;
+package com.crecg.staffshield.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,10 +19,10 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lzy.imagepicker.view.SystemBarTintManager;
-import com.rulaibao.R;
-import com.rulaibao.network.HtmlRequest;
-import com.rulaibao.uitls.ActivityStack;
+//import com.lzy.imagepicker.view.SystemBarTintManager;
+import com.crecg.staffshield.R;
+//import com.crecg.staffshield.network.HtmlRequest;
+import com.crecg.staffshield.utils.ActivityStack;
 
 
 public class WebActivity extends Activity implements View.OnClickListener {
@@ -132,7 +132,7 @@ public class WebActivity extends Activity implements View.OnClickListener {
         }
 
 
-        HtmlRequest.synCookies(this, url);
+//        HtmlRequest.synCookies(this, url);
 
         mWebview.loadUrl(url);
 
@@ -224,9 +224,9 @@ public class WebActivity extends Activity implements View.OnClickListener {
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //4.4-5.0使用三方工具类，有些4.4的手机有问题，这里为演示方便，不使用沉浸式
             //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-            tintManager.setStatusBarTintEnabled(true);
-            tintManager.setStatusBarTintColor(setStatusBarColor());
+//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+//            tintManager.setStatusBarTintEnabled(true);
+//            tintManager.setStatusBarTintColor(setStatusBarColor());
         }
     }
 
