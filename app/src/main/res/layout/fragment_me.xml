@@ -101,7 +101,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="25dp"
+                        android:layout_marginRight="20dp"
+                        android:padding="5dp"
                         android:src="@mipmap/img_eye_open"/>
                 </RelativeLayout>
 
@@ -131,7 +132,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/me_btn_yesterday_profit"
+                        android:id="@+id/me__yesterday_profit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -143,7 +144,6 @@
                         android:textSize="16sp"/>
 
                     <TextView
-                        android:id="@+id/me_tv_yesterday_profit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -164,7 +164,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/me_btn_accumulated_income"
+                        android:id="@+id/me_tv_accumulated_income"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -176,7 +176,6 @@
                         android:textSize="16sp"/>
 
                     <TextView
-                        android:id="@+id/me_tv_accumulated_income"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

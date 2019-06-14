@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.SettingActivity;
@@ -24,6 +25,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout me_rl_customer_service_center; // 客服中心
     private Context context;
     private ImageView iv_mine_setting; // 设置
+    private ImageView iv_eye_open; // 显示或隐藏 资产总额
+    private TextView me_tv_total_assets; // 资产总额
+    private TextView me_tv_yesterday_profit; //昨日收益
+    private TextView me_tv_accumulated_income; // 累计收益
 
     @Nullable
     @Override
@@ -47,6 +52,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private void initView(View mView) {
         context = getContext();
         iv_mine_setting = mView.findViewById(R.id.iv_mine_setting);
+        me_tv_total_assets = mView.findViewById(R.id.me_tv_total_assets);
+        me_tv_yesterday_profit = mView.findViewById(R.id.me_tv_yesterday_profit);
+        me_tv_accumulated_income = mView.findViewById(R.id.me_tv_accumulated_income);
+        iv_eye_open = mView.findViewById(R.id.iv_eye_open);
 //        me_rl_customer_service_center = mView.findViewById(R.id.me_rl_customer_service_center);
 
 //        me_rl_customer_service_center.setOnClickListener(this);
