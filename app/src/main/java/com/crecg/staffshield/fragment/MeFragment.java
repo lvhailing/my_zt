@@ -53,7 +53,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         context = getContext();
         iv_mine_setting = mView.findViewById(R.id.iv_mine_setting);
         me_tv_total_assets = mView.findViewById(R.id.me_tv_total_assets);
-        me_tv_yesterday_profit = mView.findViewById(R.id.me_tv_yesterday_profit);
+//        me_tv_yesterday_profit = mView.findViewById(R.id.me_tv_yesterday_profit);
         me_tv_accumulated_income = mView.findViewById(R.id.me_tv_accumulated_income);
         iv_eye_open = mView.findViewById(R.id.iv_eye_open);
 //        me_rl_customer_service_center = mView.findViewById(R.id.me_rl_customer_service_center);

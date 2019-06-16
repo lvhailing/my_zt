@@ -42,7 +42,7 @@ public class ModifyLoginPasswordActivity extends BaseActivity {
         et_reset_transaction_password_verify_code = findViewById(R.id.et_reset_transaction_password_verify_code);
         et_reset_transaction_password_confirm = findViewById(R.id.et_reset_transaction_password_confirm);
 
-        iv_reset_transaction_password_delete_id = findViewById(R.id.iv_reset_transaction_password_delete_id);
+//        iv_reset_transaction_password_delete_id = findViewById(R.id.iv_reset_transaction_password_delete_id);
         iv_reset_transaction_password_delete_verify_code = findViewById(R.id.iv_reset_transaction_password_delete_verify_code);
         iv_reset_transaction_password_delete_new = findViewById(R.id.iv_reset_transaction_password_delete_new);
         iv_reset_transaction_password_delete_confirm = findViewById(R.id.iv_reset_transaction_password_delete_confirm);

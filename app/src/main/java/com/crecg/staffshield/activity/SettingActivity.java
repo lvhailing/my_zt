@@ -182,7 +182,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 //                break;
 
             case R.id.rl_modify_login_password: // 修改登录密码
-                intent = new Intent(SettingActivity.this, ModifyLoginPasswordActivity.class);
+                intent = new Intent(SettingActivity.this, TestActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_reset_transaction_password: // 重置交易密码
