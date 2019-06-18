@@ -90,6 +90,17 @@
             android:name=".activity.WorkCertificateActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.FundChangeIntoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.FundTurnOutActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.SettingPatternPswActivity" />
+        <activity android:name=".activity.ClosePatternPswActivity" />
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

@@ -49,7 +49,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
         iv_reset_transaction_password_delete_verify_code = findViewById(R.id.iv_reset_transaction_password_delete_verify_code);
         iv_reset_transaction_password_delete_new = findViewById(R.id.iv_reset_transaction_password_delete_new);
         iv_reset_transaction_password_delete_confirm = findViewById(R.id.iv_reset_transaction_password_delete_confirm);
-        btn_reset_transaction_password_sure = findViewById(R.id.btn_reset_transaction_password_sure);
+        btn_reset_transaction_password_sure = findViewById(R.id.btn_sure);
 
         tv_reset_transaction_password_get_verify_code.setOnClickListener(this);
         iv_delete_id_card.setOnClickListener(this);
@@ -73,7 +73,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
                 break;
             case R.id.iv_reset_transaction_password_delete_confirm: // 删除确认密码
                 break;
-            case R.id.btn_reset_transaction_password_sure: // 确定 按钮
+            case R.id.btn_sure: // 确定 按钮
                 break;
         }
 

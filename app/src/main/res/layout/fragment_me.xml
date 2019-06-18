@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="15dp">
+                android:layout_marginRight="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_message_num"
@@ -132,7 +133,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/me__yesterday_profit"
+                        android:id="@+id/me_tv_yesterday_profit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -213,6 +214,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
+
             <!--银行存管 start-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -298,6 +300,7 @@
                     android:orientation="horizontal">
 
                     <Button
+                        android:id="@+id/btn_change_into"
                         android:layout_width="64dp"
                         android:layout_height="28dp"
                         android:background="@drawable/shape_rect_btn_blue"
@@ -306,6 +309,7 @@
                         android:textSize="14sp"/>
 
                     <Button
+                        android:id="@+id/btn_turn_out"
                         android:layout_width="64dp"
                         android:layout_height="28dp"
                         android:layout_marginLeft="13dp"
@@ -324,97 +328,48 @@
 
             <!--工资宝 start-->
             <LinearLayout
+                android:id="@+id/ll_salary_treasure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="13dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="13dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/img_salary_treasure"/>
-
-                <TextView
-                    android:id="@+id/tv_salary_treasure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/me_salary_treasure"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="15sp"/>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="44dp">
-
-                    <LinearLayout
-                        android:id="@+id/ll_salary_treasure"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center_vertical"
-                            android:src="@mipmap/img_dot_blue"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/me_total_holdings"
-                            android:textColor="@color/txt_black_999999"
-                            android:textSize="12sp"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/ll_salary_treasure"
-                        android:layout_marginLeft="23dp"
-                        android:layout_marginTop="10dp"
-                        android:includeFontPadding="false"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:text="112000.00"
-                        android:textColor="@color/txt_black_333333"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="35dp"
-                    android:layout_centerInParent="true"
-                    android:background="@color/bg_line"/>
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="13dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="13dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/img_salary_treasure"/>
+
+                    <TextView
+                        android:id="@+id/tv_salary_treasure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/me_salary_treasure"
+                        android:textColor="@color/txt_black_333333"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="12dp"
-                        android:layout_marginRight="44dp">
+                        android:layout_marginLeft="44dp">
 
                         <LinearLayout
-                            android:id="@+id/ll_yesterday_profit"
+                            android:id="@+id/ll_total_position"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -423,13 +378,13 @@
                                 android:layout_width="18dp"
                                 android:layout_height="18dp"
                                 android:layout_gravity="center_vertical"
-                                android:src="@mipmap/img_dot_orange_light"/>
+                                android:src="@mipmap/img_dot_blue"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="@string/me_yesterday_profit"
+                                android:text="@string/me_total_holdings"
                                 android:textColor="@color/txt_black_999999"
                                 android:textSize="12sp"/>
                         </LinearLayout>
@@ -437,7 +392,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/ll_yesterday_profit"
+                            android:layout_below="@id/ll_total_position"
                             android:layout_marginLeft="23dp"
                             android:layout_marginTop="10dp"
                             android:includeFontPadding="false"
@@ -447,107 +402,114 @@
                             android:textColor="@color/txt_black_333333"
                             android:textSize="14sp"/>
                     </RelativeLayout>
-                </LinearLayout>
-            </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bg_line"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/bg_line"/>
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="44dp">
+
+                            <LinearLayout
+                                android:id="@+id/ll_yesterday_profit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@mipmap/img_dot_orange_light"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="@string/me_yesterday_profit"
+                                    android:textColor="@color/txt_black_999999"
+                                    android:textSize="12sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ll_yesterday_profit"
+                                android:layout_marginLeft="23dp"
+                                android:layout_marginTop="10dp"
+                                android:includeFontPadding="false"
+                                android:maxLength="16"
+                                android:maxLines="1"
+                                android:text="112000.00"
+                                android:textColor="@color/txt_black_333333"
+                                android:textSize="14sp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/bg_line"/>
+            </LinearLayout>
             <!--定期理财 start-->
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/ll_conduct_financial_transactions"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="13dp"
-                android:paddingLeft="15dp"
-                android:paddingTop="13dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/img_regular_financial_management"/>
-
-                <TextView
-                    android:id="@+id/tv_regular_financial_management"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_horizontal"
-                    android:text="@string/me_regular_financial_management"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="15sp"/>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="44dp">
-
-                    <LinearLayout
-                        android:id="@+id/ll_regular_financial_management"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_gravity="center_vertical"
-                            android:src="@mipmap/img_dot_blue"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/me_total_holdings"
-                            android:textColor="@color/txt_black_999999"
-                            android:textSize="12sp"/>
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/ll_regular_financial_management"
-                        android:layout_marginLeft="23dp"
-                        android:layout_marginTop="10dp"
-                        android:includeFontPadding="false"
-                        android:maxLength="16"
-                        android:maxLines="1"
-                        android:text="112000.00"
-                        android:textColor="@color/txt_black_333333"
-                        android:textSize="14sp"/>
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="35dp"
-                    android:layout_centerInParent="true"
-                    android:background="@color/bg_line"/>
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="13dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="13dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/img_regular_financial_management"/>
+
+                    <TextView
+                        android:id="@+id/tv_regular_financial_management"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/me_regular_financial_management"
+                        android:textColor="@color/txt_black_333333"
+                        android:textSize="15sp"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="12dp"
-                        android:layout_marginRight="44dp">
+                        android:layout_marginLeft="44dp">
 
                         <LinearLayout
-                            android:id="@+id/ll_uncollected_revenue"
+                            android:id="@+id/ll_regular_financial_management"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
@@ -556,13 +518,13 @@
                                 android:layout_width="18dp"
                                 android:layout_height="18dp"
                                 android:layout_gravity="center_vertical"
-                                android:src="@mipmap/img_dot_red"/>
+                                android:src="@mipmap/img_dot_blue"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="@string/me_uncollected_revenue"
+                                android:text="@string/me_total_holdings"
                                 android:textColor="@color/txt_black_999999"
                                 android:textSize="12sp"/>
                         </LinearLayout>
@@ -570,7 +532,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/ll_uncollected_revenue"
+                            android:layout_below="@id/ll_regular_financial_management"
                             android:layout_marginLeft="23dp"
                             android:layout_marginTop="10dp"
                             android:includeFontPadding="false"
@@ -580,18 +542,76 @@
                             android:textColor="@color/txt_black_333333"
                             android:textSize="14sp"/>
                     </RelativeLayout>
-                </LinearLayout>
-            </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bg_line"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="35dp"
+                        android:layout_centerInParent="true"
+                        android:background="@color/bg_line"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="44dp">
+
+                            <LinearLayout
+                                android:id="@+id/ll_uncollected_revenue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:src="@mipmap/img_dot_red"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="@string/me_uncollected_revenue"
+                                    android:textColor="@color/txt_black_999999"
+                                    android:textSize="12sp"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ll_uncollected_revenue"
+                                android:layout_marginLeft="23dp"
+                                android:layout_marginTop="10dp"
+                                android:includeFontPadding="false"
+                                android:maxLength="16"
+                                android:maxLines="1"
+                                android:text="112000.00"
+                                android:textColor="@color/txt_black_333333"
+                                android:textSize="14sp"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/bg_line"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
 
         <RelativeLayout
+            android:id="@+id/rl_invite_colleagues"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

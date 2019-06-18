@@ -11,6 +11,8 @@ import android.net.NetworkInfo;
 import com.crecg.crecglibrary.CrecgLibManager;
 //import com.hyphenate.chat.ChatClient;
 //import com.hyphenate.helpdesk.easeui.UIProvider;
+import com.crecg.staffshield.utils.PreferenceUtil;
+import com.crecg.staffshield.utils.SystemInfo;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.umeng.analytics.MobclickAgent;
@@ -29,12 +31,21 @@ public class MyApplication extends Application {
     public String netType;
     IntentFilter mFilter;
     HashSet<NetListener> mListeners = new HashSet<NetListener>();
+    private static MyApplication instance;
 
+    public static MyApplication getInstance() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        instance = this;
+//        NetworkUtils.setContext(this);
+        PreferenceUtil.initialize(this);
+        SystemInfo.initialize(this);
+        initNetReceiver();
         CrecgLibManager.getInstance().init(this);
 
         //初始化极光推送sdk

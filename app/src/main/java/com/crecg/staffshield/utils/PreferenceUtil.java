@@ -19,6 +19,9 @@ public class PreferenceUtil {
     public static final String CLIENTTGT = "CLIENTTGT";
     public static final String COOKIE = "COOKIE";
 
+    public static final String GESTURE_FLG = "gesture_flg"; // 判断是否设置有手势密码
+    public static final String GESTURE_TIME = "gesture_time"; // 手势密码输入错误超过5次时间
+
     public static void initialize(Context context) {
         mContext = context;
     }
@@ -46,17 +49,19 @@ public class PreferenceUtil {
         }
         return setting;
     }
+
     /**
      * 获取设置信息
      *
      * @return
      */
     public static SharedPreferences getSearchSharedPreferences() {
-        if (search== null) {
+        if (search == null) {
             search = mContext.getSharedPreferences("search_pre", Context.MODE_PRIVATE);
         }
         return search;
     }
+
     /**
      * 获取token
      *
@@ -163,6 +168,31 @@ public class PreferenceUtil {
      */
     public static String getGesturePwd() {
         return getSettingSharedPreferences().getString("gesture", "");
+    }
+
+    public static void putGestureFlag(boolean flg) {
+//        SharedPreferences pref = getSharedPreferences();
+//
+//        SharedPreferences.Editor editor = pref.edit();
+//        editor.putBoolean(GESTURE_FLG, flg);
+//        editor.commit();
+
+        getSettingSharedPreferences().edit().putBoolean(GESTURE_FLG, flg).commit();
+    }
+
+    public static boolean getGestureFlag() {
+        return getSettingSharedPreferences().getBoolean(GESTURE_FLG, false);
+    }
+
+    public static void putGestureTime(long time) {
+        SharedPreferences pref = getSettingSharedPreferences();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putLong(GESTURE_TIME, time);
+        editor.commit();
+    }
+
+    public static long getGestureTime() {
+        return getSettingSharedPreferences().getLong(GESTURE_TIME, 0);
     }
 
     /**
@@ -390,7 +420,6 @@ public class PreferenceUtil {
 
     /**
      * 设置是否开启手势密码
-     *
      * @param is
      */
     public static void setGestureChose(boolean is) {
@@ -399,12 +428,12 @@ public class PreferenceUtil {
 
     /**
      * 是否开启手势密码
-     *
      * @return
      */
     public static boolean isGestureChose() {
         return getUserSharedPreferences().getBoolean("getGestureMsg", false);
     }
+
     /**
      * 保存List
      *
@@ -412,8 +441,7 @@ public class PreferenceUtil {
      * @param datalist
      */
     public static void setDataList(String tag, ArrayList<String> datalist) {
-        if (null == datalist || datalist.size() <= 0)
-            return;
+        if (null == datalist || datalist.size() <= 0) return;
 
         Gson gson = new Gson();
         //转换成json数据，再保存
@@ -426,11 +454,12 @@ public class PreferenceUtil {
 
     /**
      * 获取List
+     *
      * @param tag
      * @return
      */
     public <T> List<T> getDataList(String tag) {
-        List<T> datalist=new ArrayList<T>();
+        List<T> datalist = new ArrayList<T>();
         String strJson = getSearchSharedPreferences().getString(tag, null);
         if (null == strJson) {
             return datalist;

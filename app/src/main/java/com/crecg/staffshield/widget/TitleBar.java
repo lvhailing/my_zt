@@ -913,7 +913,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
             if (convertView == null) {
                 holder = new Holder();
                 inflater = LayoutInflater.from(mContext);
-//                convertView = inflater.inflate(R.layout.titlemenu, null);
+//                convertView = inflater.inflate(R.title.titlemenu, null);
 //                holder.img = (ImageView) convertView.findViewById(R.id.title_menu_img);
 //                holder.text = (TextView) convertView.findViewById(R.id.title_menu_text);
 //                holder.redImg = (ImageView) convertView.findViewById(R.id.title_menu_red);
@@ -1025,7 +1025,7 @@ public class TitleBar extends RelativeLayout implements OnClickListener {
 
                 holder = new Holder();
                 inflater = LayoutInflater.from(mContext);
-//                convertView = inflater.inflate(R.layout.titlemenu_left, null);
+//                convertView = inflater.inflate(R.title.titlemenu_left, null);
 //                holder.text = (TextView) convertView.findViewById(R.id.title_menu_text);
                 holder.text.setGravity(Gravity.CENTER);
                 // holder.text.setLayoutParams(new

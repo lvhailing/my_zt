@@ -11,6 +11,8 @@
     <string name="title_setting">设置</string>
     <string name="title_find_login_password">找回登录密码</string>
     <string name="title_work_certificate">申请加入中铁员工宝</string>
+    <string name="title_fund_change_into">资金转入</string>
+    <string name="title_fund_turn_out">资金转出</string>
 
 
 
@@ -76,6 +78,8 @@
 
     <!-- 设置 相关 -->
     <string name="phone_number">手机号</string>
+    <string name="txt_setting_gesture_password">手势密码</string>
+    <string name="setting_change_gesture_password">修改手势密码</string>
     <string name="modify_login_password">修改登录密码</string>
     <string name="reset_transaction_password">重置交易密码</string>
     <string name="clear_local_cache">清空本地缓存</string>
@@ -83,6 +87,8 @@
 
 
     <string name="join_immediately">立即加入</string>
+    <string name="btn_confirm_transfer">确认转入</string>
+    <string name="btn_confirm_turn_out">确认转出</string>
 
 
 

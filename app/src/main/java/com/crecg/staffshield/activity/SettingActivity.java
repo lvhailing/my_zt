@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,10 +24,11 @@ import com.crecg.staffshield.widget.TitleBar;
  * 设置页面
  */
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
+    private ImageView iv_back;
+    private TextView tv_common_title;
     private ImageButton ib_setting_gesture; // 手势密码 开关
     private LinearLayout ll_show_after_login; // 登录后显示的布局
     private RelativeLayout rl_setting_change_gesture_password; // 修改手势密码
-    private RelativeLayout rl_setting_invite; // 推荐app给好友
     private RelativeLayout rl_setting_contact_customer_service;  // 联系客服
     private RelativeLayout rl_setting_platform_bulletin;  // 平台公告
     private RelativeLayout rl_setting_service_agreement; // 服务协议
@@ -45,79 +47,44 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         baseSetContentView(R.layout.activity_setting);
 
-        initTopTitle();
         initView();
         initData();
         registerBroadcastReceiver();
 
     }
 
-    private void initTopTitle() {
-//        TitleBar title = (TitleBar) findViewById(R.id.rl_title);
-//        title.setTitle(getResources().getString(R.string.title_null)).setLogo(R.mipmap.ic_launcher, false)
-//                .setIndicator(R.mipmap.img_arrow_left).setCenterText(getResources().getString(R.string.setting_title))
-//                .showMore(false).setOnActionListener(new TitleBar.OnActionListener() {
-//
-//            @Override
-//            public void onMenu(int id) {
-//            }
-//
-//            @Override
-//            public void onBack() {
-//                finish();
-//            }
-//
-//            @Override
-//            public void onAction(int id) {
-//
-//            }
-//        });
+    private void initData() {
+// 设置手势密码开关状态
+        if (PreferenceUtil.getGestureFlag()) {
+            ib_setting_gesture.setImageResource(R.mipmap.img_set_on);
+            rl_setting_change_gesture_password.setVisibility(View.VISIBLE);
+        } else {
+            ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
+            rl_setting_change_gesture_password.setVisibility(View.GONE);
+        }
     }
 
     public void initView() {
         stack = ActivityStack.getActivityManage();
         stack.addActivity(this);
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        tv_common_title.setText(getResources().getString(R.string.title_setting));
 
-//        ib_setting_gesture = (ImageButton) findViewById(R.id.ib_setting_gesture);
-//        ll_show_after_login = (LinearLayout) findViewById(R.id.ll_show_after_login);
+        ib_setting_gesture = findViewById(R.id.ib_setting_gesture);
+        ll_show_after_login = findViewById(R.id.ll_show_after_login);
+        rl_setting_change_gesture_password = findViewById(R.id.rl_setting_change_gesture_password);
         rl_modify_login_password = findViewById(R.id.rl_modify_login_password);
         rl_reset_transaction_password = findViewById(R.id.rl_reset_transaction_password);
         rl_clear_local_cache = findViewById(R.id.rl_clear_local_cache);
-//        rl_setting_contact_customer_service = (RelativeLayout) findViewById(R.id.rl_setting_contact_customer_service);
-//        rl_setting_platform_bulletin = (RelativeLayout) findViewById(R.id.rl_setting_platform_bulletin);
-//        rl_setting_service_agreement = (RelativeLayout) findViewById(R.id.rl_setting_service_agreement);
-//        rl_setting_about = (RelativeLayout) findViewById(R.id.rl_setting_about);
-//
-//        View v_show_no_login = findViewById(R.id.v_show_no_login);
-//        tv_setting_version_code = (TextView) findViewById(R.id.tv_setting_version_code);
-//        btn_setting_logout = (Button) findViewById(R.id.btn_setting_logout);
 
-//        if (PreferenceUtil.isLogin()) { // 登录后显示的
-//            ll_show_after_login.setVisibility(View.VISIBLE);
-//            v_show_no_login.setVisibility(View.GONE);
-//            btn_setting_logout.setVisibility(View.VISIBLE);
-//        }else { // 未登录时显示的
-//            ll_show_after_login.setVisibility(View.GONE);
-//            v_show_no_login.setVisibility(View.VISIBLE);
-//            btn_setting_logout.setVisibility(View.GONE);
-//        }
-
-//        ib_setting_gesture.setOnClickListener(this);
-//        rl_setting_change_gesture_password.setOnClickListener(this);
-//        rl_setting_invite.setOnClickListener(this);
-//        rl_setting_contact_customer_service.setOnClickListener(this);
-//        rl_setting_platform_bulletin.setOnClickListener(this);
-//        rl_setting_service_agreement.setOnClickListener(this);
-//        rl_setting_about.setOnClickListener(this);
-
+        iv_back.setOnClickListener(this);
+        ib_setting_gesture.setOnClickListener(this);
+        rl_setting_change_gesture_password.setOnClickListener(this);
         rl_modify_login_password.setOnClickListener(this);
         rl_reset_transaction_password.setOnClickListener(this);
         rl_clear_local_cache.setOnClickListener(this);
 
-    }
-
-    public void initData() {
-//        tv_setting_version_code.setText(SystemInfo.sVersionName);
     }
 
     @Override
@@ -128,17 +95,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onResume() {
         super.onResume();
+        if (PreferenceUtil.isGestureChose()) {
+            ib_setting_gesture.setImageResource(R.mipmap.img_set_on);
+            rl_setting_change_gesture_password.setVisibility(View.VISIBLE);
 
-//        if (PreferenceUtil.isGestureChose()) {
-//            ib_setting_gesture.setImageResource(R.mipmap.img_set_on);
-//            rl_setting_change_gesture_password.setVisibility(View.VISIBLE);
-//
-//        } else {
-//            ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
-//            rl_setting_change_gesture_password.setVisibility(View.GONE);
-//            imgGestureSwitch.setVisibility(View.GONE);
-//        }
-
+        } else {
+            ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
+            rl_setting_change_gesture_password.setVisibility(View.GONE);
+        }
 
     }
 
@@ -156,7 +120,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
 
         switch (view.getId()) {
-//            case R.id.ib_setting_gesture: // 手势密码 开关
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.ib_setting_gesture: // 手势密码 开关
 //                if (PreferenceUtil.isGestureChose()) {
 //                    ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
 //                    rl_setting_change_gesture_password.setVisibility(View.GONE);
@@ -170,64 +137,63 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 //                    startActivity(intent);
 //                }
 
-//                break;
-
-//            case R.id.rl_setting_change_gesture_password: // 修改手势密码
+               // **************************************
+                if (!PreferenceUtil.getGestureFlag()){
+                    Intent intent = new Intent(SettingActivity.this,SettingPatternPswActivity.class);
+                    startActivityForResult(intent,1);
+                }else{
+                    Intent close_intent = new Intent(SettingActivity.this,ClosePatternPswActivity.class);
+                    //等于1为删除密码
+                    close_intent.putExtra("gestureFlg", 1);
+                    startActivityForResult(close_intent,1);
+                }
+                break;
+            case R.id.rl_setting_change_gesture_password: // 修改手势密码
 //                intent = new Intent(SettingActivity.this, GestureVerifyActivity.class);
 //                intent.putExtra("from", Urls.ACTIVITY_CHANGE_GESTURE);
 //                intent.putExtra("title", getResources().getString(R.string.title_changegesture));
 //                intent.putExtra("message", getResources().getString(R.string.set_gesture_pattern_old));
 //                startActivity(intent);
 
-//                break;
-
+                Intent intent = new Intent(SettingActivity.this, ClosePatternPswActivity.class);
+                //等于2为修改密码
+                intent.putExtra("gestureFlg", 2);
+                startActivityForResult(intent, 1);
+                break;
             case R.id.rl_modify_login_password: // 修改登录密码
-                intent = new Intent(SettingActivity.this, TestActivity.class);
+                intent = new Intent(SettingActivity.this, ModifyLoginPasswordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_reset_transaction_password: // 重置交易密码
-                intent= new Intent(SettingActivity.this, ResetTransactionPasswordActivity.class);
+                intent = new Intent(SettingActivity.this, ResetTransactionPasswordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_clear_local_cache:  // 清空本地缓存 （测试：暂且跳至上传工作证明页）
                 intent = new Intent(SettingActivity.this, WorkCertificateActivity.class);
                 startActivity(intent);
                 break;
-//            case R.id.rl_setting_platform_bulletin:  // 平台公告
-//                intent = new Intent(SettingActivity.this, PlatformBulletinActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.rl_setting_service_agreement:  // 服务协议
-//                intent = new Intent(SettingActivity.this, WebActivity.class);
-//                intent.putExtra("type", WebActivity.WEB_TYPE_SIGN_AGREEMENT);
-//                intent.putExtra("title", getResources().getString(R.string.setting_service_agreement));
-//                intent.putExtra("url", Urls.URL_SERVICE_AGREEMENT);
-//                startActivity(intent);
-
-//                break;
-
-//            case R.id.rl_setting_about: // 关于如来保
-//              intent = new Intent(SettingActivity.this, WebActivity.class);
-//                intent.putExtra("type", WebActivity.WEB_TYPE_ABOUT_US);
-//                intent.putExtra("title", getResources().getString(R.string.setting_about));
-//                intent.putExtra("url", Urls.URL_ABOUT_US /*+ SystemInfo.sVersionName*/);
-//                startActivity(intent);
-//                break;
-
-//            case R.id.btn_setting_logout: // 退出登录
+            case R.id.rl_safe_exit: // 安全退出
 //                UserLoadout out = new UserLoadout(SettingActivity.this, userId);
 //                out.requestData();
 //                finish();
-
-//                break;
-
+                break;
 
             default:
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            initData();
+        }
+    }
+
     private ReceiveBroadCast receiveBroadCast; // 广播实例
     String myActionName = "gestureChooseState";
+
     // 注册广播
     public void registerBroadcastReceiver() {
         receiveBroadCast = new ReceiveBroadCast();

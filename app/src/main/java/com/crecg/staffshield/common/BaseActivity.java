@@ -26,7 +26,7 @@ import cn.jpush.android.api.JPushInterface;
 public class BaseActivity extends FragmentActivity implements MyApplication.NetListener, SwipeRefreshLayout.OnRefreshListener {
 
     private SwipeRefreshLayout swipe;
-    private BaseActivity mContext;  // Activity 上下文
+    private BaseActivity mContext;
     public CustomProgressDialog dialog;
 
     @Override
