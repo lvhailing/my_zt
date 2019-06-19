@@ -1,6 +1,9 @@
 package com.crecg.crecglibrary.network;
 
 
+/**
+ *  服务器地址
+ */
 public class UrlRoot {
 
     private final static int ENV_DEV = 1;
@@ -13,14 +16,13 @@ public class UrlRoot {
 
     static {
         switch (mEnvironment) {
-            case ENV_DEV:
-                // 测试环境
+            case ENV_DEV: // 测试环境
                 ROOT_URL = "http://123.126.102.219:30093/";
                 break;
-            case ENV_PRODUCT:
-                // 正式环境
+            case ENV_PRODUCT: // 正式环境
                 ROOT_URL = "http://v.juhe.cn/";
                 break;
+
             default:
                 break;
         }

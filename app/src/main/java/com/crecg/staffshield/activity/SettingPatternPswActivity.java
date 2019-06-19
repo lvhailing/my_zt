@@ -36,6 +36,7 @@ public class SettingPatternPswActivity extends AppCompatActivity implements Gest
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
         tv_common_title.setText("设置手势密码");
 
         gestureView = (GestureView) findViewById(R.id.gesture);

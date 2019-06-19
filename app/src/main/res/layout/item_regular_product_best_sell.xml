@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/home_tv_top_product_name"
+            android:id="@+id/tv_top_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
@@ -86,6 +86,7 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tv_initial_investment_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10万元起投"
@@ -95,49 +96,71 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <FrameLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/bg_line"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_light_gray_down_corners">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/bg_line"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingBottom="12dp">
-
-            <ImageView
-                android:id="@+id/iv_time"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginLeft="22dp"
-                android:layout_marginTop="15dp"
-                android:src="@mipmap/img_time"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@id/iv_time"
-                android:text="2019-06-04 14:00"
-                android:textSize="12sp"/>
-
-        </RelativeLayout>
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="21dp"
+        android:background="@drawable/shape_bg_light_gray_down_corners"
+        android:orientation="horizontal"
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp">
 
         <ImageView
+            android:id="@+id/iv_time"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:src="@mipmap/img_fire"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="4dp"
-            android:layout_gravity="right"
-            android:scaleType="fitXY"
-            android:src="@mipmap/img_on_sale"/>
-    </FrameLayout>
+            android:layout_marginLeft="5dp"
+            android:text="热卖中"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="12sp"/>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="130dp"
+            android:layout_height="6dp"
+            android:progressDrawable="@drawable/shape_bg_progressbar"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:max="100"
+            android:progress="50"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="剩余"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_surplus_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="123,123"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="元"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
 </LinearLayout>

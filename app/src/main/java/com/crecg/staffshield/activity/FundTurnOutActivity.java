@@ -35,6 +35,7 @@ public class FundTurnOutActivity extends BaseActivity implements View.OnClickLis
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
         tv_common_title.setText(getResources().getString(R.string.title_fund_turn_out));
 
         tv_bank_card_name = findViewById(R.id.tv_bank_card_name);

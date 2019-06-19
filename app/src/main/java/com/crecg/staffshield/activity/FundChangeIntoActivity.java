@@ -34,6 +34,7 @@ public class FundChangeIntoActivity extends BaseActivity implements View.OnClick
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back = findViewById(R.id.iv_back);
         tv_common_title.setText(getResources().getString(R.string.title_fund_change_into));
 
         tv_bank_card_name = findViewById(R.id.tv_bank_card_name);

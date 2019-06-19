@@ -29,16 +29,11 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private ImageButton ib_setting_gesture; // 手势密码 开关
     private LinearLayout ll_show_after_login; // 登录后显示的布局
     private RelativeLayout rl_setting_change_gesture_password; // 修改手势密码
-    private RelativeLayout rl_setting_contact_customer_service;  // 联系客服
-    private RelativeLayout rl_setting_platform_bulletin;  // 平台公告
-    private RelativeLayout rl_setting_service_agreement; // 服务协议
-    private RelativeLayout rl_setting_about;  //  关于如来保
-    private TextView tv_setting_version_code;  //  版本号
-    private Button btn_setting_logout;  // 退出登录
 
     private RelativeLayout rl_modify_login_password; // 修改登录密码
     private RelativeLayout rl_reset_transaction_password; // 重置交易密码
     private RelativeLayout rl_clear_local_cache; // 清空本地缓存
+    private RelativeLayout rl_safe_exit; // 安全退出
     private ActivityStack stack;
     private Intent intent;
 
@@ -55,9 +50,17 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     private void initData() {
 // 设置手势密码开关状态
-        if (PreferenceUtil.getGestureFlag()) {
+//        if (PreferenceUtil.getGestureFlag()) {
+//            ib_setting_gesture.setImageResource(R.mipmap.img_set_on);
+//            rl_setting_change_gesture_password.setVisibility(View.VISIBLE);
+//        } else {
+//            ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
+//            rl_setting_change_gesture_password.setVisibility(View.GONE);
+//        }
+        if (PreferenceUtil.isGestureChose()) {
             ib_setting_gesture.setImageResource(R.mipmap.img_set_on);
             rl_setting_change_gesture_password.setVisibility(View.VISIBLE);
+
         } else {
             ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
             rl_setting_change_gesture_password.setVisibility(View.GONE);
@@ -69,6 +72,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         stack.addActivity(this);
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
         tv_common_title.setText(getResources().getString(R.string.title_setting));
 
         ib_setting_gesture = findViewById(R.id.ib_setting_gesture);
@@ -77,6 +81,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         rl_modify_login_password = findViewById(R.id.rl_modify_login_password);
         rl_reset_transaction_password = findViewById(R.id.rl_reset_transaction_password);
         rl_clear_local_cache = findViewById(R.id.rl_clear_local_cache);
+        rl_safe_exit = findViewById(R.id.rl_safe_exit);
 
         iv_back.setOnClickListener(this);
         ib_setting_gesture.setOnClickListener(this);
@@ -84,6 +89,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         rl_modify_login_password.setOnClickListener(this);
         rl_reset_transaction_password.setOnClickListener(this);
         rl_clear_local_cache.setOnClickListener(this);
+        rl_safe_exit.setOnClickListener(this);
 
     }
 
@@ -124,41 +130,44 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.ib_setting_gesture: // 手势密码 开关
-//                if (PreferenceUtil.isGestureChose()) {
-//                    ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
-//                    rl_setting_change_gesture_password.setVisibility(View.GONE);
-//                    PreferenceUtil.setGestureChose(false);
-//                } else {
-//                    intent = new Intent(this, GestureEditActivity.class);
+                if (PreferenceUtil.isGestureChose()) {
+                    ib_setting_gesture.setImageResource(R.mipmap.img_set_off);
+                    rl_setting_change_gesture_password.setVisibility(View.GONE);
+                    PreferenceUtil.setGestureChose(false);
+                } else {
+                    intent = new Intent(this, SettingPatternPswActivity.class);
 //                    intent.putExtra("comeflag", 4);
 //                    intent.putExtra("title", getResources().getString(R.string.setup_gesture_code));
 //                    intent.putExtra("message", getResources().getString(R.string.setup_gesture_pattern));
 //                    intent.putExtra("skip","skip_from_account");
-//                    startActivity(intent);
-//                }
-
-               // **************************************
-                if (!PreferenceUtil.getGestureFlag()){
-                    Intent intent = new Intent(SettingActivity.this,SettingPatternPswActivity.class);
-                    startActivityForResult(intent,1);
-                }else{
-                    Intent close_intent = new Intent(SettingActivity.this,ClosePatternPswActivity.class);
-                    //等于1为删除密码
-                    close_intent.putExtra("gestureFlg", 1);
-                    startActivityForResult(close_intent,1);
+                    startActivityForResult(intent, 1);
                 }
+
+                // **************************************
+//                if (!PreferenceUtil.getGestureFlag()){
+//                    Intent intent = new Intent(SettingActivity.this,SettingPatternPswActivity.class);
+//                    startActivityForResult(intent,1);
+//                }else{
+//                    Intent close_intent = new Intent(SettingActivity.this,ClosePatternPswActivity.class);
+//                    //等于1为删除密码
+//                    close_intent.putExtra("gestureFlg", 1);
+//                    startActivityForResult(close_intent,1);
+//                }
                 break;
             case R.id.rl_setting_change_gesture_password: // 修改手势密码
-//                intent = new Intent(SettingActivity.this, GestureVerifyActivity.class);
+                intent = new Intent(SettingActivity.this, ClosePatternPswActivity.class);
 //                intent.putExtra("from", Urls.ACTIVITY_CHANGE_GESTURE);
 //                intent.putExtra("title", getResources().getString(R.string.title_changegesture));
 //                intent.putExtra("message", getResources().getString(R.string.set_gesture_pattern_old));
-//                startActivity(intent);
-
-                Intent intent = new Intent(SettingActivity.this, ClosePatternPswActivity.class);
-                //等于2为修改密码
                 intent.putExtra("gestureFlg", 2);
                 startActivityForResult(intent, 1);
+
+                // ******************************************************
+
+//                Intent intent = new Intent(SettingActivity.this, ClosePatternPswActivity.class);
+//                //等于2为修改密码
+//                intent.putExtra("gestureFlg", 2);
+//                startActivityForResult(intent, 1);
                 break;
             case R.id.rl_modify_login_password: // 修改登录密码
                 intent = new Intent(SettingActivity.this, ModifyLoginPasswordActivity.class);
@@ -176,6 +185,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 //                UserLoadout out = new UserLoadout(SettingActivity.this, userId);
 //                out.requestData();
 //                finish();
+
+                intent = new Intent(this, TestActivity.class);
+                startActivity(intent);
                 break;
 
             default:

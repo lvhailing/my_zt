@@ -101,6 +101,10 @@
         <activity android:name=".activity.SettingPatternPswActivity" />
         <activity android:name=".activity.ClosePatternPswActivity" />
 
+        <activity
+            android:name=".activity.MyFinancialManagementActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

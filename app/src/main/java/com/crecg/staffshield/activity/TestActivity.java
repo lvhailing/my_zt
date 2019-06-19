@@ -75,9 +75,11 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         params.put("type", "caijing");
         params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
 
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getBookListByPost(params)
-//                .getBookListByGet()   //get请求样例
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CrecgObserverAdapter<ResultModel<DataWrapper<DataModel>>>() {
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getBookListByPost(params)
+//              .getBookListByGet()   //get请求样例
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CrecgObserverAdapter<ResultModel<DataWrapper<DataModel>>>() {
             @Override
             public void onMyError(Throwable e) {
                 //server取单据失败

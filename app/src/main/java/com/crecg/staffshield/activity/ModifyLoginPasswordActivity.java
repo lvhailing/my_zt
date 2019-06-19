@@ -41,7 +41,9 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        tv_common_title.setText("修改登录密码");
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title.setText(getResources().getString(R.string.title_modify_login_password));
 
         et_old_password = findViewById(R.id.et_old_password);
         et_new_password = findViewById(R.id.et_new_password);

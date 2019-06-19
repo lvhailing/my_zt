@@ -70,6 +70,8 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
     public static final int SELECT_PIC_BY_PICK_PHOTO = 2;
     private String workCertificate;
     private Bitmap newZoomImage;
+    private ImageView iv_back;
+    private TextView tv_common_title;
 
 
     @Override
@@ -81,6 +83,11 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
     }
 
     private void initView() {
+        iv_back = (ImageView) findViewById(R.id.iv_back);
+        tv_common_title = (TextView) findViewById(R.id.tv_common_title);
+        iv_back.setBackgroundResource(R.mipmap.img_close);
+        tv_common_title.setText(getResources().getString(R.string.title_work_certificate));
+
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_id_card = (TextView) findViewById(R.id.tv_id_card);
         tv_phone_number = (TextView) findViewById(R.id.tv_phone_number);
@@ -104,6 +111,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 //            iv_work_certificate.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
 //        }
 
+        iv_back.setOnClickListener(this);
         ll_upload_left.setOnClickListener(this);
         ll_upload_right.setOnClickListener(this);
         btn_join_immediately.setOnClickListener(this);
@@ -111,6 +119,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
     /**
      * 获取网落图片资源
+     *
      * @return
      */
     class ImageViewService extends AsyncTask<String, Void, Bitmap> {
@@ -180,6 +189,9 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
             case R.id.ll_upload_left: // 上传工作证明
                 selectPhoto();
                 break;
@@ -250,6 +262,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
     /**
      * 根据用户选择，返回图片资源
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -321,12 +334,13 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
     /**
      * 通过Uri获取文件
+     *
      * @param ac
      * @param uri
      * @return
      */
     public static File getFileFromMediaUri(Context ac, Uri uri) {
-        if(uri.getScheme().toString().compareTo("content") == 0){
+        if (uri.getScheme().toString().compareTo("content") == 0) {
             ContentResolver cr = ac.getContentResolver();
             Cursor cursor = cr.query(uri, null, null, null, null);// 根据Uri从数据库中找
             if (cursor != null) {
@@ -337,14 +351,15 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
                     return new File(filePath);
                 }
             }
-        }else if(uri.getScheme().toString().compareTo("file") == 0){
-            return new File(uri.toString().replace("file://",""));
+        } else if (uri.getScheme().toString().compareTo("file") == 0) {
+            return new File(uri.toString().replace("file://", ""));
         }
         return null;
     }
 
     /**
      * 通过uri获取图片并进行压缩
+     *
      * @param uri
      */
     public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
@@ -383,6 +398,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
     /**
      * 质量压缩方法
+     *
      * @param image
      * @return
      */
@@ -418,6 +434,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
     /**
      * 调接口，上传图片到服务器
+     *
      * @param bm
      */
     private void sendImage(Bitmap bm) {

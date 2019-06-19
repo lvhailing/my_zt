@@ -10,6 +10,7 @@
     <!--<string name="title_mine">我的</string>-->
     <string name="title_setting">设置</string>
     <string name="title_find_login_password">找回登录密码</string>
+    <string name="title_modify_login_password">修改登录密码</string>
     <string name="title_work_certificate">申请加入中铁员工宝</string>
     <string name="title_fund_change_into">资金转入</string>
     <string name="title_fund_turn_out">资金转出</string>

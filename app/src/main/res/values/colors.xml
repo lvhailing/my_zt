@@ -26,6 +26,7 @@
     <color name="gray_d">#999999</color>
     <color name="gray_dark">#696969</color>
     <color name="bg_gray">#F5F5F5</color>
-    <color name="bg_light_gray">#F9F9F9</color>
+    <color name="bg_common_gray_f9f9f9">#F9F9F9</color>
     <color name="bg_light_gray_fe">#FeFeFe</color>
+    <color name="bg_progressbar_color">#FFDBE1FD</color>
 </resources>
