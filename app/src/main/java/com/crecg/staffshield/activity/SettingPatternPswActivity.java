@@ -54,7 +54,8 @@ public class SettingPatternPswActivity extends AppCompatActivity implements Gest
     @Override
     public void gestureVerifySuccessListener(int stateFlag, List<GestureView.GestureBean> data, boolean success) {
         if (stateFlag == GestureView.STATE_LOGIN) {
-            PreferenceUtil.putGestureFlag(true);
+//            PreferenceUtil.putGestureFlag(true);
+            PreferenceUtil.setGestureChose(true);
             finish();
         }
     }
