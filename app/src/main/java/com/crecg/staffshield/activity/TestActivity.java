@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +13,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.CrecgObserverAdapter;
 import com.crecg.crecglibrary.network.model.DataModel;
 import com.crecg.crecglibrary.network.model.DataWrapper;
 import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
@@ -27,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.jpush.android.api.JPushInterface;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -70,6 +70,39 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
         getBooks("");
     }
 
+    /**
+     *  按照 如来保接口修改后的方法
+     * @param id
+     */
+    private void geZt(String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("type", "caijing");
+        params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
+        DESUtil.encMap(params);
+
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getZt(params)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String,DataWrapper<DataModel>>() {
+                    @Override
+                    public void onMyError() {
+                        //server取单据失败
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
+                        //server取单据成功
+                        if (result != null && result.code != null && result.data != null && result.data.data.size() > 0) {
+                            List<DataModel> list = result.data.data;
+
+                            textView.setText(list.get(1).category);
+
+                            Glide.with(TestActivity.this).load(list.get(0).thumbnail_pic_s).into(imageView);
+                        }
+                    }
+                });
+    }
     private void getBooks(String id) {
         Map<String, Object> params = new HashMap<>();
         params.put("type", "caijing");
@@ -89,8 +122,8 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
                 //server取单据成功
-                if (result != null && result.result != null && result.result.data != null && result.result.data.size() > 0) {
-                    List<DataModel> list = result.result.data;
+                if (result != null && result.data != null && result.data != null && result.data.data.size() > 0) {
+                    List<DataModel> list = result.data.data;
 
                     textView.setText(list.get(1).category);
 

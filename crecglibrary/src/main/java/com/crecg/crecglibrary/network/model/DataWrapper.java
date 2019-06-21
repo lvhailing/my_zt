@@ -6,5 +6,7 @@ import java.util.List;
 
 public class DataWrapper<T> implements Serializable {
     public List<T> data;
-    public String stat;
+    public String flag;
+    public String message;
+    public String total;
 }

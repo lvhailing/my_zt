@@ -12,4 +12,5 @@ public class DataModel {
     public String author_name;
     public String url;
     public String thumbnail_pic_s;
+    public String size;
 }

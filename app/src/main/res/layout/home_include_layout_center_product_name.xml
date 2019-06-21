@@ -10,90 +10,83 @@
     android:baselineAligned="false"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bg_white_top_corners"
-        android:orientation="vertical">
+        android:background="@drawable/shape_bg_white_top_corners">
 
-        <TextView
-            android:id="@+id/home_tv_top_product_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
             android:layout_marginTop="14dp"
-            android:text="中铁三号"
-            android:textColor="@color/txt_black_333333"
-            android:textSize="15sp"/>
+            android:orientation="vertical">
 
-        <RelativeLayout
+            <TextView
+                android:id="@+id/home_tv_center_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="中铁三号"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_annualized_return"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:layout_marginTop="10dp"
+                android:text="6.12%"
+                android:textColor="@color/txt_red_fc514e"
+                android:textSize="32sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="年化收益率"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="60dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="31"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="32sp"/>
+
+                <TextView
+                    android:id="@+id/tv_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_time"
+                    android:text="天"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="22dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_annualized_return"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="6.12%"
-                    android:textColor="@color/txt_red_fc514e"
-                    android:textSize="36sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="年化收益率"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="60dp"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="31"
-                        android:textColor="@color/txt_black_333333"
-                        android:textSize="36sp"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/tv_day"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/tv_time"
-                        android:paddingTop="18dp"
-                        android:text="天"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"/>
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10万元起投"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
+                android:text="10万元起投"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </RelativeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -131,11 +124,11 @@
         </RelativeLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="4dp"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
             android:layout_gravity="right"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="2dp"
             android:scaleType="fitXY"
             android:src="@mipmap/img_on_sale"/>
     </FrameLayout>

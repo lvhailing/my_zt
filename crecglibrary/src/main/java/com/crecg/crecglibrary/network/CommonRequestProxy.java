@@ -4,8 +4,6 @@ package com.crecg.crecglibrary.network;
 import com.crecg.crecglibrary.network.model.DataModel;
 import com.crecg.crecglibrary.network.model.DataWrapper;
 import com.crecg.crecglibrary.network.model.ResultModel;
-import com.crecg.crecglibrary.network.model.ResultUserLoginBean;
-import com.crecg.crecglibrary.network.model.ResultUserLoginContentBean;
 
 import java.util.Map;
 
@@ -15,7 +13,6 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 /**
  * 本类说明：通用网络接口
@@ -29,8 +26,8 @@ public interface CommonRequestProxy {
     Observable<ResultModel<DataWrapper<DataModel>>> getBookListByPost(@FieldMap Map<String, Object> params);
     //测试接口
     @FormUrlEncoded
-    @POST("android/login")
-    Observable<ResultModel<ResultUserLoginContentBean>> getLoginByPost(@FieldMap Map<String, Object> params);
+//    @POST("android/login")
+//    Observable<ResultModel<ResultUserLoginContentBean>> getLoginByPost(@FieldMap Map<String, Object> params);
 
     //测试接口
     @POST("shop/mattersna/v1/getcreatestatus")
@@ -43,4 +40,9 @@ public interface CommonRequestProxy {
     //测试接口
     @GET("book/receipts/nav1/getgoodslist")
     Observable<ResultModel<DataWrapper<DataModel>>> getDeliveryReceiptDetail(@Query("receipt_id") String id, @Query("shop_id") String shopId);
+
+
+    // 自己修改的接口
+    @POST("toutiao/index")
+    Observable<String> getZt(@FieldMap Map<String, Object> params);
 }

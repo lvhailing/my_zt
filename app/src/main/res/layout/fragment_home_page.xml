@@ -36,39 +36,39 @@
 
                 <!-- 右侧客服图标，暂且去掉 -->
                 <!--<RelativeLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:layout_alignParentRight="true"-->
-                    <!--android:layout_marginRight="26dp"-->
-                    <!--android:visibility="gone">-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="26dp"-->
+                <!--android:visibility="gone">-->
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/tv_message_num"-->
-                        <!--android:layout_width="15dp"-->
-                        <!--android:layout_height="15dp"-->
-                        <!--android:layout_marginBottom="18dp"-->
-                        <!--android:layout_alignParentRight="true"-->
-                        <!--android:background="@drawable/shape_circle_red"-->
-                        <!--android:gravity="center"-->
-                        <!--android:text="99"-->
-                        <!--android:textColor="@color/white"-->
-                        <!--android:textSize="10sp"/>-->
+                <!--<TextView-->
+                <!--android:id="@+id/tv_message_num"-->
+                <!--android:layout_width="15dp"-->
+                <!--android:layout_height="15dp"-->
+                <!--android:layout_marginBottom="18dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:background="@drawable/shape_circle_red"-->
+                <!--android:gravity="center"-->
+                <!--android:text="99"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="10sp"/>-->
 
-                    <!--<ImageView-->
-                        <!--android:layout_toLeftOf="@id/tv_message_num"-->
-                        <!--android:id="@+id/iv_customer_service"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_centerVertical="true"-->
-                        <!--android:src="@mipmap/img_customer_service"/>-->
+                <!--<ImageView-->
+                <!--android:layout_toLeftOf="@id/tv_message_num"-->
+                <!--android:id="@+id/iv_customer_service"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:src="@mipmap/img_customer_service"/>-->
                 <!--</RelativeLayout>-->
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/bg_line"
-                    android:layout_alignParentBottom="true"/>
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/bg_line"/>
             </RelativeLayout>
 
             <!-- 顶部轮播图  开始 -->
@@ -227,7 +227,9 @@
                     android:textSize="12sp"/>
             </LinearLayout>
 
+            <!-- 工资宝布局  start -->
             <LinearLayout
+                android:id="@+id/ll_go_to_salary_treasure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -275,9 +277,9 @@
                         android:id="@+id/tv_annualized_return"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3.52%"
+                        android:text="3.5289%"
                         android:textColor="@color/txt_red_fc514e"
-                        android:textSize="36sp"/>
+                        android:textSize="32sp"/>
 
                     <TextView
                         android:id="@+id/tv_transfer_immediately"
@@ -303,7 +305,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="年化收益率"
+                        android:text="近七日年化收益率"
                         android:textColor="@color/txt_black_333333"
                         android:textSize="12sp"/>
 
@@ -318,6 +320,7 @@
                 </RelativeLayout>
 
             </LinearLayout>
+            <!-- 工资宝布局  end -->
 
             <RelativeLayout
                 android:layout_width="match_parent"

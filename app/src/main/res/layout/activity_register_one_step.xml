@@ -103,7 +103,7 @@
             android:maxLength="11"
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
-            android:textCursorDrawable="@drawable/color_cursor"
+            android:textCursorDrawable="@drawable/bg_et_cursor"
             android:textSize="16sp"/>
 
         <ImageView
@@ -147,7 +147,7 @@
             android:maxLength="4"
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
-            android:textCursorDrawable="@drawable/color_cursor"
+            android:textCursorDrawable="@drawable/bg_et_cursor"
             android:textSize="16sp"/>
 
         <ImageView
