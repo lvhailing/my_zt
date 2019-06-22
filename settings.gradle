@@ -1,1 +1,1 @@
-include ':app', ':crecglibrary'
+include ':app', ':crecglibrary', ':xnumberkeyboard'

@@ -15,8 +15,8 @@
                 android:startColor="#08000000" />
 
             <corners
-                android:bottomLeftRadius="1dip"
-                android:bottomRightRadius="1dip"
+                android:bottomLeftRadius="8dip"
+                android:bottomRightRadius="8dip"
                 android:topLeftRadius="0dip"
                 android:topRightRadius="0dip" />
         </shape>

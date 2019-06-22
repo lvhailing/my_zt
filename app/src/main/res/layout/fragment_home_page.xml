@@ -360,17 +360,11 @@
 
             </RelativeLayout>
 
-            <include
-                android:id="@+id/home_include_layout_top_product_name"
-                layout="@layout/home_include_layout_top_product_name"/>
-
-            <include
-                android:id="@+id/home_include_layout_center_product_name"
-                layout="@layout/home_include_layout_center_product_name"/>
-
-            <include
-                android:id="@+id/home_include_layout_bottom_product_name"
-                layout="@layout/home_include_layout_bottom_product_name"/>
+            <LinearLayout
+                android:id="@+id/ll_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
 
             <View
                 android:layout_width="match_parent"
