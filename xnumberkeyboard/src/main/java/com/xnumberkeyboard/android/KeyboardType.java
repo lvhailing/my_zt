@@ -3,10 +3,7 @@ package com.xnumberkeyboard.android;
 import android.support.annotation.IntDef;
 
 /**
- * 数字键盘的类型。
- *
- * @author Dylan Wu
- * @since 2019-01-25
+ * 数字键盘的类型
  */
 @IntDef({KeyboardType.number, KeyboardType.digit, KeyboardType.idCard})
 public @interface KeyboardType {

@@ -20,35 +20,32 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 数字键盘，只显示数字。
- *
- * @author Dylan Wu
- * @since 2019-01-25
+ * 数字键盘，只显示数字
  */
 public class XNumberKeyboardView extends KeyboardView implements KeyboardView.OnKeyboardActionListener {
 
     /**
-     * 键盘左下角按键的Keycode。
+     * 键盘左下角按键的Keycode
      */
     public static final int KEYCODE_BOTTOM_LEFT = -11;
 
     /**
-     * 键盘右下角按键的Keycode。
+     * 键盘右下角按键的Keycode
      */
     public static final int KEYCODE_BOTTOM_RIGHT = -12;
 
     /**
-     * 打乱按键动画的步进，控制打乱的动画多久刷新执行。
+     * 打乱按键动画的步进，控制打乱的动画多久刷新执行
      */
     private static final int STEP_SHUFFLE_ANIM = 25;
 
     /**
-     * 0-9 数字的 Character 值。
+     * 0-9 数字的 Character 值
      */
     private final List<Character> keyCodes = Arrays.asList('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
 
     /**
-     * 键盘文字的大小。
+     * 键盘文字的大小
      */
     private int mKeyTextSize;
     /**
@@ -57,46 +54,46 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     private int mKeyTextColor;
 
     /**
-     * 右下角按键图标的绘制区域。
+     * 右下角按键图标的绘制区域
      */
     private Rect mBRKeyDrawRect;
     /**
-     * 右下角按键的图标。
+     * 右下角按键的图标
      */
     private Drawable mBRKeyDrawable;
     /**
-     * 右下角按键图标的宽度。
+     * 右下角按键图标的宽度
      */
     private int mBRKeyDrawableWidth;
     /**
-     * 右下角按键图标的高度。
+     * 右下角按键图标的高度
      */
     private int mBRKeyDrawableHeight;
     /**
-     * 右下角按键的背景。
+     * 右下角按键的背景
      */
     private Drawable mBRKeyBackground;
 
     /**
-     * 左下角的特殊按键。
+     * 左下角的特殊按键
      */
     private NumberSpecialKey mSpecialKey;
     /**
-     * 左下角特殊按键的背景。
+     * 左下角特殊按键的背景
      */
     private Drawable mSpecialKeyBackground;
     /**
-     * 左下角特殊按键绘制文字的 Paint。
+     * 左下角特殊按键绘制文字的 Paint
      */
     private Paint mSpecialKeyPaint;
 
     /**
-     * 键盘的事件。
+     * 键盘的事件
      */
     private OnKeyboardActionListener mOnKeyboardActionListener;
 
     /**
-     * 键盘点击事件。
+     * 键盘点击事件
      */
     private OnNumberKeyboardListener mOnKeyboardListener;
 
@@ -111,24 +108,20 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.XNumberKeyboardView,
-                defStyleAttr, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.XNumberKeyboardView, defStyleAttr, 0);
         mSpecialKeyBackground = a.getDrawable(R.styleable.XNumberKeyboardView_xnkv_blKeyBackground);
 
         mBRKeyDrawable = a.getDrawable(R.styleable.XNumberKeyboardView_xnkv_brKeyDrawable);
         mBRKeyBackground = a.getDrawable(R.styleable.XNumberKeyboardView_xnkv_brKeyBackground);
-        mBRKeyDrawableWidth = a.getDimensionPixelOffset(R.styleable.XNumberKeyboardView_xnkv_brKeyDrawableWidth,
-                -1);
-        mBRKeyDrawableHeight = a.getDimensionPixelOffset(R.styleable.XNumberKeyboardView_xnkv_brKeyDrawableHeight,
-                -1);
+        mBRKeyDrawableWidth = a.getDimensionPixelOffset(R.styleable.XNumberKeyboardView_xnkv_brKeyDrawableWidth, -1);
+        mBRKeyDrawableHeight = a.getDimensionPixelOffset(R.styleable.XNumberKeyboardView_xnkv_brKeyDrawableHeight, -1);
 
         int keyboardType = a.getInt(R.styleable.XNumberKeyboardView_xnkv_type, KeyboardType.number);
 
         if (a.hasValue(R.styleable.XNumberKeyboardView_android_keyTextSize)) {
             // 默认值18sp
             final int defValue = (int) (context.getResources().getDisplayMetrics().scaledDensity * 18 + 0.5f);
-            mKeyTextSize = a.getDimensionPixelSize(R.styleable.XNumberKeyboardView_android_keyTextSize,
-                    defValue);
+            mKeyTextSize = a.getDimensionPixelSize(R.styleable.XNumberKeyboardView_android_keyTextSize, defValue);
         } else {
             mKeyTextSize = parentFieldValue("mKeyTextSize");
         }
@@ -172,9 +165,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 重写设置监听事件的方法，避免自定义的事件被覆盖掉。
-     *
-     * @param listener 监听事件
+     * 重写设置监听事件的方法，避免自定义的事件被覆盖掉
      */
     @Override
     public void setOnKeyboardActionListener(OnKeyboardActionListener listener) {
@@ -182,9 +173,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 设置键盘左下角特殊按键的背景。
-     *
-     * @param drawable Drawable
+     * 设置键盘左下角特殊按键的背景
      */
     public void setSpecialKeyBackground(Drawable drawable) {
         this.mSpecialKeyBackground = drawable;
@@ -192,9 +181,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 设置键盘的类型。
-     *
-     * @param type 键盘的类型
+     * 设置键盘的类型
      */
     public void setKeyboardType(@KeyboardType int type) {
         this.mSpecialKey.setType(type);
@@ -204,7 +191,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 配置左下角的特殊按键。
+     * 配置左下角的特殊按键
      */
     private void settingSpecialKey() {
         if (getKeyboard() == null || getKeyboard().getKeys() == null) {
@@ -221,8 +208,6 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
 
     /**
      * 设置键盘的监听事件。
-     *
-     * @param listener 监听事件
      */
     public void setOnNumberKeyboardListener(OnNumberKeyboardListener listener) {
         this.mOnKeyboardListener = listener;
@@ -267,7 +252,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 打乱按键的顺序。
+     * 打乱按键的顺序
      */
     private void shuffleKeys() {
         Keyboard keyboard = getKeyboard();
@@ -312,7 +297,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 绘制按键的背景。
+     * 绘制按键的背景
      */
     private void drawKeyBackground(Keyboard.Key key, Canvas canvas, Drawable drawable) {
         if (drawable == null) {
@@ -327,9 +312,6 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
 
     /**
      * 绘制左下角特殊按键显示的文字。
-     *
-     * @param key    Key
-     * @param canvas canvas
      */
     private void drawSpecialKeyLabel(Keyboard.Key key, Canvas canvas) {
         if (TextUtils.isEmpty(mSpecialKey.keyLabel())) {
@@ -344,9 +326,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
             mSpecialKeyPaint.setStyle(Paint.Style.STROKE);
         }
 
-        canvas.drawText(mSpecialKey.keyLabel(), key.x + key.width / 2,
-                key.y + key.height / 2 + (mSpecialKeyPaint.getTextSize() - mSpecialKeyPaint.descent()) / 2,
-                mSpecialKeyPaint);
+        canvas.drawText(mSpecialKey.keyLabel(), key.x + key.width / 2, key.y + key.height / 2 + (mSpecialKeyPaint.getTextSize() - mSpecialKeyPaint.descent()) / 2, mSpecialKeyPaint);
     }
 
     /**

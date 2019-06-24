@@ -1,189 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <View
-            android:id="@+id/v_hidden"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#66000000"
-            android:visibility="visible"/>
-    </RelativeLayout>
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/linear_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="请输入银行短信验证码"
-                android:textColor="@color/txt_black_333333"
-                android:textSize="16sp"/>
+                android:layout_centerInParent="true"
+                android:text="输入密码"
+                android:textColor="#898181"
+                android:textSize="20sp"/>
 
+            <!-- 取消按钮 -->
             <ImageView
-                android:id="@+id/iv_close_keyboard"
+                android:id="@+id/img_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="15dp"
-                android:src="@mipmap/img_close"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:background="@color/bg_line"/>
+                android:background="@mipmap/img_close"/>
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#555555"/>
 
         <!-- 6位密码框布局，需要一个圆角边框的shape作为layout的背景 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/shape_input_area"
             android:orientation="horizontal">
 
-            <!-- inputType设置隐藏密码明文 textSize设置大一点，否则“点”太小了，不美观 -->
-            <EditText
+            <!-- inputType设置隐藏密码明文
+                 textSize设置大一点，否则“点”太小了，不美观 -->
+            <TextView
                 android:id="@+id/et_pass1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:text=""
-                android:textColor="@color/txt_black_666666"
+                android:text="1"
                 android:textSize="42sp"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/bg_line"/>
+                android:background="#999999"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/et_pass2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:text=""
-                android:textColor="@color/txt_black_666666"
+                android:text="2"
                 android:textSize="42sp"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/bg_line"/>
+                android:background="#999999"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/et_pass3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:text=""
-                android:textColor="@color/txt_black_666666"
+                android:text="2"
                 android:textSize="42sp"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/bg_line"/>
+                android:background="#999999"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/et_pass4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:text=""
-                android:textColor="@color/txt_black_666666"
+                android:text="2"
                 android:textSize="42sp"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/bg_line"/>
+                android:background="#999999"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/et_pass5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:text=""
-                android:textColor="@color/txt_black_666666"
+                android:text="2"
                 android:textSize="42sp"/>
 
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/bg_line"/>
+                android:background="#999999"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/et_pass6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:inputType="numberPassword"
-                android:text=""
-                android:textColor="@color/txt_black_666666"
+                android:text="2"
                 android:textSize="42sp"/>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="38dp"
-            android:background="@color/bg_line"/>
-
-        <com.xnumberkeyboard.android.XNumberKeyboardView
-            android:id="@+id/view_keyboard"
-            android:layout_width="match_parent"
+        <!-- 忘记密码链接 -->
+        <TextView
+            android:id="@+id/tv_forgetPwd"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/bg_line"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:keyBackground="@drawable/selector_key_background"
-            android:keyTextColor="@color/txt_black_333333"
-            android:shadowColor="@android:color/transparent"
-            android:shadowRadius="0"
-            app:xnkv_blKeyBackground="@color/colorKeyBlank"
-            app:xnkv_brKeyBackground="@color/colorKeyBlank"
-            app:xnkv_brKeyDrawable="@mipmap/keyboard_backspace"
-            app:xnkv_brKeyDrawableWidth="24dp"
-            app:xnkv_type="number"/>
+            android:layout_gravity="right"
+            android:layout_margin="15dp"
+            android:text="忘记密码？"
+            android:textColor="#354EEF"/>
     </LinearLayout>
+
+    <!-- 输入键盘 -->
+    <GridView
+        android:id="@+id/gv_keybord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_pass"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/black"
+        android:horizontalSpacing="0.5dp"
+        android:numColumns="3"
+        android:verticalSpacing="0.5dp"/>
 </RelativeLayout>

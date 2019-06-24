@@ -6,7 +6,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorKeyBlank">#dadada</color>
-    <color name="colorKeyPressed">#81D4FA</color>
+    <color name="colorKeyPressed">#dadada</color>
 
     <!-- 临时写的颜色 -->
     <color name="gray_light">#F2F2F2</color>

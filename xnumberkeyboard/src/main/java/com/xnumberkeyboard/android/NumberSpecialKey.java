@@ -1,10 +1,7 @@
 package com.xnumberkeyboard.android;
 
 /**
- * 特殊按键的逻辑处理。
- *
- * @author Dylan Wu
- * @since 2019-01-25
+ * 特殊按键的逻辑处理
  */
 public class NumberSpecialKey {
 
