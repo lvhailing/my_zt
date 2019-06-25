@@ -1,5 +1,6 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -19,6 +20,9 @@ import com.crecg.staffshield.fragment.MyFinacialPaymentReturnedFragment;
 
 public class MyFinancialManagementActivity extends BaseActivity implements View.OnClickListener {
 
+    private ImageView iv_back;
+    private ImageView iv_right_btn;
+    private TextView tv_common_title;
     private ImageView iv_eye_state;
     private TabLayout sliding_tabs;
     private ViewPager viewpager;
@@ -38,12 +42,23 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
     }
 
     private void initView() {
+        iv_back = findViewById(R.id.iv_back);
+        iv_right_btn = findViewById(R.id.iv_right_btn);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        iv_right_btn.setVisibility(View.VISIBLE);
+        iv_right_btn.setBackgroundResource(R.mipmap.img_finacial_detail);
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        tv_common_title.setText("我的理财");
+
         iv_eye_state = (ImageView) findViewById(R.id.iv_eye_state);
         tv_waiting_income = (TextView) findViewById(R.id.tv_waiting_income);
         tv_accumulated_income = (TextView) findViewById(R.id.tv_accumulated_income);
         tv_total_holdings = (TextView) findViewById(R.id.tv_total_holdings);
         sliding_tabs = (TabLayout) findViewById(R.id.sliding_tabs);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
+
+        iv_back.setOnClickListener(this);
+        iv_right_btn.setOnClickListener(this);
     }
 
     private void initData() {
@@ -83,6 +98,14 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.iv_right_btn:
+//                Intent intent = new Intent(this, WebActivity.class);
+//                startActivity(intent);
+                break;
+        }
     }
 }

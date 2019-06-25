@@ -9,7 +9,7 @@ android {
         minSdkVersion Integer.parseInt(project.property("minVersion"))
         targetSdkVersion Integer.parseInt(project.property("targetVersion"))
         versionCode Integer.parseInt(project.property("versionCode"))
-        versionName "${versionName}"
+        versionName "1.0.0"
 
         ndk {
             //选择要添加的对应cpu类型的.so库
@@ -33,7 +33,6 @@ android {
     /**
      *  解决如下错误：
      *  aapt.exe'' finished with non-zero exit value 1
-
      */
     configurations.all {
         resolutionStrategy.eachDependency { details ->

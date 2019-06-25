@@ -106,8 +106,14 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.BankShortMessageVerifyCode"
-            android:screenOrientation="portrait"/>
+            android:name=".activity.BankShortMessageVerifyCodeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityAsDialog"/>
+
+        <activity
+            android:name=".activity.TransactionPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityAsDialog"/>
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

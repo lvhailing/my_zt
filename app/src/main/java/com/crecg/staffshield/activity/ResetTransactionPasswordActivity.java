@@ -16,6 +16,8 @@ import com.crecg.staffshield.common.BaseActivity;
 
 public class ResetTransactionPasswordActivity extends BaseActivity implements View.OnClickListener {
 
+    private ImageView iv_back;
+    private TextView tv_common_title;
     private EditText et_reset_transaction_password_id_num; // 身份证号
     private EditText et_reset_transaction_password_verify_code; // 验证码
     private EditText et_reset_transaction_password_new; // 新密码
@@ -32,13 +34,18 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_transaction_password);
+        baseSetContentView(R.layout.activity_reset_transaction_password);
 
         initView();
 
     }
 
     private void initView() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        tv_common_title.setText(getResources().getString(R.string.reset_transaction_password));
+
         et_reset_transaction_password_id_num = findViewById(R.id.et_reset_transaction_password_id_num);
         et_reset_transaction_password_verify_code = findViewById(R.id.et_reset_transaction_password_verify_code);
         et_reset_transaction_password_new = findViewById(R.id.et_reset_transaction_password_new);
@@ -51,6 +58,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
         iv_reset_transaction_password_delete_confirm = findViewById(R.id.iv_reset_transaction_password_delete_confirm);
         btn_reset_transaction_password_sure = findViewById(R.id.btn_sure);
 
+        iv_back.setOnClickListener(this);
         tv_reset_transaction_password_get_verify_code.setOnClickListener(this);
         iv_delete_id_card.setOnClickListener(this);
         iv_reset_transaction_password_delete_verify_code.setOnClickListener(this);
@@ -62,6 +70,9 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
             case R.id.tv_reset_transaction_password_get_verify_code: // 获取验证码
 
                 break;

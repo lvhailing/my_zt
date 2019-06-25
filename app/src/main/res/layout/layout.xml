@@ -51,7 +51,7 @@
             <!-- inputType设置隐藏密码明文
                  textSize设置大一点，否则“点”太小了，不美观 -->
             <TextView
-                android:id="@+id/et_pass1"
+                android:id="@+id/iv_pass1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

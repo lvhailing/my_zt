@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_gray"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <include layout="@layout/title"/>
@@ -36,9 +36,9 @@
                 android:id="@+id/iv_eye_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
                 android:layout_gravity="center_vertical"
-                android:background="@mipmap/img_eye_close"/>
+                android:background="@mipmap/img_eye_close"
+                android:padding="10dp"/>
         </LinearLayout>
 
         <TextView
@@ -108,19 +108,26 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <android.support.design.widget.TabLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:id="@+id/sliding_tabs"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/txt_blue_4A67F5"
-        app:tabMode="fixed"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"/>
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/txt_blue_4A67F5"
+            app:tabMode="fixed"/>
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 </LinearLayout>

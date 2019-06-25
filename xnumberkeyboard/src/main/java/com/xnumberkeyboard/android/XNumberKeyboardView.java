@@ -12,6 +12,7 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import java.lang.reflect.Field;
@@ -49,7 +50,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
      */
     private int mKeyTextSize;
     /**
-     * 键盘文字的颜色。
+     * 键盘文字的颜色
      */
     private int mKeyTextColor;
 
@@ -96,6 +97,11 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
      * 键盘点击事件
      */
     private OnNumberKeyboardListener mOnKeyboardListener;
+
+    /**
+     * 设置当密码输入满之后，按钮不可点，不满则可点的开关
+     */
+    private boolean isDelBtnEnable = true;
 
     public XNumberKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -207,21 +213,21 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 设置键盘的监听事件。
+     * 设置键盘的监听事件
      */
     public void setOnNumberKeyboardListener(OnNumberKeyboardListener listener) {
         this.mOnKeyboardListener = listener;
     }
 
     /**
-     * 随机打乱数字键盘上键位的排列顺序，带有动画。
+     * 随机打乱数字键盘上键位的排列顺序，带有动画
      */
     public void shuffleKeyboard() {
         this.shuffleKeyboard(true);
     }
 
     /**
-     * 随机打乱数字键盘上键位的排列顺序。
+     * 随机打乱数字键盘上键位的排列顺序
      *
      * @param anim 是否带有动画
      */
@@ -311,7 +317,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 绘制左下角特殊按键显示的文字。
+     * 绘制左下角特殊按键显示的文字
      */
     private void drawSpecialKeyLabel(Keyboard.Key key, Canvas canvas) {
         if (TextUtils.isEmpty(mSpecialKey.keyLabel())) {
@@ -330,7 +336,7 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
     }
 
     /**
-     * 绘制按键的图标。
+     * 绘制按键的图标
      */
     private void drawBRKeyDrawable(Keyboard.Key key, Canvas canvas, Drawable drawable) {
         if (drawable == null) {
@@ -395,7 +401,14 @@ public class XNumberKeyboardView extends KeyboardView implements KeyboardView.On
         } else if (primaryCode != KEYCODE_BOTTOM_RIGHT) {
             insertText = Character.toString((char) primaryCode);
         }
-        mOnKeyboardListener.onNumberKey(primaryCode, insertText);
+        if (isDelBtnEnable) {
+            Log.i("dd","isDelBtnEnable == "+isDelBtnEnable);
+            mOnKeyboardListener.onNumberKey(primaryCode, insertText);
+        }
+    }
+
+    public void setDelBtnEnable(boolean isEnable) {
+        this.isDelBtnEnable = isEnable;
     }
 
     @Override

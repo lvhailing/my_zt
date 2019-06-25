@@ -9,7 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="10dp"
+        android:padding="5dp"/>
 
     <TextView
         android:id="@+id/tv_common_title"
@@ -19,6 +20,16 @@
         android:text="title"
         android:textColor="@color/txt_black_333333"
         android:textSize="18sp"/>
+
+    <ImageView
+        android:id="@+id/iv_right_btn"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:visibility="gone" />
 
     <View
         android:layout_width="match_parent"

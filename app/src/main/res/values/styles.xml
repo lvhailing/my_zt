@@ -71,4 +71,14 @@
         <item name="android:background">@null</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="ActivityAsDialog" parent="AppTheme">
+        <!--背景色,此处的背景色请一定要设置为透明度背景色-->
+        <item name="android:windowBackground">@color/transparent</item>
+        <!--window Is Translucent 窗口是半透明的-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--弹出动画-->
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
 </resources>

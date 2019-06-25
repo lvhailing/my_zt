@@ -186,8 +186,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 //                out.requestData();
 //                finish();
 
-                intent = new Intent(this, BankShortMessageVerifyCode.class);
-                startActivity(intent);
                 break;
 
             default:

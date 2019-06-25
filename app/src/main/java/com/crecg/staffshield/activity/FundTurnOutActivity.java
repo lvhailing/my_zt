@@ -1,5 +1,6 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
@@ -46,6 +48,7 @@ public class FundTurnOutActivity extends BaseActivity implements View.OnClickLis
 
         iv_back.setOnClickListener(this);
         tv_all.setOnClickListener(this);
+        btn_confirm_turn_out.setOnClickListener(this);
     }
 
     @Override
@@ -59,8 +62,11 @@ public class FundTurnOutActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_confirm_turn_out: // 确认转出
                 String turnOutMoney = et_turn_out_money.getText().toString();
-                if (!TextUtils.isEmpty(turnOutMoney)) {
-                    // Todo 调接口
+                if (TextUtils.isEmpty(turnOutMoney)) {
+                    ToastUtil.showCustom("转出金额不能为空");
+                } else {
+                    Intent intent = new Intent(this, TransactionPasswordActivity.class);
+                    startActivity(intent);
                 }
                 break;
         }
