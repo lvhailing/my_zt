@@ -1,40 +1,21 @@
 apply plugin: 'com.android.library'
+apply from: "${rootDir}/gradle/base.gradle"
 
-android {
-    compileSdkVersion Integer.parseInt(project.property("compileVersion"))
-    buildToolsVersion "${buildToolsVersion}"
-
-    defaultConfig {
-        minSdkVersion Integer.parseInt(project.property("minVersion"))
-        targetSdkVersion Integer.parseInt(project.property("targetVersion"))
-        versionCode Integer.parseInt(project.property("versionCode"))
-        versionName "${versionName}"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
-}
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.android.support:recyclerview-v7:$supportVersion"
-    compile "com.android.support:appcompat-v7:$supportVersion"
-    compile "com.android.support:design:$supportVersion"
+    compile "com.android.support:recyclerview-v7:26.1.0"
+    compile "com.android.support:appcompat-v7:26.1.0"
+    compile "com.android.support:design:26.1.0"
     //glide
-    compile "com.github.bumptech.glide:glide:$glideVersion"
+    compile "com.github.bumptech.glide:glide:3.7.0"
     //rxjava2
-    compile "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
-    compile "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    compile "io.reactivex.rxjava2:rxjava:2.1.7"
+    compile "io.reactivex.rxjava2:rxandroid:2.0.1"
     //Retrofit2
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    compile "com.squareup.retrofit2:retrofit:2.3.0"
+    compile "com.squareup.retrofit2:converter-gson:2.3.0"
+    compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
     //okhttp3
-    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
+    compile "com.squareup.okhttp3:okhttp:3.2.0"
+    compile "com.squareup.okhttp3:logging-interceptor:3.6.0"
 }

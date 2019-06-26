@@ -1,15 +1,10 @@
 apply plugin: 'com.android.application'
+apply from: "${rootDir}/gradle/base.gradle"
 
 android {
-    compileSdkVersion Integer.parseInt(project.property("compileVersion"))
-    buildToolsVersion "${buildToolsVersion}"
 
     defaultConfig {
         applicationId "com.crecg.staffshield"
-        minSdkVersion Integer.parseInt(project.property("minVersion"))
-        targetSdkVersion Integer.parseInt(project.property("targetVersion"))
-        versionCode Integer.parseInt(project.property("versionCode"))
-        versionName "1.0.0"
 
         ndk {
             //选择要添加的对应cpu类型的.so库
@@ -18,12 +13,6 @@ android {
         }
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -49,7 +38,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':crecglibrary')
     implementation project(':xnumberkeyboard')
     implementation files('libs/umeng-analytics-7.5.4.jar')
