@@ -38,7 +38,7 @@
         android:layout_marginTop="40dp"
         app:maxFailCounts="5"
         app:minPoint="4"
-        app:paintColor="@color/txt_blue_4A67F5"
+        app:paintColor="@color/main_blue_4A67F5"
         app:paintTextSize="15sp"
         app:selectedBitmap="@mipmap/icon_finger_selected"
         app:selectedBitmapSmall="@mipmap/icon_finger_selected_small"

@@ -4,22 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 
+import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.MyPartakeAskAdapter;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 /**
  * 我的理财 -- 持有中列表 Fragment
@@ -37,6 +35,7 @@ public class MyFinacialHoldFragment extends Fragment {
     private int currentPosition; // 当前tab位置（0：提问，1：话题）
     private String userId;
     private ViewSwitcher vs;
+    private ArrayList<ProductModelTestData> list;
 //    private MouldList<MyAskList2B> everyList;
 
 
@@ -78,11 +77,52 @@ public class MyFinacialHoldFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        initData();
         View view = inflater.inflate(R.layout.fragment_found, container, false); // Todo need modify
         initView(view);
         initListener();
 
         return view;
+    }
+
+    private void initData() {
+        // 模拟数据
+        ProductModelTestData testData1 = new ProductModelTestData();
+        testData1.name = "中铁1号";
+        testData1.expectedEarnings = "1020.00";
+        testData1.date = "2019/06/04-2019/08/31";
+        testData1.state = "one";
+
+        ProductModelTestData testData2 = new ProductModelTestData();
+        testData2.name = "中铁2号";
+        testData2.expectedEarnings = "1020.00";
+        testData2.date = "2019/07/01-2019/09/01";
+        testData2.state = "two";
+
+        ProductModelTestData testData3 = new ProductModelTestData();
+        testData3.name = "中铁3号";
+        testData3.expectedEarnings = "1020.00";
+        testData3.date = "2019/03/01-2019/05/31";
+        testData3.state = "three";
+
+        ProductModelTestData testData4 = new ProductModelTestData();
+        testData4.name = "中铁4号";
+        testData4.expectedEarnings = "1020.00";
+        testData4.date = "2019/10/04-2019/12/05";
+        testData4.state = "four";
+
+        ProductModelTestData testData5 = new ProductModelTestData();
+        testData5.name = "中铁5号";
+        testData5.expectedEarnings = "1020.00";
+        testData5.date = "2019/06/04-2019/08/31";
+        testData5.state = "four";
+
+        list = new ArrayList<>();
+        list.add(testData1);
+        list.add(testData2);
+        list.add(testData3);
+        list.add(testData4);
+        list.add(testData5);
     }
 
     private void initView(View view) {

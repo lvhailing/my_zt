@@ -3,7 +3,7 @@
     android:shape="rectangle" >
 
     <!-- 填充的颜色 -->
-    <solid android:color="@color/txt_blue_4A67F5" />
+    <solid android:color="@color/main_blue_4A67F5" />
 
     <!--设置渐变-->
     <!--<gradient android:startColor="#fab22c"-->

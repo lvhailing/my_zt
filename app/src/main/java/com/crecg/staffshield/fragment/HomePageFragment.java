@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.crecg.crecglibrary.network.model.ProductModel;
+import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.TestActivity1;
 
@@ -41,7 +41,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private TextView tv_annualized_return; // 近七日年化收益率
 
     private LinearLayout ll_container; // 加载首页定期产品
-    private ArrayList<ProductModel> list;
+    private ArrayList<ProductModelTestData> list;
 
     @Nullable
     @Override
@@ -66,7 +66,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         // 模拟数据
-        ProductModel product1 = new ProductModel();
+        ProductModelTestData product1 = new ProductModelTestData();
         product1.annualizedReturn = "6.12%";
         product1.date = "2019-06-04 14:00";
         product1.day = "22";
@@ -74,7 +74,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         product1.investmentAmount = "10万起投";
         product1.flag = 1;
 
-        ProductModel product2 = new ProductModel();
+        ProductModelTestData product2 = new ProductModelTestData();
         product2.annualizedReturn = "6.22%";
         product2.date = "2029-06-04 24:00";
         product2.day = "22";
@@ -82,7 +82,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         product2.investmentAmount = "20万起投";
         product2.flag = 2;
 
-        ProductModel product3 = new ProductModel();
+        ProductModelTestData product3 = new ProductModelTestData();
         product3.annualizedReturn = "6.32%";
         product3.date = "2039-06-04 34:00";
         product3.day = "22";
@@ -99,7 +99,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private void initView() {
         context = getContext();
         ll_container = mView.findViewById(R.id.ll_container);
-        for (ProductModel product : list) {
+        for (ProductModelTestData product : list) {
             ll_container.addView(getItem(product));
         }
 
@@ -126,7 +126,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         home_btn_transfer_immediately.setOnClickListener(this);
     }
 
-    private View getItem(final ProductModel product) {
+    private View getItem(final ProductModelTestData product) {
         View ll_item = LayoutInflater.from(context).inflate(R.layout.item_regular_products, null);
         TextView tv_regular_product_name1 = ll_item.findViewById(R.id.tv_regular_product_name); // 产品名称
         TextView tv_product_annualized_return1 = ll_item.findViewById(R.id.tv_product_annualized_return); // 年化收益率
@@ -203,8 +203,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 //                startActivity(intent);
                 break;
             case R.id.tv_transfer_immediately:  // 立即转入
-                intent = new Intent(context, TestActivity1.class);
-                startActivity(intent);
+//                intent = new Intent(context, TestActivity1.class);
+//                startActivity(intent);
                 break;
         }
     }

@@ -2,12 +2,12 @@ package com.crecg.staffshield.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidkun.xtablayout.XTabLayout;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.MyFinacialVpAdapter;
 import com.crecg.staffshield.common.BaseActivity;
@@ -15,7 +15,7 @@ import com.crecg.staffshield.fragment.MyFinacialHoldFragment;
 import com.crecg.staffshield.fragment.MyFinacialPaymentReturnedFragment;
 
 /**
- * Created by junde on 2019/6/18.
+ * (我的模块--->定期理财跳转到此页面)我的理财
  */
 
 public class MyFinancialManagementActivity extends BaseActivity implements View.OnClickListener {
@@ -24,7 +24,7 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
     private ImageView iv_right_btn;
     private TextView tv_common_title;
     private ImageView iv_eye_state;
-    private TabLayout sliding_tabs;
+    private XTabLayout tab_layout;
     private ViewPager viewpager;
     private TextView tv_waiting_income; // 待收参考收益
     private TextView tv_accumulated_income; // 累计收益
@@ -50,12 +50,12 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
         iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
         tv_common_title.setText("我的理财");
 
-        iv_eye_state = (ImageView) findViewById(R.id.iv_eye_state);
-        tv_waiting_income = (TextView) findViewById(R.id.tv_waiting_income);
-        tv_accumulated_income = (TextView) findViewById(R.id.tv_accumulated_income);
-        tv_total_holdings = (TextView) findViewById(R.id.tv_total_holdings);
-        sliding_tabs = (TabLayout) findViewById(R.id.sliding_tabs);
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        iv_eye_state = findViewById(R.id.iv_eye_state);
+        tv_waiting_income = findViewById(R.id.tv_waiting_income);
+        tv_accumulated_income = findViewById(R.id.tv_accumulated_income);
+        tv_total_holdings = findViewById(R.id.tv_total_holdings);
+        tab_layout = findViewById(R.id.tab_layout);
+        viewpager = findViewById(R.id.viewpager);
 
         iv_back.setOnClickListener(this);
         iv_right_btn.setOnClickListener(this);
@@ -69,7 +69,7 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
         viewpager.setAdapter(myFinacialVpAdapter);
 
         //将TabLayout和ViewPager关联起来
-        sliding_tabs.setupWithViewPager(viewpager);
+        tab_layout.setupWithViewPager(viewpager);
 
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

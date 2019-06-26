@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         fragmentAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public int getCount() {
-                Log.i("aa","tabFragments个数是："+tabFragments.size());
+//                Log.i("aa","tabFragments个数是："+tabFragments.size());
                 return tabFragments.size();
             }
 
@@ -170,28 +170,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void setTab(int pos) {
-        resetTvs();
+        setTabTextUnselectedColor();
         resetImages();
 
         switch (pos) {
             case 0:
-                tv_tab_home_page.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
+                tv_tab_home_page.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                 iv_tab_home_page.setImageResource(R.mipmap.tab_home_selected);
                 break;
             case 1:
-                tv_tab_found.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
+                tv_tab_found.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                 iv_tab_found.setImageResource(R.mipmap.tab_found_selected);
                 break;
             case 2:
-                tv_tab_me.setTextColor(getResources().getColor(R.color.financing_tv_slected_66000000));
+                tv_tab_me.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                 iv_tab_me.setImageResource(R.mipmap.tab_mine_selected);
                 break;
 
         }
     }
 
-    // 改变底部tab文字颜色
-    private void resetTvs() {
+    // 底部tab未选中时文字颜色
+    private void setTabTextUnselectedColor() {
         tv_tab_home_page.setTextColor(Color.parseColor("#999999"));
         tv_tab_found.setTextColor(Color.parseColor("#999999"));
         tv_tab_me.setTextColor(Color.parseColor("#999999"));

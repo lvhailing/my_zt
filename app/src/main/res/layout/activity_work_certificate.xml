@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工作证明"
-            android:textColor="@color/txt_blue_4A67F5"
+            android:textColor="@color/main_blue_4A67F5"
             android:textSize="15sp"/>
 
         <TextView
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工会盖章的证明材料"
-            android:textColor="@color/txt_blue_4A67F5"
+            android:textColor="@color/main_blue_4A67F5"
             android:textSize="15sp"/>
 
         <TextView
