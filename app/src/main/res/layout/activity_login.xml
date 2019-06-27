@@ -162,6 +162,6 @@
         android:layout_marginTop="12dp"
         android:padding="6dp"
         android:text="@string/login_new_user_sign"
-        android:textColor="@color/txt_blue_4B67F6"
+        android:textColor="@color/main_blue_4A67F5"
         android:textSize="16sp"/>
 </LinearLayout>

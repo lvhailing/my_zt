@@ -102,7 +102,7 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.iv_right_btn:
+            case R.id.iv_right_btn: //
 //                Intent intent = new Intent(this, WebActivity.class);
 //                startActivity(intent);
                 break;

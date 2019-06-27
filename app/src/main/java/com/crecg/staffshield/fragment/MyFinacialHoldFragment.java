@@ -10,12 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
-import com.crecg.staffshield.adapter.MyPartakeAskAdapter;
+import com.crecg.staffshield.adapter.MyFinaciaHoldAdapter;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class MyFinacialHoldFragment extends Fragment {
     private String mParam1;
     private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recycler_view;
-    private MyPartakeAskAdapter myPartakeAskAdapter;
+    private MyFinaciaHoldAdapter myFinaciaHoldAdapter;
 //    private MouldList<MyAskList2B> totalList = new MouldList<>();
     private int currentPage = 1;    //当前页
     private Context context;
@@ -52,16 +53,17 @@ public class MyFinacialHoldFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             //页面可见时调接口刷新数据
-            Log.i("hh", this + " -- setUserVisibleHint --" + isVisibleToUser);
-//            totalList.clear();
-            currentPage = 1;
-            requestAskData();
+//            Log.i("hh", this + " -- setUserVisibleHint --" + isVisibleToUser);
+//            list.clear();
+//            currentPage = 1;
+//            requestAskData();
+            initData();
         } else {
             Log.i("hh", this + " -- setUserVisibleHint --" + isVisibleToUser);
-            if (myPartakeAskAdapter != null) {
-//                totalList.clear();
-                currentPage = 1;
-                myPartakeAskAdapter.changeMoreStatus(myPartakeAskAdapter.NO_LOAD_MORE);
+            if (myFinaciaHoldAdapter != null) {
+//                list.clear();
+//                currentPage = 1;
+                myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.NO_LOAD_MORE);
             }
         }
     }
@@ -78,7 +80,7 @@ public class MyFinacialHoldFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initData();
-        View view = inflater.inflate(R.layout.fragment_found, container, false); // Todo need modify
+        View view = inflater.inflate(R.layout.fragment_recycle_layout, container, false); // Todo need modify
         initView(view);
         initListener();
 
@@ -89,33 +91,38 @@ public class MyFinacialHoldFragment extends Fragment {
         // 模拟数据
         ProductModelTestData testData1 = new ProductModelTestData();
         testData1.name = "中铁1号";
+        testData1.holdingShare = "200000.00";
         testData1.expectedEarnings = "1020.00";
         testData1.date = "2019/06/04-2019/08/31";
         testData1.state = "one";
 
         ProductModelTestData testData2 = new ProductModelTestData();
         testData2.name = "中铁2号";
-        testData2.expectedEarnings = "1020.00";
+        testData2.holdingShare = "3000000.00";
+        testData2.expectedEarnings = "100000.00";
         testData2.date = "2019/07/01-2019/09/01";
-        testData2.state = "two";
+        testData2.state = "one";
 
         ProductModelTestData testData3 = new ProductModelTestData();
         testData3.name = "中铁3号";
-        testData3.expectedEarnings = "1020.00";
+        testData3.holdingShare = "4000000.00";
+        testData3.expectedEarnings = "200000.00";
         testData3.date = "2019/03/01-2019/05/31";
-        testData3.state = "three";
+        testData3.state = "two";
 
         ProductModelTestData testData4 = new ProductModelTestData();
         testData4.name = "中铁4号";
-        testData4.expectedEarnings = "1020.00";
+        testData4.holdingShare = "5000000.00";
+        testData4.expectedEarnings = "500000.00";
         testData4.date = "2019/10/04-2019/12/05";
-        testData4.state = "four";
+        testData4.state = "two";
 
         ProductModelTestData testData5 = new ProductModelTestData();
         testData5.name = "中铁5号";
-        testData5.expectedEarnings = "1020.00";
+        testData5.holdingShare = "60000000.00";
+        testData5.expectedEarnings = "600000.00";
         testData5.date = "2019/06/04-2019/08/31";
-        testData5.state = "four";
+        testData5.state = "three";
 
         list = new ArrayList<>();
         list.add(testData1);
@@ -129,32 +136,32 @@ public class MyFinacialHoldFragment extends Fragment {
         context = getActivity();
 
 //        vs = (ViewSwitcher) view.findViewById(R.id.vs);
-        swipe_refresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
-        recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
+//        swipe_refresh = view.findViewById(R.id.swipe_refresh);
+        recycler_view = view.findViewById(R.id.recycler_view);
 
-//        TextView tv_empty = (TextView) view.findViewById(R.id.tv_empty);
-//        tv_empty.setText("未参与提问");
+//        TextView tv_empty = view.findViewById(R.id.tv_empty);
+//        tv_empty.setText("测试...");
 
         initRecyclerView();
     }
 
     private void initRecyclerView() {
-//        recycler_view.setLayoutManager(new LinearLayoutManager(context));
-//        myPartakeAskAdapter = new MyPartakeAskAdapter(context, totalList);
-//        recycler_view.setAdapter(myPartakeAskAdapter);
+        recycler_view.setLayoutManager(new LinearLayoutManager(context));
+        myFinaciaHoldAdapter = new MyFinaciaHoldAdapter(context, list);
+        recycler_view.setAdapter(myFinaciaHoldAdapter);
 //        //添加动画
 //        recycler_view.setItemAnimator(new DefaultItemAnimator());
     }
 
     /**
-     * 获取提问列表数据
+     * 获取持有中列表数据
      */
     public void requestAskData() {
     }
 
     private void initListener() {
-        initPullRefresh();
-        initLoadMoreListener();
+//        initPullRefresh();
+//        initLoadMoreListener();
     }
 
     private void initPullRefresh() {
@@ -176,13 +183,13 @@ public class MyFinacialHoldFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 //判断RecyclerView的状态 是空闲时，同时，是最后一个可见的ITEM时才加载
-//                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == myPartakeAskAdapter.getItemCount() && firstVisibleItem != 0) {
-//                    if (everyList.size() == 0) {
-//                        return;
-//                    }
-//                    currentPage++;
-//                    requestAskData();
-//                }
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == myFinaciaHoldAdapter.getItemCount() && firstVisibleItem != 0) {
+                    if (list.size() == 0) {
+                        return;
+                    }
+                    currentPage++;
+                    requestAskData();
+                }
             }
 
             @Override
