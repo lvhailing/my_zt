@@ -1,6 +1,9 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -8,12 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
-import com.crecg.crecglibrary.network.model.DataModel;
-import com.crecg.crecglibrary.network.model.DataWrapper;
 import com.crecg.crecglibrary.network.model.LoginModel;
 import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
@@ -22,15 +22,12 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
  * 登录
- * Created by hong on 2018/12/24.
  */
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -64,6 +61,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         iv_login_delete_password = findViewById(R.id.iv_login_delete_password);
         btn_login = findViewById(R.id.btn_login);
 
+        initEditTextListener();
+
         tv_login_forget_password.setOnClickListener(this);
         tv_login_sign.setOnClickListener(this);
         iv_login_delete_phone.setOnClickListener(this);
@@ -71,10 +70,51 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         btn_login.setOnClickListener(this);
     }
 
+    private void initEditTextListener() {
+        // 手机号 输入监听
+        et_login_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        // // 密码 输入监听
+        et_login_password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.tv_login_forget_password: // 忘记密码
+                intent = new Intent(this,FindLoginPasswordActivity.class);
+                startActivity(intent);
                 break;
             case R.id.iv_fine_password_delete_phone: // 删除手机号
                 break;
@@ -86,44 +126,49 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 getLoginByPost();
                 break;
             case R.id.tv_login_sign: // 新用户注册
+                intent = new Intent(this,RegisterOneStepActivity.class);
+                startActivity(intent);
                 break;
         }
     }
 
     /**
-     *  登录
+     * 登录
      */
     private void getLoginByPost() {
         HashMap<String, Object> param = new HashMap<>();
         param.put("mobile", "13593262371");
         param.put("password", "aa111111");
         data = DESUtil.encMap(param);
-        Log.i("hh", "getLoginByPost--加密后的入参为：" + data);
 
-        // 下面getLoginByPost(param)这里为了不报错先这样写了
+        HashMap<String, Object> param2 = new HashMap<>();
+        param2.put("requestKey", data);
+
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getLoginByPost(param)
+                .getLoginByPost(param2)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String, LoginModel>() {
             @Override
             public void onMyError() {
-                //server取单据失败
                 ToastUtil.showCustom("登录失败");
             }
 
             @Override
             public void onMySuccess(ResultModel<LoginModel> result) {
-                //server取单据成功
                 if (result != null && result.code != null && result.data != null) {
+                    Log.i("hh", "登录接口返回数据：" + result);
                     loginData = result.data;
                     String userId = loginData.userId;
                     if ("true".equals(loginData.flag)) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
                         ToastUtil.showCustom("登录成功");
-                    }else{
+                    } else {
                         ToastUtil.showCustom(loginData.flag);
                     }
                 }
             }
         });
     }
+
 }

@@ -66,8 +66,8 @@
 
                 <ImageView
                     android:id="@+id/iv_fine_password_delete_phone"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/icon_delete"
@@ -124,8 +124,9 @@
 
                 <ImageView
                     android:id="@+id/iv_login_delete_password"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginRight="5dp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@id/tv_login_forget_password"
                     android:src="@mipmap/icon_delete"

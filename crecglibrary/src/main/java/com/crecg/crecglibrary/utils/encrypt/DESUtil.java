@@ -67,7 +67,7 @@ public class DESUtil {
 	public static String encMap(Map<String, Object> param) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		Map<String, Object> sortMap = sortMap(param);
-        Log.i("hh", "排序后的入参为：" + sortMap);
+//        Log.i("hh", "排序后的入参为：" + sortMap);
 		String str_md5 = gson.toJson(sortMap);
 		String md5 = MD5.stringToMD5(str_md5);
 

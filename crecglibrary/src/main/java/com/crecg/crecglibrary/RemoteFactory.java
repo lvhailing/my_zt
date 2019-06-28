@@ -48,11 +48,13 @@ public class RemoteFactory {
 
     public RemoteFactory() {
         mGsonDateFormat = new GsonBuilder()
-                .enableComplexMapKeySerialization()
-                .serializeNulls()
-                .setPrettyPrinting()
-                .setVersion(1.0)
-                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+//                .enableComplexMapKeySerialization()
+//                .serializeNulls()
+                .disableHtmlEscaping()
+//                .setPrettyPrinting()
+//                .setVersion(1.0)
+                .setLenient()
+//                .setDateFormat("yyyy-MM-dd hh:mm:ss")
                 .create();
     }
 
@@ -79,7 +81,7 @@ public class RemoteFactory {
                 .build();
         T proxyClass = retrofit.create(someClass);
         proxyMap.put(someClass, proxyClass);
-        Log.i("hh", "baseUrl == " + baseUrl);
+//        Log.i("hh", "baseUrl == " + baseUrl);
         return proxyClass;
     }
 
@@ -98,12 +100,12 @@ public class RemoteFactory {
         }
 
         //添加公共参数
-        builder.addInterceptor(commonParams);
+//        builder.addInterceptor(commonParams);
 
         //添加日志打印
-        HttpLoggingInterceptor log = new HttpLoggingInterceptor();
-        log.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-        builder.addInterceptor(log);
+//        HttpLoggingInterceptor log = new HttpLoggingInterceptor();
+//        log.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+//        builder.addInterceptor(log);
 
         return builder.build();
     }

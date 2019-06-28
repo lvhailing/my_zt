@@ -16,7 +16,8 @@ import com.crecg.staffshield.common.BaseActivity;
  */
 
 public class FindLoginPasswordActivity extends BaseActivity implements View.OnClickListener {
-
+    private ImageView iv_back; // 返回
+    private TextView tv_common_title; // 标题
     private EditText et_find_password_phone; // 手机号
     private EditText et_find_password_verify_code; // 验证码
     private ImageView iv_find_password_delete_phone; // 删除手机号
@@ -33,6 +34,11 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
     }
 
     protected void initView() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        tv_common_title.setText(getResources().getString(R.string.title_find_login_password));
+
         et_find_password_phone = findViewById(R.id.et_find_password_phone);
         et_find_password_verify_code = findViewById(R.id.et_find_password_verify_code);
         iv_find_password_delete_phone = findViewById(R.id.iv_fine_password_delete_phone);
@@ -40,6 +46,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
         tv_find_password_get_verify_code = findViewById(R.id.tv_find_password_get_verify_code);
         btn_sure = findViewById(R.id.btn_sure);
 
+        iv_back.setOnClickListener(this);
         iv_find_password_delete_phone.setOnClickListener(this);
         iv_find_password_delete_verify_code.setOnClickListener(this);
         tv_find_password_get_verify_code.setOnClickListener(this);
@@ -49,6 +56,9 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
             case R.id.iv_fine_password_delete_phone:
                 break;
             case R.id.iv_find_password_delete_verify_code:

@@ -9,7 +9,6 @@ import com.crecg.staffshield.common.BaseActivity;
 
 /**
  *  客服中心
- * Created by junde on 2018/12/21.
  */
 
 public class CustomerServiceCenterActivity extends BaseActivity {
