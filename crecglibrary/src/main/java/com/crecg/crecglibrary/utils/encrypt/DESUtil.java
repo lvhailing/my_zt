@@ -1,5 +1,7 @@
 package com.crecg.crecglibrary.utils.encrypt;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -65,7 +67,7 @@ public class DESUtil {
 	public static String encMap(Map<String, Object> param) {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		Map<String, Object> sortMap = sortMap(param);
-//        Log.i("hh", "排序后的入参为：" + sortMap);
+        Log.i("hh", "排序后的入参为：" + sortMap);
 		String str_md5 = gson.toJson(sortMap);
 		String md5 = MD5.stringToMD5(str_md5);
 
@@ -75,8 +77,9 @@ public class DESUtil {
 			map.put("check", md5);
 			map.put("data", sortMap);
 			String encrypt = gson.toJson(map);
-//            Log.i("hh", "传给后台的入参为：" + encrypt);
+            Log.i("hh", "加密前的入参为：" + encrypt);
 			result = DESUtil.encrypt(encrypt);
+            Log.i("hh", "加密后的入参为：" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

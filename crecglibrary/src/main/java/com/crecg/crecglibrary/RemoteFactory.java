@@ -79,6 +79,7 @@ public class RemoteFactory {
                 .build();
         T proxyClass = retrofit.create(someClass);
         proxyMap.put(someClass, proxyClass);
+        Log.i("hh", "baseUrl == " + baseUrl);
         return proxyClass;
     }
 

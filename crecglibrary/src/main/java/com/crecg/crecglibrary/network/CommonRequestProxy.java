@@ -26,11 +26,6 @@ public interface CommonRequestProxy {
     @POST("toutiao/index")
     Observable<ResultModel<DataWrapper<DataModel>>> getBookListByPost(@FieldMap Map<String, Object> params);
 
-    //登录
-    @FormUrlEncoded
-    @POST("android/login")
-    Observable<ResultModel<LoginModel>> getLoginByPost(@FieldMap Map<String, Object> params);
-
     //测试接口
     @POST("shop/mattersna/v1/getcreatestatus")
     Observable<ResultModel<DataWrapper<DataModel>>> canIEditReceipt();
@@ -42,9 +37,13 @@ public interface CommonRequestProxy {
     //测试接口
     @GET("book/receipts/nav1/getgoodslist")
     Observable<ResultModel<DataWrapper<DataModel>>> getDeliveryReceiptDetail(@Query("receipt_id") String id, @Query("shop_id") String shopId);
-
-
+/*************************************************************************************************************************************************/
     // 自己修改的接口
     @POST("toutiao/index")
     Observable<String> getZt(@FieldMap Map<String, Object> params);
+
+    //登录
+    @FormUrlEncoded
+    @POST("android/login")
+    Observable<String> getLoginByPost(@FieldMap Map<String, Object> param);
 }

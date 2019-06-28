@@ -1,6 +1,7 @@
 package com.crecg.staffshield.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private ImageView iv_login_delete_password; // 删除登录密码
     private String loginPhone;
     private String loginPassword;
+    private LoginModel loginData;
+    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,34 +94,36 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      *  登录
      */
     private void getLoginByPost() {
-        Map<String, Object> params = new HashMap<>();
-        params.put("mobile", "13593262371");
-        params.put("password", "aa111111");
-        DESUtil.encMap(params);
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("mobile", "13593262371");
+        param.put("password", "aa111111");
+        data = DESUtil.encMap(param);
+        Log.i("hh", "getLoginByPost--加密后的入参为：" + data);
 
-//        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-//                .getLoginByPost(params)
-//                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new CommonObserverAdapter<String, LoginModel>() {
-//            @Override
-//            public void onMyError() {
-//                //server取单据失败
-//                ToastUtil.showCustom("登录失败");
-//            }
-//
-//            @Override
-//            public void onMySuccess(ResultModel<LoginModel> result) {
-//                //server取单据成功
-//                if (result != null && result.code != null && result.data != null) {
-//                    LoginModel loginData = result.data;
-//                    String userId = loginData.userId;
-//                    if ("true".equals(loginData.flag)) {
-//                        ToastUtil.showCustom("登录成功");
-//                    }else{
-//                        ToastUtil.showCustom(loginData.flag);
-//                    }
-//                }
-//            }
-//        });
+        // 下面getLoginByPost(param)这里为了不报错先这样写了
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getLoginByPost(param)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, LoginModel>() {
+            @Override
+            public void onMyError() {
+                //server取单据失败
+                ToastUtil.showCustom("登录失败");
+            }
+
+            @Override
+            public void onMySuccess(ResultModel<LoginModel> result) {
+                //server取单据成功
+                if (result != null && result.code != null && result.data != null) {
+                    loginData = result.data;
+                    String userId = loginData.userId;
+                    if ("true".equals(loginData.flag)) {
+                        ToastUtil.showCustom("登录成功");
+                    }else{
+                        ToastUtil.showCustom(loginData.flag);
+                    }
+                }
+            }
+        });
     }
 }
