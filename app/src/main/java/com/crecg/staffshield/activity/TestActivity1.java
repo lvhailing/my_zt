@@ -1,25 +1,11 @@
 package com.crecg.staffshield.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.crecg.crecglibrary.RemoteFactory;
-import com.crecg.crecglibrary.network.CommonRequestProxy;
-import com.crecg.crecglibrary.network.CrecgObserverAdapter;
-import com.crecg.crecglibrary.network.model.ResultModel;
-import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
-import com.crecg.staffshield.utils.DESUtil;
-import com.crecg.staffshield.utils.RequestUtil;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class TestActivity1 extends BaseActivity implements View.OnClickListener {

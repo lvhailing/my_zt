@@ -24,6 +24,7 @@
     <string name="login_btn">登录</string>
     <string name="btn_sure">确定</string>
     <string name="get_verify_code">获取验证码</string>
+    <string name="get_verify_code_again">重新获取</string>
     <string name="register_next_step">下一步</string>
     <string name="register_phone_authentication">手机号认证</string>
     <string name="register_id_number_authentication">身份认证</string>

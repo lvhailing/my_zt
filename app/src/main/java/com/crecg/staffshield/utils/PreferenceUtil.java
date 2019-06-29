@@ -73,7 +73,6 @@ public class PreferenceUtil {
 
     /**
      * 设置token
-     *
      * @param userId
      */
     public static void setToken(String userId) {
@@ -82,7 +81,6 @@ public class PreferenceUtil {
 
     /**
      * 获取身份证号
-     *
      * @return
      */
     public static String getIdNo() {
@@ -91,7 +89,6 @@ public class PreferenceUtil {
 
     /**
      * 设置身份证号
-     *
      * @param idNo
      */
     public static void setIdNo(String idNo) {
@@ -100,7 +97,6 @@ public class PreferenceUtil {
 
     /**
      * 获取认证状态
-     *
      * @return
      */
     public static String getCheckStatus() {
@@ -109,7 +105,6 @@ public class PreferenceUtil {
 
     /**
      * 设置认证状态
-     *
      * @param checkStatus
      */
     public static void setCheckStatus(String checkStatus) {
@@ -118,7 +113,6 @@ public class PreferenceUtil {
 
     /**
      * 是否首次进入应用
-     *
      * @return
      */
     public static boolean isFirst() {
@@ -127,7 +121,6 @@ public class PreferenceUtil {
 
     /**
      * 设置是否首次进入应用
-     *
      * @param isfirst
      */
     public static void setFirst(boolean isfirst) {
@@ -136,7 +129,6 @@ public class PreferenceUtil {
 
     /**
      * 是否首次登陆应用
-     *
      * @return
      */
     public static boolean isFirstLogin() {
@@ -145,7 +137,6 @@ public class PreferenceUtil {
 
     /**
      * 设置是否首次登陆
-     *
      * @param isfirst
      */
     public static void setFirstLogin(boolean isfirst) {
@@ -154,7 +145,6 @@ public class PreferenceUtil {
 
     /**
      * 设置手势密码
-     *
      * @param pwd
      */
     public static void setGesturePwd(String pwd) {
@@ -163,7 +153,6 @@ public class PreferenceUtil {
 
     /**
      * 获取手势密码
-     *
      * @return
      */
     public static String getGesturePwd() {
@@ -197,7 +186,6 @@ public class PreferenceUtil {
 
     /**
      * 是否接收推送
-     *
      * @return
      */
     public static boolean isPushEnable() {
@@ -206,7 +194,6 @@ public class PreferenceUtil {
 
     /**
      * 设置是否接收推送
-     *
      * @param is
      * @return
      */
@@ -216,7 +203,6 @@ public class PreferenceUtil {
 
     /**
      * 判断是否开启防骚扰模式
-     *
      * @return
      */
     public static boolean isEnable() {
@@ -233,7 +219,6 @@ public class PreferenceUtil {
 
     /**
      * 是否打开防骚扰
-     *
      * @return boolean
      */
     public static boolean getIsAntiHarassment() {
@@ -242,7 +227,6 @@ public class PreferenceUtil {
 
     /**
      * 从SharedPreference中获取存入的TGT 默认传空
-     *
      * @return
      */
     public static String getClienttgt() {
@@ -255,7 +239,6 @@ public class PreferenceUtil {
 
     /**
      * 获取用户ID
-     *
      * @return
      */
     public static String getUserId() {
@@ -264,7 +247,6 @@ public class PreferenceUtil {
 
     /**
      * 设置用户ID
-     *
      * @param userId
      */
     public static void setUserId(String userId) {
@@ -273,7 +255,6 @@ public class PreferenceUtil {
 
     /**
      * 设置用户名
-     *
      * @param nickName
      */
     public static void setUserNickName(String nickName) {
@@ -282,7 +263,6 @@ public class PreferenceUtil {
 
     /**
      * 获取用户名
-     *
      * @return
      */
     public static String getUserNickName() {
@@ -292,7 +272,6 @@ public class PreferenceUtil {
 
     /**
      * 设置真实姓名
-     *
      * @param realName
      */
     public static void setUserRealName(String realName) {
@@ -301,7 +280,6 @@ public class PreferenceUtil {
 
     /**
      * 获取真实姓名
-     *
      * @return
      */
     public static String getUserRealName() {
@@ -311,7 +289,6 @@ public class PreferenceUtil {
 
     /**
      * 是否已经登陆
-     *
      * @return
      */
     public static boolean isLogin() {
@@ -320,7 +297,6 @@ public class PreferenceUtil {
 
     /**
      * 设置是否登陆
-     *
      * @param isLogin
      */
     public static void setLogin(boolean isLogin) {
@@ -329,7 +305,6 @@ public class PreferenceUtil {
 
     /**
      * 设置用户账户名
-     *
      * @param name
      */
     public static void setAutoLoginAccount(String name) {
@@ -338,7 +313,6 @@ public class PreferenceUtil {
 
     /**
      * 得到用户账户名
-     *
      * @return
      */
     public static String getAutoLoginAccount() {
@@ -347,7 +321,6 @@ public class PreferenceUtil {
 
     /**
      * 设置用户密码
-     *
      * @param pwd
      */
     public static void setAutoLoginPwd(String pwd) {
@@ -365,7 +338,6 @@ public class PreferenceUtil {
 
     /**
      * 设置cookie
-     *
      * @param cookie
      */
     public static void setCookie(String cookie) {
@@ -374,7 +346,6 @@ public class PreferenceUtil {
 
     /**
      * 获得cookie
-     *
      * @return
      */
     public static String getCookie() {
@@ -383,7 +354,6 @@ public class PreferenceUtil {
 
     /**
      * 设置用户注册手机号
-     *
      * @param phone
      */
     public static void setPhone(String phone) {
@@ -392,7 +362,6 @@ public class PreferenceUtil {
 
     /**
      * 获取用户注册手机号
-     *
      * @return
      */
     public static String getPhone() {

@@ -46,4 +46,24 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("android/login")
     Observable<String> getLoginByPost(@FieldMap Map<String, Object> param);
+
+    //发送短信验证码
+    @FormUrlEncoded
+    @POST("userinfo/mobile/send/verifycode")
+    Observable<String> getVerifyCodeByPost(@FieldMap Map<String, Object> param);
+
+    //找回密码
+    @FormUrlEncoded
+    @POST("userinfo/pwd/retrieve")
+    Observable<String> getFindPwdByPost(@FieldMap Map<String, Object> param);
+
+    //修改密码
+    @FormUrlEncoded
+    @POST("userinfo/pwd/update")
+    Observable<String> modifyPasswordByPost(@FieldMap Map<String, Object> param);
+
+    //重置交易密码
+    @FormUrlEncoded
+    @POST("userinfo/trspwd/reset")
+    Observable<String> ResetTransactionPwdByPost(@FieldMap Map<String, Object> param);
 }

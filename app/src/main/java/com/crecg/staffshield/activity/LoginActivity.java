@@ -20,6 +20,9 @@ import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
+import com.crecg.staffshield.utils.PreferenceUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.HashMap;
 
@@ -42,7 +45,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private String loginPhone;
     private String loginPassword;
     private LoginModel loginData;
-    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +115,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         Intent intent;
         switch (view.getId()) {
             case R.id.tv_login_forget_password: // 忘记密码
-                intent = new Intent(this,FindLoginPasswordActivity.class);
+                intent = new Intent(this, FindLoginPasswordActivity.class);
                 startActivity(intent);
                 break;
             case R.id.iv_fine_password_delete_phone: // 删除手机号
@@ -126,7 +128,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 getLoginByPost();
                 break;
             case R.id.tv_login_sign: // 新用户注册
-                intent = new Intent(this,RegisterOneStepActivity.class);
+                intent = new Intent(this, RegisterOneStepActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -138,37 +140,58 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void getLoginByPost() {
         HashMap<String, Object> param = new HashMap<>();
         param.put("mobile", "13593262371");
-        param.put("password", "aa111111");
-        data = DESUtil.encMap(param);
+        param.put("password", loginPassword);
+        String  data = DESUtil.encMap(param);
 
-        HashMap<String, Object> param2 = new HashMap<>();
-        param2.put("requestKey", data);
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
 
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getLoginByPost(param2)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .getLoginByPost(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String, LoginModel>() {
             @Override
             public void onMyError() {
-                ToastUtil.showCustom("登录失败");
+                ToastUtil.showCustom("获取数据失败");
             }
 
             @Override
-            public void onMySuccess(ResultModel<LoginModel> result) {
-                if (result != null && result.code != null && result.data != null) {
-                    Log.i("hh", "登录接口返回数据：" + result);
-                    loginData = result.data;
-                    String userId = loginData.userId;
-                    if ("true".equals(loginData.flag)) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        ToastUtil.showCustom("登录成功");
-                    } else {
-                        ToastUtil.showCustom(loginData.flag);
+            public void onMySuccess(String result) {
+                if (result != null) {
+//                    Log.i("hh", "登录接口数据1：" + result);
+                    ResultModel<LoginModel> loginModel = new Gson().fromJson(result, new TypeToken<ResultModel<LoginModel>>() {
+                    }.getType());
+//                    Log.i("hh", "登录接口数据2：" + loginModel);
+//                    Log.i("hh", "登录接口数据3：" + "userid= " + loginModel.data.userId + "mobile= " + loginModel.data.mobile);
+                    if (loginModel.data == null) {
+                        return;
                     }
+                    try {
+                        String encUserId = DESUtil.encrypt(loginModel.data.userId);
+                        String mobile = DESUtil.encrypt(loginModel.data.mobile);
+                        String idNo = DESUtil.encrypt(loginModel.data.idNo);
+                        PreferenceUtil.setUserId(encUserId);
+                        PreferenceUtil.setPhone(mobile);
+                        PreferenceUtil.setIdNo(idNo);
+
+                        if (Boolean.parseBoolean(loginModel.data.flag)) {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            ToastUtil.showCustom(loginModel.data.message);
+                        } else {
+                            ToastUtil.showCustom(loginModel.data.message);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         });
     }
 
+//    public static <T> T jsonToObject(String jsonStr, Type listType) {
+//        return new Gson().fromJson(jsonStr,listType);
+//    }
 }

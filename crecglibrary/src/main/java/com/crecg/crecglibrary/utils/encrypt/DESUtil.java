@@ -77,9 +77,9 @@ public class DESUtil {
 			map.put("check", md5);
 			map.put("data", sortMap);
 			String encrypt = gson.toJson(map);
-            Log.i("hh", "加密前的入参为：" + encrypt);
+            Log.i("hh", "加密前入参：" + encrypt);
 			result = DESUtil.encrypt(encrypt);
-            Log.i("hh", "加密后的入参为：" + result);
+//            Log.i("hh", "加密后入参：" + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

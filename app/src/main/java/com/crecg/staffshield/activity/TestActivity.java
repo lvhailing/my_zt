@@ -74,35 +74,35 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
      *  按照 如来保接口修改后的方法
      * @param id
      */
-    private void geZt(String id) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("type", "caijing");
-        params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
-        DESUtil.encMap(params);
+//    private void geZt(String id) {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("type", "caijing");
+//        params.put("key", "cf2e8c721799bbc8f3c9d639a4d0a9e6");
+//        DESUtil.encMap(params);
+//
+//        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+//                .getZt(params)
+//                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new CommonObserverAdapter<String,DataWrapper<DataModel>>() {
+//                    @Override
+//                    public void onMyError() {
+//                        //server取单据失败
+//                        ToastUtil.showCustom("调接口失败");
+//                    }
 
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getZt(params)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String,DataWrapper<DataModel>>() {
-                    @Override
-                    public void onMyError() {
-                        //server取单据失败
-                        ToastUtil.showCustom("调接口失败");
-                    }
-
-                    @Override
-                    public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
-                        //server取单据成功
-                        if (result != null && result.code != null && result.data != null && result.data.data.size() > 0) {
-                            List<DataModel> list = result.data.data;
-
-                            textView.setText(list.get(1).category);
-
-                            Glide.with(TestActivity.this).load(list.get(0).thumbnail_pic_s).into(imageView);
-                        }
-                    }
-                });
-    }
+//                    @Override
+//                    public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
+//                        //server取单据成功
+//                        if (result != null && result.code != null && result.data != null && result.data.data.size() > 0) {
+//                            List<DataModel> list = result.data.data;
+//
+//                            textView.setText(list.get(1).category);
+//
+//                            Glide.with(TestActivity.this).load(list.get(0).thumbnail_pic_s).into(imageView);
+//                        }
+//                    }
+//                });
+//    }
     private void getBooks(String id) {
         Map<String, Object> params = new HashMap<>();
         params.put("type", "caijing");

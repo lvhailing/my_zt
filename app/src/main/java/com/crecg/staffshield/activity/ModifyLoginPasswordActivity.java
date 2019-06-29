@@ -1,5 +1,6 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -7,11 +8,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
+import com.crecg.crecglibrary.network.model.ResultModel;
+import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 import com.crecg.staffshield.utils.StringUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 修改登录密码
@@ -28,6 +42,9 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
     private ImageView iv_delete_old_password; // 删除旧密码
     private ImageView iv_delete_confirm_password; // 删除确认密码
     private Button btn_sure; // 确定
+    private String oldPassword;
+    private String newPassword;
+    private String confirmPassword;
 
 
     @Override
@@ -65,34 +82,34 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
                 finish();
                 break;
             case R.id.btn_sure:
-                String oldPassword = et_old_password.getText().toString().trim();
-                String newPassword = et_new_password.getText().toString().trim();
-                String confirmPassword = et_confirm_password.getText().toString().trim();
+                oldPassword = et_old_password.getText().toString().trim();
+                newPassword = et_new_password.getText().toString().trim();
+                confirmPassword = et_confirm_password.getText().toString().trim();
                 if (TextUtils.isEmpty(oldPassword)) {
-                    Toast.makeText(this, "请输入旧密码", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showCustom("请输入旧密码");
                     return;
                 }
                 if (TextUtils.isEmpty(newPassword)) {
-                    Toast.makeText(this, "请输入新密码", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showCustom("请输入新密码");
                     return;
                 }
                 if (TextUtils.isEmpty(confirmPassword)) {
-                    Toast.makeText(this, "请输入确认密码", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showCustom("请输入确认密码");
                     return;
                 }
                 if (!StringUtil.checkPassword(oldPassword)) {
-                    Toast.makeText(this, "请输入6至8位字母数字组合密码", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showCustom("请输入6至8位字母数字组合密码");
                     return;
                 }
                 if (!StringUtil.checkPassword(newPassword)) {
-                    Toast.makeText(this, "请输入6至8位字母数字组合密码", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showCustom("请输入6至8位字母数字组合密码");
                     return;
                 }
                 if (!newPassword.equals(confirmPassword)) {
-                    Toast.makeText(this, "两次密码输入不一致，请重新输入", Toast.LENGTH_SHORT).show();
+                    ToastUtil.showCustom("两次密码输入不一致，请重新输入");
                     return;
                 }
-                modifyPassword(); // 调接口
+                modifyPasswordByPost();
                 break;
         }
 
@@ -102,7 +119,46 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
     /**
      *  重新修改密码
      */
-    private void modifyPassword() {
+    private void modifyPasswordByPost() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", userId);
+        param.put("oldPassword", oldPassword);
+        param.put("newPassword",newPassword );
+        String data = DESUtil.encMap(param);
+//        Log.i("hh", "手机号与用户Id:" + userPhone + "---" + userId);
 
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .modifyPasswordByPost(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                    @Override
+                    public void onMyError() {
+                        ToastUtil.showCustom("获取数据失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (result == null) {
+                            return;
+                        }
+                        ResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<ResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                        }.getType());
+                        if (verifyCodeModel.data == null) {
+                            return;
+                        }
+                        if (Boolean.parseBoolean(verifyCodeModel.data.flag)) {
+                            ToastUtil.showCustom(verifyCodeModel.data.message);
+                            finish();
+                            Intent intent = new Intent(ModifyLoginPasswordActivity.this, LoginActivity.class);
+//                            intent.putExtra("GOTOMAIN", LoginActivity.GOTOMAIN);
+                            startActivity(intent);
+                        }else {
+                            ToastUtil.showCustom(verifyCodeModel.data.message);
+                        }
+                    }
+                });
     }
 }

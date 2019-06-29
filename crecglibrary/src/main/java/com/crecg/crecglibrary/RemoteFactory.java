@@ -48,13 +48,13 @@ public class RemoteFactory {
 
     public RemoteFactory() {
         mGsonDateFormat = new GsonBuilder()
-//                .enableComplexMapKeySerialization()
-//                .serializeNulls()
+                .enableComplexMapKeySerialization()
+                .serializeNulls()
                 .disableHtmlEscaping()
-//                .setPrettyPrinting()
-//                .setVersion(1.0)
+                .setPrettyPrinting()
+                .setVersion(1.0)
                 .setLenient()
-//                .setDateFormat("yyyy-MM-dd hh:mm:ss")
+                .setDateFormat("yyyy-MM-dd hh:mm:ss")
                 .create();
     }
 

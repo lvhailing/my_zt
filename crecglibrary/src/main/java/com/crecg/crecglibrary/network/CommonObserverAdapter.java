@@ -29,19 +29,17 @@ public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
     @Override
     public void onNext(T1 result) {
         String encStr = (String) result; // 后台返回的加密数据
-        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
+//        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
         if (TextUtils.isEmpty(encStr)) {
             onMyError();
         } else {
             try {
-                String aa = URLDecoder.decode(encStr, "utf-8");
-                Log.i("hh", "onNext方法中decode的返回数据--aa：" + aa);
+                String decodeStr = URLDecoder.decode(encStr, "utf-8");
+//                Log.i("hh", "onNext方法中解码后数据--decodeStr：" + decodeStr);
 
-                String desStr = DESUtil.decrypt(aa); // 解密后的返回数据
-                Log.i("hh", "onNext方法中解密后的返回数据--desStr：" + desStr);
-                ResultModel<T2> desModel = new Gson().fromJson(desStr, new TypeToken<ResultModel<T2>>() {
-                }.getType());
-                onMySuccess(desModel);
+                String desStr = DESUtil.decrypt(decodeStr); // 解密后的返回数据
+                Log.i("hh", "onNext方法中解密后数据--desStr：" + desStr);
+                onMySuccess(desStr);
             } catch (Exception e) {
                 Log.i("hh", "onNext --- catch的错：" + e);
                 e.printStackTrace();
@@ -50,17 +48,16 @@ public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
     }
 
     @Override
-    public void onError(Throwable e)  {
-        Log.i("hh", "系统回调的onError方法里错误是：" + e);
+    public void onError(Throwable e) {
         onMyError();
     }
 
     @Override
     public void onComplete() {
-        Log.i("hh", "回调我了吗？");
+//        Log.i("hh", "onComplete()回调了");
     }
 
-    public void onMySuccess(ResultModel<T2> result) {
+    public void onMySuccess(String result) {
     }
 
     public void onMyError() {
