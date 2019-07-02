@@ -84,6 +84,7 @@
 
         <activity
             android:name=".activity.ResetTransactionPasswordActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -98,8 +99,8 @@
             android:name=".activity.FundTurnOutActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".activity.SettingPatternPswActivity" />
-        <activity android:name=".activity.ClosePatternPswActivity" />
+        <activity android:name=".activity.SettingPatternPswActivity"/>
+        <activity android:name=".activity.ClosePatternPswActivity"/>
 
         <activity
             android:name=".activity.MyFinancialManagementActivity"
@@ -113,7 +114,17 @@
         <activity
             android:name=".activity.TransactionPasswordActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleInstance"
             android:theme="@style/ActivityAsDialog"/>
+
+        <activity
+            android:name=".activity.WageTreasureBuyingActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.WageTreasureTurnSuccessActivity"
+            android:screenOrientation="portrait"/>
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

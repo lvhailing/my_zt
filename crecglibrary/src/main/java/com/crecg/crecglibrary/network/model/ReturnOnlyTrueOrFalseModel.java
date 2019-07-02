@@ -7,4 +7,5 @@ package com.crecg.crecglibrary.network.model;
 public class ReturnOnlyTrueOrFalseModel {
     public String flag; // true/false 成功或失败
     public String message; // 失败信息说明
+    public String mobile; // 手机号 （注册时会返回）
 }

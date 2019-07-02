@@ -42,6 +42,16 @@ public interface CommonRequestProxy {
     @POST("toutiao/index")
     Observable<String> getZt(@FieldMap Map<String, Object> params);
 
+    //注册一（手机号认证）
+    @FormUrlEncoded
+    @POST("android/regist")
+    Observable<String> getRegisterOneStepByPost(@FieldMap Map<String, Object> param);
+
+    //注册二（身份认证）
+    @FormUrlEncoded
+    @POST("android/registTwo")
+    Observable<String> getRegisterTwoStepByPost(@FieldMap Map<String, Object> param);
+
     //登录
     @FormUrlEncoded
     @POST("android/login")

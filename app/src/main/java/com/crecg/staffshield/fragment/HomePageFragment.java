@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.TestActivity1;
+import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
 
 import java.util.ArrayList;
 
@@ -195,16 +196,16 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 //                startActivity(intent);
                 break;
             case R.id.ll_home_insurance:  // 保险
-//                intent = new Intent(context, TestActivity1.class);
-//                startActivity(intent);
+                intent = new Intent(context, TestActivity1.class);
+                startActivity(intent);
                 break;
             case R.id.ll_go_to_salary_treasure:  // 活期 工资宝布局
 //                intent = new Intent(context, TestActivity1.class);
 //                startActivity(intent);
                 break;
             case R.id.tv_transfer_immediately:  // 立即转入
-//                intent = new Intent(context, TestActivity1.class);
-//                startActivity(intent);
+                intent = new Intent(context, WageTreasureBuyingActivity.class);
+                startActivity(intent);
                 break;
         }
     }

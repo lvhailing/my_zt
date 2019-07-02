@@ -102,7 +102,7 @@
             android:layout_toRightOf="@id/iv_register_two_step_name"
             android:background="@color/transparent"
             android:hint="请输入真实姓名"
-            android:inputType="phone"
+            android:inputType="text"
             android:maxLength="11"
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
@@ -148,7 +148,7 @@
             android:layout_toRightOf="@id/iv_register_two_step_id"
             android:background="@color/transparent"
             android:hint="请输入身份证号"
-            android:inputType="phone"
+            android:inputType="none"
             android:maxLength="11"
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
@@ -194,7 +194,7 @@
             android:layout_toRightOf="@id/iv_register_two_step_login_password"
             android:background="@color/transparent"
             android:hint="请设置6-8位登录密码"
-            android:inputType="phone"
+            android:inputType="textPassword"
             android:maxLength="8"
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
@@ -226,15 +226,15 @@
         android:layout_marginTop="15dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/img_error_message"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:text="密码至少包括数字、字母、字符两种组合"
-            android:textColor="@color/txt_black_666666"
-            android:textSize="12sp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:drawableLeft="@mipmap/img_error_message"-->
+            <!--android:drawablePadding="8dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="密码至少包括数字、字母、字符两种组合"-->
+            <!--android:textColor="@color/txt_black_666666"-->
+            <!--android:textSize="12sp"/>-->
     </LinearLayout>
 
     <Button

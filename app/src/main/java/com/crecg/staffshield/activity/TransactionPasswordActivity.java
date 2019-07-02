@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * （资金转出）请输入交易密码
+ * 请输入交易密码
  */
 
 public class TransactionPasswordActivity extends BaseActivity implements OnNumberKeyboardListener {
@@ -118,7 +118,11 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
             iv_pass5.setVisibility(View.VISIBLE);
             iv_pass6.setVisibility(View.VISIBLE);
 
-            // Todo 调后台接口
+            // Todo 调后台接口成功后跳转到成功状态页
+            Intent intent = new Intent(this, WageTreasureTurnSuccessActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
 
             // 删除键不可点
             view_keyboard.setDelBtnEnable(false);
