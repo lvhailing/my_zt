@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -73,6 +74,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (intent != null) {
 //            selectPage = getIntent().getIntExtra("selectIndex", 0);
 //            setSelect(selectPage);
+            String homeFlag = getIntent().getStringExtra("homeFlag");
+            if (!TextUtils.isEmpty(homeFlag)) {
+                if ("1".equals(homeFlag)) {
+                    setSelect(0);
+                }
+            }
         }
     }
 

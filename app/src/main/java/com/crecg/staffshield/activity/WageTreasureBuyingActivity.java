@@ -70,7 +70,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
             case R.id.tv_transfer_of_funds: // 资金转入
-                intent = new Intent(WageTreasureBuyingActivity.this, FundChangeIntoActivity.class);
+                intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_all: // 全部
@@ -84,7 +84,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                     ToastUtil.showCustom("买入金额不能为空");
                 } else {
                     intent = new Intent(this, TransactionPasswordActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
                 break;

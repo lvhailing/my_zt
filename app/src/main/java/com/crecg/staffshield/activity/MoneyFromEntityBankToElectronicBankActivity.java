@@ -14,21 +14,25 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- * 资金转入(从绑定的银行卡向开通的电子银行卡转钱)
+ * Transfer of Money from Entity Bank Card to Electronic Bank Card
+ * 资金转入(从绑定的银行卡向开通的联名卡（电子银行卡）转钱)
  */
 
-public class FundChangeIntoActivity extends BaseActivity implements View.OnClickListener {
+public class MoneyFromEntityBankToElectronicBankActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_back;
     private TextView tv_common_title;
-    private TextView tv_bank_card_name;
-    private TextView tv_bank_card_num;
-    private EditText et_change_into_money;
+    private TextView tv_entity_bank_card_name; // 实体银行卡名称
+    private TextView tv_entity_bank_card_last_num; // 实体银行卡后四位卡号
+    private TextView tv_transfer_limits; // 日转账限制额度
+    private TextView tv_electronic_bank_name1;
+    private TextView tv_electronic_bank_name2;
+    private EditText et_change_into_money; // 输入转入金额
     private Button btn_confirm_change_into;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        baseSetContentView(R.layout.activity_fund_change_into);
+        baseSetContentView(R.layout.activity_entity_to_electronic);
 
         initView();
     }
@@ -39,8 +43,11 @@ public class FundChangeIntoActivity extends BaseActivity implements View.OnClick
         iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
         tv_common_title.setText(getResources().getString(R.string.title_fund_change_into));
 
-        tv_bank_card_name = findViewById(R.id.tv_bank_card_name);
-        tv_bank_card_num = findViewById(R.id.tv_bank_card_num);
+        tv_entity_bank_card_name = findViewById(R.id.tv_entity_bank_card_name);
+        tv_entity_bank_card_last_num = findViewById(R.id.tv_entity_bank_card_last_num);
+        tv_transfer_limits = findViewById(R.id.tv_transfer_limits);
+        tv_electronic_bank_name1 = findViewById(R.id.tv_electronic_bank_name1);
+        tv_electronic_bank_name2 = findViewById(R.id.tv_electronic_bank_name2);
         et_change_into_money = findViewById(R.id.et_change_into_money);
         btn_confirm_change_into = findViewById(R.id.btn_confirm_change_into);
 

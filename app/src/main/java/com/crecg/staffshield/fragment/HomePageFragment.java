@@ -199,11 +199,11 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, TestActivity1.class);
                 startActivity(intent);
                 break;
-            case R.id.ll_go_to_salary_treasure:  // 活期 工资宝布局
+            case R.id.ll_go_to_salary_treasure:  // 活期 工资宝布局 (跳转工资宝详情页H5)
 //                intent = new Intent(context, TestActivity1.class);
 //                startActivity(intent);
                 break;
-            case R.id.tv_transfer_immediately:  // 立即转入
+            case R.id.tv_transfer_immediately:  // 立即转入 （跳转工资宝买入页）
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
                 startActivity(intent);
                 break;

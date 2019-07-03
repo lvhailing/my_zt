@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="请输入银行短信验证码"
+                android:text="请输入交易密码"
                 android:textColor="@color/txt_black_333333"
                 android:textSize="16sp"/>
 

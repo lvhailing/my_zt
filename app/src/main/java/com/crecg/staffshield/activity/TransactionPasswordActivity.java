@@ -120,9 +120,8 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
 
             // Todo 调后台接口成功后跳转到成功状态页
             Intent intent = new Intent(this, WageTreasureTurnSuccessActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
 
             // 删除键不可点
             view_keyboard.setDelBtnEnable(false);

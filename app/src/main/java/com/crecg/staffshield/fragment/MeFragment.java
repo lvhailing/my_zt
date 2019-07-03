@@ -15,8 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crecg.staffshield.R;
-import com.crecg.staffshield.activity.FundChangeIntoActivity;
-import com.crecg.staffshield.activity.FundTurnOutActivity;
+import com.crecg.staffshield.activity.MoneyFromEntityBankToElectronicBankActivity;
+import com.crecg.staffshield.activity.MoneyFromElectronicBankToEntityBankActivity;
 import com.crecg.staffshield.activity.MyFinancialManagementActivity;
 import com.crecg.staffshield.activity.SettingActivity;
 
@@ -95,11 +95,11 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.btn_change_into: // 转入
-                intent = new Intent(context, FundChangeIntoActivity.class);
+                intent = new Intent(context, MoneyFromEntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_turn_out: // 转出
-                intent = new Intent(context, FundTurnOutActivity.class);
+                intent = new Intent(context, MoneyFromElectronicBankToEntityBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_salary_treasure: // 工资宝

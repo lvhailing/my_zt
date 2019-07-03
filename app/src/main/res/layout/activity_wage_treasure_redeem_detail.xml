@@ -38,7 +38,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
-                android:background="@mipmap/img_circle_gray"/>
+                android:background="@mipmap/img_check_mark"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
                 android:text="赎回申请已提交，等待银行处理"
-                android:textColor="@color/txt_black_999999"
+                android:textColor="@color/main_blue_4A67F5"
                 android:textSize="15sp"/>
         </LinearLayout>
 
@@ -59,10 +59,10 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="43dp"
-                android:background="@color/bg_line"/>
+                android:background="@mipmap/img_line_blue_and_gray"/>
 
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/tv_redeem_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
@@ -102,7 +102,7 @@
             android:layout_marginBottom="16dp">
 
             <TextView
-                android:id="@+id/tv_date_start_calculating_earnings"
+                android:id="@+id/tv_latest_arrival_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"

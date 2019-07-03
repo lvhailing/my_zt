@@ -50,7 +50,15 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
         btn_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(WageTreasureTurnSuccessActivity.this, MainActivity.class);
+                intent.putExtra("homeFlag","1"); //
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+//                overridePendingTransition(R.anim.activity_in_from_right,
+//                        R.anim.activity_out_to_left);
+//
+//                AppManager.getAppManager().finishAllActivity();
+
             }
         });
 

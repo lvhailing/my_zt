@@ -14,10 +14,10 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- * 资金转出
+ * 资金转出(从开通的联名卡向绑定的银行卡转钱)
  */
 
-public class FundTurnOutActivity extends BaseActivity implements View.OnClickListener {
+public class MoneyFromElectronicBankToEntityBankActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_back;
     private TextView tv_common_title;
     private TextView tv_bank_card_name;

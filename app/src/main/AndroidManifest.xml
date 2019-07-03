@@ -38,7 +38,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -55,15 +55,15 @@
             android:screenOrientation="portrait"/>
 
         <activity
+        android:name=".activity.LoginActivity"
+        android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".activity.CustomerServiceCenterActivity"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".activity.FindLoginPasswordActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.MainActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -92,11 +92,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.FundChangeIntoActivity"
+            android:name=".activity.MoneyFromEntityBankToElectronicBankActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.FundTurnOutActivity"
+            android:name=".activity.MoneyFromElectronicBankToEntityBankActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.SettingPatternPswActivity"/>
@@ -114,12 +114,10 @@
         <activity
             android:name=".activity.TransactionPasswordActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleInstance"
             android:theme="@style/ActivityAsDialog"/>
 
         <activity
             android:name=".activity.WageTreasureBuyingActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait"/>
 
         <activity

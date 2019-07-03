@@ -118,7 +118,7 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
         paramWrapper.put("requestKey", data);
 
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getRegisterOneStepByPost(paramWrapper)
+                .getRegisterTwoStepByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {

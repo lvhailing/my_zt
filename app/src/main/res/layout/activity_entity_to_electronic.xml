@@ -29,6 +29,7 @@
                 android:background="@mipmap/img_yellow_bank_card"/>
 
             <TextView
+                android:id="@+id/tv_entity_bank_card_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -38,6 +39,7 @@
                 android:textSize="14sp"/>
 
             <TextView
+                android:id="@+id/tv_entity_bank_card_last_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -70,6 +72,7 @@
                 android:background="@mipmap/img_line_change_into"/>
 
             <TextView
+                android:id="@+id/tv_transfer_limits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -92,15 +95,17 @@
                 android:background="@mipmap/img_blue_bank_card"/>
 
             <TextView
+                android:id="@+id/tv_electronic_bank_name1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="中铁"
+                android:text="堪设"
                 android:textColor="@color/txt_black_666666"
                 android:textSize="14sp"/>
 
             <TextView
+                android:id="@+id/tv_electronic_bank_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
