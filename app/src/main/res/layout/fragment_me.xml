@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <!-- 顶部 title -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -240,16 +241,19 @@
                     android:textSize="15sp"/>
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rl_account_balance"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginLeft="44dp">
+                    android:layout_weight="1"
+                   android:layout_gravity="center_vertical"
+                    android:paddingLeft="44dp">
 
                     <LinearLayout
                         android:id="@+id/ll_available_balance"
@@ -273,6 +277,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_account_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/ll_available_balance"
@@ -289,14 +294,15 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="35dp"
-                    android:layout_centerInParent="true"
+                   android:layout_gravity="center_vertical"
                     android:background="@color/bg_line"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="27dp"
                     android:orientation="horizontal">
 
                     <Button
@@ -319,7 +325,7 @@
                         android:textColor="@color/main_blue_4A67F5"
                         android:textSize="14sp"/>
                 </LinearLayout>
-            </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

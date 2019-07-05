@@ -43,10 +43,10 @@ public class WageTreasureRedeemDetailActivity extends BaseActivity {
         btn_complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(WageTreasureRedeemDetailActivity.this, MainActivity.class);
-//                intent.putExtra("homeFlag","1"); //
+                Intent intent = new Intent(WageTreasureRedeemDetailActivity.this, SalaryTreasureDetailActivity.class);
+//                intent.putExtra("homeFlag","1");
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
+                startActivity(intent);
 //                overridePendingTransition(R.anim.activity_in_from_right,
 //                        R.anim.activity_out_to_left);
 //

@@ -30,6 +30,8 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
     private XNumberKeyboardView view_keyboard;
     private List<String> transactionPwdList = new ArrayList<>();
     private TextView tv_forget_transaction_pwd;
+    private String fromFlag; // wageTreasureRedeem:工资宝赎回  wageTreasureBuy:工资宝买入
+    private String whereToEnterFlag; //  1:首页进   2：工资宝详情页进
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
     }
 
     private void initView() {
+        fromFlag = getIntent().getStringExtra("fromFlag");
+        whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
         iv_close_keyboard = findViewById(R.id.iv_close_keyboard);
         view_keyboard = findViewById(R.id.view_keyboard);
         iv_pass1 = findViewById(R.id.iv_pass1);
@@ -119,9 +123,16 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
             iv_pass6.setVisibility(View.VISIBLE);
 
             // Todo 调后台接口成功后跳转到成功状态页
-            Intent intent = new Intent(this, WageTreasureTurnSuccessActivity.class);
+            if (fromFlag.equals("wageTreasureRedeem")) { // 工资宝赎回
+                Intent intent = new Intent(this, WageTreasureRedeemDetailActivity.class);
 //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+                startActivity(intent);
+            } else if (fromFlag.equals("wageTreasureBuy")) { // 工资宝买入（一：从工资宝详情页进的买入，二：从首页点“立即买入”进）
+                Intent intent = new Intent(this, WageTreasureTurnSuccessActivity.class);
+                intent.putExtra("whereToEnterFlag",whereToEnterFlag);
+                startActivity(intent);
+            }
+
 
             // 删除键不可点
             view_keyboard.setDelBtnEnable(false);

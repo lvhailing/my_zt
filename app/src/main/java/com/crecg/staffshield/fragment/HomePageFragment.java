@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
+import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
 
@@ -144,7 +146,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         tv_product_cycle1.setText(product.day);
         tv_initial_investment_amount1.setText(product.investmentAmount);
         tv_start_sale_time1.setText(product.date);
-        int flag = product.flag;
+        final int flag = product.flag;
         if (flag == 1) {
             //即将开售
             iv_will_sell_state1.setBackground(getResources().getDrawable(R.mipmap.img_on_sale));
@@ -161,12 +163,13 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             ll_best_sell1.setVisibility(View.GONE);
             fl_start_sell1.setVisibility(View.VISIBLE);
         }
-        ll_item.setOnClickListener(new View.OnClickListener() {
+        ll_item.setOnClickListener(new View.OnClickListener() { // item 点击监听
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, TestActivity1.class);
-                intent.putExtra("aaa", product.investmentAmount);
-                startActivity(intent);
+                if (flag == 2) {
+                    Intent intent = new Intent(context, RegularFinancialManagementBuyingActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         return ll_item;
@@ -200,11 +203,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.ll_go_to_salary_treasure:  // 活期 工资宝布局 (跳转工资宝详情页H5)
-//                intent = new Intent(context, TestActivity1.class);
-//                startActivity(intent);
+                intent = new Intent(context, SalaryTreasureDetailActivity.class);
+                startActivity(intent);
                 break;
             case R.id.tv_transfer_immediately:  // 立即转入 （跳转工资宝买入页）
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
+                intent.putExtra("whereToEnterFlag", "1");
                 startActivity(intent);
                 break;
         }

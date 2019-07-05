@@ -124,6 +124,29 @@
             android:name=".activity.WageTreasureTurnSuccessActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.SalaryTreasureDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RedemptionOfElectronicBankCardActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.WageTreasureRedeemDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegularFinancialManagementBuyingActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.AccountBalanceActivity"
+            android:screenOrientation="portrait"/>
+
+
+
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

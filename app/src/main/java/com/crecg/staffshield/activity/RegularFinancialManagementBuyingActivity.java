@@ -14,10 +14,10 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- * 工资宝买入
+ * 定期理财买入
  */
 
-public class WageTreasureBuyingActivity extends BaseActivity implements View.OnClickListener {
+public class RegularFinancialManagementBuyingActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_back;
     private TextView tv_common_title;
@@ -34,34 +34,33 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wage_treasure_buying);
+        setContentView(R.layout.activity_regular_financial_management_buying);
 
         initView();
     }
 
     private void initView() {
-        whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
 
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
         iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
-        tv_common_title.setText("工资宝");
+        tv_common_title.setText("堪设一号"); // Todo 需要动态获取标题
 
-        tv_money_amount = findViewById(R.id.tv_money_amount);
-        et_all_money_amount = findViewById(R.id.et_all_money_amount);
-        tv_transfer_of_funds = findViewById(R.id.tv_transfer_of_funds);
-        tv_all = findViewById(R.id.tv_all);
-        tv_date_start_accruing_interest = findViewById(R.id.tv_date_start_accruing_interest);
-        tv_about_agreement = findViewById(R.id.tv_about_agreement);
-        iv_selected_or_unselected = findViewById(R.id.iv_selected_or_unselected);
-        btn_buy = findViewById(R.id.btn_buy);
+//        tv_money_amount = findViewById(R.id.tv_money_amount);
+//        et_all_money_amount = findViewById(R.id.et_all_money_amount);
+//        tv_transfer_of_funds = findViewById(R.id.tv_transfer_of_funds);
+//        tv_all = findViewById(R.id.tv_all);
+//        tv_date_start_accruing_interest = findViewById(R.id.tv_date_start_accruing_interest);
+//        tv_about_agreement = findViewById(R.id.tv_about_agreement);
+//        iv_selected_or_unselected = findViewById(R.id.iv_selected_or_unselected);
+//        btn_buy = findViewById(R.id.btn_buy);
 
-        tv_money_amount.setText("201222.00");
-        iv_back.setOnClickListener(this);
-        tv_transfer_of_funds.setOnClickListener(this);
-        tv_all.setOnClickListener(this);
-        tv_about_agreement.setOnClickListener(this);
-        btn_buy.setOnClickListener(this);
+//        tv_money_amount.setText("201222.00");
+//        iv_back.setOnClickListener(this);
+//        tv_transfer_of_funds.setOnClickListener(this);
+//        tv_all.setOnClickListener(this);
+//        tv_about_agreement.setOnClickListener(this);
+//        btn_buy.setOnClickListener(this);
     }
 
     @Override
@@ -72,7 +71,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
             case R.id.tv_transfer_of_funds: // 资金转入
-                intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                intent = new Intent(RegularFinancialManagementBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_all: // 全部

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_account_balance"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/img_account_balance"/>
+
+        <TextView
+            android:id="@+id/tv_account_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="9dp"
+            android:layout_toRightOf="@id/iv_account_balance"
+            android:text="账户余额(元)："
+            android:textColor="@color/txt_black_333333"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_money_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_account_balance"
+            android:background="@color/transparent"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="15sp"
+            tools:text="201222.12"
+            />
+
+        <TextView
+            android:id="@+id/tv_transfer_of_funds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="3dp"
+            android:paddingLeft="3dp"
+            android:paddingTop="3dp"
+            android:text="资金转入"
+            android:textColor="@color/main_blue_4A67F5"
+            android:textSize="16sp"/>
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@id/tv_transfer_of_funds"
+            android:background="@color/bg_line"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_money_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@mipmap/img_money"/>
+
+        <EditText
+            android:id="@+id/et_all_money_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+            android:layout_toRightOf="@id/iv_money_logo"
+            android:background="@color/transparent"
+            android:hint="请输入最低10W的购买金额"
+            android:text=""
+            android:textColor="@color/txt_black_333333"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="3dp"
+            android:paddingLeft="9dp"
+            android:paddingRight="9dp"
+            android:paddingTop="3dp"
+            android:text="全部"
+            android:textColor="@color/main_blue_4A67F5"
+            android:textSize="16sp"/>
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="45dp"
+            android:layout_toLeftOf="@id/tv_all"
+            android:background="@color/bg_line"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单笔上线100万元"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_date_start_accruing_interest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余可购买金额201万元"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:text="当剩余金额&lt;起购金额时，只成交剩余金额，多余的退回账户"
+        android:textColor="@color/txt_gray_ccc"
+        android:textSize="12sp"/>
+
+    <Button
+        android:id="@+id/btn_buy"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/login_btn_shape_blue_0087fd"
+        android:text="确认买入"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_selected_or_unselected"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/img_unselected"/>
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@id/iv_selected_or_unselected"
+            android:text="购买表示同意"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_about_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv4"
+            android:text="《相关协议》"
+            android:textColor="@color/main_blue_4A67F5"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+
+</LinearLayout>

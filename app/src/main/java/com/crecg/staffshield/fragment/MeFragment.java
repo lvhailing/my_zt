@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.AccountBalanceActivity;
 import com.crecg.staffshield.activity.MoneyFromEntityBankToElectronicBankActivity;
 import com.crecg.staffshield.activity.MoneyFromElectronicBankToEntityBankActivity;
 import com.crecg.staffshield.activity.MyFinancialManagementActivity;
@@ -39,6 +40,9 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private LinearLayout ll_salary_treasure; // 工资宝 布局
     private LinearLayout ll_conduct_financial_transactions; // 定期理财 布局
     private RelativeLayout rl_invite_colleagues; // 邀请同事
+    private RelativeLayout rl_account_balance; // 账户余额
+
+    private String btnFlag = "1"; // 1:转入     2：转出
 
     @Nullable
     @Override
@@ -68,6 +72,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         iv_eye_open = mView.findViewById(R.id.iv_eye_open);
         btn_change_into = mView.findViewById(R.id.btn_change_into);
         btn_turn_out = mView.findViewById(R.id.btn_turn_out);
+        rl_account_balance = mView.findViewById(R.id.rl_account_balance);
         ll_salary_treasure = mView.findViewById(R.id.ll_salary_treasure);
         ll_conduct_financial_transactions = mView.findViewById(R.id.ll_conduct_financial_transactions);
         rl_invite_colleagues = mView.findViewById(R.id.rl_invite_colleagues);
@@ -75,6 +80,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
 //        me_rl_customer_service_center.setOnClickListener(this);
         iv_mine_setting.setOnClickListener(this);
+        rl_account_balance.setOnClickListener(this);
         btn_change_into.setOnClickListener(this);
         btn_turn_out.setOnClickListener(this);
         ll_salary_treasure.setOnClickListener(this);
@@ -94,13 +100,30 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, SettingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btn_change_into: // 转入
-                intent = new Intent(context, MoneyFromEntityBankToElectronicBankActivity.class);
+            case R.id.rl_account_balance: // (联名卡)账户余额  跳转前需要先判断用户是否绑卡，没绑卡先跳绑卡页，反之则跳账户余额页
+                intent = new Intent(context, AccountBalanceActivity.class);
                 startActivity(intent);
+            case R.id.btn_change_into: // (联名卡)转入
+                if ("2".equals(btnFlag)) {
+                    btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
+                    btn_change_into.setTextColor(getResources().getColor(R.color.white));
+                    btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_btn_blue));
+                    btn_turn_out.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
+                    btnFlag = "1";
+                    intent = new Intent(context, MoneyFromEntityBankToElectronicBankActivity.class);
+                    startActivity(intent);
+                }
                 break;
-            case R.id.btn_turn_out: // 转出
-                intent = new Intent(context, MoneyFromElectronicBankToEntityBankActivity.class);
-                startActivity(intent);
+            case R.id.btn_turn_out: // (联名卡)转出
+                if ("1".equals(btnFlag)) {
+                    btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
+                    btn_turn_out.setTextColor(getResources().getColor(R.color.white));
+                    btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_btn_blue));
+                    btn_change_into.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
+                    btnFlag = "2";
+                    intent = new Intent(context, MoneyFromElectronicBankToEntityBankActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.ll_salary_treasure: // 工资宝
                 break;

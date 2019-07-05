@@ -24,6 +24,7 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
     private TextView tv_date_arrival_account; // 第一笔收益到账时间（11-30）
     private TextView tv_week_arrival_account; // 第一笔收益到账时间（周三）
     private TextView btn_complete; //完成
+    private String whereToEnterFlag; //  1:首页进   2：工资宝详情页进
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
     }
 
     private void initView() {
+        whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
         iv_back.setVisibility(View.GONE);
@@ -48,11 +50,19 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
         btn_complete = findViewById(R.id.btn_complete);
 
         btn_complete.setOnClickListener(new View.OnClickListener() {
+            Intent intent;
+
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WageTreasureTurnSuccessActivity.this, MainActivity.class);
-                intent.putExtra("homeFlag","1"); //
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                if ("1".equals(whereToEnterFlag)) {
+                    intent = new Intent(WageTreasureTurnSuccessActivity.this, MainActivity.class);
+                    intent.putExtra("homeFlag", "1");
+                    intent.putExtra("homeFlag", "1");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                } else if ("2".equals(whereToEnterFlag)) {
+                    intent = new Intent(WageTreasureTurnSuccessActivity.this, SalaryTreasureDetailActivity.class);
+                    intent.putExtra("homeFlag", "1");
+                }
                 startActivity(intent);
 //                overridePendingTransition(R.anim.activity_in_from_right,
 //                        R.anim.activity_out_to_left);
