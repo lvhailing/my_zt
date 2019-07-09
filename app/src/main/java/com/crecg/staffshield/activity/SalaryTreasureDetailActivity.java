@@ -91,6 +91,8 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                 finish();
                 break;
             case R.id.tv_right_txt: // 明细
+                intent = new Intent(SalaryTreasureDetailActivity.this, BillCenterActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_redeem: // 赎回
                 if ("0".equals(btnFlag)) {

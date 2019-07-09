@@ -15,10 +15,10 @@ import com.crecg.staffshield.fragment.MyFinacialHoldFragment;
 import com.crecg.staffshield.fragment.MyFinacialPaymentReturnedFragment;
 
 /**
- * (我的模块--->定期理财跳转到此页面)我的理财
+ * 我的理财 (包含持仓和已回款)
  */
 
-public class MyFinancialManagementActivity extends BaseActivity implements View.OnClickListener {
+public class MyFinancialManagementListActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_back;
     private ImageView iv_right_btn;
@@ -32,10 +32,13 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
     private String[] titles;
     private MyFinacialVpAdapter myFinacialVpAdapter;
 
+    private boolean showOrHideFlag = true; // 持有总额 默认显示
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        baseSetContentView(R.layout.activity_financial_management);
+        baseSetContentView(R.layout.activity_financial_management_list);
 
         initView();
         initData();
@@ -59,6 +62,7 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
 
         iv_back.setOnClickListener(this);
         iv_right_btn.setOnClickListener(this);
+        iv_eye_state.setOnClickListener(this);
     }
 
     private void initData() {
@@ -82,7 +86,7 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
                     ((MyFinacialHoldFragment) myFinacialVpAdapter.getItem(position)).setUserId("111");
                     MyFinacialHoldFragment myFinacialHoldFragment = (MyFinacialHoldFragment) myFinacialVpAdapter.getItem(position);
                     myFinacialHoldFragment.getCurrentTab(position);
-                } else if (position==1){
+                } else if (position == 1) {
                     ((MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(position)).setUserId("111");
                     MyFinacialPaymentReturnedFragment myFinacialPaymentReturnedFragment = (MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(position);
                     myFinacialPaymentReturnedFragment.getCurrentTab(position);
@@ -102,9 +106,18 @@ public class MyFinancialManagementActivity extends BaseActivity implements View.
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.iv_right_btn: //
-//                Intent intent = new Intent(this, WebActivity.class);
-//                startActivity(intent);
+            case R.id.iv_right_btn: // 明细
+                Intent intent = new Intent(this, BillCenterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.iv_eye_state: // 小眼睛 （显示或隐藏金额）
+                if (showOrHideFlag) {
+                    tv_waiting_income.setText("****");
+                    showOrHideFlag = false;
+                } else {
+                    tv_waiting_income.setText("27000.55");
+                    showOrHideFlag = true;
+                }
                 break;
         }
     }

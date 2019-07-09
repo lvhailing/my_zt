@@ -18,7 +18,8 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.AccountBalanceActivity;
 import com.crecg.staffshield.activity.MoneyFromEntityBankToElectronicBankActivity;
 import com.crecg.staffshield.activity.MoneyFromElectronicBankToEntityBankActivity;
-import com.crecg.staffshield.activity.MyFinancialManagementActivity;
+import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
+import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.SettingActivity;
 
 /**
@@ -43,6 +44,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout rl_account_balance; // 账户余额
 
     private String btnFlag = "1"; // 1:转入     2：转出
+    private boolean showOrHideFlag = true; // 资产总额 默认显示
 
     @Nullable
     @Override
@@ -79,6 +81,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 //        me_rl_customer_service_center = mView.findViewById(R.id.me_rl_customer_service_center);
 
 //        me_rl_customer_service_center.setOnClickListener(this);
+        iv_eye_open.setOnClickListener(this);
         iv_mine_setting.setOnClickListener(this);
         rl_account_balance.setOnClickListener(this);
         btn_change_into.setOnClickListener(this);
@@ -100,9 +103,19 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, SettingActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.iv_eye_open: // 显示或隐藏 资产总额
+                if (showOrHideFlag) {
+                    me_tv_total_assets.setText("****");
+                    showOrHideFlag = false;
+                } else {
+                    me_tv_total_assets.setText("270024.99");
+                    showOrHideFlag = true;
+                }
+                break;
             case R.id.rl_account_balance: // (联名卡)账户余额  跳转前需要先判断用户是否绑卡，没绑卡先跳绑卡页，反之则跳账户余额页
                 intent = new Intent(context, AccountBalanceActivity.class);
                 startActivity(intent);
+                break;
             case R.id.btn_change_into: // (联名卡)转入
                 if ("2".equals(btnFlag)) {
                     btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
@@ -110,9 +123,9 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_btn_blue));
                     btn_turn_out.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "1";
-                    intent = new Intent(context, MoneyFromEntityBankToElectronicBankActivity.class);
-                    startActivity(intent);
                 }
+                intent = new Intent(context, MoneyFromEntityBankToElectronicBankActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn_turn_out: // (联名卡)转出
                 if ("1".equals(btnFlag)) {
@@ -121,14 +134,16 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_btn_blue));
                     btn_change_into.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "2";
-                    intent = new Intent(context, MoneyFromElectronicBankToEntityBankActivity.class);
-                    startActivity(intent);
                 }
+                intent = new Intent(context, MoneyFromElectronicBankToEntityBankActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_salary_treasure: // 工资宝
+                intent = new Intent(context, SalaryTreasureDetailActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_conduct_financial_transactions: // 定期理财
-                intent = new Intent(context, MyFinancialManagementActivity.class);
+                intent = new Intent(context, MyFinancialManagementListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_invite_colleagues: // 邀请同事（跳H5）

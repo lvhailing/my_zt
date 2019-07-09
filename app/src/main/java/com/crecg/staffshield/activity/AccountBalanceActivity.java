@@ -1,8 +1,10 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crecg.staffshield.R;
@@ -17,6 +19,12 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
     private ImageView iv_back;
     private TextView tv_common_title;
     private TextView tv_right_txt;
+    private RelativeLayout rl_tied_card; // 已绑卡显示的布局
+    private RelativeLayout rl_untied_card; // 未绑卡显示的布局
+    private TextView btn_turn_out; // 转出
+    private TextView btn_turn_into; // 转入
+
+    private String btnFlag = "1"; // 1:转出     2:转入
 
 
     @Override
@@ -36,21 +44,52 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
         tv_right_txt.setVisibility(View.VISIBLE);
         tv_right_txt.setText("明细");
 
+        rl_tied_card = findViewById(R.id.rl_tied_card);
+        rl_untied_card = findViewById(R.id.rl_untied_card);
+        btn_turn_out = findViewById(R.id.btn_turn_out);
+        btn_turn_into = findViewById(R.id.btn_turn_into);
 
 
 
 
         iv_back.setOnClickListener(this);
         tv_right_txt.setOnClickListener(this);
+        btn_turn_out.setOnClickListener(this);
+        btn_turn_into.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.tv_right_txt: // 明细
+                intent = new Intent(this, BillCenterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_turn_out: // 转出
+                if ("1".equals(btnFlag)) {
+                    btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue2));
+                    btn_turn_out.setTextColor(getResources().getColor(R.color.white));
+                    btn_turn_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_white));
+                    btn_turn_into.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
+                    btnFlag = "2";
+                }
+                intent = new Intent(AccountBalanceActivity.this, MoneyFromElectronicBankToEntityBankActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_turn_into: // 转入
+                if ("2".equals(btnFlag)) {
+                    btn_turn_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue2));
+                    btn_turn_into.setTextColor(getResources().getColor(R.color.white));
+                    btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_white));
+                    btn_turn_out.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
+                    btnFlag = "1";
+                }
+                intent = new Intent(AccountBalanceActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                startActivity(intent);
                 break;
         }
     }

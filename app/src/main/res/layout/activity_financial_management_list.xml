@@ -22,12 +22,13 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
+            android:layout_marginTop="14dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dp"
                 android:text="待收参考收益（元）"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
@@ -36,9 +37,8 @@
                 android:id="@+id/iv_eye_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@mipmap/img_eye_close"
-                android:padding="10dp"/>
+                android:src="@mipmap/img_eye_open"
+                android:padding="5dp"/>
         </LinearLayout>
 
         <TextView

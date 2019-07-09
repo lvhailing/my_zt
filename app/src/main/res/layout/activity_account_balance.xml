@@ -132,7 +132,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_redeem"
+            android:id="@+id/btn_turn_out"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -143,7 +143,7 @@
             />
 
         <Button
-            android:id="@+id/btn_buy"
+            android:id="@+id/btn_turn_into"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="16dp"
+        android:text="请输入招商银行尾号(1101)的银行短信验证码"
+        android:textColor="@color/txt_black_999999"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/bg_line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="验证码"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_get_verify_code"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/get_verify_code"
+            android:textColor="@color/main_blue_4A67F5"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/iv_vertical_line"
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_get_verify_code"
+            android:background="@color/bg_line"/>
+
+
+        <EditText
+            android:id="@+id/et_fast_payment_verify_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="32dp"
+            android:layout_toLeftOf="@+id/iv_vertical_line"
+            android:background="@color/white"
+            android:hint="银行短信验证码"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textColor="@color/gray_dark"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textCursorDrawable="@drawable/bg_et_cursor"
+            android:textSize="15sp"/>
+
+        <ImageView
+            android:id="@+id/iv_delete_verify_code"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_vertical_line"
+            android:src="@mipmap/icon_delete"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bg_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="11dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="继续操作表示同意"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="《授权扣款同意书》 "
+            android:textColor="@color/main_blue_4A67F5"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next_step"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/shape_rect_btn_blue"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+</LinearLayout>

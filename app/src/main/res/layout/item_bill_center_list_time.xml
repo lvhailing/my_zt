@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="33dp"
+    android:background="@color/bg_common_gray_f9f9f9">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="本月"
+        android:textColor="@color/txt_black_666666"
+        android:textSize="12sp"/>
+</LinearLayout>
