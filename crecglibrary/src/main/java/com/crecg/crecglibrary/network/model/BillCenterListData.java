@@ -11,6 +11,6 @@ import java.util.List;
 public class BillCenterListData<T> implements Serializable{
     public int type;
     public String time;
-    public ArrayList<BillCenterModelData> jsonData;
+    public List<BillCenterModelData> jsonData;
 
 }

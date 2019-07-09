@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.crecg.crecglibrary.network.model.BillCenterListData;
@@ -31,18 +32,6 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
     LayoutInflater mInflater;
     private static final int TYPE_TIME = 0; // 时间布局
     private static final int TYPE_ITEM = 1; // 账单中心布局
-    private static final int TYPE_FOOTER = 2;
-
-    //上拉加载更多
-    public static final int PULLUP_LOAD_MORE = 0;
-    //正在加载中
-    public static final int LOADING_MORE = 1;
-    //没有加载更多 隐藏
-    public static final int NO_LOAD_MORE = 2;
-
-    //上拉加载更多状态-默认为0
-    private int mLoadMoreStatus = 0;
-    private ArrayList<BillCenterModelData> list2;
 
 
     public BillCenterAllRecycleAdapter(Context context, ArrayList<BillCenterListData> list) {
@@ -53,21 +42,15 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        if (viewType == TYPE_TIME) { // 加载时间节点布局
-//            View itemView = mInflater.inflate(R.layout.item_bill_center_list, parent, false);
-//
-//            return new BillCenterAllRecycleAdapter.ItemTimeViewHolder(itemView);
-//        }
+        if (viewType == TYPE_TIME) { // 加载时间节点布局
+            View itemView = mInflater.inflate(R.layout.item_bill_center_list_time, parent, false);
+
+            return new BillCenterAllRecycleAdapter.ItemTimeViewHolder(itemView);
+        }
         if (viewType == TYPE_ITEM) { // 加载账单布局
             View itemView = mInflater.inflate(R.layout.item_bill_center_list, parent, false);
 
             return new BillCenterAllRecycleAdapter.ItemViewHolder(itemView);
-        } else {
-            if (viewType == TYPE_FOOTER) {
-                View itemView = mInflater.inflate(R.layout.load_more_footview_layout, parent, false);
-
-                return new BillCenterAllRecycleAdapter.FooterViewHolder(itemView);
-            }
         }
         return null;
     }
@@ -88,7 +71,6 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
      * 账单布局 viewHolder
      */
     public class ItemViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tv_time; // 显示的交易 时间
         private final ImageView iv_left_category_card; // 左侧卡的图标
         private final TextView tv_card_title; //
         private final TextView tv_bill_time; // 账单时间
@@ -96,7 +78,6 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            tv_time = itemView.findViewById(R.id.tv_time);
             iv_left_category_card = itemView.findViewById(R.id.iv_left_category_card);
             tv_card_title = itemView.findViewById(R.id.tv_card_title);
             tv_bill_time = itemView.findViewById(R.id.tv_bill_time);
@@ -122,84 +103,87 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-//        if (holder instanceof BillCenterBankCardRecycleAdapter.ItemTimeViewHolder) {
-//            BillCenterAllRecycleAdapter.ItemTimeViewHolder itemTimeViewHolder = (BillCenterAllRecycleAdapter.ItemTimeViewHolder) holder;
-//            if (list.get(position).type == 0) {
-//                itemTimeViewHolder.tv_time.setText(list.get(position).time);
-//            }
-//        } else
-        if (holder instanceof ItemViewHolder) {
-            BillCenterAllRecycleAdapter.ItemViewHolder itemViewHolder = (BillCenterAllRecycleAdapter.ItemViewHolder) holder;
-            if (list.get(position).type == 1) {
-                itemViewHolder.tv_time.setText(list.get(position).time);
-            }
-            list2 = list.get(position).jsonData;
-            for (BillCenterModelData item : list2) {
-                Log.i("hh", "list2集合个数：" + list2.size() + item);
-
-                itemViewHolder.tv_card_title.setText(item.title);
-                itemViewHolder.tv_bill_time.setText(item.time);
-                itemViewHolder.tv_money.setText(item.income);
-
-                if (item.cardType.equals("bank")) {
-                    itemViewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_bank_card); // 银行卡
-                } else if (item.cardType.equals("salaryTreasure")) {
-                    itemViewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary); // 工资宝
-                } else if (item.cardType.equals("regularFinancial")) {
-                    itemViewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial); // 定期理财
+        if (holder instanceof ItemTimeViewHolder) {
+            ItemTimeViewHolder itemTimeViewHolder = (ItemTimeViewHolder) holder;
+            String time = "";
+            if (position == 0) {
+                time = list.get(0).time;
+            } else {
+                int count2 = -1;
+                int count3 = 0;
+                for (BillCenterListData item : list) {
+                    count2++;
+                    count3++;
+                    count2 += item.jsonData.size();
+                    if (position - 1 == count2) {
+                        time = list.get(count3).time;
+                    }
                 }
             }
+            itemTimeViewHolder.tv_time.setText(time);
+        } else if (holder instanceof ItemViewHolder) {
+            ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
+            int count2 = -1;
+            int count3 = -1;
+            int count4 = 0;
+            for (BillCenterListData item : list) {
+                count2++;
+                count3++;
+                count2 += item.jsonData.size();
+                if (position <= count2) {
+                    List<BillCenterModelData> neiList = list.get(count3).jsonData;
+                    BillCenterModelData itemNei = neiList.get(position - count3 - count4 - 1);
 
-//            initListener(itemViewHolder.itemView,list.get(position).getQuestionId());
-        } else if (holder instanceof FooterViewHolder) {
-            FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
+                    itemViewHolder.tv_card_title.setText(itemNei.title);
+                    itemViewHolder.tv_bill_time.setText(itemNei.time);
+                    itemViewHolder.tv_money.setText(itemNei.income);
 
-//            switch (mLoadMoreStatus) {
-//                case PULLUP_LOAD_MORE: //上拉加载更多
-//                    footerViewHolder.tvLoadText.setText("数据加载中...");
-//                    break;
-//                case LOADING_MORE: //正在加载中
-//                    footerViewHolder.tvLoadText.setText("正加载更多...");
-//                    break;
-//                case NO_LOAD_MORE:  //没有加载更多 隐藏
-            //隐藏加载更多
-//                    footerViewHolder.loadLayout.setVisibility(View.GONE);
-//                    break;
-
-//            }
+                    if (itemNei.cardType.equals("bank")) {
+                        itemViewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_bank_card); // 银行卡
+                    } else if (itemNei.cardType.equals("salaryTreasure")) {
+                        itemViewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary); // 工资宝
+                    } else if (itemNei.cardType.equals("regularFinancial")) {
+                        itemViewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial); // 定期理财
+                    }
+                    initListener(itemViewHolder.itemView, itemNei.title);
+                    break;
+                }
+                count4 += item.jsonData.size();
+            }
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return list == null ? 0 : list.size();
+        int count = 0;
+        if (list != null) {
+            count += list.size();
+            for (BillCenterListData item : list) {
+                if (item.jsonData != null) {
+                    count += item.jsonData.size();
+                }
+            }
+        }
+        return count;
     }
 
     @Override
     public int getItemViewType(int position) {
-//        if (position + 1 == getItemCount()) {
-//            //最后一个item设置为footerView
-//            return TYPE_FOOTER;
-//        } else {
-//            return TYPE_ITEM;
-//        }
-
-//        if (list.get(position).type == TYPE_TIME) {
-//            // 时间节点布局
-//            return TYPE_TIME;
-//        }
-//        else if (position + 1 == getItemCount()) {
-        //最后一个item设置为footerView
-//            return TYPE_FOOTER;
-//        }
-        if (list.get(position).type == 1) {
-            // 账单布局
-            return TYPE_ITEM;
-        } else {
-            return TYPE_FOOTER;
+        if (position == 0) {
+            return TYPE_TIME;
         }
+        int count2 = -1;
+        for (BillCenterListData item : list) {
+            count2++;
+            if (item.jsonData != null) {
+                count2 += item.jsonData.size();
+                if (position - 1 == count2) {
+                    return TYPE_TIME;
+                }
+            }
+        }
+        return TYPE_ITEM;
     }
 
     /**
@@ -215,18 +199,9 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
 //                intent.putExtra("questionId", id);
 //                Log.i("hh","我参与的---提问列表Item的questionId:"+id);
 //                mContext.startActivity(intent);
+                Toast.makeText(mContext, "click: " + id, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    public void AddHeaderItem(ArrayList<BillCenterListData> items) {
-        list.addAll(0, items);
-        notifyDataSetChanged();
-    }
-
-    public void AddFooterItem(ArrayList<BillCenterListData> items) {
-        list.addAll(items);
-        notifyDataSetChanged();
     }
 
     /**
@@ -235,7 +210,6 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
      * @param status
      */
     public void changeMoreStatus(int status) {
-        mLoadMoreStatus = status;
         notifyDataSetChanged();
     }
 }

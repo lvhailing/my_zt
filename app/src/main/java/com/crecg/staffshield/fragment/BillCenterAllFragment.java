@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +13,9 @@ import android.widget.ViewSwitcher;
 
 import com.crecg.crecglibrary.network.model.BillCenterListData;
 import com.crecg.crecglibrary.network.model.BillCenterModelData;
-import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.BillCenterAllRecycleAdapter;
-import com.crecg.staffshield.adapter.MyFinaciaHoldAdapter;
+import com.crecg.staffshield.adapter.BillCenterAllRecycleAdapter2;
 
 import java.util.ArrayList;
 
@@ -36,7 +34,6 @@ public class BillCenterAllFragment extends Fragment {
     private String userId;
     private ViewSwitcher vs;
     private ArrayList<BillCenterListData> list;
-    private ArrayList<BillCenterModelData> list2;
     private BillCenterAllRecycleAdapter billCenterAllRecycleAdapter;
 
     public static BillCenterAllFragment newInstance(String param1) {
@@ -81,37 +78,106 @@ public class BillCenterAllFragment extends Fragment {
     }
 
     private void initData() {
-        // 模拟数据
-        BillCenterListData billCenterData = new BillCenterListData();
-        billCenterData.type = 1;
-        billCenterData.time = "本月";
-        billCenterData.jsonData = list2;
+        // 模拟本月数据
+        BillCenterModelData data11 = new BillCenterModelData();
+        data11.cardType = "bank";
+        data11.title = "勘设联名卡 - 银行卡（ 2331）";
+        data11.income = "3000.00 ";
+        data11.time = "今天  18:05";
 
-        BillCenterModelData billCenterModelData1 = new BillCenterModelData();
-        billCenterModelData1.cardType = "bank";
-        billCenterModelData1.title = "勘设联名卡 - 银行卡（ 2331）";
-        billCenterModelData1.income = "-5070000.00 ";
-        billCenterModelData1.time = "今天  18:05";
+        BillCenterModelData data12 = new BillCenterModelData();
+        data12.cardType = "salaryTreasure";
+        data12.title = "工资宝收益";
+        data12.income = "+64.3";
+        data12.time = "昨天 11:30";
 
-        BillCenterModelData billCenterModelData2 = new BillCenterModelData();
-        billCenterModelData2.cardType = "salaryTreasure";
-        billCenterModelData2.title = "工资宝收益";
-        billCenterModelData2.income = "+4.3";
-        billCenterModelData2.time = "07-07 11:30";
+        BillCenterModelData data13 = new BillCenterModelData();
+        data13.cardType = "regularFinancial";
+        data13.title = "理财- 勘设联名卡";
+        data13.income = "600.00 ";
+        data13.time = "07-07  18:05";
 
-        BillCenterModelData billCenterModelData3 = new BillCenterModelData();
-        billCenterModelData3.cardType = "regularFinancial";
-        billCenterModelData3.title = "理财- 勘设联名卡";
-        billCenterModelData3.income = "5070000.00 ";
-        billCenterModelData3.time = "昨天  18:05";
+        ArrayList<BillCenterModelData> thisMonth = new ArrayList<BillCenterModelData>();
+        thisMonth.add(data11);
+        thisMonth.add(data12);
+        thisMonth.add(data13);
 
-        list2 = new ArrayList<BillCenterModelData>();
-        list2.add(billCenterModelData1);
-        list2.add(billCenterModelData2);
-        list2.add(billCenterModelData3);
+        BillCenterListData billCenterData1 = new BillCenterListData();
+        billCenterData1.type = 1;
+        billCenterData1.time = "本月";
+        billCenterData1.jsonData = thisMonth;
 
-        list = new ArrayList<BillCenterListData>();
-        list.add(billCenterData);
+
+        //模拟06数据
+        BillCenterModelData data21 = new BillCenterModelData();
+        data21.cardType = "bank";
+        data21.title = "勘设联名卡 - 银行卡（ 2331）";
+        data21.income = "400.00 ";
+        data21.time = "06-06  18:05";
+
+        BillCenterModelData data22 = new BillCenterModelData();
+        data22.cardType = "salaryTreasure";
+        data22.title = "工资宝收益";
+        data22.income = "+14.3";
+        data22.time = "06-07 11:30";
+
+        ArrayList<BillCenterModelData> preMonth = new ArrayList<BillCenterModelData>();
+        preMonth.add(data21);
+        preMonth.add(data22);
+
+        BillCenterListData billCenterData2 = new BillCenterListData();
+        billCenterData2.type = 1;
+        billCenterData2.time = "07月";
+        billCenterData2.jsonData = preMonth;
+
+
+        // 模拟05数据
+        BillCenterModelData data31 = new BillCenterModelData();
+        data31.cardType = "bank";
+        data31.title = "勘设联名卡 - 银行卡（ 2331）";
+        data31.income = "333.00 ";
+        data31.time = "05-06  18:05";
+
+        BillCenterModelData data32 = new BillCenterModelData();
+        data32.cardType = "salaryTreasure";
+        data32.title = "工资宝收益";
+        data32.income = "+24.3";
+        data32.time = "05-07 11:30";
+
+        BillCenterModelData data33 = new BillCenterModelData();
+        data33.cardType = "regularFinancial";
+        data33.title = "理财- 勘设联名卡";
+        data33.income = "56.00 ";
+        data33.time = "05-08  18:05";
+
+        BillCenterModelData data34 = new BillCenterModelData();
+        data34.cardType = "salaryTreasure";
+        data34.title = "工资宝收益";
+        data34.income = "+34.3";
+        data34.time = "05-09 11:30";
+
+        BillCenterModelData data35 = new BillCenterModelData();
+        data35.cardType = "regularFinancial";
+        data35.title = "理财- 勘设联名卡";
+        data35.income = "2345.00 ";
+        data35.time = "05-10  18:05";
+
+        ArrayList<BillCenterModelData> prepreMonth = new ArrayList<BillCenterModelData>();
+        prepreMonth.add(data31);
+        prepreMonth.add(data32);
+        prepreMonth.add(data33);
+        prepreMonth.add(data34);
+        prepreMonth.add(data35);
+
+        BillCenterListData billCenterData3 = new BillCenterListData();
+        billCenterData3.type = 1;
+        billCenterData3.time = "06月";
+        billCenterData3.jsonData = prepreMonth;
+
+        list = new ArrayList<>();
+        list.add(billCenterData1);
+        list.add(billCenterData2);
+        list.add(billCenterData3);
     }
 
     private void initView(View view) {

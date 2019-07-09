@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="match_parent"
-        android:layout_height="33dp"
-        android:gravity="center_vertical"
-        android:paddingLeft="15dp"
-        android:text=""
-        android:textColor="@color/txt_black_666666"
-        android:textSize="12sp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +16,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:background="@mipmap/img_bill_center_salary"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -42,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="勘设联名卡 - 银行卡（ 2331）"
                 android:textColor="@color/txt_black_333333"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_bill_time"
@@ -51,7 +40,7 @@
                 android:layout_marginTop="14dp"
                 android:text="今天  18:05"
                 android:textColor="@color/txt_black_333333"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
         <TextView
@@ -62,6 +51,6 @@
             android:layout_centerVertical="true"
             android:text="-5070000.00 "
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
     </RelativeLayout>
 </LinearLayout>

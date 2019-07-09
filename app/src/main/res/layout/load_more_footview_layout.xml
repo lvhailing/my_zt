@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loadLayout"
     android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_centerVertical="true"
-            android:indeterminate="false"/>
+            android:indeterminate="false" />
 
         <TextView
             android:id="@+id/tvLoadText"
@@ -32,9 +31,8 @@
             android:layout_marginLeft="4dip"
             android:layout_toRightOf="@id/pbLoad"
             android:clickable="true"
-            tools:text="数据加载中"
             android:textColor="@color/txt_black_333333"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            tools:text="数据加载中" />
     </RelativeLayout>
-
 </LinearLayout>
