@@ -21,9 +21,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import cn.jpush.android.api.JPushInterface;
 
-/**
- * Created by junde on 2018/12/15.
- */
 
 public class BaseActivity extends FragmentActivity implements MyApplication.NetListener, SwipeRefreshLayout.OnRefreshListener {
     public String userId = null;

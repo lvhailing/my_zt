@@ -34,7 +34,7 @@ public class BillCenterAllFragment extends Fragment {
     private String userId;
     private ViewSwitcher vs;
     private ArrayList<BillCenterListData> list;
-    private BillCenterAllRecycleAdapter billCenterAllRecycleAdapter;
+    private BillCenterAllRecycleAdapter2 billCenterAllRecycleAdapter;
 
     public static BillCenterAllFragment newInstance(String param1) {
         BillCenterAllFragment fragment = new BillCenterAllFragment();
@@ -131,7 +131,7 @@ public class BillCenterAllFragment extends Fragment {
         billCenterData2.jsonData = preMonth;
 
 
-        // 模拟05数据
+        // 模拟07数据
         BillCenterModelData data31 = new BillCenterModelData();
         data31.cardType = "bank";
         data31.title = "勘设联名卡 - 银行卡（ 2331）";
@@ -195,7 +195,7 @@ public class BillCenterAllFragment extends Fragment {
 
     private void initRecyclerView() {
         recycler_view.setLayoutManager(new LinearLayoutManager(context));
-        billCenterAllRecycleAdapter = new BillCenterAllRecycleAdapter(context, list);
+        billCenterAllRecycleAdapter = new BillCenterAllRecycleAdapter2(context, list);
         recycler_view.setAdapter(billCenterAllRecycleAdapter);
 //        //添加动画
 //        recycler_view.setItemAnimator(new DefaultItemAnimator());

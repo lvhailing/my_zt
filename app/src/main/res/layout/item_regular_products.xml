@@ -1,18 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
 
+    <!-- 产品热卖中布局 -->
     <LinearLayout
+        android:id="@+id/ll_container_best_sell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="11dp"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/rl_up"
+            android:id="@+id/rl_top1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_bg_white_top_corners">
@@ -25,7 +27,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_regular_product_name"
+                    android:id="@+id/tv_regular_product_name1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="中铁三号"
@@ -33,7 +35,7 @@
                     android:textSize="15sp"/>
 
                 <TextView
-                    android:id="@+id/tv_product_annualized_return"
+                    android:id="@+id/tv_product_annualized_return1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -43,7 +45,7 @@
                     android:textSize="32sp"/>
 
                 <TextView
-                    android:id="@+id/tv_return_category"
+                    android:id="@+id/tv_income_category1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="年化收益率"
@@ -52,7 +54,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_right"
+                android:id="@+id/ll_product_info1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -65,7 +67,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/tv_product_cycle"
+                        android:id="@+id/tv_product_cycle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
@@ -74,17 +76,17 @@
                         android:textSize="32sp"/>
 
                     <TextView
-                        android:id="@+id/tv_day"
+                        android:id="@+id/tv_day1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/tv_product_cycle"
+                        android:layout_toRightOf="@id/tv_product_cycle1"
                         android:text="天"
                         android:textColor="@color/black"
                         android:textSize="12sp"/>
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/tv_initial_investment_amount"
+                    android:id="@+id/tv_initial_investment_amount1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10万元起投"
@@ -93,87 +95,13 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- 产品即半开售布局 -->
-        <FrameLayout
-            android:id="@+id/fl_start_sell"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_light_gray_down_corners"
-            android:visibility="visible">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/bg_line"/>
-
-            <RelativeLayout
-                android:id="@+id/rl_product_sell_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingBottom="12dp">
-
-                <ImageView
-                    android:id="@+id/iv_left_state"
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@mipmap/img_time"/>
-
-                <TextView
-                    android:id="@+id/tv_start_sale_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@id/iv_left_state"
-                    android:text="2019-06-04 14:00"
-                    android:textSize="12sp"/>
-
-            </RelativeLayout>
-
-            <ImageView
-                android:id="@+id/iv_will_sell_state"
-                android:layout_width="50dp"
-                android:layout_height="46dp"
-                android:layout_gravity="right"
-                android:layout_marginBottom="4dp"
-                android:layout_marginRight="2dp"
-                android:background="@mipmap/img_on_sale"
-                android:scaleType="fitXY"/>
-        </FrameLayout>
-
-        <!-- 产品已售罄布局 -->
-        <FrameLayout
-            android:id="@+id/fl_start_sell_out"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_bg_light_gray_down_corners"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/iv_sell_out"
-                android:layout_width="50dp"
-                android:layout_height="46dp"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="right"
-                android:layout_marginBottom="14dp"
-                android:layout_marginRight="2dp"
-                android:background="@mipmap/img_sell_out"
-                android:scaleType="fitXY"/>
-        </FrameLayout>
-
-
-        <!-- 产品热卖中布局 -->
         <LinearLayout
             android:id="@+id/ll_best_sell"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_bg_light_gray_down_corners"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <View
                 android:layout_width="match_parent"
@@ -242,4 +170,444 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <!-- 产品即将开售布局 -->
+    <LinearLayout
+        android:id="@+id/ll_container_start_sell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rl_top2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_white_top_corners">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="14dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_regular_product_name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中铁三号"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_product_annualized_return2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="false"
+                    android:text="6.12%"
+                    android:textColor="@color/txt_red_fc514e"
+                    android:textSize="32sp"/>
+
+                <TextView
+                    android:id="@+id/tv_income_category2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="年化收益率"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_product_info2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="44dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_product_cycle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="31"
+                        android:textColor="@color/txt_black_333333"
+                        android:textSize="32sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_day2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/tv_product_cycle2"
+                        android:text="天"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_initial_investment_amount2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10万元起投"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_start_sell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_bg_light_gray_down_corners"
+            android:visibility="visible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/bg_line"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_product_sell_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="12dp">
+
+                <ImageView
+                    android:id="@+id/iv_left_state"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@mipmap/img_time"/>
+
+                <TextView
+                    android:id="@+id/tv_start_sale_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/iv_left_state"
+                    android:text="2019-06-04 14:00"
+                    android:textSize="12sp"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_will_sell_state"
+                android:layout_width="50dp"
+                android:layout_height="46dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="4dp"
+                android:layout_marginRight="2dp"
+                android:background="@mipmap/img_regular_product_on_sale"
+                android:scaleType="fitXY"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- 已售罄布局 -->
+    <RelativeLayout
+        android:id="@+id/rl_product_on_sell_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/shape_bg_white3"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_left_product_name3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_regular_product_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="堪设三号"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_product_annualized_return3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="6.12%"
+                android:textColor="@color/txt_red_fc514e"
+                android:textSize="32sp"/>
+
+            <TextView
+                android:id="@+id/tv_return_category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="年化收益率"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_product_state3"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_alignBottom="@id/ll_left_product_name3"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/img_regular_product_sell_out"/>
+
+        <LinearLayout
+            android:id="@+id/ll_product_info3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_product_state3"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_product_state3"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_product_cycle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="31"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="32sp"/>
+
+                <TextView
+                    android:id="@+id/tv_day3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_product_cycle3"
+                    android:text="天"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_initial_investment_amount3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10万元起投"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 计息中布局 -->
+    <RelativeLayout
+        android:id="@+id/rl_product_interest_bearing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/shape_bg_white3"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_left_product_name4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_regular_product_name4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="堪设三号"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_product_annualized_return4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="6.12%"
+                android:textColor="@color/txt_red_fc514e"
+                android:textSize="32sp"/>
+
+            <TextView
+                android:id="@+id/tv_income_category4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="年化收益率"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_product_state2"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_alignBottom="@id/ll_left_product_name4"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/img_regular_product_interest_bearing"/>
+
+        <LinearLayout
+            android:id="@+id/ll_product_info4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_product_state2"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_product_state2"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_product_cycle4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="31"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="32sp"/>
+
+                <TextView
+                    android:id="@+id/tv_day4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_product_cycle4"
+                    android:text="天"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_initial_investment_amount4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10万元起投"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 已回款布局 -->
+    <RelativeLayout
+        android:id="@+id/rl_product_payment_returned"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/shape_bg_white3"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_left_product_name5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_regular_product_name5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="堪设三号"
+                android:textColor="@color/txt_black_666666"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_product_annualized_return5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="6.12%"
+                android:textColor="@color/txt_black_999999"
+                android:textSize="32sp"/>
+
+            <TextView
+                android:id="@+id/tv_income_category5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:text="年化收益率"
+                android:textColor="@color/txt_black_999999"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_product_state5"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_alignBottom="@id/ll_left_product_name5"
+            android:layout_alignParentRight="true"
+            android:background="@mipmap/img_regular_product_payment_returned"/>
+
+        <LinearLayout
+            android:id="@+id/ll_product_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_product_state5"
+            android:layout_marginBottom="18dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_product_state5"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_product_cycle5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="31"
+                    android:textColor="@color/txt_black_999999"
+                    android:textSize="32sp"/>
+
+                <TextView
+                    android:id="@+id/tv_day5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_product_cycle5"
+                    android:text="天"
+                    android:textColor="@color/txt_black_999999"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_initial_investment_amount5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10万元起投"
+                android:textColor="@color/txt_black_999999"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

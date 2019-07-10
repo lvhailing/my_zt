@@ -353,7 +353,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="5dp"
                     android:text="更多"
                     android:textColor="@color/txt_black_666666"
                     android:textSize="12sp"/>
@@ -364,11 +365,14 @@
                 android:id="@+id/ll_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/bg_common_gray_f9f9f9"
                 android:orientation="vertical"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
+                android:layout_height="20dp"
                 android:background="@color/bg_common_gray_f9f9f9"/>
         </LinearLayout>
     </ScrollView>

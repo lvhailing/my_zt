@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
+import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
@@ -42,6 +44,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private LinearLayout ll_go_to_salary_treasure; // 活期 工资宝布局
     private TextView home_btn_transfer_immediately; // 立即转入
     private TextView tv_annualized_return; // 近七日年化收益率
+    private TextView tv_home_more; // 更多
 
     private LinearLayout ll_container; // 加载首页定期产品
     private ArrayList<ProductModelTestData> list;
@@ -91,7 +94,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         product3.day = "22";
         product3.name = "中铁3号";
         product3.investmentAmount = "30万起投";
-        product3.flag = 3;
+        product3.flag = 1;
 
         list = new ArrayList<>();
         list.add(product1);
@@ -106,7 +109,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             ll_container.addView(getItem(product));
         }
 
-        swipe_refresh = (SwipeRefreshLayout) mView.findViewById(R.id.swipe_refresh);
+        swipe_refresh = mView.findViewById(R.id.swipe_refresh);
         swipe_refresh.setColorSchemeResources(R.color.colorPrimary);
 
         scrollView = mView.findViewById(R.id.scrollView);
@@ -119,6 +122,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         tv_annualized_return = mView.findViewById(R.id.tv_annualized_return);
         ll_go_to_salary_treasure = mView.findViewById(R.id.ll_go_to_salary_treasure);
         home_btn_transfer_immediately = mView.findViewById(R.id.tv_transfer_immediately);
+        tv_home_more = mView.findViewById(R.id.tv_home_more);
 
 
         ll_home_salary_treasure.setOnClickListener(this);
@@ -127,49 +131,75 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         ll_home_insurance.setOnClickListener(this);
         ll_go_to_salary_treasure.setOnClickListener(this);
         home_btn_transfer_immediately.setOnClickListener(this);
+        tv_home_more.setOnClickListener(this);
     }
 
     private View getItem(final ProductModelTestData product) {
-        View ll_item = LayoutInflater.from(context).inflate(R.layout.item_regular_products, null);
-        TextView tv_regular_product_name1 = ll_item.findViewById(R.id.tv_regular_product_name); // 产品名称
-        TextView tv_product_annualized_return1 = ll_item.findViewById(R.id.tv_product_annualized_return); // 年化收益率
-        TextView tv_product_cycle1 = ll_item.findViewById(R.id.tv_product_cycle); // 产品周期（例：31天）
-        TextView tv_initial_investment_amount1 = ll_item.findViewById(R.id.tv_initial_investment_amount); // 起投金额
-        TextView tv_start_sale_time1 = ll_item.findViewById(R.id.tv_start_sale_time);  // 产品开售时间
-        TextView tv_surplus_money1 = ll_item.findViewById(R.id.tv_surplus_money); // 产品剩余可投金额
-        ImageView iv_will_sell_state1 = ll_item.findViewById(R.id.iv_will_sell_state); // 产品即将开售状态
-        FrameLayout fl_start_sell1 = ll_item.findViewById(R.id.fl_start_sell);
-        LinearLayout ll_best_sell1 = ll_item.findViewById(R.id.ll_best_sell);
-
-        tv_regular_product_name1.setText(product.name);
-        tv_product_annualized_return1.setText(product.annualizedReturn);
-        tv_product_cycle1.setText(product.day);
-        tv_initial_investment_amount1.setText(product.investmentAmount);
-        tv_start_sale_time1.setText(product.date);
         final int flag = product.flag;
-        if (flag == 1) {
-            //即将开售
-            iv_will_sell_state1.setBackground(getResources().getDrawable(R.mipmap.img_on_sale));
-            ll_best_sell1.setVisibility(View.GONE);
-            fl_start_sell1.setVisibility(View.VISIBLE);
-        } else if (flag == 2) {
-            //热卖中
-            iv_will_sell_state1.setVisibility(View.GONE);
-            ll_best_sell1.setVisibility(View.VISIBLE);
-            fl_start_sell1.setVisibility(View.GONE);
-        } else if (flag == 3) {
-            //售罄
-            iv_will_sell_state1.setBackground(getResources().getDrawable(R.mipmap.img_sell_out));
-            ll_best_sell1.setVisibility(View.GONE);
-            fl_start_sell1.setVisibility(View.VISIBLE);
+        View ll_item;
+        // 加载 item 布局
+        ll_item = LayoutInflater.from(context).inflate(R.layout.item_regular_products2, null);
+        if (product.flag == 1 || product.flag == 2) {
+            LinearLayout ll_container1 = ll_item.findViewById(R.id.ll_container1);
+            ll_container1.setVisibility(View.VISIBLE);
+
+            TextView tv_regular_product_name1 = ll_item.findViewById(R.id.tv_regular_product_name); // 产品名称
+            TextView tv_product_annualized_return1 = ll_item.findViewById(R.id.tv_product_annualized_return); // 年化收益率
+            TextView tv_product_cycle1 = ll_item.findViewById(R.id.tv_product_cycle); // 产品周期（例：31天）
+            TextView tv_initial_investment_amount1 = ll_item.findViewById(R.id.tv_initial_investment_amount); // 起投金额
+            TextView tv_start_sale_time1 = ll_item.findViewById(R.id.tv_start_sale_time);  // 产品开售时间
+            TextView tv_surplus_money1 = ll_item.findViewById(R.id.tv_surplus_money); // 产品剩余可投金额
+            ImageView iv_will_sell_state1 = ll_item.findViewById(R.id.iv_will_sell_state); // 产品即将开售状态
+            FrameLayout fl_start_sell1 = ll_item.findViewById(R.id.fl_start_sell);
+            LinearLayout ll_best_sell1 = ll_item.findViewById(R.id.ll_best_sell);
+            tv_regular_product_name1.setText(product.name);
+            tv_product_annualized_return1.setText(product.annualizedReturn);
+            tv_product_cycle1.setText(product.day);
+            tv_initial_investment_amount1.setText(product.investmentAmount);
+            tv_start_sale_time1.setText(product.date);
+
+            if (flag == 1) {
+                //热卖中
+                ll_best_sell1.setVisibility(View.VISIBLE);
+            } else if (flag == 2) {
+                //即将开售
+                iv_will_sell_state1.setVisibility(View.VISIBLE);
+                iv_will_sell_state1.setBackgroundResource(R.mipmap.img_regular_product_on_sale);
+                fl_start_sell1.setVisibility(View.VISIBLE);
+            }
+        } else {
+            RelativeLayout rl_container2 = ll_item.findViewById(R.id.rl_container2);
+            rl_container2.setVisibility(View.VISIBLE);
+
+            TextView tv_regular_product_name2 = ll_item.findViewById(R.id.tv_regular_product_name2); // 产品名称
+            TextView tv_product_annualized_return2 = ll_item.findViewById(R.id.tv_product_annualized_return2); // 年化收益率
+            TextView tv_product_cycle2 = ll_item.findViewById(R.id.tv_product_cycle2); // 产品周期（例：31天）
+            TextView tv_initial_investment_amount2 = ll_item.findViewById(R.id.tv_initial_investment_amount2); // 起投金额
+            ImageView iv_product_state2 = ll_item.findViewById(R.id.iv_product_state2); // 产品状态图片
+
+            tv_regular_product_name2.setText(product.name);
+            tv_product_annualized_return2.setText(product.annualizedReturn);
+            tv_product_cycle2.setText(product.day);
+            tv_initial_investment_amount2.setText(product.investmentAmount);
+
+            if (flag == 3) {
+                //已售罄
+                iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_sell_out));
+            } else if (flag == 4) {
+                //计息中
+                iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_interest_bearing));
+            } else if (flag == 5) {
+                //已回款
+                iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_payment_returned));
+            }
         }
-        ll_item.setOnClickListener(new View.OnClickListener() { // item 点击监听
+
+        // item 点击跳转定期理财购买页
+        ll_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag == 2) {
-                    Intent intent = new Intent(context, RegularFinancialManagementBuyingActivity.class);
-                    startActivity(intent);
-                }
+//                Intent intent = new Intent(context, RegularFinancialManagementBuyingActivity.class);
+//                startActivity(intent);
             }
         });
         return ll_item;
@@ -211,6 +241,9 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra("whereToEnterFlag", "1");
                 startActivity(intent);
                 break;
+            case R.id.tv_home_more: // 更多 （跳转到定期理财列表页）
+                intent = new Intent(context, RegularFinancialManagementListActivity.class);
+                startActivity(intent);
         }
     }
 }

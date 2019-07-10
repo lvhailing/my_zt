@@ -40,7 +40,6 @@ public class RegularFinancialManagementBuyingActivity extends BaseActivity imple
     }
 
     private void initView() {
-
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
         iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
@@ -61,6 +60,7 @@ public class RegularFinancialManagementBuyingActivity extends BaseActivity imple
 //        tv_all.setOnClickListener(this);
 //        tv_about_agreement.setOnClickListener(this);
 //        btn_buy.setOnClickListener(this);
+        iv_back.setOnClickListener(this);
     }
 
     @Override

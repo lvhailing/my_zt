@@ -205,7 +205,7 @@
             android:layout_marginBottom="4dp"
             android:layout_marginRight="2dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/img_on_sale"
+            android:src="@mipmap/img_regular_product_on_sale"
             android:visibility="invisible"/>
     </FrameLayout>
 

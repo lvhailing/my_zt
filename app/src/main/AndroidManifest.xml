@@ -152,6 +152,10 @@
             android:name=".activity.BillCenterActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.RegularFinancialManagementListActivity"
+            android:screenOrientation="portrait"/>
+
 
 
 

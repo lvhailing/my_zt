@@ -13,7 +13,7 @@ public class ProductModelTestData {
     public String annualizedReturn; // 产品年化收益率
     public String investmentAmount; // 产品起投金额
     public String percentName;
-    public int flag;
+    public int flag; // 定期产品状态  1：热卖中  2：即将开售   3：已售罄   4：计息中   5：已回款
 
     //模拟我的理财产品数据
     public String holdingShare; // 持有份额（元）
