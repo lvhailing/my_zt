@@ -4,19 +4,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!-- 产品热卖中或即将开售布局 -->
     <LinearLayout
-        android:id="@+id/ll_container1"
+        android:id="@+id/ll_container_best_sell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/rl_top1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
             android:background="@drawable/shape_bg_white_top_corners">
 
             <LinearLayout
@@ -76,7 +75,7 @@
                         android:textSize="32sp"/>
 
                     <TextView
-                        android:id="@+id/tv_day1"
+                        android:id="@+id/tv_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/tv_product_cycle"
@@ -106,7 +105,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/bg_line"/>
 
@@ -120,7 +119,7 @@
                 android:paddingTop="13dp">
 
                 <ImageView
-                    android:id="@+id/iv_time"
+                    android:id="@+id/iv_fire"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
                     android:src="@mipmap/img_fire"/>
@@ -181,7 +180,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/bg_line"/>
 
@@ -223,104 +222,4 @@
                 android:scaleType="fitXY"/>
         </FrameLayout>
     </LinearLayout>
-
-    <!-- 已售罄布局 -->
-    <RelativeLayout
-        android:id="@+id/rl_container2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:background="@drawable/shape_bg_white_down_shadow"
-        android:visibility="gone">
-
-        <LinearLayout
-            android:id="@+id/ll_left_product_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="21dp"
-            android:layout_marginTop="14dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_regular_product_name2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:includeFontPadding="false"
-                android:text="堪设三号"
-                android:textColor="@color/txt_black_333333"
-                android:textSize="15sp"/>
-
-            <TextView
-                android:id="@+id/tv_product_annualized_return2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:includeFontPadding="false"
-                android:text="6.12%"
-                android:textColor="@color/txt_red_fc514e"
-                android:textSize="32sp"/>
-
-            <TextView
-                android:id="@+id/tv_return_category2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="18dp"
-                android:layout_marginTop="10dp"
-                android:includeFontPadding="false"
-                android:text="年化收益率"
-                android:textColor="@color/txt_black_333333"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_product_state2"
-            android:layout_width="50dp"
-            android:layout_height="46dp"
-            android:layout_alignBottom="@id/ll_left_product_name2"
-            android:layout_alignParentRight="true"
-            android:background="@mipmap/img_regular_product_sell_out"/>
-
-        <LinearLayout
-            android:id="@+id/ll_product_info2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/iv_product_state2"
-            android:layout_marginBottom="18dp"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_product_state2"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tv_product_cycle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:text="31"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="32sp"/>
-
-                <TextView
-                    android:id="@+id/tv_day2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/tv_product_cycle2"
-                    android:text="天"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="12sp"/>
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tv_initial_investment_amount2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10万元起投"
-                android:textColor="@color/txt_black_333333"
-                android:textSize="12sp"/>
-        </LinearLayout>
-    </RelativeLayout>
-
 </LinearLayout>

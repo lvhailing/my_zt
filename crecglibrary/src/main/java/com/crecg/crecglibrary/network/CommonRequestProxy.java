@@ -75,5 +75,10 @@ public interface CommonRequestProxy {
     //重置交易密码
     @FormUrlEncoded
     @POST("userinfo/trspwd/reset")
-    Observable<String> ResetTransactionPwdByPost(@FieldMap Map<String, Object> param);
+    Observable<String> resetTransactionPwdByPost(@FieldMap Map<String, Object> param);
+
+    // 首页轮播图
+    @FormUrlEncoded
+    @POST("userinfo/trspwd/reset")
+    Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
 }

@@ -32,6 +32,8 @@ public class MyApplication extends Application {
     IntentFilter mFilter;
     HashSet<NetListener> mListeners = new HashSet<NetListener>();
     private static MyApplication instance;
+    public static String mAppId;
+    public static String mDownloadPath;
 
     public static MyApplication getInstance() {
         return instance;
@@ -73,6 +75,9 @@ public class MyApplication extends Application {
                 .showMessagePredict()); // 消息预知功能开关 调用此方法开启
         // Kefu EaseUI的初始化
         UIProvider.getInstance().init(this);
+
+        mAppId = getString(R.string.app_id);
+        mDownloadPath = "/" + mAppId + "/download";
     }
 
     public interface NetListener {

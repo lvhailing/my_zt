@@ -5,24 +5,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
+import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
+import com.crecg.staffshield.widget.MyRollViewPager;
 
 import java.util.ArrayList;
 
@@ -48,6 +54,18 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 
     private LinearLayout ll_container; // 加载首页定期产品
     private ArrayList<ProductModelTestData> list;
+    private ArrayList<ImageView> picList; // 滑动的图片集合
+    private int[] imageResId; // 图片ID
+    private MyRollViewPager rollViewPager;
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            Log.i("hh", "HomePageFragment --- " + getClass());
+        }
+    }
 
     @Nullable
     @Override
@@ -100,6 +118,21 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         list.add(product1);
         list.add(product2);
         list.add(product3);
+
+        // 模拟轮播图数据
+        auto_Image();
+        freshVP();
+    }
+
+    private void auto_Image() {
+        picList = new ArrayList<ImageView>();
+        imageResId = new int[]{R.mipmap.bg_banner_default1, R.mipmap.bg_banner_default2, R.mipmap.bg_banner_default3};
+        for (int i = 0; i < imageResId.length; i++) {
+            ImageView imageView = new ImageView(getActivity());
+            imageView.setImageResource(imageResId[i]);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            picList.add(imageView);
+        }
     }
 
     private void initView() {
@@ -148,6 +181,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             TextView tv_product_cycle1 = ll_item.findViewById(R.id.tv_product_cycle); // 产品周期（例：31天）
             TextView tv_initial_investment_amount1 = ll_item.findViewById(R.id.tv_initial_investment_amount); // 起投金额
             TextView tv_start_sale_time1 = ll_item.findViewById(R.id.tv_start_sale_time);  // 产品开售时间
+            ProgressBar progressbar = ll_item.findViewById(R.id.progressbar); // 产品进度条
             TextView tv_surplus_money1 = ll_item.findViewById(R.id.tv_surplus_money); // 产品剩余可投金额
             ImageView iv_will_sell_state1 = ll_item.findViewById(R.id.iv_will_sell_state); // 产品即将开售状态
             FrameLayout fl_start_sell1 = ll_item.findViewById(R.id.fl_start_sell);
@@ -205,12 +239,64 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         return ll_item;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("hh", "首页 onResume方法：" + getClass());
+        initData();
+    }
+
     /**
      * 获取首页数据
      */
     private void requestHomeData() {
 
     }
+
+    /**
+     * 请求轮播图数据
+     */
+    private void freshVP() {
+        if (context == null) {
+            return;
+        }
+        if (rollViewPager == null) {
+            //第一次从后台获取到数据
+            rollViewPager = new MyRollViewPager(context, picList, ll_point_container);
+            rollViewPager.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_MOVE:
+//                            swipe_refresh.setEnabled(false);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+//                            swipe_refresh.setEnabled(true);
+                            break;
+                    }
+                    return false;
+                }
+            });
+            rollViewPager.setCycle(true);
+            rollViewPager.setOnMyListener(new MyRollViewPager.MyClickListener() {
+                @Override
+                public void onMyClick(int position) {
+                    if (picList != null && picList.size() != 0) {
+                        ToastUtil.showCustom("当前的position = " + position);
+                    }
+
+                }
+            });
+            rollViewPager.startRoll();
+            ll_vp.addView(rollViewPager);
+        } else {
+            //第二或之后获取到数据，刷新vp
+            rollViewPager.setPicList(picList);
+            rollViewPager.reStartRoll();
+        }
+    }
+
 
     @Override
     public void onClick(View view) {

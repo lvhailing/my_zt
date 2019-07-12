@@ -244,7 +244,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
         HashMap<String, Object> paramWrapper = new HashMap<>();
         paramWrapper.put("requestKey", data);
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .ResetTransactionPwdByPost(paramWrapper)
+                .resetTransactionPwdByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {

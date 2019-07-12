@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">堪设</string>
+    <string name="app_id">kanshe</string>
+    <string name="app_update_title">堪设版本更新</string>
 
     <string name="net_fail_text">当前网络不可用，点此检查网络设置</string>
 

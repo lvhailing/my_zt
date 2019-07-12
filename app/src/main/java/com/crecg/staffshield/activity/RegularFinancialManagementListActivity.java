@@ -32,8 +32,8 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
         super.onCreate(savedInstanceState);
         baseSetContentView(R.layout.activity_regular_financial_management_list);
 
-        initView();
         initData();
+        initView();
     }
 
     private void initView() {
@@ -48,8 +48,6 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
         recycler_view.setAdapter(regularFinancialListAdapter);
 
 
-
-
         iv_back.setOnClickListener(this);
     }
 
@@ -61,6 +59,8 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
         product1.day = "22";
         product1.name = "中铁1号";
         product1.investmentAmount = "10万起投";
+        product1.progressBar = 25;
+        product1.surplusMoney = "2200000";
         product1.flag = 1;
 
         ProductModelTestData product2 = new ProductModelTestData();
@@ -79,10 +79,39 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
         product3.investmentAmount = "30万起投";
         product3.flag = 3;
 
+        ProductModelTestData product4 = new ProductModelTestData();
+        product4.annualizedReturn = "6.32%";
+        product4.date = "2039-06-04 34:00";
+        product4.day = "22";
+        product4.name = "中铁4号";
+        product4.investmentAmount = "50万起投";
+        product4.flag = 4;
+
+        ProductModelTestData product5 = new ProductModelTestData();
+        product5.annualizedReturn = "6.32%";
+        product5.date = "2039-06-04 34:00";
+        product5.day = "22";
+        product5.name = "中铁5号";
+        product5.investmentAmount = "70万起投";
+        product5.flag = 5;
+
+        ProductModelTestData product6 = new ProductModelTestData();
+        product6.annualizedReturn = "4.72%";
+        product6.date = "2019-07-11 10:00";
+        product6.day = "180";
+        product6.name = "中铁6号";
+        product6.investmentAmount = "10万起投";
+        product6.progressBar = 85;
+        product6.surplusMoney = "120000";
+        product6.flag = 1;
+
         list = new ArrayList<>();
         list.add(product1);
         list.add(product2);
         list.add(product3);
+        list.add(product4);
+        list.add(product5);
+        list.add(product6);
     }
 
     @Override

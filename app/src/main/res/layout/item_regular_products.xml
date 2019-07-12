@@ -178,7 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <RelativeLayout
             android:id="@+id/rl_top2"
@@ -320,7 +320,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:background="@drawable/shape_bg_white3"
+        android:background="@drawable/shape_bg_white_down_shadow"
         android:visibility="gone">
 
         <LinearLayout
@@ -419,7 +419,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:background="@drawable/shape_bg_white3"
+        android:background="@drawable/shape_bg_white_down_shadow"
         android:visibility="gone">
 
         <LinearLayout
@@ -518,7 +518,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:background="@drawable/shape_bg_white3"
+        android:background="@drawable/shape_bg_white_down_shadow"
         android:visibility="gone">
 
         <LinearLayout
