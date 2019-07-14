@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -38,9 +37,9 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
     ArrayList<OnCancelListener> m_arrCancelListeners = new ArrayList<OnCancelListener>();
     ArrayList<OnDismissListener> m_arrDismissListeners = new ArrayList<OnDismissListener>();
     private OnCheckVersion onChanged = null;
-    private String forcedUpgrade = "false";
+    private boolean forcedUpgrade;
 
-    public CheckVersionDialog(Context context, OnCheckVersion onChanged, String info, String forcedUpgrade) {
+    public CheckVersionDialog(Context context, String info, boolean forcedUpgrade, OnCheckVersion onChanged) {
         super(context, R.style.UpdateDialog);
         this.mContext = context;
         this.onChanged = onChanged;
@@ -50,7 +49,6 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View mView = inflater.inflate(R.layout.dialog_check_version, null);
@@ -67,8 +65,8 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
         setCanceledOnTouchOutside(false);
         setOnDismissListener(this);
         setOnCancelListener(this);
-        initView(mView);
 
+        initView(mView);
     }
 
     private void initView(View mView) {
@@ -79,23 +77,22 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
         rl_check_version_cancel = (RelativeLayout) mView.findViewById(R.id.rl_check_version_cancel);
 
         txtInfo.setText(info);
-        txtConfirm.setOnClickListener(confimListener);
+        txtConfirm.setOnClickListener(confirmListener);
         txtCancel.setOnClickListener(cancelListener);
-        if (!TextUtils.isEmpty(forcedUpgrade)) {
-            if (forcedUpgrade.equals("false")) {
-                rl_check_version_cancel.setVisibility(View.VISIBLE);
-            } else if (forcedUpgrade.equals("true")) {
-                rl_check_version_cancel.setVisibility(View.GONE);
-            } else {
-                rl_check_version_cancel.setVisibility(View.VISIBLE);
-            }
+        if (forcedUpgrade) {
+            //是强制跟新
+            rl_check_version_cancel.setVisibility(View.GONE);
+            setCancelable(false);
+            setCanceledOnTouchOutside(false);
         } else {
+            //不是强制跟新
             rl_check_version_cancel.setVisibility(View.VISIBLE);
+            setCancelable(true);
+            setCanceledOnTouchOutside(true);
         }
-
     }
 
-    private View.OnClickListener confimListener = new View.OnClickListener() {
+    private View.OnClickListener confirmListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
@@ -113,17 +110,12 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
         }
     };
 
-    private void ondismiss() {
-
-    }
-
     @Override
     public void onDismiss(DialogInterface dialog) {
         if (m_arrDismissListeners != null) {
             for (int x = 0; x < m_arrDismissListeners.size(); x++)
                 m_arrDismissListeners.get(x).onDismiss(dialog);
         }
-        ondismiss();
     }
 
     @Override
@@ -153,6 +145,7 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
 
     /**
      * 获取当前window width,height
+     *
      * @param context
      * @return
      */
@@ -166,10 +159,7 @@ public class CheckVersionDialog extends Dialog implements DialogInterface.OnCanc
     }
 
     public interface OnCheckVersion {
-        public void onConfirm();
-
-        public void onCancel();
-
+        void onConfirm();
     }
 
 }

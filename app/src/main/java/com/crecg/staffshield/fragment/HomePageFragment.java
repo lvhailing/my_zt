@@ -28,9 +28,11 @@ import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
+import com.crecg.staffshield.utils.DataUtil;
 import com.crecg.staffshield.widget.MyRollViewPager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 首页
@@ -53,8 +55,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private TextView tv_home_more; // 更多
 
     private LinearLayout ll_container; // 加载首页定期产品
-    private ArrayList<ProductModelTestData> list;
-    private ArrayList<ImageView> picList; // 滑动的图片集合
+    private List<ProductModelTestData> list;
+    private List<String> picList; // 滑动的图片集合
     private int[] imageResId; // 图片ID
     private MyRollViewPager rollViewPager;
 
@@ -90,49 +92,21 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         // 模拟数据
-        ProductModelTestData product1 = new ProductModelTestData();
-        product1.annualizedReturn = "6.12%";
-        product1.date = "2019-06-04 14:00";
-        product1.day = "22";
-        product1.name = "中铁1号";
-        product1.investmentAmount = "10万起投";
-        product1.flag = 1;
-
-        ProductModelTestData product2 = new ProductModelTestData();
-        product2.annualizedReturn = "6.22%";
-        product2.date = "2029-06-04 24:00";
-        product2.day = "22";
-        product2.name = "中铁2号";
-        product2.investmentAmount = "20万起投";
-        product2.flag = 2;
-
-        ProductModelTestData product3 = new ProductModelTestData();
-        product3.annualizedReturn = "6.32%";
-        product3.date = "2039-06-04 34:00";
-        product3.day = "22";
-        product3.name = "中铁3号";
-        product3.investmentAmount = "30万起投";
-        product3.flag = 1;
-
-        list = new ArrayList<>();
-        list.add(product1);
-        list.add(product2);
-        list.add(product3);
+        list = DataUtil.getProductList();
 
         // 模拟轮播图数据
         auto_Image();
+
         freshVP();
     }
 
     private void auto_Image() {
-        picList = new ArrayList<ImageView>();
+        picList = new ArrayList<String>();
+        picList.add("https://csdnimg.cn/feed/20190712/9bb6aa25f82b061230d08a65a1b534c5.png");
+        picList.add("https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAujxlx50uwaMWjpghsyVBYjZsgibRQlSTg5V28wWfNOz6QDwrIWHGolXJqFBoA3rWYlv6tnLwbDFQ8g/640?wx_fmt=jpeg");
+        picList.add("https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/Rm6KfjqOnWwDkSZUHmIjUAZpc1QXd43BgpEI45JKS7qJA2kghDYBr0CgwhJHTtat7RVawRcSiaFp8PgHm9q0YZA/640?wx_fmt=jpeg");
+
         imageResId = new int[]{R.mipmap.bg_banner_default1, R.mipmap.bg_banner_default2, R.mipmap.bg_banner_default3};
-        for (int i = 0; i < imageResId.length; i++) {
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setImageResource(imageResId[i]);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            picList.add(imageView);
-        }
     }
 
     private void initView() {

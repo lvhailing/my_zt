@@ -19,11 +19,10 @@ import android.widget.Toast;
 import com.crecg.crecglibrary.network.model.CheckVersionModelData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
-import com.crecg.staffshield.dialog.CheckVersionDialog;
 import com.crecg.staffshield.fragment.HomePageFragment;
 import com.crecg.staffshield.fragment.FoundFragment;
 import com.crecg.staffshield.fragment.MeFragment;
-import com.crecg.staffshield.service.AppUpgradeService;
+import com.crecg.staffshield.update.UpdateManager;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -73,10 +72,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     /**
-     *  检查版本更新
+     * 检查版本更新
      */
     private void CheckVersionUpdates() {
-
+        CheckVersionModelData version = new CheckVersionModelData();
+        version.display = "修复了bug";
+        version.isForce = 0;
+        version.url = "";
+        new UpdateManager().checkVersion(this, version);
     }
 
     @Override
@@ -273,26 +276,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             lastTime = currentTime;
         }
-    }
-
-    public void showAppUpdateDialog(final CheckVersionModelData b){
-
-        CheckVersionDialog dialog = new CheckVersionDialog(MainActivity.this, new CheckVersionDialog.OnCheckVersion() {
-            @Override
-            public void onConfirm() {
-                Intent updateIntent = new Intent(MainActivity.this, AppUpgradeService.class);
-                updateIntent.putExtra("titleId", R.string.app_update_title);
-                updateIntent.putExtra("downloadUrl", b.url);
-                MainActivity.this.startService(updateIntent);
-            }
-
-            @Override
-            public void onCancel() {
-            }
-        }, "发现新版本,是否更新", "false");
-        dialog.setCancelable(false);
-        dialog.show();
-
-
     }
 }

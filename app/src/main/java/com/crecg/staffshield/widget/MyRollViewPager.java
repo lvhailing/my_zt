@@ -28,7 +28,8 @@ public class MyRollViewPager extends ViewPager {
     private MyClickListener myClickListener;
     private LinearLayout mPointContainer;
     private boolean isCycle = false;
-    private ArrayList<ImageView> picList; //用于保存后台返回的图片的集合
+    private List<String> picList; //用于保存后台返回的图片的集合
+    private int[] imageResId;
     private int ids[] = {R.mipmap.bg_banner_default1, R.mipmap.bg_banner_default2, R.mipmap.bg_banner_default3}; // 假如后台没返回图片，则使用默认图片
 
     private Handler handler = new Handler() {
@@ -43,7 +44,7 @@ public class MyRollViewPager extends ViewPager {
         }
     };
 
-    public MyRollViewPager(Context context, ArrayList<ImageView> pics, LinearLayout container) {
+    public MyRollViewPager(Context context, List<String> pics, LinearLayout container) {
         super(context);
 
         this.context = context;
@@ -70,7 +71,7 @@ public class MyRollViewPager extends ViewPager {
     /**
      * @param pics 第二次获取到后台数据后，需要将本类的数据更新下
      */
-    public void setPicList(ArrayList<ImageView> pics) {
+    public void setPicList(List<String> pics) {
         this.picList = pics;
     }
 
@@ -196,7 +197,9 @@ public class MyRollViewPager extends ViewPager {
 //                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(picList.get(position % picList.size()).getPicture(), imageView, options);
 
                 //Glide 加载图片
-                Glide.with(context).load(R.mipmap.bg_banner_default1).into(imageView);
+                int posResult = position % picList.size();
+                String url = picList.get(posResult);
+                Glide.with(context).load(url).into(imageView);
 
                 //设置了点击回调，则回调activity
                 if (myClickListener != null) {
