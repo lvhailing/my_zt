@@ -11,7 +11,7 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- *  账户余额页
+ *  账户余额页(中铁联名卡页)
  */
 
 public class AccountBalanceActivity extends BaseActivity implements View.OnClickListener {
@@ -54,6 +54,8 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
 
         iv_back.setOnClickListener(this);
         tv_right_txt.setOnClickListener(this);
+        rl_tied_card.setOnClickListener(this);
+        rl_untied_card.setOnClickListener(this);
         btn_turn_out.setOnClickListener(this);
         btn_turn_into.setOnClickListener(this);
     }
@@ -68,6 +70,10 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
             case R.id.tv_right_txt: // 明细
                 intent = new Intent(this, BillCenterActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.rl_tied_card: // 已开通联名卡（跳转到联名卡详情页）
+                break;
+            case R.id.rl_untied_card: // 未开通联名卡（弹框提示用户开通理财账户，然后跳转添加银行卡页面）
                 break;
             case R.id.btn_turn_out: // 转出
                 if ("1".equals(btnFlag)) {

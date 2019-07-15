@@ -75,11 +75,11 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 finish();
                 break;
             case R.id.tv_transfer_of_funds: // 资金转入 (需先判断用户绑定银行卡是否开通快捷支付，否的话需要先开通银行快捷支付才可转入)
-                if (isOpenFastPayment) {
+                if (isOpenFastPayment) { // 开通银行快捷支付
                     intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
                     startActivity(intent);
-                } else {
-                    intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                } else { // 未开通银行快捷支付，先跳银行快捷支付页
+                    intent = new Intent(WageTreasureBuyingActivity.this, FastPaymentActivity.class);
                     startActivity(intent);
                 }
                 break;
@@ -95,7 +95,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                     isCheckedFlag = true;
                 }
                 break;
-            case R.id.tv_about_agreement: // 相关协议 
+            case R.id.tv_about_agreement: // 相关协议
 
                 break;
             case R.id.btn_buy: // 确认买入
