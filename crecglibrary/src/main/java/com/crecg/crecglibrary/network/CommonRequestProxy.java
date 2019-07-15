@@ -81,4 +81,14 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("userinfo/trspwd/reset")
     Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
+
+    //快捷支付签约短信验证码获取 (未调试)
+    @FormUrlEncoded
+    @POST("userInfo/paySigned/send/verifyCode")
+    Observable<String> getFastPaymentVerifyCode(@FieldMap Map<String, Object> param);
+
+    //快捷支付签约（点下一步按钮调此接口） (未调试)
+    @FormUrlEncoded
+    @POST("userInfo/paySigned/submit")
+    Observable<String> getFastPaymentSubmit(@FieldMap Map<String, Object> param);
 }

@@ -216,7 +216,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("hh", "首页 onResume方法：" + getClass());
+//        Log.i("hh", "首页 onResume方法：" + getClass());
         initData();
     }
 
@@ -296,7 +296,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, SalaryTreasureDetailActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_transfer_immediately:  // 立即转入 （跳转工资宝买入页）
+            case R.id.tv_transfer_immediately:  // 立即转入 （已经开户跳转工资宝买入页）
+                // Todo 点立即转入时，需要先判断用户是否开通联名卡账户
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
                 intent.putExtra("whereToEnterFlag", "1");
                 startActivity(intent);

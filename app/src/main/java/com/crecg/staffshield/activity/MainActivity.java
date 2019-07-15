@@ -99,19 +99,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void initView() {
 //        swipe_refresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        vp = (ViewPager) findViewById(R.id.vp);
+        vp = findViewById(R.id.vp);
 
-        ll_tab_home = (LinearLayout) findViewById(R.id.ll_tab_home);
-        ll_tab_found = (LinearLayout) findViewById(R.id.ll_tab_found);
-        ll_tab_me = (LinearLayout) findViewById(R.id.ll_tab_me);
+        ll_tab_home = findViewById(R.id.ll_tab_home);
+        ll_tab_found = findViewById(R.id.ll_tab_found);
+        ll_tab_me = findViewById(R.id.ll_tab_me);
 
-        iv_tab_home_page = (ImageView) findViewById(R.id.iv_tab_home_page);
-        iv_tab_found = (ImageView) findViewById(R.id.iv_tab_found);
-        iv_tab_me = (ImageView) findViewById(R.id.iv_tab_me);
+        iv_tab_home_page = findViewById(R.id.iv_tab_home_page);
+        iv_tab_found = findViewById(R.id.iv_tab_found);
+        iv_tab_me = findViewById(R.id.iv_tab_me);
 
-        tv_tab_home_page = (TextView) findViewById(R.id.tv_tab_home_page);
-        tv_tab_found = (TextView) findViewById(R.id.tv_tab_found);
-        tv_tab_me = (TextView) findViewById(R.id.tv_tab_me);
+        tv_tab_home_page = findViewById(R.id.tv_tab_home_page);
+        tv_tab_found = findViewById(R.id.tv_tab_found);
+        tv_tab_me = findViewById(R.id.tv_tab_me);
 
         ll_tab_home.setOnClickListener(this);
         ll_tab_found.setOnClickListener(this);

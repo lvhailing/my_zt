@@ -30,6 +30,8 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
     private Button btn_buy; // 确认买入
     private ImageView iv_selected_or_unselected; // 相关协议未选中状态
     private String whereToEnterFlag; // 1:首页进   2：工资宝详情页进
+    private boolean isCheckedFlag = false;
+    private boolean isOpenFastPayment = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
         iv_back.setOnClickListener(this);
         tv_transfer_of_funds.setOnClickListener(this);
         tv_all.setOnClickListener(this);
+        iv_selected_or_unselected.setOnClickListener(this);
         tv_about_agreement.setOnClickListener(this);
         btn_buy.setOnClickListener(this);
     }
@@ -71,14 +74,29 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
             case R.id.iv_back:
                 finish();
                 break;
-            case R.id.tv_transfer_of_funds: // 资金转入
-                intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
-                startActivity(intent);
+            case R.id.tv_transfer_of_funds: // 资金转入 (需先判断用户绑定银行卡是否开通快捷支付，否的话需要先开通银行快捷支付才可转入)
+                if (isOpenFastPayment) {
+                    intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.tv_all: // 全部
                 et_all_money_amount.setText(tv_money_amount.getText());
                 break;
-            case R.id.tv_about_agreement: // 相关协议
+            case R.id.iv_selected_or_unselected: // 是否勾选相关协议
+                if (isCheckedFlag) {
+                    iv_selected_or_unselected.setBackgroundResource(R.mipmap.img_unselected);
+                    isCheckedFlag = false;
+                } else {
+                    iv_selected_or_unselected.setBackgroundResource(R.mipmap.img_seleced);
+                    isCheckedFlag = true;
+                }
+                break;
+            case R.id.tv_about_agreement: // 相关协议 
+
                 break;
             case R.id.btn_buy: // 确认买入
                 String moneyAmount = et_all_money_amount.getText().toString();
