@@ -32,7 +32,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     //    private RelativeLayout me_rl_customer_service_center; // 客服中心
     private Context context;
     private ImageView iv_mine_setting; // 设置
-    private ImageView iv_eye_open; // 显示或隐藏 资产总额
+    private ImageView iv_eye_state; // 显示或隐藏 资产总额
     private TextView me_tv_total_assets; // 资产总额
     private TextView me_tv_yesterday_profit; //昨日收益
     private TextView me_tv_accumulated_income; // 累计收益
@@ -71,7 +71,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         me_tv_total_assets = mView.findViewById(R.id.me_tv_total_assets);
         me_tv_yesterday_profit = mView.findViewById(R.id.me_tv_yesterday_profit);
         me_tv_accumulated_income = mView.findViewById(R.id.me_tv_accumulated_income);
-        iv_eye_open = mView.findViewById(R.id.iv_eye_open);
+        iv_eye_state = mView.findViewById(R.id.iv_eye_state);
         btn_change_into = mView.findViewById(R.id.btn_change_into);
         btn_turn_out = mView.findViewById(R.id.btn_turn_out);
         rl_account_balance = mView.findViewById(R.id.rl_account_balance);
@@ -81,7 +81,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 //        me_rl_customer_service_center = mView.findViewById(R.id.me_rl_customer_service_center);
 
 //        me_rl_customer_service_center.setOnClickListener(this);
-        iv_eye_open.setOnClickListener(this);
+        iv_eye_state.setOnClickListener(this);
         iv_mine_setting.setOnClickListener(this);
         rl_account_balance.setOnClickListener(this);
         btn_change_into.setOnClickListener(this);
@@ -103,11 +103,13 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, SettingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.iv_eye_open: // 显示或隐藏 资产总额
+            case R.id.iv_eye_state: // 显示或隐藏 资产总额
                 if (showOrHideFlag) {
+                    iv_eye_state.setImageResource(R.mipmap.img_eye_close);
                     me_tv_total_assets.setText("****");
                     showOrHideFlag = false;
                 } else {
+                    iv_eye_state.setImageResource(R.mipmap.img_eye_open);
                     me_tv_total_assets.setText("270024.99");
                     showOrHideFlag = true;
                 }

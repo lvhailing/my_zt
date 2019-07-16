@@ -180,9 +180,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.rl_safe_exit: // 安全退出
-//                UserLoadout out = new UserLoadout(SettingActivity.this, userId);
-//                out.requestData();
-//                finish();
 
                 break;
 

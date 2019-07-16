@@ -112,9 +112,11 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
                 break;
             case R.id.iv_eye_state: // 小眼睛 （显示或隐藏金额）
                 if (showOrHideFlag) {
+                    iv_eye_state.setImageResource(R.mipmap.img_eye_close);
                     tv_waiting_income.setText("****");
                     showOrHideFlag = false;
                 } else {
+                    iv_eye_state.setImageResource(R.mipmap.img_eye_open);
                     tv_waiting_income.setText("27000.55");
                     showOrHideFlag = true;
                 }
