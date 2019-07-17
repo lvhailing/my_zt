@@ -14,8 +14,7 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- * Transfer of Money from Entity Bank Card to Electronic Bank Card
- * 资金转入(从绑定的银行卡向开通的联名卡（电子银行卡）转钱)
+ *  资金转入(联名卡转入)
  */
 
 public class MoneyFromEntityBankToElectronicBankActivity extends BaseActivity implements View.OnClickListener {

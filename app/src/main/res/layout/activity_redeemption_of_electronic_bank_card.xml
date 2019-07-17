@@ -200,51 +200,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:lineSpacingExtra="3dp"
+                android:lineSpacingMultiplier="1.2"
                 android:layout_marginLeft="7dp"
                 android:background="@color/white"
-                android:text="预计"
-                android:textColor="@color/txt_black_666666"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@color/white"
-                android:text="明天"
-                android:textColor="@color/main_blue_4A67F5"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@color/white"
-                android:text="（11月29日）23:59前到账，"
-                android:textColor="@color/txt_black_666666"
-                android:textSize="12sp"/>
-
-            <TextView
-                android:id="@+id/tv_current_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:background="@color/white"
-                android:text="今日（11月28日）"
+                android:text="工作日期间，15:00前赎回次日24:00前到账，15:00后赎回2日后24:00前到账，非工作日延后。"
                 android:textColor="@color/txt_black_666666"
                 android:textSize="12sp"/>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="35.5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/white"
-            android:text="仍有收益。"
-            android:textColor="@color/txt_black_666666"
-            android:textSize="12sp"/>
     </LinearLayout>
 
     <Button

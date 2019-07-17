@@ -21,8 +21,34 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="转入金额（元）"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_transfer_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="22dp"
+            android:text="50000.00"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_line"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
+            android:layout_marginTop="20dp"
             android:text="转入进度"
             android:textColor="@color/txt_black_999999"
             android:textSize="15sp"/>
@@ -151,8 +177,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="46dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginLeft="46dp"
             android:orientation="horizontal">
 
             <TextView

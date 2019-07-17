@@ -8,28 +8,31 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.crecg.crecglibrary.network.model.CheckVersionModelData;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.FoundFragmentAdapter;
+import com.crecg.staffshield.dialog.CheckVersionDialog;
+import com.crecg.staffshield.dialog.OpeningAccountSuccessDialog;
 
 /**
  * Created by junde on 2018/12/15.
  */
 
-public class FoundFragment extends Fragment {
+public class FoundFragment extends Fragment implements View.OnClickListener {
 
     private View mView;
     private Context context;
-    private SwipeRefreshLayout swipe_refresh;
-    private LinearLayout ll_vp;
-    private LinearLayout ll_point_container;
-    private RecyclerView recycler_view;
-//    private MouldList<PolicyRecordList2B> totalList = new MouldList<>();
-    private FoundFragmentAdapter foundFragmentAdapter;
+    private Button btn1;
+    private Button btn2;
+    private Button btn3;
+    private Button btn4;
 
     @Nullable
     @Override
@@ -52,16 +55,46 @@ public class FoundFragment extends Fragment {
 
     private void initView(View mView) {
         context = getContext();
-        swipe_refresh = (SwipeRefreshLayout) mView.findViewById(R.id.swipe_refresh);
-        swipe_refresh.setColorSchemeResources(R.color.colorPrimary);
 
-        ll_vp = (LinearLayout) mView.findViewById(R.id.ll_vp);
-        ll_point_container = (LinearLayout) mView.findViewById(R.id.ll_point_container);
-        recycler_view = (RecyclerView) mView.findViewById(R.id.recycler_view);
-        recycler_view.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        foundFragmentAdapter = new FoundFragmentAdapter(getActivity(), totalList);
-//        recycler_view.setAdapter(foundFragmentAdapter);
-        //添加动画
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
+        btn1 = mView.findViewById(R.id.btn1);
+        btn2 = mView.findViewById(R.id.btn2);
+        btn3 = mView.findViewById(R.id.btn3);
+        btn4 = mView.findViewById(R.id.btn4);
+
+        btn1.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn1:
+                showDialog();
+                break;
+            case R.id.btn2:
+                CheckVersionModelData version = new CheckVersionModelData();
+                version.display = "修复了bug";
+                version.isForce = 0;
+                version.url = "https://www.baidu.com/";
+                showUpdateDialog(version);
+                break;
+        }
+    }
+
+    private void showDialog() {
+        OpeningAccountSuccessDialog dialog = new OpeningAccountSuccessDialog(context);
+        dialog.show();
+    }
+
+    private void showUpdateDialog(final CheckVersionModelData version) {
+        String content = TextUtils.isEmpty(version.display) ? "发现新版本,是否更新" : version.display;
+        boolean isForceUpdate = version.isForce == 1;
+        CheckVersionDialog dialog = new CheckVersionDialog(context, content, isForceUpdate, new CheckVersionDialog.OnCheckVersion() {
+            @Override
+            public void onConfirm() {
+//                startDownload(version.url);
+            }
+        });
+        dialog.show();
+    }
+
 }

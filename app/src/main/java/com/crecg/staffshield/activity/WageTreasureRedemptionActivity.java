@@ -18,7 +18,7 @@ import com.crecg.staffshield.common.BaseActivity;
  * (工资宝)赎回至堪设联名卡
  */
 
-public class RedemptionOfElectronicBankCardActivity extends BaseActivity implements View.OnClickListener {
+public class WageTreasureRedemptionActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_back;
     private TextView tv_common_title;
@@ -91,7 +91,7 @@ public class RedemptionOfElectronicBankCardActivity extends BaseActivity impleme
                     ToastUtil.showCustom("赎回金额不能为空");
                     return;
                 }
-                Intent intent = new Intent(RedemptionOfElectronicBankCardActivity.this, TransactionPasswordActivity.class);
+                Intent intent = new Intent(WageTreasureRedemptionActivity.this, TransactionPasswordActivity.class);
                 intent.putExtra("fromFlag", "wageTreasureRedeem");
                 startActivity(intent);
                 break;

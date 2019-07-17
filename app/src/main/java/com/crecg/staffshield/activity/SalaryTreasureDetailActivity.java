@@ -102,7 +102,7 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                     btn_buy.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "1";
                 }
-                intent = new Intent(SalaryTreasureDetailActivity.this, RedemptionOfElectronicBankCardActivity.class);
+                intent = new Intent(SalaryTreasureDetailActivity.this, WageTreasureRedemptionActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_buy: // 买入 (买入时需要判断是否开户，开户的话直接跳买入页，没开户的话需要先跳绑卡页开户再进买入页)
