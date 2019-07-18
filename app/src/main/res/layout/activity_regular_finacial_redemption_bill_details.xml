@@ -23,12 +23,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="赎回金额（元）"
+            android:text=" 赎回金额（元）"
             android:textColor="@color/txt_black_999999"
             android:textSize="12sp"/>
 
         <TextView
-            android:id="@+id/tv_transfer_amount"
+            android:id="@+id/tv_redemption_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="20dp"
-            android:text="赎回进度"
+            android:text="回款进度"
             android:textColor="@color/txt_black_999999"
             android:textSize="15sp"/>
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
-                android:text="赎回申请已提交，等待银行处理"
+                android:text="开始计算收益"
                 android:textColor="@color/main_blue_4A67F5"
                 android:textSize="15sp"/>
         </LinearLayout>
@@ -82,13 +82,14 @@
             android:layout_marginLeft="46dp"
             android:orientation="horizontal">
 
-            <View
+            <ImageView
+                android:id="@+id/iv_first_vertical_line"
                 android:layout_width="1dp"
                 android:layout_height="43dp"
                 android:background="@mipmap/img_vertical_line_blue_and_gray"/>
 
             <TextView
-                android:id="@+id/tv_redeem_time"
+                android:id="@+id/tv_start_calculating_earnings_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
@@ -105,6 +106,64 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/iv_second_circle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="@mipmap/img_check_mark"/>
+
+            <TextView
+                android:id="@+id/tv_financial_maturity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="理财到期"
+                android:textColor="@color/main_blue_4A67F5"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="46dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_second_vertical_line"
+                android:layout_width="1dp"
+                android:layout_height="43dp"
+                android:background="@mipmap/img_vertical_line_gray"/>
+
+            <TextView
+                android:id="@+id/tv_maturity_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="5dp"
+                android:text="12-01"
+                android:textColor="@color/txt_black_999999"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_maturity_time_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="5dp"
+                android:text="周四"
+                android:textColor="@color/txt_black_999999"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="34dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_third_circle"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
@@ -115,8 +174,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
-                android:text="最晚到帐时间"
-                android:textColor="@color/txt_black_999999"
+                android:text="本息到账"
+                android:textColor="@color/main_blue_4A67F5"
                 android:textSize="15sp"/>
         </LinearLayout>
 
@@ -128,29 +187,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_latest_arrival_time"
+                android:id="@+id/tv_principal_and_interest_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22dp"
                 android:layout_marginTop="5dp"
-                android:text="11-12 17:12"
+                android:text="01-04后三个工作日内"
                 android:textColor="@color/txt_black_999999"
                 android:textSize="12sp"/>
-
         </LinearLayout>
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_complete"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="46dp"
-        android:background="@drawable/login_btn_shape_blue_0087fd"
-        android:text="完成"
-        android:textColor="@color/white"
-        android:textSize="16sp"/>
-
 </LinearLayout>

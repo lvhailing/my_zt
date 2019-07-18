@@ -71,7 +71,7 @@ public class RegularFinancialManagementBuyingActivity extends BaseActivity imple
                 finish();
                 break;
             case R.id.tv_transfer_of_funds: // 资金转入
-                intent = new Intent(RegularFinancialManagementBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                intent = new Intent(RegularFinancialManagementBuyingActivity.this, EntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_all: // 全部

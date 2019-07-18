@@ -6,15 +6,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- * 资金转入详情(联名卡转入详情)
+ * 资金转出详情(联名卡转出详情)
  */
 
-public class MoneyFromEntityBankToElectronicBankDetailActivity extends BaseActivity implements View.OnClickListener {
+public class ElectronicBankToEntityBankDetailActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_back;
     private TextView tv_common_title;
     private TextView tv_transfer_amount; // 转入金额
@@ -27,14 +26,16 @@ public class MoneyFromEntityBankToElectronicBankDetailActivity extends BaseActiv
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        baseSetContentView(R.layout.activity_entity_to_electronic_detail);
+        baseSetContentView(R.layout.activity_electronic_to_entity_detail);
 
         initView();
     }
 
     private void initView() {
+        iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        tv_common_title.setText("堪设联名卡转入详情");
+        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        tv_common_title.setText("账单详情");
 
         tv_transfer_amount = findViewById(R.id.tv_transfer_amount);
         tv_turn_into_date = findViewById(R.id.tv_turn_into_date);

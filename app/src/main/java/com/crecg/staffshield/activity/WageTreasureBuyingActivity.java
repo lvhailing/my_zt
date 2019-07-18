@@ -76,7 +76,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 break;
             case R.id.tv_transfer_of_funds: // 资金转入 (需先判断用户绑定银行卡是否开通快捷支付，否的话需要先开通银行快捷支付才可转入)
                 if (isOpenFastPayment) { // 开通银行快捷支付
-                    intent = new Intent(WageTreasureBuyingActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                    intent = new Intent(WageTreasureBuyingActivity.this, EntityBankToElectronicBankActivity.class);
                     startActivity(intent);
                 } else { // 未开通银行快捷支付，先跳银行快捷支付页
                     intent = new Intent(WageTreasureBuyingActivity.this, FastPaymentActivity.class);

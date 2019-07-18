@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.AccountBalanceActivity;
-import com.crecg.staffshield.activity.MoneyFromEntityBankToElectronicBankActivity;
-import com.crecg.staffshield.activity.MoneyFromElectronicBankToEntityBankActivity;
+import com.crecg.staffshield.activity.EntityBankToElectronicBankActivity;
+import com.crecg.staffshield.activity.ElectronicBankToEntityBankActivity;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.SettingActivity;
@@ -126,7 +126,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     btn_turn_out.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "1";
                 }
-                intent = new Intent(context, MoneyFromEntityBankToElectronicBankActivity.class);
+                intent = new Intent(context, EntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_turn_out: // (联名卡)转出
@@ -137,7 +137,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     btn_change_into.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "2";
                 }
-                intent = new Intent(context, MoneyFromElectronicBankToEntityBankActivity.class);
+                intent = new Intent(context, ElectronicBankToEntityBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_salary_treasure: // 工资宝

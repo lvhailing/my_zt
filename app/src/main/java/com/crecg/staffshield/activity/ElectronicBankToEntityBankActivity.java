@@ -17,7 +17,7 @@ import com.crecg.staffshield.common.BaseActivity;
  * 资金转出(联名卡转出)
  */
 
-public class MoneyFromElectronicBankToEntityBankActivity extends BaseActivity implements View.OnClickListener {
+public class ElectronicBankToEntityBankActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_back;
     private TextView tv_common_title;
     private TextView tv_bank_card_name;

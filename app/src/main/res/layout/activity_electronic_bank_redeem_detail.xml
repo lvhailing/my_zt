@@ -86,7 +86,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="43dp"
-                android:background="@mipmap/img_line_blue_and_gray"/>
+                android:background="@mipmap/img_vertical_line_blue_and_gray"/>
 
             <TextView
                 android:id="@+id/tv_time_turn_out"

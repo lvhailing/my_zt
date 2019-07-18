@@ -92,11 +92,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.MoneyFromEntityBankToElectronicBankActivity"
+            android:name=".activity.EntityBankToElectronicBankActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.MoneyFromElectronicBankToEntityBankActivity"
+            android:name=".activity.ElectronicBankToEntityBankActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".activity.SettingPatternPswActivity"/>
@@ -154,6 +154,38 @@
 
         <activity
             android:name=".activity.RegularFinancialManagementListActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegularFinancialManagementBuyingSuccessActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.ElectronicBankToEntityBankDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.EntityBankToElectronicBankDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.EntityBankToElectronicBankBillDetailsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.ElectronicBankToEntityBankBillDetailsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegularFinancialBuyingBillDetailsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegularFinancialRedemptionBillDetailsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.WageTreasureTurnIntoBillDetailsActivity"
             android:screenOrientation="portrait"/>
 
 

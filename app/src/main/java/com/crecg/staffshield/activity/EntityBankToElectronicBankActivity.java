@@ -14,10 +14,10 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
 /**
- *  资金转入(联名卡转入)
+ * 资金转入(联名卡转入)
  */
 
-public class MoneyFromEntityBankToElectronicBankActivity extends BaseActivity implements View.OnClickListener {
+public class EntityBankToElectronicBankActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_back;
     private TextView tv_common_title;
     private TextView tv_entity_bank_card_name; // 实体银行卡名称

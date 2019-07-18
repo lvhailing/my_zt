@@ -83,7 +83,7 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
                     btn_turn_into.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "2";
                 }
-                intent = new Intent(AccountBalanceActivity.this, MoneyFromElectronicBankToEntityBankActivity.class);
+                intent = new Intent(AccountBalanceActivity.this, ElectronicBankToEntityBankActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_turn_into: // 转入
@@ -94,7 +94,7 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
                     btn_turn_out.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "1";
                 }
-                intent = new Intent(AccountBalanceActivity.this, MoneyFromEntityBankToElectronicBankActivity.class);
+                intent = new Intent(AccountBalanceActivity.this, EntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
         }
