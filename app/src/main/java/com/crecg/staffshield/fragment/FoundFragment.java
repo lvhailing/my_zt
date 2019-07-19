@@ -83,6 +83,14 @@ public class FoundFragment extends Fragment implements View.OnClickListener {
     private void showDialog() {
         OpeningAccountSuccessDialog dialog = new OpeningAccountSuccessDialog(context);
         dialog.show();
+        dialog.setMyClickListener(new OpeningAccountSuccessDialog.MyClickListener() {
+            @Override
+            public void onMyClick() {
+                //收到dialog的点击事件
+//                doSomething();
+            }
+        });
+
     }
 
     private void showUpdateDialog(final CheckVersionModelData version) {

@@ -188,6 +188,10 @@
             android:name=".activity.WageTreasureTurnIntoBillDetailsActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.AllKindsOfDetailsActivity"
+            android:screenOrientation="portrait"/>
+
 
 
 

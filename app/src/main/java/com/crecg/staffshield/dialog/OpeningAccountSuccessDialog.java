@@ -19,9 +19,9 @@ import com.crecg.staffshield.R;
 import java.util.ArrayList;
 
 /**
- * 请开通理财账户 弹框
+ * 电子账户开通成功 弹框
  */
-public class OpeningAccountSuccessDialog extends Dialog implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
+public class OpeningAccountSuccessDialog extends Dialog {
 
     private Context mContext;
     private LayoutInflater inflater;
@@ -53,9 +53,8 @@ public class OpeningAccountSuccessDialog extends Dialog implements DialogInterfa
         lp.width = wh[0] - wh[0] / percentageW;
         lp.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
         getWindow().setAttributes(lp);
+
         setCanceledOnTouchOutside(false);
-        setOnDismissListener(this);
-        setOnCancelListener(this);
 
         initView(mView);
     }
@@ -63,49 +62,18 @@ public class OpeningAccountSuccessDialog extends Dialog implements DialogInterfa
     private void initView(View mView) {
         iv_close_dialog = mView.findViewById(R.id.iv_close_dialog);
 
-        iv_close_dialog.setOnClickListener(cancelListener);
+        iv_close_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                if (listener != null) {
+                    listener.onMyClick();
+                }
+            }
+        });
     }
 
-    private View.OnClickListener cancelListener = new View.OnClickListener() {
 
-        @Override
-        public void onClick(View v) {
-            onDismiss();
-        }
-    };
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        if (m_arrDismissListeners != null) {
-            for (int x = 0; x < m_arrDismissListeners.size(); x++)
-                m_arrDismissListeners.get(x).onDismiss(dialog);
-        }
-    }
-
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        if (m_arrCancelListeners != null) {
-            for (int x = 0; x < m_arrDismissListeners.size(); x++)
-                m_arrCancelListeners.get(x).onCancel(dialog);
-        }
-    }
-
-    public void addListeners(OnCancelListener c, OnDismissListener d) {
-        m_arrDismissListeners.add(d);
-        m_arrCancelListeners.add(c);
-    }
-
-    public void removeListeners(OnCancelListener c, OnDismissListener d) {
-        m_arrDismissListeners.remove(d);
-
-        m_arrCancelListeners.remove(c);
-    }
-
-    private void onDismiss() {
-        if (this.isShowing()) {
-            this.dismiss();
-        }
-    }
 
     /**
      * 获取当前window width,height
@@ -122,8 +90,14 @@ public class OpeningAccountSuccessDialog extends Dialog implements DialogInterfa
         return wh;
     }
 
-    public interface OnCheckVersion {
-        void onConfirm();
+    private MyClickListener listener;
+
+    public void setMyClickListener(MyClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface MyClickListener {
+        void onMyClick();
     }
 
 }

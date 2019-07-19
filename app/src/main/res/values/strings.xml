@@ -17,6 +17,12 @@
     <string name="title_work_certificate">申请加入中铁员工宝</string>
     <string name="title_fund_change_into">资金转入</string>
     <string name="title_fund_turn_out">资金转出</string>
+    <string name="title_wage_treasure_buying_detail">工资宝转入详情</string>
+    <string name="title_wage_treasure_redemption_detail">工资宝赎回详情</string>
+    <string name="title_bank_turn_into_detail">联名卡转入详情</string>
+    <string name="title_bank_roll_out_detail">联名卡转出详情</string>
+    <string name="title_regular_financial_buying_detail">定期理财买入详情</string>
+    <string name="title_bill_details">账单详情</string>
 
 
 
@@ -95,6 +101,18 @@
     <string name="btn_confirm_transfer">确认转入</string>
     <string name="btn_confirm_turn_out">确认转出</string>
 
+    <!-- 11种状态详情相关文字描述 -->
+    <string name="transfer_amount">转入金额（元）</string>
+    <string name="roll_out_amount">转出金额（元）</string>
+    <string name="purchase_amount">买入金额（元）</string>
+    <string name="redemption_amount">赎回金额（元）</string>
+
+    <string name="turn_into_progress">转入进度</string>
+    <string name="turn_out_progress">转出进度</string>
+    <string name="buying_progress">买入进度</string>
+    <string name="redemption_progress">赎回进度</string>
+    <string name="payment_progress">回款进度</string>
+    <string name="bill_progress">账单进度</string>
 
 
 </resources>
