@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.AllKindsOfDetailsActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
@@ -298,8 +299,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_transfer_immediately:  // 立即转入 （已经开户跳转工资宝买入页）
                 // Todo 点立即转入时，需要先判断用户是否开通联名卡账户
-                intent = new Intent(context, WageTreasureBuyingActivity.class);
-                intent.putExtra("whereToEnterFlag", "1");
+                intent = new Intent(context, AllKindsOfDetailsActivity.class);
+                intent.putExtra("fromFlag", 5);
                 startActivity(intent);
                 break;
             case R.id.tv_home_more: // 更多 （跳转到定期理财列表页）
