@@ -122,7 +122,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 if ("2".equals(btnFlag)) {
                     btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
                     btn_change_into.setTextColor(getResources().getColor(R.color.white));
-                    btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_btn_blue));
+                    btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_blue_solid_white));
                     btn_turn_out.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "1";
                 }
@@ -133,7 +133,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 if ("1".equals(btnFlag)) {
                     btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
                     btn_turn_out.setTextColor(getResources().getColor(R.color.white));
-                    btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_btn_blue));
+                    btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_stroke_blue_solid_white));
                     btn_change_into.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "2";
                 }

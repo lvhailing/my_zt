@@ -1,7 +1,7 @@
 package com.crecg.staffshield.utils;
 
 import com.crecg.crecglibrary.network.model.BankInfoModel;
-import com.crecg.crecglibrary.network.model.BankProcessModel;
+import com.crecg.crecglibrary.network.model.BankProgressModel;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 
 import java.util.ArrayList;
@@ -47,22 +47,22 @@ public class DataUtil {
 
     public static BankInfoModel getBankInfo() {
 
-        BankProcessModel process1 = new BankProcessModel();
+        BankProgressModel process1 = new BankProgressModel();
         process1.time = "06-04 22:00";
         process1.title = "已转入";
         process1.state = 1;
 
-        BankProcessModel process2 = new BankProcessModel();
+        BankProgressModel process2 = new BankProgressModel();
         process2.time = "06-05 14:00";
         process2.title = "待审核";
         process2.state = 0;
 
-        BankProcessModel process3 = new BankProcessModel();
+        BankProgressModel process3 = new BankProgressModel();
         process3.time = "06-07 10:00";
         process3.title = "待驳回";
         process3.state = 0;
 
-        List<BankProcessModel> processModels = new ArrayList<>();
+        List<BankProgressModel> processModels = new ArrayList<>();
         processModels.add(process1);
         processModels.add(process2);
         processModels.add(process3);
@@ -72,7 +72,7 @@ public class DataUtil {
         bankInfoModel.createTime = "2039-06-04 34:00";
         bankInfoModel.flueId = "9846593459203794039405234957";
         bankInfoModel.price = 50000.00;
-        bankInfoModel.processList = processModels;
+        bankInfoModel.progressList = processModels;
 
         return bankInfoModel;
     }

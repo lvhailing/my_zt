@@ -192,8 +192,17 @@
             android:name=".activity.AllKindsOfDetailsActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.ReplacementBankCardActivity"
+            android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.ElectronicBankCardActivity"
+            android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.AddBankCardActivity"
+            android:screenOrientation="portrait"/>
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

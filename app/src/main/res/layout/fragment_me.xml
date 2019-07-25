@@ -320,7 +320,7 @@
                         android:layout_height="28dp"
                         android:layout_marginLeft="13dp"
                         android:layout_marginRight="15dp"
-                        android:background="@drawable/shape_rect_stroke_btn_blue"
+                        android:background="@drawable/shape_rect_stroke_blue_solid_white"
                         android:text="转出"
                         android:textColor="@color/main_blue_4A67F5"
                         android:textSize="14sp"/>

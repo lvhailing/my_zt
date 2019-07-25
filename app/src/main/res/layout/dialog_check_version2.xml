@@ -83,7 +83,7 @@
                 android:layout_marginLeft="65dp"
                 android:layout_marginRight="65dp"
                 android:layout_marginTop="18dp"
-                android:background="@drawable/shape_rect_stroke_btn_blue"
+                android:background="@drawable/shape_rect_stroke_blue_solid_white"
                 android:text="立即更新"
                 android:textColor="@color/main_blue_4A67F5"
                 android:textSize="14sp"/>

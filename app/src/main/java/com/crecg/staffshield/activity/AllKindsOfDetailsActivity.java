@@ -65,6 +65,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
+
         tv_title_category = findViewById(R.id.tv_title_category);
         tv_transfer_amount = findViewById(R.id.tv_transfer_amount);
         tv_notes_transfer = findViewById(R.id.tv_notes_transfer);
@@ -87,21 +88,24 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
 
     private void setRV() {
         //设置进度
-        BankInfoAdapter adapter = new BankInfoAdapter(this, bankInfoModel.processList);
+        BankInfoAdapter adapter = new BankInfoAdapter(this, bankInfoModel.progressList);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.setAdapter(adapter);
     }
 
     private void setInfo() {
         fromFlag = getIntent().getIntExtra("fromFlag", 0);
-        String typeName = "";
+        String titleCategory = "";
+        String transferAmount = "";
+        String notesTransfer = "";
         switch (fromFlag) {
             case 1: // 工资宝转入详情；
                 iv_back.setVisibility(View.GONE);
                 tv_common_title.setText(getResources().getString(R.string.title_wage_treasure_buying_detail));
 
-                typeName = getResources().getString(R.string.transfer_amount);
-                tv_notes_transfer.setText(getResources().getString(R.string.turn_into_progress));
+                titleCategory = getResources().getString(R.string.transfer_amount);
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.turn_into_progress));
                 btn_complete.setVisibility(View.VISIBLE);
                 btn_complete.setOnClickListener(this);
                 break;
@@ -109,8 +113,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 iv_back.setVisibility(View.GONE);
                 tv_common_title.setText(getResources().getString(R.string.title_wage_treasure_redemption_detail));
 
-                tv_title_category.setText(getResources().getString(R.string.redemption_amount));
-                tv_notes_transfer.setText(getResources().getString(R.string.redemption_progress));
+                titleCategory = (getResources().getString(R.string.redemption_amount));
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.redemption_progress));
                 btn_complete.setVisibility(View.VISIBLE);
                 btn_complete.setOnClickListener(this);
                 break;
@@ -119,8 +124,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
-                typeName = getResources().getString(R.string.transfer_amount);
-                tv_notes_transfer.setText(getResources().getString(R.string.turn_into_progress));
+                titleCategory = getResources().getString(R.string.transfer_amount);
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.turn_into_progress));
                 btn_complete.setVisibility(View.GONE);
                 break;
             case 4: // 工资宝赎回账单详情
@@ -128,16 +134,18 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
-                tv_title_category.setText(getResources().getString(R.string.redemption_amount));
-                tv_notes_transfer.setText(getResources().getString(R.string.redemption_progress));
+                titleCategory = (getResources().getString(R.string.redemption_amount));
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.redemption_progress));
                 btn_complete.setVisibility(View.GONE);
                 break;
             case 5: // 联名卡转入详情；
                 iv_back.setVisibility(View.GONE);
                 tv_common_title.setText(getResources().getString(R.string.title_bank_turn_into_detail));
 
-                typeName = getResources().getString(R.string.transfer_amount);
-                tv_notes_transfer.setText(getResources().getString(R.string.turn_into_progress));
+                titleCategory = getResources().getString(R.string.transfer_amount);
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.turn_into_progress));
                 ll_about_bank_layout.setVisibility(View.VISIBLE);
                 tv_turn_into_or_out.setText("转入到");
                 tv_bank_name.setText(bankInfoModel.cardType); // Todo 后需调接口获取
@@ -150,8 +158,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 iv_back.setVisibility(View.GONE);
                 tv_common_title.setText(getResources().getString(R.string.title_bank_roll_out_detail));
 
-                tv_title_category.setText(getResources().getString(R.string.roll_out_amount));
-                tv_notes_transfer.setText(getResources().getString(R.string.turn_out_progress));
+                titleCategory = (getResources().getString(R.string.roll_out_amount));
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.turn_out_progress));
                 ll_about_bank_layout.setVisibility(View.VISIBLE);
                 tv_turn_into_or_out.setText("转出到");
                 tv_bank_name.setText("招商银行(0123)张三"); // Todo 后需调接口获取
@@ -165,8 +174,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
-                tv_title_category.setText("银行卡(2321)-勘设联名卡");
-                tv_notes_transfer.setText(getResources().getString(R.string.turn_into_progress));
+                titleCategory = ("银行卡(2321)-勘设联名卡");
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.turn_into_progress));
                 ll_about_bank_layout.setVisibility(View.VISIBLE);
                 tv_turn_into_or_out.setText("转入到");
                 tv_bank_name.setText("勘设联名卡(可用余额)"); // Todo 后需调接口获取
@@ -178,8 +188,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
-                tv_title_category.setText("勘设联名卡-银行卡(2321)");
-                tv_notes_transfer.setText(getResources().getString(R.string.turn_out_progress));
+                titleCategory = ("勘设联名卡-银行卡(2321)");
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.turn_out_progress));
                 ll_about_bank_layout.setVisibility(View.VISIBLE);
                 tv_turn_into_or_out.setText("转出到");
                 tv_bank_name.setText("招商银行(0123)张三"); // Todo 后需调接口获取
@@ -190,8 +201,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 iv_back.setVisibility(View.GONE);
                 tv_common_title.setText(getResources().getString(R.string.title_regular_financial_buying_detail));
 
-                tv_title_category.setText(getResources().getString(R.string.purchase_amount));
-                tv_notes_transfer.setText(getResources().getString(R.string.buying_progress));
+                titleCategory = (getResources().getString(R.string.purchase_amount));
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.buying_progress));
                 btn_complete.setVisibility(View.VISIBLE);
                 btn_complete.setOnClickListener(this);
                 break;
@@ -200,8 +212,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
-                tv_title_category.setText(getResources().getString(R.string.purchase_amount));
-                tv_notes_transfer.setText(getResources().getString(R.string.buying_progress));
+                titleCategory = (getResources().getString(R.string.purchase_amount));
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.buying_progress));
 
                 break;
             case 11: // 定期理财赎回账单详情；
@@ -209,13 +222,15 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
-                tv_title_category.setText(getResources().getString(R.string.redemption_amount));
-                tv_notes_transfer.setText(getResources().getString(R.string.payment_progress));
+                titleCategory = (getResources().getString(R.string.redemption_amount));
+                transferAmount = String.valueOf(bankInfoModel.price) ;
+                notesTransfer = (getResources().getString(R.string.payment_progress));
                 break;
         }
 
-        tv_common_title.setText(typeName);
-        tv_transfer_amount.setText(String.valueOf(bankInfoModel.price));
+        tv_title_category.setText(titleCategory);
+        tv_transfer_amount.setText(transferAmount);
+        tv_notes_transfer.setText(notesTransfer);
     }
 
     @Override

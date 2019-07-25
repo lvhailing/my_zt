@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
+import com.crecg.staffshield.utils.PreferenceUtil;
 
 /**
- *  账户余额页(中铁联名卡页)
+ * 账户余额页(中铁联名卡页)
  */
 
 public class AccountBalanceActivity extends BaseActivity implements View.OnClickListener {
@@ -50,8 +51,6 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
         btn_turn_into = findViewById(R.id.btn_turn_into);
 
 
-
-
         iv_back.setOnClickListener(this);
         tv_right_txt.setOnClickListener(this);
         rl_tied_card.setOnClickListener(this);
@@ -72,8 +71,14 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.rl_tied_card: // 已开通联名卡（跳转到联名卡详情页）
+                intent = new Intent(this, ReplacementBankCardActivity.class);
+                intent.putExtra("oldBankCardNum", "" + "");
+                startActivity(intent);
                 break;
             case R.id.rl_untied_card: // 未开通联名卡（弹框提示用户开通理财账户，然后跳转添加银行卡页面）
+                intent = new Intent(this, AddBankCardActivity.class);
+//                intent.putExtra("userName", PreferenceUtil.getUserRealName());
+                startActivity(intent);
                 break;
             case R.id.btn_turn_out: // 转出
                 if ("1".equals(btnFlag)) {

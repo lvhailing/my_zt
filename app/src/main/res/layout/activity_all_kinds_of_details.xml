@@ -1,174 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical">
 
-    <include layout="@layout/title" />
+    <include layout="@layout/title"/>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/shape_bg_white"
-        android:orientation="vertical">
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tv_title_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:includeFontPadding="false"
-            android:text="转出金额（元）"
-            android:textColor="@color/txt_black_999999"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/tv_transfer_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:includeFontPadding="false"
-            android:text="50000.00"
-            android:textColor="@color/txt_black_333333"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_marginTop="12dp"
-            android:layout_height="1dp"
-            android:background="@color/bg_line" />
-
-        <TextView
-            android:id="@+id/tv_notes_transfer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="16dp"
-            android:includeFontPadding="false"
-            android:text="账单进度"
-            android:textColor="@color/txt_black_999999"
-            android:textSize="15sp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="45dp"
-            android:layout_marginRight="15dp" />
-
-        <!-- 只有跟联名卡相关时才显示此布局 -->
         <LinearLayout
-            android:id="@+id/ll_about_bank_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bg_line" />
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_bg_white"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_turn_into_or_out"
+                    android:id="@+id/tv_title_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="26dp"
+                    android:includeFontPadding="false"
+                    tools:text="转出金额（元）"
+                    android:textColor="@color/txt_black_999999"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_transfer_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="18dp"
+                    android:includeFontPadding="false"
+                    tools:text="50000.00"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="26dp"
+                    android:background="@color/bg_line"/>
+
+                <TextView
+                    android:id="@+id/tv_notes_transfer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="转出到"
+                    android:layout_marginTop="16dp"
+                    android:includeFontPadding="false"
+                    tools:text="账单进度"
                     android:textColor="@color/txt_black_999999"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
 
-                <TextView
-                    android:id="@+id/tv_bank_name"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:text="招商银行(0123)张三"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="15sp" />
-            </RelativeLayout>
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="15dp"/>
 
-            <View
+                <!-- 只有跟联名卡相关时才显示此布局 -->
+                <LinearLayout
+                    android:id="@+id/ll_about_bank_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/bg_line"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="16dp">
+
+                        <TextView
+                            android:id="@+id/tv_turn_into_or_out"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="转出到"
+                            android:textColor="@color/txt_black_999999"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_bank_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:text="招商银行(0123)张三"
+                            android:textColor="@color/txt_black_333333"
+                            android:textSize="15sp"/>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/bg_line"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="创建时间"
+                            android:textColor="@color/txt_black_999999"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_creation_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:text="2019-07-17  00:00"
+                            android:textColor="@color/txt_black_333333"
+                            android:textSize="12sp"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="流水号"
+                            android:textColor="@color/txt_black_999999"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_bank_flow_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="15dp"
+                            android:text="2018112810500201010233232321"
+                            android:textColor="@color/txt_black_333333"
+                            android:textSize="12sp"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 账单详情时不显示此按钮，其他详情则显示按钮 -->
+            <Button
+                android:id="@+id/btn_complete"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/bg_line" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="创建时间"
-                    android:textColor="@color/txt_black_999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tv_creation_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:text="2019-07-17  00:00"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="12dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:text="流水号"
-                    android:textColor="@color/txt_black_999999"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tv_bank_flow_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:text="2018112810500201010233232321"
-                    android:textColor="@color/txt_black_333333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+                android:layout_height="44dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/login_btn_shape_blue_0087fd"
+                android:text="完成"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"/>
         </LinearLayout>
-    </LinearLayout>
-
-    <!-- 账单详情时不显示此按钮，其他详情则显示按钮 -->
-    <Button
-        android:id="@+id/btn_complete"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/login_btn_shape_blue_0087fd"
-        android:text="完成"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:visibility="gone" />
+    </ScrollView>
 </LinearLayout>

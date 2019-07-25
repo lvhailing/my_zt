@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/bg_common_gray_f9f9f9"
+              android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:text="原银行卡号"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_old_bank_card_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:maxLength="19"
+            android:maxLines="1"
+            android:text="6210********1101"
+            android:textColor="@color/txt_black_666666"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_look_at_bank_info"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="right|center_vertical"
+        android:paddingRight="15dp"
+        android:text="查看支持的银行及限额"
+        android:textColor="@color/main_blue_4A67F5"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:text="新银行卡号"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/et_new_bank_card_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/transparent"
+            android:hint="请输入本人储蓄卡卡号"
+            android:inputType="number"
+            android:maxLength="19"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/txt_black_666666"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:text="手机号"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/et_phone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="46dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/transparent"
+            android:hint="请输入手机号"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/txt_black_666666"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="验证码"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_get_verify_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:text="获取证码"
+            android:textColor="@color/main_blue_4A67F5"
+            android:textSize="16sp"/>
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="13dp"
+            android:layout_toLeftOf="@id/tv_get_verify_code"
+            android:background="@color/bg_line"/>
+
+        <EditText
+            android:id="@+id/et_verify_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="107dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@id/v_line"
+            android:background="@color/transparent"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:text=""
+            android:textColor="@color/txt_black_666666"
+            android:textColorHint="@color/txt_gray_ccc"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_sure"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/login_btn_shape_blue_0087fd"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+</LinearLayout>

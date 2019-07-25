@@ -300,7 +300,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_transfer_immediately:  // 立即转入 （已经开户跳转工资宝买入页）
                 // Todo 点立即转入时，需要先判断用户是否开通联名卡账户
                 intent = new Intent(context, AllKindsOfDetailsActivity.class);
-                intent.putExtra("fromFlag", 5);
+                intent.putExtra("fromFlag", 1);
                 startActivity(intent);
                 break;
             case R.id.tv_home_more: // 更多 （跳转到定期理财列表页）

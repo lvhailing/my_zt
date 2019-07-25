@@ -6,17 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.crecg.crecglibrary.network.model.BankProcessModel;
-import com.crecg.crecglibrary.network.model.BillCenterListData;
-import com.crecg.crecglibrary.network.model.BillCenterModelData;
+import com.crecg.crecglibrary.network.model.BankProgressModel;
 import com.crecg.staffshield.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,11 +18,11 @@ import java.util.List;
  * 账单进度adapter
  */
 public class BankInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<BankProcessModel> list;
+    private List<BankProgressModel> list;
     private Context mContext;
 
 
-    public BankInfoAdapter(Context context, List<BankProcessModel> list) {
+    public BankInfoAdapter(Context context, List<BankProgressModel> list) {
         mContext = context;
         this.list = list;
     }
@@ -42,7 +36,7 @@ public class BankInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder viewHolder = (ItemViewHolder) holder;
-        BankProcessModel item = list.get(position);
+        BankProgressModel item = list.get(position);
 
         //设置显示隐藏
         if (position == 0) {
