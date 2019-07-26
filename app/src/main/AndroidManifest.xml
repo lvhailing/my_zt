@@ -204,6 +204,10 @@
             android:name=".activity.AddBankCardActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.RealNameAuthenticationActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

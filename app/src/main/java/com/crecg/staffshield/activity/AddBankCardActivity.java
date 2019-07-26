@@ -1,5 +1,6 @@
 package com.crecg.staffshield.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -89,9 +90,8 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             Log.d("hh", "onTextChanged: s = " + s + ", start = " + start + ", before = " + before + ", count = " + count);
-            int cardNumPlaceholder = 19;
-            int newStr = 19 - s.length();
-            tv_bank_card_num.setText(s);
+            String str = s.toString();
+            tv_bank_card_num.setText(getDefaultPlaceholderLength(str));
 
         }
 
@@ -119,6 +119,51 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
         }
     };
 
+    /**
+     * 获取银行卡号默认占位符“*”的长度
+     */
+//    private static String getDefaultPlaceholderLength(String input) {
+//        StringBuilder sb = new StringBuilder();
+//        String str = input.trim().replace(" ", "");
+////        String str = input.replaceAll(" ", "");
+//
+//        for (int i = 0; i < str.length(); i++) {
+//            sb.append(str.charAt(i));
+//            if ((i + 1) % 4 == 0) {
+//                sb.append(" ");
+//            }
+//        }
+//        String result = sb.toString();
+//        if (result.endsWith(" ")) {
+//            result = result.substring(0, result.length() - 1);
+//        }
+//        if (result.length() >= 16) {
+//            return result;
+//        }
+//        String res = "**** **** **** ****";
+//        return result + res.substring(result.length());
+//    }
+
+    private static String getDefaultPlaceholderLength(String input) {
+        StringBuilder sb = new StringBuilder();
+        String str = input.replaceAll(" ", "");
+        for (int i = 0; i < str.length(); i++) {
+            sb.append(str.charAt(i));
+            if ((i + 1) % 4 == 0) {
+                sb.append(" ");
+            }
+        }
+        String result = sb.toString();
+        if (result.endsWith(" ")) {
+            result = result.substring(0, result.length() - 1);
+        }
+        if (result.length() >= 19) {
+            return result;
+        }
+        String res = "**** **** **** ****";
+        return result + res.substring(result.length());
+    }
+
     private void setTitle() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
@@ -140,6 +185,9 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_next_step: // 下一步
                 checkDataNull();
+                Intent intent = new Intent(this, RealNameAuthenticationActivity.class);
+                intent.putExtra("userName", "问**");
+                startActivity(intent);
                 break;
         }
     }
@@ -154,11 +202,11 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
             ToastUtil.showCustom("请输入本人储蓄卡号");
             return;
         }
-        if(TextUtils.isEmpty(phoneNum.trim())){
+        if (TextUtils.isEmpty(phoneNum.trim())) {
             ToastUtil.showCustom("请输入手机号");
             return;
         }
-        if(!StringUtil.isMobileNO(phoneNum.trim())){
+        if (!StringUtil.isMobileNO(phoneNum.trim())) {
             ToastUtil.showCustom("请输入正确的手机号");
             return;
         }
