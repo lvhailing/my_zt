@@ -48,7 +48,7 @@
                     android:id="@+id/tv_income_category1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="年化收益率"
+                    android:text="预期年化收益率"
                     android:textColor="@color/txt_black_333333"
                     android:textSize="12sp"/>
             </LinearLayout>
@@ -215,7 +215,7 @@
                     android:id="@+id/tv_income_category2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="年化收益率"
+                    android:text="预期年化收益率"
                     android:textColor="@color/txt_black_333333"
                     android:textSize="12sp"/>
             </LinearLayout>
@@ -357,7 +357,7 @@
                 android:layout_marginBottom="18dp"
                 android:layout_marginTop="10dp"
                 android:includeFontPadding="false"
-                android:text="年化收益率"
+                android:text="预期年化收益率"
                 android:textColor="@color/txt_black_333333"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -456,7 +456,7 @@
                 android:layout_marginBottom="18dp"
                 android:layout_marginTop="10dp"
                 android:includeFontPadding="false"
-                android:text="年化收益率"
+                android:text="预期年化收益率"
                 android:textColor="@color/txt_black_333333"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -555,7 +555,7 @@
                 android:layout_marginBottom="18dp"
                 android:layout_marginTop="10dp"
                 android:includeFontPadding="false"
-                android:text="年化收益率"
+                android:text="预期年化收益率"
                 android:textColor="@color/txt_black_999999"
                 android:textSize="12sp"/>
         </LinearLayout>
