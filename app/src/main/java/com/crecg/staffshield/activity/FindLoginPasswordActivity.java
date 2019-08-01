@@ -64,7 +64,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
     protected void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText(getResources().getString(R.string.title_find_login_password));
 
         et_find_password_phone = findViewById(R.id.et_find_password_phone);

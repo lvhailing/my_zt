@@ -50,7 +50,7 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
         tv_common_title = findViewById(R.id.tv_common_title);
         iv_right_btn.setVisibility(View.VISIBLE);
         iv_right_btn.setBackgroundResource(R.mipmap.img_finacial_detail);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("我的理财");
 
         iv_eye_state = findViewById(R.id.iv_eye_state);

@@ -73,7 +73,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText(getResources().getString(R.string.reset_transaction_password));
 
         et_reset_transaction_password_id_num = findViewById(R.id.et_reset_transaction_password_id_num);

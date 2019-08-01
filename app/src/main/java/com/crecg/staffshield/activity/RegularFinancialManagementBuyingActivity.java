@@ -42,7 +42,7 @@ public class RegularFinancialManagementBuyingActivity extends BaseActivity imple
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("堪设一号"); // Todo 需要动态获取标题
 
 //        tv_money_amount = findViewById(R.id.tv_money_amount);

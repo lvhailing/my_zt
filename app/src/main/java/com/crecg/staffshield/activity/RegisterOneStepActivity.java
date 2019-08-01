@@ -32,7 +32,6 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 注册(第一步：手机号认证)
- * Created by hong on 2018/12/24.
  */
 
 public class RegisterOneStepActivity extends BaseActivity implements View.OnClickListener {
@@ -65,7 +64,7 @@ public class RegisterOneStepActivity extends BaseActivity implements View.OnClic
     protected void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("注册");
 
         et_register_phone = findViewById(R.id.et_register_phone);

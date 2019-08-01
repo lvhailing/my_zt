@@ -88,7 +88,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.WorkCertificateActivity"
+            android:name=".activity.UploadWorkProofActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -121,19 +121,11 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.WageTreasureTurnSuccessActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
             android:name=".activity.SalaryTreasureDetailActivity"
             android:screenOrientation="portrait"/>
 
         <activity
             android:name=".activity.WageTreasureRedemptionActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.WageTreasureRedeemDetailActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -154,38 +146,6 @@
 
         <activity
             android:name=".activity.RegularFinancialManagementListActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.RegularFinancialManagementBuyingSuccessActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.ElectronicBankToEntityBankDetailActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.EntityBankToElectronicBankDetailActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.EntityBankToElectronicBankBillDetailsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.ElectronicBankToEntityBankBillDetailsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.RegularFinancialBuyingBillDetailsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.RegularFinancialRedemptionBillDetailsActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name=".activity.WageTreasureTurnIntoBillDetailsActivity"
             android:screenOrientation="portrait"/>
 
         <activity

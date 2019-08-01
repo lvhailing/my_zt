@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
+            xmlns:tools="http://schemas.android.com/tools"
             android:fillViewport="true">
 
     <LinearLayout
@@ -228,12 +229,25 @@
                 android:textSize="15sp"/>
 
             <ImageView
+                android:id="@+id/iv_right_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
                 android:src="@mipmap/img_arrow_right"/>
+
+            <TextView
+                android:id="@+id/tv_cache"
+                android:layout_toLeftOf="@id/iv_right_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="12M"
+                android:textColor="@color/txt_gray_ccc"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:textSize="15sp"
+                />
         </RelativeLayout>
 
         <View

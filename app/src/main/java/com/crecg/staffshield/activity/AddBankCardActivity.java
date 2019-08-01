@@ -122,28 +122,6 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
     /**
      * 获取银行卡号默认占位符“*”的长度
      */
-//    private static String getDefaultPlaceholderLength(String input) {
-//        StringBuilder sb = new StringBuilder();
-//        String str = input.trim().replace(" ", "");
-////        String str = input.replaceAll(" ", "");
-//
-//        for (int i = 0; i < str.length(); i++) {
-//            sb.append(str.charAt(i));
-//            if ((i + 1) % 4 == 0) {
-//                sb.append(" ");
-//            }
-//        }
-//        String result = sb.toString();
-//        if (result.endsWith(" ")) {
-//            result = result.substring(0, result.length() - 1);
-//        }
-//        if (result.length() >= 16) {
-//            return result;
-//        }
-//        String res = "**** **** **** ****";
-//        return result + res.substring(result.length());
-//    }
-
     private static String getDefaultPlaceholderLength(String input) {
         StringBuilder sb = new StringBuilder();
         String str = input.replaceAll(" ", "");
@@ -168,7 +146,7 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
 
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("添加银行卡");
 
         iv_back.setOnClickListener(this);

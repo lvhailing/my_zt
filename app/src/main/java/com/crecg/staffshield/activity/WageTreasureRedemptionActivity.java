@@ -43,7 +43,7 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("赎回至堪设联名卡");
 
         et_money = findViewById(R.id.et_money);

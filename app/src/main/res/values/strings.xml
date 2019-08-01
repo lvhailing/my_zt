@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">堪设</string>
+    <string name="app_name">勘设</string>
     <string name="app_id">kanshe</string>
     <string name="app_update_title">堪设版本更新</string>
     <string name="download_progress">%1$.2f / %2$.2fKB （%3$d%%）</string>
@@ -42,8 +42,7 @@
     <string name="register_privacy_policy">《隐私策略》</string>
     <string name="register_tips2">2、本APP为中铁职工专属理财工具，非中铁职工请勿注册</string>
     <string name="register_done">完成注册</string>
-    <string name="register_tips3">3、如果您的信息与人事暂不匹配，且准备好了工作证明，</string>
-    <string name="register_tips3_upload_proof">请上传工作证明</string>
+    <string name="register_tips3">3、如果您的信息与人事暂不匹配，请上传工作证明</string>
     <string name="old_login_password">旧密码</string>
     <string name="new_login_password">新密码</string>
     <string name="confirm_login_password">确认密码</string>

@@ -24,6 +24,7 @@ import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.AllKindsOfDetailsActivity;
+import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
@@ -278,12 +279,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         Intent intent;
         switch (view.getId()) {
             case R.id.ll_home_salary_treasure:  // 工资宝
-//                intent = new Intent(context, TestActivity1.class);
-//                startActivity(intent);
+                intent = new Intent(context, SalaryTreasureDetailActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_home_manage_money:  // 理财
-//                intent = new Intent(context, TestActivity1.class);
-//                startActivity(intent);
+                intent = new Intent(context, MyFinancialManagementListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_home_enterprise_dynamics:  // 企业动态
 //                intent = new Intent(context, TestActivity1.class);

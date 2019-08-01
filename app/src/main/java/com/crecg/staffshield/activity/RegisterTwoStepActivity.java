@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.crecg.crecglibrary.RemoteFactory;
@@ -43,6 +44,7 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
     private String userIdNo;
     private String loginPwd;
     private String mobile;
+    private LinearLayout ll_upload_work_proof; // 请上传工作证明
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
         mobile = getIntent().getStringExtra("mobile");
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("注册");
 
         et_register_two_step_name = findViewById(R.id.et_register_two_step_name);
@@ -74,6 +76,10 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
             case R.id.iv_back:
                 finish();
                 break;
+//            case R.id.ll_upload_work_proof: // 上传工作证明
+//                Intent intent = new Intent(this, UploadWorkProofActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.btn_register_next_step: // 完成注册
                 checkNull();
                 break;
@@ -118,33 +124,31 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
         paramWrapper.put("requestKey", data);
 
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getRegisterTwoStepByPost(paramWrapper)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
-                    @Override
-                    public void onMyError() {
-                        ToastUtil.showCustom("获取数据失败");
-                    }
+                .getRegisterTwoStepByPost(paramWrapper).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+            @Override
+            public void onMyError() {
+                ToastUtil.showCustom("获取数据失败");
+            }
 
-                    @Override
-                    public void onMySuccess(String result) {
-                        if (result == null) {
-                            return;
-                        }
-                        ResultModel<ReturnOnlyTrueOrFalseModel> registerOneStepModel = new Gson().fromJson(result, new TypeToken<ResultModel<ReturnOnlyTrueOrFalseModel>>() {
-                        }.getType());
-                        if (registerOneStepModel.data == null) {
-                            return;
-                        }
-                        if (Boolean.parseBoolean(registerOneStepModel.data.flag)) {
-                            ToastUtil.showCustom(registerOneStepModel.data.message);
-                            Intent intent = new Intent(RegisterTwoStepActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                        }else {
-                            ToastUtil.showCustom(registerOneStepModel.data.message);
-                        }
-                    }
-                });
+            @Override
+            public void onMySuccess(String result) {
+                if (result == null) {
+                    return;
+                }
+                ResultModel<ReturnOnlyTrueOrFalseModel> registerOneStepModel = new Gson().fromJson(result, new TypeToken<ResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                }.getType());
+                if (registerOneStepModel.data == null) {
+                    return;
+                }
+                if (Boolean.parseBoolean(registerOneStepModel.data.flag)) {
+                    ToastUtil.showCustom(registerOneStepModel.data.message);
+                    Intent intent = new Intent(RegisterTwoStepActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    ToastUtil.showCustom(registerOneStepModel.data.message);
+                }
+            }
+        });
     }
 }

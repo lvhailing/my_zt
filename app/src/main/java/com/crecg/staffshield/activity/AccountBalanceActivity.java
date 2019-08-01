@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
-import com.crecg.staffshield.utils.PreferenceUtil;
 
 /**
  * 账户余额页(中铁联名卡页)
@@ -40,7 +39,7 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
         tv_right_txt = findViewById(R.id.tv_right_txt);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("账户余额");
         tv_right_txt.setVisibility(View.VISIBLE);
         tv_right_txt.setText("明细");

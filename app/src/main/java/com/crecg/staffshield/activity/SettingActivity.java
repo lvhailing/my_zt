@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 import com.crecg.staffshield.utils.ActivityStack;
+import com.crecg.staffshield.utils.CleanDataUtils;
 import com.crecg.staffshield.utils.PreferenceUtil;
 
 
@@ -34,6 +37,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private RelativeLayout rl_safe_exit; // 安全退出
     private ActivityStack stack;
     private Intent intent;
+    private TextView tv_cache; // 缓存
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +74,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         stack.addActivity(this);
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText(getResources().getString(R.string.title_setting));
 
         ib_setting_gesture = findViewById(R.id.ib_setting_gesture);
@@ -80,6 +84,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         rl_reset_transaction_password = findViewById(R.id.rl_reset_transaction_password);
         rl_clear_local_cache = findViewById(R.id.rl_clear_local_cache);
         rl_safe_exit = findViewById(R.id.rl_safe_exit);
+        tv_cache = findViewById(R.id.tv_cache);
+        try {
+            String cache = CleanDataUtils.getTotalCacheSize(getApplicationContext());
+            Log.i("hh", "缓存：" + cache);
+            tv_cache.setText(cache);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         iv_back.setOnClickListener(this);
         ib_setting_gesture.setOnClickListener(this);
@@ -176,8 +188,15 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent);
                 break;
             case R.id.rl_clear_local_cache:  // 清空本地缓存 （测试：暂且跳至上传工作证明页）
-                intent = new Intent(SettingActivity.this, WorkCertificateActivity.class);
-                startActivity(intent);
+                CleanDataUtils.clearAllCache(this);
+                try {
+                    String cache2 = CleanDataUtils.getTotalCacheSize(this);
+                    Log.i("hh", "删除后获取到的缓存：" + cache2);
+                    tv_cache.setText(cache2);
+                    ToastUtil.showCustom("本地缓存清理成功");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.rl_safe_exit: // 安全退出
 

@@ -120,7 +120,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 btn_complete.setOnClickListener(this);
                 break;
             case 3: // 工资宝转入账单详情
-                iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+                iv_back.setBackgroundResource(R.mipmap.img_arrow_left2);
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
@@ -130,7 +130,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 btn_complete.setVisibility(View.GONE);
                 break;
             case 4: // 工资宝赎回账单详情
-                iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+                iv_back.setBackgroundResource(R.mipmap.img_arrow_left2);
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
@@ -170,7 +170,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 btn_complete.setOnClickListener(this);
                 break;
             case 7: // 联名卡转入账单详情
-                iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+                iv_back.setBackgroundResource(R.mipmap.img_arrow_left2);
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
@@ -184,7 +184,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 tv_bank_flow_num.setText("2018112810500201010233232321"); // Todo 后需调接口获取
                 break;
             case 8: // 联名卡转出账单详情
-                iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+                iv_back.setBackgroundResource(R.mipmap.img_arrow_left2);
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
@@ -208,7 +208,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
                 btn_complete.setOnClickListener(this);
                 break;
             case 10: // 定期理财买入账单详情；
-                iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+                iv_back.setBackgroundResource(R.mipmap.img_arrow_left2);
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 
@@ -218,7 +218,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
 
                 break;
             case 11: // 定期理财赎回账单详情；
-                iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+                iv_back.setBackgroundResource(R.mipmap.img_arrow_left2);
                 tv_common_title.setText(getResources().getString(R.string.title_bill_details));
                 iv_back.setOnClickListener(this);
 

@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -28,7 +29,6 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 import com.crecg.staffshield.dialog.SelectPhotoDialog;
 import com.crecg.staffshield.utils.PhotoUtils;
-import com.hyphenate.util.ImageUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -45,7 +45,7 @@ import java.net.URL;
  * 上传工作证明
  */
 
-public class WorkCertificateActivity extends BaseActivity implements View.OnClickListener {
+public class UploadWorkProofActivity extends BaseActivity implements View.OnClickListener {
     private TextView tv_name;  // 姓名
     private TextView tv_id_card;  // 身份证号
     private TextView tv_phone_number;  // 电话
@@ -77,25 +77,30 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        baseSetContentView(R.layout.activity_work_certificate);
+        baseSetContentView(R.layout.activity_upload_work_proof);
 
         initView();
     }
 
     private void initView() {
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-        tv_common_title = (TextView) findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_close);
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setImageResource(R.mipmap.img_close);
         tv_common_title.setText(getResources().getString(R.string.title_work_certificate));
 
-        tv_name = (TextView) findViewById(R.id.tv_name);
-        tv_id_card = (TextView) findViewById(R.id.tv_id_card);
-        tv_phone_number = (TextView) findViewById(R.id.tv_phone_number);
-        ll_upload_left = (LinearLayout) findViewById(R.id.ll_upload_left);
-        ll_upload_right = (LinearLayout) findViewById(R.id.ll_upload_right);
+        tv_name = findViewById(R.id.tv_name);
+        tv_id_card = findViewById(R.id.tv_id_card);
+        tv_phone_number = findViewById(R.id.tv_phone_number);
+        TextView tv_tips = findViewById(R.id.tv_tips);
+        ll_upload_left = findViewById(R.id.ll_upload_left);
+        ll_upload_right = findViewById(R.id.ll_upload_right);
         iv_work_certificate = findViewById(R.id.iv_work_certificate);
         iv_trade_union_certificate = findViewById(R.id.iv_trade_union_certificate);
-        btn_join_immediately = (Button) findViewById(R.id.btn_join_immediately);
+        btn_join_immediately = findViewById(R.id.btn_join_immediately);
+
+        String str = "请上传<font color = '#4A67F5'>工作证明</font>" + "或<font color = '#4A67F5'>工会盖章的证明材料</font>等照片";
+        tv_tips.setTextSize(15);
+        tv_tips.setText(Html.fromHtml(str));
 
         if (!TextUtils.isEmpty(workCertificate)) {
             File file = new File(IMG_PATH);
@@ -277,7 +282,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
             if (photoUri != null) {
                 try {
-                    photoBmp = getBitmapFormUri(WorkCertificateActivity.this, Uri.fromFile(file));
+                    photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, Uri.fromFile(file));
                     int degree = PhotoUtils.readPictureDegree(file.getAbsolutePath());
 //                    Log.i("aaa", "degree:  " + degree);
                     // 把图片旋转为正的方向
@@ -306,7 +311,7 @@ public class WorkCertificateActivity extends BaseActivity implements View.OnClic
 
             if (mImageCaptureUri != null) {
                 try {
-                    photoBmp = getBitmapFormUri(WorkCertificateActivity.this, mImageCaptureUri);
+                    photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, mImageCaptureUri);
                     newZoomImage = photoBmp;
                     sendImage(photoBmp);
                 } catch (IOException e) {

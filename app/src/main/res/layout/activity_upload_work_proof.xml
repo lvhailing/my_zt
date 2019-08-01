@@ -3,35 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <!-- 顶部 title -->
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="44dp">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:layout_marginLeft="15dp"-->
-    <!--android:padding="5dp"-->
-    <!--android:src="@mipmap/img_close"/>-->
-
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--android:text="@string/title_work_certificate"-->
-    <!--android:textColor="@color/txt_black_333333"-->
-    <!--android:textSize="18sp"/>-->
-
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="1dp"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:background="@color/bg_line"/>-->
-    <!--</RelativeLayout>-->
     <include layout="@layout/title"/>
 
     <LinearLayout
@@ -72,48 +46,16 @@
             android:textSize="15sp"/>
     </LinearLayout>
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/tv_tips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="28dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="请上传"
-            android:textColor="@color/txt_black_333333"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="工作证明"
-            android:textColor="@color/main_blue_4A67F5"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="或"
-            android:textColor="@color/txt_black_333333"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="工会盖章的证明材料"
-            android:textColor="@color/main_blue_4A67F5"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="等照片"
-            android:textColor="@color/txt_black_333333"
-            android:textSize="15sp"/>
-    </LinearLayout>
+        android:layout_gravity="center_horizontal"
+        tools:text="请上传工作证明或工会盖章的证明材料等照片"
+        android:textColor="@color/txt_black_333333"
+        android:textSize="15sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"

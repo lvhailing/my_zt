@@ -46,7 +46,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
 
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("工资宝");
 
         tv_money_amount = findViewById(R.id.tv_money_amount);

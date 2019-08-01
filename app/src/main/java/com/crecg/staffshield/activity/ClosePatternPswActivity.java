@@ -24,8 +24,8 @@ public class ClosePatternPswActivity extends AppCompatActivity implements Gestur
         setContentView(R.layout.activity_close_pattern_psw);
 
         gestureFlg = getIntent().getIntExtra("gestureFlg", -1);
-        gestureView = (GestureView) findViewById(R.id.gesture1);
-        tv_user_name = (TextView) findViewById(R.id.tv_user_name);
+        gestureView = findViewById(R.id.gesture1);
+        tv_user_name = findViewById(R.id.tv_user_name);
         gestureView.setGestureCallBack(ClosePatternPswActivity.this);
         gestureView.clearCacheLogin();
     }

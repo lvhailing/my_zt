@@ -43,7 +43,7 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
         tv_right_txt = findViewById(R.id.tv_right_txt);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("我的工资宝");
         tv_right_txt.setVisibility(View.VISIBLE);
         tv_right_txt.setText("明细");

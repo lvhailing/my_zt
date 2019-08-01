@@ -9,13 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
-import com.crecg.crecglibrary.network.UrlRoot;
 import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
@@ -63,7 +61,7 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("快捷支付-签约");
 
         tv_tips = findViewById(R.id.tv_tips);

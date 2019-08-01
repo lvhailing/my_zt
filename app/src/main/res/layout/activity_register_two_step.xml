@@ -192,7 +192,7 @@
             android:layout_marginLeft="14dp"
             android:layout_toRightOf="@id/iv_register_two_step_login_password"
             android:background="@color/transparent"
-            android:hint="请设置6-8位登录密码"
+            android:hint="请设置6~16位登录密码"
             android:inputType="textPassword"
             android:maxLength="8"
             android:textColor="@color/txt_black_333333"
@@ -226,14 +226,14 @@
         android:orientation="vertical">
 
         <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:drawableLeft="@mipmap/img_error_message"-->
-            <!--android:drawablePadding="8dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:text="密码至少包括数字、字母、字符两种组合"-->
-            <!--android:textColor="@color/txt_black_666666"-->
-            <!--android:textSize="12sp"/>-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:drawableLeft="@mipmap/img_error_message"-->
+        <!--android:drawablePadding="8dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:text="密码至少包括数字、字母、字符两种组合"-->
+        <!--android:textColor="@color/txt_black_666666"-->
+        <!--android:textSize="12sp"/>-->
     </LinearLayout>
 
     <Button
@@ -272,12 +272,12 @@
 
         <!-- 暂时隐藏，说是后续可能提供 -->
         <!--<TextView-->
-            <!--android:id="@+id/tv_register_privacy_policy"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/register_privacy_policy"-->
-            <!--android:textColor="@color/txt_blue_4A67F5"-->
-            <!--android:textSize="12sp"/>-->
+        <!--android:id="@+id/tv_register_privacy_policy"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/register_privacy_policy"-->
+        <!--android:textColor="@color/main_blue_4A67F5"-->
+        <!--android:textSize="12sp"/>-->
     </LinearLayout>
 
     <TextView
@@ -289,29 +289,13 @@
         android:textColor="@color/txt_black_666666"
         android:textSize="12sp"/>
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="29dp"
         android:layout_marginRight="29dp"
         android:layout_marginTop="5dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_tips3"
-            android:textColor="@color/txt_black_666666"
-            android:textSize="12sp"/>
-
-        <TextView
-            android:id="@+id/tv_register_upload_proof"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="@string/register_tips3_upload_proof"
-            android:textColor="@color/main_blue_4A67F5"
-            android:textSize="12sp"/>
-    </LinearLayout>
-
+        android:text="@string/register_tips3"
+        android:textColor="@color/txt_black_666666"
+        android:textSize="12sp"/>
 </LinearLayout>

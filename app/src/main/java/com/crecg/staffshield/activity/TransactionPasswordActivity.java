@@ -123,15 +123,15 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
             iv_pass6.setVisibility(View.VISIBLE);
 
             // Todo 调后台接口成功后跳转到成功状态页
-            if (fromFlag.equals("wageTreasureRedeem")) { // 工资宝赎回
-                Intent intent = new Intent(this, WageTreasureRedeemDetailActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            } else if (fromFlag.equals("wageTreasureBuy")) { // 工资宝买入（一：从工资宝详情页进的买入，二：从首页点“立即买入”进）
-                Intent intent = new Intent(this, WageTreasureTurnSuccessActivity.class);
-                intent.putExtra("whereToEnterFlag",whereToEnterFlag);
-                startActivity(intent);
-            }
+//            if (fromFlag.equals("wageTreasureRedeem")) { // 工资宝赎回
+//                Intent intent = new Intent(this, WageTreasureRedeemDetailActivity.class);
+////            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//            } else if (fromFlag.equals("wageTreasureBuy")) { // 工资宝买入（一：从工资宝详情页进的买入，二：从首页点“立即买入”进）
+//                Intent intent = new Intent(this, WageTreasureTurnSuccessActivity.class);
+//                intent.putExtra("whereToEnterFlag",whereToEnterFlag);
+//                startActivity(intent);
+//            }
 
 
             // 删除键不可点

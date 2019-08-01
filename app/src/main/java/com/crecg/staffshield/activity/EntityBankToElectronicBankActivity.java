@@ -39,7 +39,7 @@ public class EntityBankToElectronicBankActivity extends BaseActivity implements 
     private void initView() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setBackgroundResource(R.mipmap.img_arrow_left);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText(getResources().getString(R.string.title_fund_change_into));
 
         tv_entity_bank_card_name = findViewById(R.id.tv_entity_bank_card_name);

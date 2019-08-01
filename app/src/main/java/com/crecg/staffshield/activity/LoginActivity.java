@@ -128,7 +128,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 getLoginByPost();
                 break;
             case R.id.tv_login_sign: // 新用户注册
-                intent = new Intent(this, RegisterOneStepActivity.class);
+                intent = new Intent(this, RegisterTwoStepActivity.class);
                 startActivity(intent);
                 break;
         }
