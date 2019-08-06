@@ -82,6 +82,11 @@ public interface CommonRequestProxy {
     @POST("userinfo/trspwd/reset")
     Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
 
+    // 首页数据&&定期理财列表数据
+    @FormUrlEncoded
+    @POST("homePage/rotaryPlantingMap")
+    Observable<String>requestHomeAndFinancialData(@FieldMap Map<String,Object>param);
+
     //快捷支付签约短信验证码获取 (未调试)
     @FormUrlEncoded
     @POST("userInfo/paySigned/send/verifyCode")

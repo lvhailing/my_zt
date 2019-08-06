@@ -38,7 +38,7 @@
                 android:layout_height="20dp"
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/tv_bank_name1"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@mipmap/img_bank_logo_entity"/>
 
             <View
                 android:id="@+id/v_line"
@@ -65,7 +65,7 @@
                 android:layout_height="20dp"
                 android:layout_marginRight="5dp"
                 android:layout_toLeftOf="@id/tv_bank_name2"
-                android:background="@mipmap/ic_launcher"/>
+                android:background="@mipmap/img_bank_logo_electronic"/>
 
         </RelativeLayout>
 

@@ -37,7 +37,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="15dp"
-                        android:background="@mipmap/img_normal_bank_logo"/>
+                        android:background="@mipmap/img_bank_logo_normal"/>
 
                     <TextView
                         android:id="@+id/tv_bank_name"

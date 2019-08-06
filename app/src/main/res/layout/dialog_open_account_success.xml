@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="52dp"
         android:layout_marginRight="52dp"
-        android:background="@drawable/dialog_call_service_layout"
+        android:background="@drawable/dialog_bg_white_solid_corner"
         android:orientation="vertical">
 
         <TextView

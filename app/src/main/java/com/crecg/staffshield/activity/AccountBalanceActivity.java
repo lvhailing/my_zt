@@ -23,7 +23,6 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
     private RelativeLayout rl_untied_card; // 未绑卡显示的布局
     private TextView btn_turn_out; // 转出
     private TextView btn_turn_into; // 转入
-
     private String btnFlag = "1"; // 1:转出     2:转入
 
 
@@ -70,8 +69,8 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.rl_tied_card: // 已开通联名卡（跳转到联名卡详情页）
-                intent = new Intent(this, ReplacementBankCardActivity.class);
-                intent.putExtra("oldBankCardNum", "" + "");
+                intent = new Intent(this, ElectronicBankCardActivity.class);
+//                intent.putExtra("oldBankCardNum", "" + "");
                 startActivity(intent);
                 break;
             case R.id.rl_untied_card: // 未开通联名卡（弹框提示用户开通理财账户，然后跳转添加银行卡页面）

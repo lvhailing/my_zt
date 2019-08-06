@@ -18,6 +18,8 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * 基础ObserverAdapter
+ *
+ * T1：观察者期望观察的项的类型
  */
 public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
     public static final String TAG = CommonObserverAdapter.class.getSimpleName();

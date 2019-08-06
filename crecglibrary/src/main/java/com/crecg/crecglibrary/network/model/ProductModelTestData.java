@@ -2,7 +2,7 @@ package com.crecg.crecglibrary.network.model;
 
 
 /**
- * 模拟数据
+ * 模拟定期产品数据
  */
 public class ProductModelTestData {
 

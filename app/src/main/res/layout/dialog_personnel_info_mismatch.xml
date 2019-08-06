@@ -1,74 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center_vertical"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="53dp"
-        android:layout_marginRight="53dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginRight="52dp"
         android:background="@drawable/dialog_bg_white_solid_corner"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
-            android:gravity="center_horizontal"
-            android:text="请开通理财账户"
+            android:text="人事信息不匹配"
             android:textColor="@color/txt_black_333333"
             android:textSize="16sp"/>
 
+
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_update_content1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="36dp"
-            android:text="开通理财账户仅需两步"
+            android:text="可能的原因"
             android:textColor="@color/txt_black_666666"
             android:textSize="14sp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:text="1、绑定银行卡"
+            android:layout_marginTop="12dp"
+            android:text="1、近期入职员工，人事数据还未同步。"
             android:textColor="@color/txt_black_666666"
             android:textSize="14sp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="11dp"
-            android:text="2、上传身份证正反面"
+            android:layout_marginTop="10dp"
+            android:text="2、员工姓名/身份证填写有误。"
             android:textColor="@color/txt_black_666666"
             android:textSize="14sp"/>
 
         <Button
-            android:id="@+id/btn_open_immediately"
-            android:layout_width="140dp"
+            android:id="@+id/btn_upload_work_proof"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
             android:layout_marginTop="35dp"
             android:background="@drawable/shape_rect_btn_blue"
-            android:text="立即开通"
+            android:text="上传工作证明"
             android:textColor="@color/white"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/tv_not_open"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_return_modification"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="25dp"
-            android:layout_marginTop="19dp"
-            android:text="暂不开通"
+            android:layout_marginBottom="17dp"
+            android:layout_marginTop="14dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center_horizontal"
+            android:text="返回修改"
             android:textColor="@color/main_blue_4A67F5"
             android:textSize="14sp"/>
     </LinearLayout>
