@@ -44,8 +44,10 @@ public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
         }
     }
 
+    //这个方法是收到系统回调后 再传递给fragment的
     @Override
     public void onError(Throwable e) {
+        Log.i("hh","系统回调的onError方法："+e.getMessage());
         onMyError();
     }
 
