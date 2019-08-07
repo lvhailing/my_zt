@@ -13,14 +13,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.crecg.crecglibrary.RemoteFactory;
-import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.CrecgObserverAdapter;
 import com.crecg.crecglibrary.network.model.DataModel;
 import com.crecg.crecglibrary.network.model.DataWrapper;
-import com.crecg.crecglibrary.network.model.ResultModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
-import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 
@@ -91,7 +89,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 //                    }
 
 //                    @Override
-//                    public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
+//                    public void onMySuccess(CommonResultModel<DataWrapper<DataModel>> result) {
 //                        //server取单据成功
 //                        if (result != null && result.code != null && result.data != null && result.data.data.size() > 0) {
 //                            List<DataModel> list = result.data.data;
@@ -112,7 +110,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                 .getBookListByPost(params)
 //              .getBookListByGet()   //get请求样例
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CrecgObserverAdapter<ResultModel<DataWrapper<DataModel>>>() {
+                .subscribe(new CrecgObserverAdapter<CommonResultModel<DataWrapper<DataModel>>>() {
             @Override
             public void onMyError(Throwable e) {
                 //server取单据失败
@@ -120,7 +118,7 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
             }
 
             @Override
-            public void onMySuccess(ResultModel<DataWrapper<DataModel>> result) {
+            public void onMySuccess(CommonResultModel<DataWrapper<DataModel>> result) {
                 //server取单据成功
                 if (result != null && result.data != null && result.data != null && result.data.data.size() > 0) {
                     List<DataModel> list = result.data.data;

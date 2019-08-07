@@ -11,15 +11,17 @@ public class HomeAndFinancialProductList implements Serializable{
 
     public String id; // 产品id
     public String name; // 产品名称
-    public String amount; // 融资规模
+    public Number amount; // 融资规模
     public String annualRate; // 预期年化收益率
     public String tenderStartTime; // 融资开始时间
     public String tenderEndTime; // 融资结束时间
-    public String tenderInitAmount; // 起投金额
-    public String tenderIncreaseAmount; // 递增金额
-    public String tenderAmount; // 产品投标总额
-    public String tenderUsers; // 产品投标总人数
-    public String timeLimit; // 产品期限
+    public Number tenderInitAmount; // 起投金额
+    public Number tenderIncreaseAmount; // 递增金额
+    public Number tenderAmount; // 产品投标总额
+    public Number tenderUsers; // 产品投标总人数
+    public Number timeLimit; // 产品期限
+    public Number bfbAmount; // 规模占用百分比  例子 0.001
+    public String syAmount; // 剩余金额
 
     /**
      *  init：初始状态--即将开卖
@@ -33,5 +35,5 @@ public class HomeAndFinancialProductList implements Serializable{
      *  产品状态顺序：热卖中(tender)-->即将开售(init)-->已售馨(产品已满标，但钱还未打给借款人)-->计息中（表示钱已打给借款人）-->已回款
      */
     public String status;
-    public String highSingleInvest; // 单笔最大购买金额
+    public Number highSingleInvest; // 单笔最大购买金额
 }

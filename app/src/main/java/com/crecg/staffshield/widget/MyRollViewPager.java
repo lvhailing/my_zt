@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 
 import com.bumptech.glide.Glide;
+import com.crecg.crecglibrary.network.model.HomePicListItemData;
 import com.crecg.crecglibrary.network.model.HomePicListModelData;
 import com.crecg.staffshield.R;
 
@@ -28,7 +29,7 @@ public class MyRollViewPager extends ViewPager {
     private MyClickListener myClickListener;
     private LinearLayout mPointContainer;
     private boolean isCycle = false;
-    private List<String> picList; //用于保存后台返回的图片的集合
+    private List<HomePicListItemData> picList; //用于保存后台返回的图片的集合
     private int[] imageResId;
     private int ids[] = {R.mipmap.bg_banner_default1, R.mipmap.bg_banner_default2, R.mipmap.bg_banner_default3}; // 假如后台没返回图片，则使用默认图片
 
@@ -44,7 +45,7 @@ public class MyRollViewPager extends ViewPager {
         }
     };
 
-    public MyRollViewPager(Context context, List<String> pics, LinearLayout container) {
+    public MyRollViewPager(Context context, List<HomePicListItemData> pics, LinearLayout container) {
         super(context);
 
         this.context = context;
@@ -71,7 +72,7 @@ public class MyRollViewPager extends ViewPager {
     /**
      * @param pics 第二次获取到后台数据后，需要将本类的数据更新下
      */
-    public void setPicList(List<String> pics) {
+    public void setPicList(List<HomePicListItemData> pics) {
         this.picList = pics;
     }
 
@@ -198,7 +199,7 @@ public class MyRollViewPager extends ViewPager {
 
                 //Glide 加载图片
                 int posResult = position % picList.size();
-                String url = picList.get(posResult);
+                String url = picList.get(posResult).hlImgUrl;
                 Glide.with(context).load(url).into(imageView);
 
                 //设置了点击回调，则回调activity

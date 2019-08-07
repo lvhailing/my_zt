@@ -1,15 +1,15 @@
 package com.crecg.crecglibrary.network.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * 首页轮播图
  */
 
-public class HomePicListModelData {
-    // 模拟首页轮播图数据
+public class HomePicListModelData implements Serializable {
 
-    public String picture; // 图片地址
-    public String targetUrl; // url
-    public String name;
-    public String linkType;
+    public List<HomePicListItemData> advertiseList; // 轮播图列表
+    public List<String> advertiseList1; // 轮播图列表
 
 }

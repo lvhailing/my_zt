@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +13,8 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.LoginModel;
-import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
@@ -160,7 +159,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void onMySuccess(String result) {
                 if (result != null) {
 //                    Log.i("hh", "登录接口数据1：" + result);
-                    ResultModel<LoginModel> loginModel = new Gson().fromJson(result, new TypeToken<ResultModel<LoginModel>>() {
+                    CommonResultModel<LoginModel> loginModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<LoginModel>>() {
                     }.getType());
 //                    Log.i("hh", "登录接口数据2：" + loginModel);
 //                    Log.i("hh", "登录接口数据3：" + "userid= " + loginModel.data.userId + "mobile= " + loginModel.data.mobile);

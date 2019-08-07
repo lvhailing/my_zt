@@ -4,7 +4,7 @@ package com.crecg.crecglibrary.network;
 import android.text.TextUtils;
 
 import com.crecg.crecglibrary.CommonConstants;
-import com.crecg.crecglibrary.network.model.ResultModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 
 import io.reactivex.Observer;
@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * 基础ObserverAdapter
  */
-public abstract class CrecgObserverAdapter<T extends ResultModel> implements Observer<T> {
+public abstract class CrecgObserverAdapter<T extends CommonResultModel> implements Observer<T> {
     public static final String TAG = CrecgObserverAdapter.class.getSimpleName();
 
     @Override

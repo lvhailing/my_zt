@@ -16,7 +16,7 @@ import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.UrlRoot;
-import com.crecg.crecglibrary.network.model.ResultModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
 import com.crecg.crecglibrary.utils.IdCardCheckUtils;
 import com.crecg.crecglibrary.utils.ToastUtil;
@@ -152,7 +152,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
                         if (result == null) {
                             return;
                         }
-                        ResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<ResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                        CommonResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<ReturnOnlyTrueOrFalseModel>>() {
                         }.getType());
                         if (verifyCodeModel.data == null) {
                             return;
@@ -257,7 +257,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
                         if (result == null) {
                             return;
                         }
-                        ResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<ResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                        CommonResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<ReturnOnlyTrueOrFalseModel>>() {
                         }.getType());
                         if (verifyCodeModel.data == null) {
                             return;

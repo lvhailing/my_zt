@@ -1,10 +1,9 @@
 package com.crecg.crecglibrary.network;
 
 
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.DataModel;
 import com.crecg.crecglibrary.network.model.DataWrapper;
-import com.crecg.crecglibrary.network.model.LoginModel;
-import com.crecg.crecglibrary.network.model.ResultModel;
 
 import java.util.Map;
 
@@ -24,19 +23,19 @@ public interface CommonRequestProxy {
     //测试接口
     @FormUrlEncoded
     @POST("toutiao/index")
-    Observable<ResultModel<DataWrapper<DataModel>>> getBookListByPost(@FieldMap Map<String, Object> params);
+    Observable<CommonResultModel<DataWrapper<DataModel>>> getBookListByPost(@FieldMap Map<String, Object> params);
 
     //测试接口
     @POST("shop/mattersna/v1/getcreatestatus")
-    Observable<ResultModel<DataWrapper<DataModel>>> canIEditReceipt();
+    Observable<CommonResultModel<DataWrapper<DataModel>>> canIEditReceipt();
 
     //测试接口
     @GET("toutiao/index?type=caijing&key=cf2e8c721799bbc8f3c9d639a4d0a9e6")
-    Observable<ResultModel<DataWrapper<DataModel>>> getBookListByGet();
+    Observable<CommonResultModel<DataWrapper<DataModel>>> getBookListByGet();
 
     //测试接口
     @GET("book/receipts/nav1/getgoodslist")
-    Observable<ResultModel<DataWrapper<DataModel>>> getDeliveryReceiptDetail(@Query("receipt_id") String id, @Query("shop_id") String shopId);
+    Observable<CommonResultModel<DataWrapper<DataModel>>> getDeliveryReceiptDetail(@Query("receipt_id") String id, @Query("shop_id") String shopId);
 /*************************************************************************************************************************************************/
     // 自己修改的接口
     @POST("toutiao/index")
@@ -78,13 +77,12 @@ public interface CommonRequestProxy {
     Observable<String> resetTransactionPwdByPost(@FieldMap Map<String, Object> param);
 
     // 首页轮播图
-    @FormUrlEncoded
-    @POST("userinfo/trspwd/reset")
-    Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
+    @POST("homePage/rotaryPlantingMap")
+    Observable<String> getHomePicListByPost();
 
     // 首页数据&&定期理财列表数据
     @FormUrlEncoded
-    @POST("homePage/rotaryPlantingMap")
+    @POST("homePage")
     Observable<String>requestHomeAndFinancialData(@FieldMap Map<String,Object>param);
 
     //快捷支付签约短信验证码获取 (未调试)

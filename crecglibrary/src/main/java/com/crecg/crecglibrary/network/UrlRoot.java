@@ -6,10 +6,10 @@ package com.crecg.crecglibrary.network;
  */
 public class UrlRoot {
 
-    private final static int ENV_DEV = 1;
-    private final static int ENV_PRODUCT = 2;
-    private final static int ENV_LVJ = 3;
-    private final static int ENV_LHB = 4;
+    private final static int ENV_DEV = 1; // 测试环境
+    private final static int ENV_PRODUCT = 2; // 正式环境
+    private final static int ENV_LVJ = 3; // 吕剑
+    private final static int ENV_LHB = 4; // 李红彬
 
     // 主地址
     public static String ROOT_URL;

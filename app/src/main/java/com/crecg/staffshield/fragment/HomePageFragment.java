@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,10 +22,12 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialDataModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialProductList;
+import com.crecg.crecglibrary.network.model.HomePicListItemData;
+import com.crecg.crecglibrary.network.model.HomePicListModelData;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
-import com.crecg.crecglibrary.network.model.ResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
@@ -67,20 +70,25 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private TextView tv_home_more; // 更多
 
     private LinearLayout ll_container; // 加载首页定期产品
-    private List<ProductModelTestData> list;
-    private List<String> picList; // 滑动的图片集合
-    private int[] imageResId; // 图片ID
+//    private List<ProductModelTestData> list;
+//    private List<String> picList; // 滑动的图片集合
+//    private int[] imageResId; // 图片ID
     private MyRollViewPager rollViewPager;
 
     private HomeAndFinancialDataModel homeData;
     private List<HomeAndFinancialProductList> productList; // 定期产品数据
+    private List<HomePicListItemData> picList;
 
 
     @Override
+
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-//            Log.i("hh", "HomePageFragment --- " + getClass());
+            Log.i("hh", "HomePageFragment --- " + getClass());
+            // 获取轮播图数据
+            requestHomePicListData();
+            // 获取首页数据
             requestHomeData();
         }
     }
@@ -108,21 +116,21 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         // 模拟定期产品数据
-        list = DataUtil.getProductList();
+//        list = DataUtil.getProductList();
 
         // 模拟轮播图数据
-        auto_Image();
+//        auto_Image();
 
-        freshVP();
+//        freshVP();
     }
 
     private void auto_Image() {
-        picList = new ArrayList<String>();
-        picList.add("https://csdnimg.cn/feed/20190712/9bb6aa25f82b061230d08a65a1b534c5.png");
-        picList.add("https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAujxlx50uwaMWjpghsyVBYjZsgibRQlSTg5V28wWfNOz6QDwrIWHGolXJqFBoA3rWYlv6tnLwbDFQ8g/640?wx_fmt=jpeg");
-        picList.add("https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/Rm6KfjqOnWwDkSZUHmIjUAZpc1QXd43BgpEI45JKS7qJA2kghDYBr0CgwhJHTtat7RVawRcSiaFp8PgHm9q0YZA/640?wx_fmt=jpeg");
-
-        imageResId = new int[]{R.mipmap.bg_banner_default1, R.mipmap.bg_banner_default2, R.mipmap.bg_banner_default3};
+//        picList = new ArrayList<String>();
+//        picList.add("https://csdnimg.cn/feed/20190712/9bb6aa25f82b061230d08a65a1b534c5.png");
+//        picList.add("https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAujxlx50uwaMWjpghsyVBYjZsgibRQlSTg5V28wWfNOz6QDwrIWHGolXJqFBoA3rWYlv6tnLwbDFQ8g/640?wx_fmt=jpeg");
+//        picList.add("https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_jpg/Rm6KfjqOnWwDkSZUHmIjUAZpc1QXd43BgpEI45JKS7qJA2kghDYBr0CgwhJHTtat7RVawRcSiaFp8PgHm9q0YZA/640?wx_fmt=jpeg");
+//
+//        imageResId = new int[]{R.mipmap.bg_banner_default1, R.mipmap.bg_banner_default2, R.mipmap.bg_banner_default3};
     }
 
     private void initView() {
@@ -163,7 +171,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         View ll_item;
         // 加载 item 布局
         ll_item = LayoutInflater.from(context).inflate(R.layout.item_regular_products2, null);
-        if (status.equals("tender")||status.equals("init")) { // 热卖中、即将开售
+        if (status.equals("tender") || status.equals("init")) { // 热卖中、即将开售
             LinearLayout ll_container1 = ll_item.findViewById(R.id.ll_container1);
             ll_container1.setVisibility(View.VISIBLE);
 
@@ -179,20 +187,22 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             LinearLayout ll_best_sell1 = ll_item.findViewById(R.id.ll_best_sell);
             tv_regular_product_name1.setText(product.name);
             tv_product_annualized_return1.setText(product.annualRate);
-            tv_product_cycle1.setText(product.timeLimit+"天");
-            tv_initial_investment_amount1.setText(product.tenderInitAmount);
+            tv_product_cycle1.setText(product.timeLimit.toString() + "天");
+            tv_initial_investment_amount1.setText(product.tenderInitAmount.toString());
             tv_start_sale_time1.setText(product.tenderStartTime);
 
             if (status.equals("tender")) {
                 //热卖中
                 ll_best_sell1.setVisibility(View.VISIBLE);
+                progressbar.setProgress(85);
+                tv_surplus_money1.setText(product.syAmount);
             } else if (status.equals("init")) {
                 //即将开售
                 iv_will_sell_state1.setVisibility(View.VISIBLE);
                 iv_will_sell_state1.setBackgroundResource(R.mipmap.img_regular_product_on_sale);
                 fl_start_sell1.setVisibility(View.VISIBLE);
             }
-        } else {
+        } else { // 已售罄、计息中、已回款
             RelativeLayout rl_container2 = ll_item.findViewById(R.id.rl_container2);
             rl_container2.setVisibility(View.VISIBLE);
 
@@ -204,16 +214,16 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 
             tv_regular_product_name2.setText(product.name);
             tv_product_annualized_return2.setText(product.annualRate);
-            tv_product_cycle2.setText(product.timeLimit+"天");
-            tv_initial_investment_amount2.setText(product.tenderInitAmount);
+            tv_product_cycle2.setText(product.timeLimit + "天");
+            tv_initial_investment_amount2.setText(product.tenderInitAmount.toString());
 
-            if (status.equals("success")||status.equals("fail")) { // fail：融资失败---已卖完 success：融资成功--已卖完
+            if (status.equals("success") || status.equals("fail")) { // fail：融资失败---已卖完 success：融资成功--已卖完
                 //已售罄
                 iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_sell_out));
             } else if (status.equals("repaying")) {
                 //计息中
                 iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_interest_bearing));
-            } else if (status.equals("repayed")|| status.equals("prepayed")) {
+            } else if (status.equals("repayed") || status.equals("prepayed")) {
                 //已回款
                 iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_payment_returned));
             }
@@ -238,6 +248,37 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
+     * 获取轮播图数据
+     */
+    private void requestHomePicListData() {
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getHomePicListByPost()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, HomePicListModelData>() {
+            @Override
+            public void onMyError() {
+                ToastUtil.showCustom("轮播图获取数据失败");
+            }
+
+            @Override
+            public void onMySuccess(String result) {
+                if (result == null) {
+                    return;
+                }
+                CommonResultModel<HomePicListModelData> picListModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<HomePicListModelData>>() {
+                }.getType());
+                HomePicListModelData picListData = picListModel.data;
+                picList = picListData.advertiseList;
+                if (picList == null) {
+                    return;
+                }
+                freshVP();
+            }
+        });
+    }
+
+    /**
      * 获取首页数据
      */
     private void requestHomeData() {
@@ -256,7 +297,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 .subscribe(new CommonObserverAdapter<String, HomeAndFinancialDataModel>() {
             @Override
             public void onMyError() {
-                ToastUtil.showCustom("获取数据失败");
+                ToastUtil.showCustom("首页获取数据失败");
             }
 
             @Override
@@ -264,7 +305,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 if (result == null) {
                     return;
                 }
-                ResultModel<HomeAndFinancialDataModel> homeDataModel = new Gson().fromJson(result, new TypeToken<ResultModel<HomeAndFinancialDataModel>>() {
+                CommonResultModel<HomeAndFinancialDataModel> homeDataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<HomeAndFinancialDataModel>>() {
                 }.getType());
                 homeData = homeDataModel.data;
                 if (homeData == null) {
@@ -277,6 +318,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 for (HomeAndFinancialProductList productItem : productList) {
+                    Log.i("hh","定期列表");
                     ll_container.addView(getItemData(productItem));
                 }
             }
@@ -286,7 +328,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     // （工资宝）设置基金产品数据
     private void setFundData() {
         tv_fund_name.setText(homeData.prodName);
-        tv_annualized_return.setText(homeData.annualReturn);
+        tv_annualized_return.setText(homeData.annualReturnBys+"%");
     }
 
     /**

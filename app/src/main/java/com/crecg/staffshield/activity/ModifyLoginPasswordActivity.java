@@ -13,7 +13,7 @@ import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
-import com.crecg.crecglibrary.network.model.ResultModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
@@ -144,7 +144,7 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
                         if (result == null) {
                             return;
                         }
-                        ResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<ResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                        CommonResultModel<ReturnOnlyTrueOrFalseModel> verifyCodeModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<ReturnOnlyTrueOrFalseModel>>() {
                         }.getType());
                         if (verifyCodeModel.data == null) {
                             return;
