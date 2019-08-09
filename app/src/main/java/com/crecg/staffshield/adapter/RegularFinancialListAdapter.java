@@ -3,6 +3,7 @@ package com.crecg.staffshield.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
             View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_regular_products_list_layout2, parent, false);
             return new ItemViewHolder2(itemView);
         } else if (viewType == TYPE_FOOTER) {
-            View itemView = mInflater.inflate(R.layout.load_more_footview_layout, parent, false);
+            View itemView = LayoutInflater.from(mContext).inflate(R.layout.load_more_footview_layout, parent, false);
             return new FooterViewHolder(itemView);
         }
 

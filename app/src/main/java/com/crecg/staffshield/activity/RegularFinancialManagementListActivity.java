@@ -64,10 +64,8 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
 
     private void initView() {
         setTitle();
-
         swipe_refresh = findViewById(R.id.swipe_refresh);
         recycler_view = findViewById(R.id.recycler_view);
-
         initRecyclerView();
     }
 
