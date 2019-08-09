@@ -20,8 +20,8 @@ public class HomeAndFinancialProductList implements Serializable{
     public Number tenderAmount; // 产品投标总额
     public Number tenderUsers; // 产品投标总人数
     public Number timeLimit; // 产品期限
-    public Number bfbAmount; // 规模占用百分比  例子 0.001
-    public String syAmount; // 剩余金额
+    public String bfbAmount; // 规模占用百分比  例子 0.001
+    public String syAmount; // 剩余可投金额
 
     /**
      *  init：初始状态--即将开卖

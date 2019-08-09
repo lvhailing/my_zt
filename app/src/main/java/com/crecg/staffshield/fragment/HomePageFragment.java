@@ -70,7 +70,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private TextView tv_home_more; // 更多
 
     private LinearLayout ll_container; // 加载首页定期产品
-//    private List<ProductModelTestData> list;
+    //    private List<ProductModelTestData> list;
 //    private List<String> picList; // 滑动的图片集合
 //    private int[] imageResId; // 图片ID
     private MyRollViewPager rollViewPager;
@@ -96,7 +96,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        initData();
+//        initData();
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_home_page, container, false);
             try {
@@ -186,16 +186,21 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             FrameLayout fl_start_sell1 = ll_item.findViewById(R.id.fl_start_sell);
             LinearLayout ll_best_sell1 = ll_item.findViewById(R.id.ll_best_sell);
             tv_regular_product_name1.setText(product.name);
-            tv_product_annualized_return1.setText(product.annualRate);
+            tv_product_annualized_return1.setText(product.annualRate + "%");
             tv_product_cycle1.setText(product.timeLimit.toString() + "天");
-            tv_initial_investment_amount1.setText(product.tenderInitAmount.toString());
+            tv_initial_investment_amount1.setText(product.tenderInitAmount.toString() + "元起投");
             tv_start_sale_time1.setText(product.tenderStartTime);
 
             if (status.equals("tender")) {
                 //热卖中
                 ll_best_sell1.setVisibility(View.VISIBLE);
-                progressbar.setProgress(85);
-                tv_surplus_money1.setText(product.syAmount);
+                String currentProgress = product.bfbAmount;
+                float aa = Float.parseFloat(currentProgress)*100;
+                Log.i("hh", "String转Float后的结果：" + aa);
+                int bb = (int) aa;
+                Log.i("hh", "运算后的结果：" + bb);
+                progressbar.setProgress(bb);
+                tv_surplus_money1.setText(product.syAmount + "元");
             } else if (status.equals("init")) {
                 //即将开售
                 iv_will_sell_state1.setVisibility(View.VISIBLE);
@@ -251,8 +256,13 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
      * 获取轮播图数据
      */
     private void requestHomePicListData() {
+        HashMap<String, Object> param = new HashMap<>();
+        String data = DESUtil.encMap(param);
+
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getHomePicListByPost()
+                .getHomePicListByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String, HomePicListModelData>() {
@@ -318,7 +328,6 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 for (HomeAndFinancialProductList productItem : productList) {
-                    Log.i("hh","定期列表");
                     ll_container.addView(getItemData(productItem));
                 }
             }
@@ -328,7 +337,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     // （工资宝）设置基金产品数据
     private void setFundData() {
         tv_fund_name.setText(homeData.prodName);
-        tv_annualized_return.setText(homeData.annualReturnBys+"%");
+        tv_annualized_return.setText(homeData.annualReturnBys + "%");
     }
 
     /**
@@ -387,6 +396,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_transfer_immediately:  // (工资宝)立即转入 （已经开户跳转工资宝买入页）
                 // Todo 点立即转入时，需要先判断用户是否开通联名卡账户
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
+                intent.putExtra("prodId",homeData.prodId ); // 基金代码
+                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
                 startActivity(intent);
                 break;
             case R.id.ll_home_manage_money:  // 理财

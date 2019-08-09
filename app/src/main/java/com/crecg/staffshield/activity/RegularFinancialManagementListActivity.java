@@ -1,18 +1,36 @@
 package com.crecg.staffshield.activity;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
+import com.crecg.crecglibrary.network.model.HomeAndFinancialDataModel;
+import com.crecg.crecglibrary.network.model.HomeAndFinancialProductList;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
+import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.RegularFinancialListAdapter;
 import com.crecg.staffshield.common.BaseActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 定期理财 列表
@@ -26,29 +44,98 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
     private RecyclerView recycler_view;
     private RegularFinancialListAdapter regularFinancialListAdapter;
     private ArrayList<ProductModelTestData> list;
+    private HomeAndFinancialDataModel financialListData;
+    private SwipeRefreshLayout swipe_refresh;
+
+    private ArrayList<HomeAndFinancialProductList> totalList = new ArrayList<>();
+    private int currentPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseSetContentView(R.layout.activity_regular_financial_management_list);
 
-        initData();
+//        initData();
         initView();
+        initListener();
+        requestRegularFinancialListData();
+
     }
 
     private void initView() {
+        setTitle();
+
+        swipe_refresh = findViewById(R.id.swipe_refresh);
+        recycler_view = findViewById(R.id.recycler_view);
+
+        initRecyclerView();
+    }
+
+    /**
+     *  设置页面标题
+     */
+    private void setTitle() {
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
+
         iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("定期理财");
+    }
 
-        recycler_view = findViewById(R.id.recycler_view);
+    private void initListener() {
+        iv_back.setOnClickListener(this);
+
+        initPullRefresh();
+        initLoadMoreListener();
+    }
+
+    /**
+     * 初始化RecycleView
+     */
+    private void initRecyclerView() {
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        regularFinancialListAdapter = new RegularFinancialListAdapter(this, list);
+        regularFinancialListAdapter = new RegularFinancialListAdapter(this, totalList);
         recycler_view.setAdapter(regularFinancialListAdapter);
 
+        //添加动画
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
+    }
+    /**
+     *  初始化SwipeRefreshLayout下拉刷新
+     */
+    private void initPullRefresh() {
+        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() { // 下拉刷新
+                currentPage = 1;
+                requestRegularFinancialListData();
+            }
+        });
+    }
 
-        iv_back.setOnClickListener(this);
+    private void initLoadMoreListener() {
+        recycler_view.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            private int firstVisibleItem = 0;
+            private int lastVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                // 判断RecyclerView的状态: 是空闲时，并且是最后一个可见的ITEM时才加载
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == regularFinancialListAdapter.getItemCount() && firstVisibleItem != 0) {
+                    currentPage ++;
+                    requestRegularFinancialListData();
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager)recyclerView.getLayoutManager();
+                firstVisibleItem =layoutManager.findFirstVisibleItemPosition();
+                lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+            }
+        });
     }
 
     private void initData() {
@@ -112,6 +199,78 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
         list.add(product4);
         list.add(product5);
         list.add(product6);
+    }
+
+    /**
+     * 获取定期理财列表数据
+     */
+    private void requestRegularFinancialListData() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("pageNum", currentPage + ""); // 页码不传默认为1
+        param.put("pageSize", "10"); // 页码不传默认为3条
+        param.put("listType", "product"); // 定期理财传 product
+        String data = DESUtil.encMap(param);
+
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .requestHomeAndFinancialData(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, HomeAndFinancialDataModel>() {
+                    @Override
+                    public void onMyError() {
+                        if (swipe_refresh.isRefreshing()) {
+                            //请求返回后，无论本次请求成功与否，都关闭下拉旋转
+                            swipe_refresh.setRefreshing(false);
+                        }
+//                        ToastUtil.showCustom("定期理财列表获取数据失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (swipe_refresh.isRefreshing()) {
+                            //请求返回后，无论本次请求成功与否，都关闭下拉旋转
+                            swipe_refresh.setRefreshing(false);
+                        }
+                        if (result == null) {
+                            return;
+                        }
+                        CommonResultModel<HomeAndFinancialDataModel> financialListDataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<HomeAndFinancialDataModel>>() {
+                        }.getType());
+                        financialListData = financialListDataModel.data;
+                        if (financialListData == null) {
+                            return;
+                        }
+                        List<HomeAndFinancialProductList> everyList = financialListData.productList;
+
+                        if (everyList == null) {
+                            return;
+                        }
+                        if (everyList.size() == 0 && currentPage != 1) {
+                            ToastUtil.showCustom("已显示全部");
+                            regularFinancialListAdapter.changeMoreStatus(regularFinancialListAdapter.NO_LOAD_MORE);
+                        }
+                        if (currentPage == 1) {
+                            //刚进来时 加载第一页数据，或下拉刷新 重新加载数据 。这两种情况之前的数据都清掉
+                            totalList.clear();
+                        }
+                            totalList.addAll(everyList);
+                        // 0:从后台获取到数据展示的布局；1：从后台没有获取到数据时展示的布局；
+//                        if (totalList.size() == 0) {
+//                            vs.setDisplayedChild(1);
+//                        } else {
+//                            vs.setDisplayedChild(0);
+//                        }
+//                        if (totalList.size() != 0 && totalList.size() % 10 == 0) {
+//                            vs.setDisplayedChild(0);
+//                            commissionNewsAdapter.changeMoreStatus(commissionNewsAdapter.PULLUP_LOAD_MORE);
+//                        } else {
+//                            commissionNewsAdapter.changeMoreStatus(commissionNewsAdapter.NO_LOAD_MORE);
+//                        }
+
+                    }
+                });
     }
 
     @Override

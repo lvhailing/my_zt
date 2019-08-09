@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initJpush();
         initView();
         initVP();
-        setSelect(selectPage);
+        setSelect(0);
         CheckVersionUpdates();
     }
 

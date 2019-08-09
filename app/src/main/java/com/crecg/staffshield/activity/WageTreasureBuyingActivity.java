@@ -33,6 +33,9 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
     private boolean isCheckedFlag = false;
     private boolean isOpenFastPayment = false;
 
+    private String prodId; // 基金代码
+    private String prodSubId; // 基金标识码
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,8 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
 
     private void initView() {
         whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
+        prodId = getIntent().getStringExtra("prodId");
+        prodSubId = getIntent().getStringExtra("prodSubId");
 
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);

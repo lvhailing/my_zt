@@ -26,13 +26,13 @@ public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
     @Override
     public void onNext(T1 result) {
         String encStr = (String) result; // 后台返回的加密数据
-        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
+//        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
         if (TextUtils.isEmpty(encStr)) {
             onMyError();
         } else {
             try {
                 String decodeStr = URLDecoder.decode(encStr, "utf-8");
-                Log.i("hh", "onNext方法中解码后数据--decodeStr：" + decodeStr);
+//                Log.i("hh", "onNext方法中解码后数据--decodeStr：" + decodeStr);
 
                 String desStr = DESUtil.decrypt(decodeStr); // 解密后的返回数据
                 Log.i("hh", "onNext方法中解密后数据--desStr：" + desStr);

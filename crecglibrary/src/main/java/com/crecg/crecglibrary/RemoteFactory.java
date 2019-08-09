@@ -100,7 +100,7 @@ public class RemoteFactory {
         }
 
         //添加公共参数
-//        builder.addInterceptor(commonParams);
+        builder.addInterceptor(commonParams);
 
         //添加日志打印
 //        HttpLoggingInterceptor log = new HttpLoggingInterceptor();
@@ -119,7 +119,8 @@ public class RemoteFactory {
                 FormBody.Builder bodyBuilder = new FormBody.Builder();
                 bodyBuilder
                         .add("version", "1.0.0")
-                        .add("from", "android");
+                        .add("from", "android")
+                        .add("Accept-Language", "zh-CN" );
                 if (request.body() instanceof FormBody) {
                     FormBody body = (FormBody) request.body();
                     for (int i = 0; i < body.size(); i++) {
@@ -133,6 +134,7 @@ public class RemoteFactory {
                 Request.Builder newBuilder = request.newBuilder();
                 newBuilder.addHeader("version", "1.0.0");
                 newBuilder.addHeader("from", "android");
+                newBuilder.addHeader("Accept-Language", "zh-CN");
                 request = newBuilder.build();
             }
             return chain.proceed(request);

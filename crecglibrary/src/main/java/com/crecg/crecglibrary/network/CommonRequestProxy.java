@@ -77,8 +77,9 @@ public interface CommonRequestProxy {
     Observable<String> resetTransactionPwdByPost(@FieldMap Map<String, Object> param);
 
     // 首页轮播图
+    @FormUrlEncoded
     @POST("homePage/rotaryPlantingMap")
-    Observable<String> getHomePicListByPost();
+    Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
 
     // 首页数据&&定期理财列表数据
     @FormUrlEncoded

@@ -3,6 +3,7 @@ package com.crecg.staffshield.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.crecg.crecglibrary.network.model.HomeAndFinancialProductList;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
@@ -25,7 +27,7 @@ import java.util.ArrayList;
  */
 public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final ArrayList<ProductModelTestData> list;
+    private final ArrayList<HomeAndFinancialProductList> list;
     Context mContext;
     LayoutInflater mInflater;
     private static final int TYPE_ITEM_ONE = 0; // 热卖中或即将开售的产品布局
@@ -43,7 +45,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
     private int mLoadMoreStatus = 0;
 
 
-    public RegularFinancialListAdapter(Context context, ArrayList<ProductModelTestData> list) {
+    public RegularFinancialListAdapter(Context context, ArrayList<HomeAndFinancialProductList> list) {
         mContext = context;
         this.list = list;
     }
@@ -66,48 +68,60 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        int flag = list.get(position).flag;
+        String status = list.get(position).status;
+        /**
+         *  init：初始状态--即将开卖
+         *  tender：融资中--热卖中
+         *  fail：融资失败---已卖完
+         *  success：融资成功--已卖完
+         *  repaying: 还款中--计息中
+         *  repayed：已还清--已还款
+         *  prepayed: 提前还款结清--已还款
+         *
+         *  产品状态顺序：热卖中(tender)-->即将开售(init)-->已售馨(产品已满标，但钱还未打给借款人)-->计息中（表示钱已打给借款人）-->已回款
+         */
         if (holder instanceof ItemViewHolder1) {
             ItemViewHolder1 itemViewHolder1 = (ItemViewHolder1) holder;
             itemViewHolder1.tv_regular_product_name.setText(list.get(position).name);
-            itemViewHolder1.tv_product_annualized_return.setText(list.get(position).annualizedReturn);
-            itemViewHolder1.tv_product_cycle.setText(list.get(position).day);
-            itemViewHolder1.tv_initial_investment_amount.setText(list.get(position).investmentAmount);
-            if (flag == 1) { // 热卖布局
+            itemViewHolder1.tv_product_annualized_return.setText(list.get(position).annualRate);
+            itemViewHolder1.tv_product_cycle.setText(list.get(position).timeLimit.toString());
+            itemViewHolder1.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投");
+            if ("tender".equals(status)) { // 热卖布局
                 itemViewHolder1.ll_best_sell.setVisibility(View.VISIBLE);
                 itemViewHolder1.fl_start_sell.setVisibility(View.GONE);
-                itemViewHolder1.progressbar.setProgress(list.get(position).progressBar);
-                itemViewHolder1.tv_surplus_money.setText(list.get(position).surplusMoney);
+                float fCurrentProgress = Float.parseFloat(list.get(position).bfbAmount);
+                itemViewHolder1.progressbar.setProgress((int)fCurrentProgress);
+                itemViewHolder1.tv_surplus_money.setText(list.get(position).syAmount); // 剩余可投金额
 
-            } else if (flag == 2) { // 即将开售布局
+            } else if ("init".equals(status)) { // 即将开售布局
                 itemViewHolder1.fl_start_sell.setVisibility(View.VISIBLE);
                 itemViewHolder1.ll_best_sell.setVisibility(View.GONE);
-                itemViewHolder1.tv_start_sale_time.setText(list.get(position).date);
+                itemViewHolder1.tv_start_sale_time.setText(list.get(position).tenderStartTime);
             }
             // item 点击监听
-            initListener(itemViewHolder1.itemView, flag + "");
+            initListener(itemViewHolder1.itemView, list.get(position).id);
         } else if (holder instanceof ItemViewHolder2) {
             ItemViewHolder2 itemViewHolder2 = (ItemViewHolder2) holder;
-            if (flag == 3) { // 已售罄
+            if ("fail".equals(status) || "success".equals(status)) { // 已售罄
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
-                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualizedReturn);
-                itemViewHolder2.tv_product_cycle.setText(list.get(position).day);
-                itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).investmentAmount);
+                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate);
+                itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString());
+                itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投");
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_sell_out);
-            } else if (flag == 4) { // 计息中
+            } else if ("repaying".equals(status)) { // 计息中
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
-                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualizedReturn);
-                itemViewHolder2.tv_product_cycle.setText(list.get(position).day);
-                itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).investmentAmount);
+                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate);
+                itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString());
+                itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投");
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_interest_bearing);
-            } else if (flag == 5) { // 已回款
+            } else if ("repayed".equals(status) || "prepayed".equals(status)) { // 已回款
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
                 itemViewHolder2.tv_regular_product_name.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
-                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualizedReturn);
+                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate);
                 itemViewHolder2.tv_product_annualized_return.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
-                itemViewHolder2.tv_product_cycle.setText(list.get(position).day);
+                itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString());
                 itemViewHolder2.tv_product_cycle.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
-                itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).investmentAmount);
+                itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投");
                 itemViewHolder2.tv_initial_investment_amount.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_payment_returned);
                 itemViewHolder2.tv_income_category.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
@@ -115,7 +129,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
             }
 
             // item 点击监听
-            initListener(itemViewHolder2.itemView, flag + "");
+            initListener(itemViewHolder2.itemView, list.get(position).id);
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
 
@@ -139,12 +153,13 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public int getItemCount() {
 //        return list == null ? 0 : list.size() + 1;
+        Log.i("hh", "定期理财列表list.size() = " + list.size());
         return list == null ? 0 : list.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (list.get(position).flag == 1 || list.get(position).flag == 2) {
+        if (list.get(position).status .equals("tender") || list.get(position).status.equals("init")) {
             return TYPE_ITEM_ONE;
         } else if (position + 1 == getItemCount()) {
             //最后一个item设置为footerView
@@ -242,12 +257,12 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
     }
 
 
-    public void AddHeaderItem(ArrayList<ProductModelTestData> items) {
+    public void AddHeaderItem(ArrayList<HomeAndFinancialProductList> items) {
         list.addAll(0, items);
         notifyDataSetChanged();
     }
 
-    public void AddFooterItem(ArrayList<ProductModelTestData> items) {
+    public void AddFooterItem(ArrayList<HomeAndFinancialProductList> items) {
         list.addAll(items);
         notifyDataSetChanged();
     }
