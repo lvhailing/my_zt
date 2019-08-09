@@ -134,18 +134,18 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
 
-//            switch (mLoadMoreStatus) {
-//                case PULLUP_LOAD_MORE: //上拉加载更多
-//                    footerViewHolder.tvLoadText.setText("数据加载中...");
-//                    break;
-//                case LOADING_MORE: //正在加载中
-//                    footerViewHolder.tvLoadText.setText("正加载更多...");
-//                    break;
-//                case NO_LOAD_MORE:  //没有加载更多 隐藏
-//                    footerViewHolder.loadLayout.setVisibility(View.GONE);
-//                    break;
-//
-//            }
+            switch (mLoadMoreStatus) {
+                case PULLUP_LOAD_MORE: //上拉加载更多
+                    footerViewHolder.tvLoadText.setText("数据加载中...");
+                    break;
+                case LOADING_MORE: //正在加载中
+                    footerViewHolder.tvLoadText.setText("正加载更多...");
+                    break;
+                case NO_LOAD_MORE:  //没有加载更多 隐藏
+                    footerViewHolder.loadLayout.setVisibility(View.GONE);
+                    break;
+
+            }
         }
 
 

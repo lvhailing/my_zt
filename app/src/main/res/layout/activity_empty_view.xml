@@ -5,11 +5,10 @@
                 android:background="@color/bg_common_gray_f9f9f9">
 
     <ImageView
-        android:id="@+id/img_empty"
+        android:id="@+id/iv_no_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/img_middle"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="15dip"
         android:scaleType="centerInside"
         android:background="@mipmap/ic_empty"/>
@@ -20,7 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:scaleType="centerInside"/>
+        android:scaleType="centerInside"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tv_empty"
@@ -30,5 +30,6 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:textColor="@color/gray_d"
+        android:visibility="gone"
         />
 </RelativeLayout>

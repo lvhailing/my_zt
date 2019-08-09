@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
@@ -41,14 +42,15 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
     private ImageView iv_back;
     private TextView tv_common_title;
 
+    private ViewSwitcher vs;
+    private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recycler_view;
     private RegularFinancialListAdapter regularFinancialListAdapter;
-    private ArrayList<ProductModelTestData> list;
     private HomeAndFinancialDataModel financialListData;
-    private SwipeRefreshLayout swipe_refresh;
-
     private ArrayList<HomeAndFinancialProductList> totalList = new ArrayList<>();
     private int currentPage = 1;
+
+    private ArrayList<ProductModelTestData> list; // 模拟数据
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +66,12 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
 
     private void initView() {
         setTitle();
+        vs = findViewById(R.id.vs);
         swipe_refresh = findViewById(R.id.swipe_refresh);
         recycler_view = findViewById(R.id.recycler_view);
+
+        ImageView iv_no_data = findViewById(R.id.iv_no_data);
+        iv_no_data.setBackgroundResource(R.mipmap.ic_empty);
         initRecyclerView();
     }
 
@@ -205,7 +211,7 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
     private void requestRegularFinancialListData() {
         HashMap<String, Object> param = new HashMap<>();
         param.put("pageNum", currentPage + ""); // 页码不传默认为1
-        param.put("pageSize", "10"); // 页码不传默认为3条
+        param.put("pageSize", ""); // 页码不传默认为3条
         param.put("listType", "product"); // 定期理财传 product
         String data = DESUtil.encMap(param);
 
@@ -253,19 +259,20 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
                             //刚进来时 加载第一页数据，或下拉刷新 重新加载数据 。这两种情况之前的数据都清掉
                             totalList.clear();
                         }
-                            totalList.addAll(everyList);
-                        // 0:从后台获取到数据展示的布局；1：从后台没有获取到数据时展示的布局；
-//                        if (totalList.size() == 0) {
-//                            vs.setDisplayedChild(1);
-//                        } else {
-//                            vs.setDisplayedChild(0);
-//                        }
-//                        if (totalList.size() != 0 && totalList.size() % 10 == 0) {
-//                            vs.setDisplayedChild(0);
-//                            commissionNewsAdapter.changeMoreStatus(commissionNewsAdapter.PULLUP_LOAD_MORE);
-//                        } else {
-//                            commissionNewsAdapter.changeMoreStatus(commissionNewsAdapter.NO_LOAD_MORE);
-//                        }
+                        totalList.addAll(everyList);
+//                        regularFinancialListAdapter.notifyDataSetChanged();
+//                         0:从后台获取到数据展示的布局；1：从后台没有获取到数据时展示的布局；
+                        if (totalList.size() == 0) {
+                            vs.setDisplayedChild(1);
+                        } else {
+                            vs.setDisplayedChild(0);
+                        }
+                        if (totalList.size() != 0 && totalList.size() % 10 == 0) {
+                            vs.setDisplayedChild(0);
+                            regularFinancialListAdapter.changeMoreStatus(regularFinancialListAdapter.PULLUP_LOAD_MORE);
+                        } else {
+                            regularFinancialListAdapter.changeMoreStatus(regularFinancialListAdapter.NO_LOAD_MORE);
+                        }
 
                     }
                 });
