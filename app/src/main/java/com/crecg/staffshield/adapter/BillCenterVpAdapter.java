@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.crecg.staffshield.fragment.BillCenterAllFragment;
+import com.crecg.staffshield.fragment.BillCenterFragment;
 import com.crecg.staffshield.fragment.BillCenterBankCardFragment;
 import com.crecg.staffshield.fragment.BillCenterRegularFinancialFragment;
 import com.crecg.staffshield.fragment.BillCenterSalaryTreasureFragment;
@@ -32,7 +32,7 @@ public class BillCenterVpAdapter extends FragmentStatePagerAdapter {
 
     private void initFragments() {
         fragments = new ArrayList<>();
-        fragments.add(BillCenterAllFragment.newInstance("全部"));
+        fragments.add(BillCenterFragment.newInstance("全部"));
         fragments.add(BillCenterBankCardFragment.newInstance("银行卡"));
         fragments.add(BillCenterSalaryTreasureFragment.newInstance("工资宝"));
         fragments.add(BillCenterRegularFinancialFragment.newInstance("定期理财"));

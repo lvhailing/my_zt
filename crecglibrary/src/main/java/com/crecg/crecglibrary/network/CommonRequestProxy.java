@@ -95,4 +95,19 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("userInfo/paySigned/submit")
     Observable<String> getFastPaymentSubmit(@FieldMap Map<String, Object> param);
+
+    //我的理财接口
+    @FormUrlEncoded
+    @POST("userBalance/myProductTender")
+    Observable<String> getMyFinancialListData(@FieldMap Map<String, Object> param);
+
+    //我的模块接口
+    @FormUrlEncoded
+    @POST("myBalance/myEAccount")
+    Observable<String> getMyData(@FieldMap Map<String, Object> param);
+
+    //账单中心接口
+    @FormUrlEncoded
+    @POST("type/billCenterList")
+    Observable<String> getBillCenterListData(@FieldMap Map<String, Object> param);
 }

@@ -3,6 +3,7 @@ package com.crecg.staffshield.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import com.crecg.staffshield.fragment.MyFinacialHoldFragment;
 import com.crecg.staffshield.fragment.MyFinacialPaymentReturnedFragment;
 
 /**
- * 我的理财 (包含持仓和已回款)
+ * 我的理财 (包含持有中和已回款)
  */
 
 public class MyFinancialManagementListActivity extends BaseActivity implements View.OnClickListener {
@@ -33,6 +34,9 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
     private MyFinacialVpAdapter myFinacialVpAdapter;
 
     private boolean showOrHideFlag = true; // 持有总额 默认显示
+    private String waitingIncome;
+    private String accumulatedIncome;
+    private String totalHoldings;
 
 
     @Override
@@ -45,13 +49,8 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        iv_right_btn = findViewById(R.id.iv_right_btn);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_right_btn.setVisibility(View.VISIBLE);
-        iv_right_btn.setBackgroundResource(R.mipmap.img_finacial_detail);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText("我的理财");
+        Log.i("hh", "initView()");
+        setTitle();
 
         iv_eye_state = findViewById(R.id.iv_eye_state);
         tv_waiting_income = findViewById(R.id.tv_waiting_income);
@@ -65,11 +64,22 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
         iv_eye_state.setOnClickListener(this);
     }
 
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        iv_right_btn = findViewById(R.id.iv_right_btn);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_right_btn.setVisibility(View.VISIBLE);
+        iv_right_btn.setBackgroundResource(R.mipmap.img_finacial_detail);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("我的理财");
+    }
+
     private void initData() {
         titles = new String[]{"持有中", "已回款"};
         myFinacialVpAdapter = new MyFinacialVpAdapter(getSupportFragmentManager(), titles, this);
-        ((MyFinacialHoldFragment) myFinacialVpAdapter.getItem(0)).setUserId("111");
-        ((MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(1)).setUserId("111");
+        ((MyFinacialHoldFragment) myFinacialVpAdapter.getItem(0)).setUserId(userId);
+        ((MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(1)).setUserId(userId);
         viewpager.setAdapter(myFinacialVpAdapter);
 
         //将TabLayout和ViewPager关联起来
@@ -78,16 +88,18 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.i("hh", "onPageScrolled ---" + position);
             }
 
             @Override
             public void onPageSelected(int position) {
+                Log.i("hh", "onPageSelected ---" + position);
                 if (position == 0) {
-                    ((MyFinacialHoldFragment) myFinacialVpAdapter.getItem(position)).setUserId("111");
+                    ((MyFinacialHoldFragment) myFinacialVpAdapter.getItem(position)).setUserId(userId);
                     MyFinacialHoldFragment myFinacialHoldFragment = (MyFinacialHoldFragment) myFinacialVpAdapter.getItem(position);
                     myFinacialHoldFragment.getCurrentTab(position);
                 } else if (position == 1) {
-                    ((MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(position)).setUserId("111");
+                    ((MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(position)).setUserId(userId);
                     MyFinacialPaymentReturnedFragment myFinacialPaymentReturnedFragment = (MyFinacialPaymentReturnedFragment) myFinacialVpAdapter.getItem(position);
                     myFinacialPaymentReturnedFragment.getCurrentTab(position);
                 }
@@ -95,10 +107,21 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                Log.i("hh", "onPageScrollStateChanged ---" + state);
             }
         });
     }
 
+    public void setAboutMoneyData(String waitingIncome, String accumulatedIncome, String totalHoldings) {
+        Log.i("hh", "setAboutMoneyData()");
+        this.waitingIncome = waitingIncome;
+        this.accumulatedIncome = accumulatedIncome;
+        this.totalHoldings = totalHoldings;
+
+        tv_waiting_income.setText(waitingIncome);
+        tv_accumulated_income.setText(accumulatedIncome);
+        tv_total_holdings.setText(totalHoldings);
+    }
 
     @Override
     public void onClick(View view) {
@@ -114,10 +137,14 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
                 if (showOrHideFlag) {
                     iv_eye_state.setImageResource(R.mipmap.img_eye_close);
                     tv_waiting_income.setText("****");
+                    tv_accumulated_income.setText("****");
+                    tv_total_holdings.setText("****");
                     showOrHideFlag = false;
                 } else {
                     iv_eye_state.setImageResource(R.mipmap.img_eye_open);
-                    tv_waiting_income.setText("27000.55");
+                    tv_waiting_income.setText(waitingIncome);
+                    tv_accumulated_income.setText(accumulatedIncome);
+                    tv_total_holdings.setText(totalHoldings);
                     showOrHideFlag = true;
                 }
                 break;

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,11 +15,26 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
+import com.crecg.crecglibrary.network.model.MyFinancialDataModel;
+import com.crecg.crecglibrary.network.model.MyFinancialProductItemDataModel;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
+import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.MyFinacialPaymentReturnedAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 我的理财 -- 已回款列表 Fragment
@@ -27,18 +43,17 @@ public class MyFinacialPaymentReturnedFragment extends Fragment {
     private static final String KEY = "param1";
 
     private String mParam1;
-    private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recycler_view;
     private MyFinacialPaymentReturnedAdapter myFinacialPaymentReturnedAdapter;
-//    private MouldList<MyTopicList2B> totalList = new MouldList<>();
+    private ArrayList<MyFinancialProductItemDataModel> totalList = new ArrayList<>();
+    private List<MyFinancialProductItemDataModel> everyList;
     private int currentPage = 1;    //当前页
+    private int currentPosition; // 当前tab位置（0：持有中，1：已回款）
     private Context context;
-    private int currentPosition; // 当前tab位置（0：提问，1：话题）
     private String userId;
     private ViewSwitcher vs;
     private ArrayList<ProductModelTestData> list;
-//    private MouldList<MyTopicList2B> everyList;
-//    private MyAskList1B data;
+
 
 
     public static MyFinacialPaymentReturnedFragment newInstance(String param1) {
@@ -55,13 +70,13 @@ public class MyFinacialPaymentReturnedFragment extends Fragment {
         if (isVisibleToUser) {
             //获取话题列表数据
             Log.i("hh", this + " -- setUserVisibleHint --" + isVisibleToUser);
-//            list.clear();
-//            currentPage = 1;
-//            requestTopicData();
+            totalList.clear();
+            currentPage = 1;
+            requestData();
         } else {
             Log.i("hh", this + " -- setUserVisibleHint --" + isVisibleToUser);
             if (myFinacialPaymentReturnedAdapter != null) {
-//                list.clear();
+                totalList.clear();
                 currentPage = 1;
                 myFinacialPaymentReturnedAdapter.changeMoreStatus(myFinacialPaymentReturnedAdapter.NO_LOAD_MORE);
             }
@@ -78,7 +93,7 @@ public class MyFinacialPaymentReturnedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        initData();
+//        initData();
         View view = inflater.inflate(R.layout.fragment_recycle_layout, container, false);
         initView(view);
         initListener();
@@ -146,30 +161,79 @@ public class MyFinacialPaymentReturnedFragment extends Fragment {
 
     private void initRecyclerView() {
         recycler_view.setLayoutManager(new LinearLayoutManager(context));
-        myFinacialPaymentReturnedAdapter = new MyFinacialPaymentReturnedAdapter(context, list);
+        myFinacialPaymentReturnedAdapter = new MyFinacialPaymentReturnedAdapter(context, totalList);
         recycler_view.setAdapter(myFinacialPaymentReturnedAdapter);
 //        //添加动画
-//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
     }
 
 
-    private void requestTopicData() {
+    /**
+     * 获取已回款列表数据
+     */
+    public void requestData() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId","8");
+        param.put("pageNum", currentPage);
+        param.put("productType","end");
+        String data = DESUtil.encMap(param);
 
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getMyFinancialListData(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, MyFinancialDataModel>() {
+                    @Override
+                    public void onMyError() {
+                        ToastUtil.showCustom("我的理财列表获取数据失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (result == null) {
+                            return;
+                        }
+                        CommonResultModel<MyFinancialDataModel> financialListDataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<MyFinancialDataModel>>() {
+                        }.getType());
+                        MyFinancialDataModel financialListData = financialListDataModel.data;
+                        if (financialListData == null) {
+                            return;
+                        }
+                         everyList = financialListData.listProducts;
+                        if (everyList == null) {
+                            return;
+                        }
+                        if (everyList.size() == 0 && currentPage != 1) {
+                            ToastUtil.showCustom("已显示全部");
+                            myFinacialPaymentReturnedAdapter.changeMoreStatus(myFinacialPaymentReturnedAdapter.NO_LOAD_MORE);
+                        }
+                        if (currentPage == 1) {
+                            //刚进来时 加载第一页数据，或下拉刷新 重新加载数据 。这两种情况之前的数据都清掉
+                            totalList.clear();
+                        }
+                        totalList.addAll(everyList);
+                        myFinacialPaymentReturnedAdapter.notifyDataSetChanged();
+//                         0:从后台获取到数据展示的布局；1：从后台没有获取到数据时展示的布局；
+//                        if (totalList.size() == 0) {
+//                            vs.setDisplayedChild(1);
+//                        } else {
+//                            vs.setDisplayedChild(0);
+//                        }
+//                        if (totalList.size() != 0 && totalList.size() % 10 == 0) {
+//                            vs.setDisplayedChild(0);
+//                            myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.PULLUP_LOAD_MORE);
+//                        } else {
+//                            myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.NO_LOAD_MORE);
+//                        }
+
+                    }
+                });
     }
 
     private void initListener() {
-//        initPullRefresh();
-//        initLoadMoreListener();
-    }
-
-    private void initPullRefresh() {
-        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {  // 下拉刷新
-                currentPage = 1;
-                requestTopicData();
-            }
-        });
+        initLoadMoreListener();
     }
 
     private void initLoadMoreListener() {
@@ -182,12 +246,12 @@ public class MyFinacialPaymentReturnedFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
                 //判断RecyclerView的状态 是空闲时，同时，是最后一个可见的ITEM时才加载
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == myFinacialPaymentReturnedAdapter.getItemCount() && firstVisibleItem != 0) {
-                    if (list.size() == 0) {
+                    if (everyList.size() == 0) {
                         return;
                     }
 
                     currentPage++;
-                    requestTopicData();
+                    requestData();
                 }
             }
 

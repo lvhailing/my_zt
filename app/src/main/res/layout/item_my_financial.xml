@@ -83,8 +83,7 @@
             android:layout_height="42dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="11dp"
-            />
+            android:layout_marginTop="11dp"/>
     </RelativeLayout>
 
     <View
@@ -101,19 +100,12 @@
         android:paddingTop="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_toRightOf="@id/iv_time"
-            android:text="投资周期："
-            android:textSize="11sp"/>
-
-        <TextView
             android:id="@+id/tv_product_cycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:textSize="11sp"
-            tools:text="2019/06/01-2019/06/30"/>
+            tools:text="投资周期：2019/06/01-2019/06/30"/>
     </LinearLayout>
 
 </LinearLayout>

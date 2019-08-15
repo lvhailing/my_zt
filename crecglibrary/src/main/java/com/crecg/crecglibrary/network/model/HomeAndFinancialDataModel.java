@@ -12,6 +12,6 @@ public class HomeAndFinancialDataModel implements Serializable{
     public String prodSubId; // 基金标识码
     public String annualReturnBys; // 基金七日年化
     public String pageNum; // pageNum
-    public List<HomeAndFinancialProductList> productList; // 理财产品列表
+    public List<HomeAndFinancialProductItemDataModel> productList; // 理财产品列表
 
 }

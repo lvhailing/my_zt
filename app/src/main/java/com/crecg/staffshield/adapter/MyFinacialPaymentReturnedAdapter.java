@@ -1,9 +1,7 @@
 package com.crecg.staffshield.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.crecg.crecglibrary.network.model.ProductModelTestData;
+import com.crecg.crecglibrary.network.model.MyFinancialProductItemDataModel;
 import com.crecg.staffshield.R;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
  */
 public class MyFinacialPaymentReturnedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final ArrayList<ProductModelTestData> list;
+    private final ArrayList<MyFinancialProductItemDataModel> list;
     Context mContext;
     LayoutInflater mInflater;
     private static final int TYPE_ITEM = 0;
@@ -41,7 +39,7 @@ public class MyFinacialPaymentReturnedAdapter extends RecyclerView.Adapter<Recyc
     private int mLoadMoreStatus = 0;
 
 
-    public MyFinacialPaymentReturnedAdapter(Context context, ArrayList<ProductModelTestData> list) {
+    public MyFinacialPaymentReturnedAdapter(Context context, ArrayList<MyFinancialProductItemDataModel> list) {
         mContext = context;
         this.list = list;
         mInflater = LayoutInflater.from(context);
@@ -49,8 +47,8 @@ public class MyFinacialPaymentReturnedAdapter extends RecyclerView.Adapter<Recyc
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM) { // 加载我的理财：持有中列表 item 布局
-            View itemView = mInflater.inflate(R.layout.item_conduct_financial_transactions, parent, false);
+        if (viewType == TYPE_ITEM) { // 加载我的理财：已回款列表 item 布局
+            View itemView = mInflater.inflate(R.layout.item_my_financial, parent, false);
 
             return new ItemViewHolder(itemView);
         } else if (viewType == TYPE_FOOTER) {
@@ -66,12 +64,17 @@ public class MyFinacialPaymentReturnedAdapter extends RecyclerView.Adapter<Recyc
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             itemViewHolder.tv_financial_product_name.setText(list.get(position).name);
-            itemViewHolder.tv_product_holding_share.setText(list.get(position).holdingShare);
-            itemViewHolder.tv_product_expect_income.setText(list.get(position).expectedEarnings);
-            itemViewHolder.tv_product_cycle.setText(list.get(position).date);
-            if (list.get(position).state.equals("four")) {
+            itemViewHolder.tv_product_holding_share.setText(list.get(position).productSum);
+            itemViewHolder.tv_product_expect_income.setText(list.get(position).yuJiPoFit);
+
+            if (list.get(position).status.equals("fail")) { // 募集失败
+                itemViewHolder.tv_product_cycle.setText("投资时间：" + list.get(position).createTime);
+                Glide.with(mContext).load(R.mipmap.img_finacial_state_five).into(itemViewHolder.iv_product_state);
+            } else if (list.get(position).status.equals("repayed") || list.get(position).status.equals("prepayed")) { // 已回款
+                itemViewHolder.tv_product_cycle.setText("产品周期：" + list.get(position).repayStartDate + "-" + list.get(position).repayEndDate);
                 Glide.with(mContext).load(R.mipmap.img_finacial_state_four).into(itemViewHolder.iv_product_state);
             }
+
 
 //            initListener(itemViewHolder.itemView,list.get(position).getTopicId());
         } else if (holder instanceof FooterViewHolder) {
@@ -159,12 +162,12 @@ public class MyFinacialPaymentReturnedAdapter extends RecyclerView.Adapter<Recyc
     }
 
 
-    public void AddHeaderItem(ArrayList<ProductModelTestData> items) {
+    public void AddHeaderItem(ArrayList<MyFinancialProductItemDataModel> items) {
         list.addAll(0, items);
         notifyDataSetChanged();
     }
 
-    public void AddFooterItem(ArrayList<ProductModelTestData> items) {
+    public void AddFooterItem(ArrayList<MyFinancialProductItemDataModel> items) {
         list.addAll(items);
         notifyDataSetChanged();
     }

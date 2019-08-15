@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.crecg.crecglibrary.RemoteFactory;
@@ -16,7 +15,7 @@ import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialDataModel;
-import com.crecg.crecglibrary.network.model.HomeAndFinancialProductList;
+import com.crecg.crecglibrary.network.model.HomeAndFinancialProductItemDataModel;
 import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
@@ -47,7 +46,7 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
     private RecyclerView recycler_view;
     private RegularFinancialListAdapter regularFinancialListAdapter;
     private HomeAndFinancialDataModel financialListData;
-    private ArrayList<HomeAndFinancialProductList> totalList = new ArrayList<>();
+    private ArrayList<HomeAndFinancialProductItemDataModel> totalList = new ArrayList<>();
     private int currentPage = 1;
 
     private ArrayList<ProductModelTestData> list; // 模拟数据
@@ -246,7 +245,7 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
                         if (financialListData == null) {
                             return;
                         }
-                        List<HomeAndFinancialProductList> everyList = financialListData.productList;
+                        List<HomeAndFinancialProductItemDataModel> everyList = financialListData.productList;
 
                         if (everyList == null) {
                             return;

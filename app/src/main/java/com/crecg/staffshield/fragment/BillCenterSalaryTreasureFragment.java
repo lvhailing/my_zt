@@ -116,7 +116,7 @@ public class BillCenterSalaryTreasureFragment extends Fragment {
             @Override
             public void onRefresh() {  // 下拉刷新
                 currentPage = 1;
-//                requestBillCenterAllData();
+//                requestBillCenterAData();
             }
         });
     }

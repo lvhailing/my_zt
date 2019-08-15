@@ -24,10 +24,9 @@ import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialDataModel;
-import com.crecg.crecglibrary.network.model.HomeAndFinancialProductList;
+import com.crecg.crecglibrary.network.model.HomeAndFinancialProductItemDataModel;
 import com.crecg.crecglibrary.network.model.HomePicListItemData;
 import com.crecg.crecglibrary.network.model.HomePicListModelData;
-import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
@@ -36,12 +35,10 @@ import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
-import com.crecg.staffshield.utils.DataUtil;
 import com.crecg.staffshield.widget.MyRollViewPager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -76,7 +73,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     private MyRollViewPager rollViewPager;
 
     private HomeAndFinancialDataModel homeData;
-    private List<HomeAndFinancialProductList> productList; // 定期产品数据
+    private List<HomeAndFinancialProductItemDataModel> productList; // 定期产品数据
     private List<HomePicListItemData> picList;
 
 
@@ -166,12 +163,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         tv_home_more.setOnClickListener(this);
     }
 
-    private View getItemData(final HomeAndFinancialProductList product) {
+    private View getItemData(final HomeAndFinancialProductItemDataModel product) {
         final String status = product.status;
         View ll_item;
         // 加载 item 布局
         ll_item = LayoutInflater.from(context).inflate(R.layout.item_regular_products2, null);
-        if (status.equals("tender") || status.equals("init")) { // 热卖中、即将开售
+        if (status.equals("init") || status.equals("tender")) { // 即将开售、募集中
             LinearLayout ll_container1 = ll_item.findViewById(R.id.ll_container1);
             ll_container1.setVisibility(View.VISIBLE);
 
@@ -192,22 +189,18 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             tv_start_sale_time1.setText(product.tenderStartTime);
 
             if (status.equals("tender")) {
-                //热卖中
+                //募集中
                 ll_best_sell1.setVisibility(View.VISIBLE);
-                String currentProgress = product.bfbAmount;
-                float aa = Float.parseFloat(currentProgress)*100;
-                Log.i("hh", "String转Float后的结果：" + aa);
-                int bb = (int) aa;
-                Log.i("hh", "运算后的结果：" + bb);
-                progressbar.setProgress(bb);
-                tv_surplus_money1.setText(product.syAmount + "元");
+                float currentProgress = Float.parseFloat(product.bfbAmount)*100;
+                progressbar.setProgress((int)currentProgress);
+                tv_surplus_money1.setText(product.syAmount);
             } else if (status.equals("init")) {
                 //即将开售
                 iv_will_sell_state1.setVisibility(View.VISIBLE);
                 iv_will_sell_state1.setBackgroundResource(R.mipmap.img_regular_product_on_sale);
                 fl_start_sell1.setVisibility(View.VISIBLE);
             }
-        } else { // 已售罄、计息中、已回款
+        } else { // 募集失败、已满标、计息中、已回款
             RelativeLayout rl_container2 = ll_item.findViewById(R.id.rl_container2);
             rl_container2.setVisibility(View.VISIBLE);
 
@@ -222,15 +215,19 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             tv_product_cycle2.setText(product.timeLimit + "天");
             tv_initial_investment_amount2.setText(product.tenderInitAmount.toString());
 
-            if (status.equals("success") || status.equals("fail")) { // fail：融资失败---已卖完 success：融资成功--已卖完
-                //已售罄
+            if (status.equals("success")) { // success：融资成功--已满标
+                //已满标
                 iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_sell_out));
-            } else if (status.equals("repaying")) {
-                //计息中
-                iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_interest_bearing));
-            } else if (status.equals("repayed") || status.equals("prepayed")) {
-                //已回款
-                iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_payment_returned));
+            } else if (status.equals("fail")) { // fail：融资失败---募集失败
+                iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_sell_fail));
+            } else {
+                if (status.equals("repaying")) {
+                    //计息中
+                    iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_interest_bearing));
+                } else if (status.equals("repayed") || status.equals("prepayed")) {
+                    //已回款
+                    iv_product_state2.setBackground(getResources().getDrawable(R.mipmap.img_regular_product_payment_returned));
+                }
             }
         }
 
@@ -327,7 +324,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 if (productList == null) {
                     return;
                 }
-                for (HomeAndFinancialProductList productItem : productList) {
+                for (HomeAndFinancialProductItemDataModel productItem : productList) {
                     ll_container.addView(getItemData(productItem));
                 }
             }

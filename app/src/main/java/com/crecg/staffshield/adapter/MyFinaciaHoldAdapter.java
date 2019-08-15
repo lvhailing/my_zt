@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.crecg.crecglibrary.network.model.ProductModelTestData;
+import com.crecg.crecglibrary.network.model.MyFinancialProductItemDataModel;
 import com.crecg.staffshield.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
  */
 public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final ArrayList<ProductModelTestData> list;
+    private final ArrayList<MyFinancialProductItemDataModel> list;
     Context mContext;
     LayoutInflater mInflater;
     private static final int TYPE_ITEM = 0;
@@ -39,7 +39,7 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
     private int mLoadMoreStatus = 0;
 
 
-    public MyFinaciaHoldAdapter(Context context, ArrayList<ProductModelTestData> list) {
+    public MyFinaciaHoldAdapter(Context context, ArrayList<MyFinancialProductItemDataModel> list) {
         mContext = context;
         this.list = list;
         mInflater = LayoutInflater.from(context);
@@ -47,8 +47,8 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM) { // 加载持有中列表 item 布局
-            View itemView = mInflater.inflate(R.layout.item_conduct_financial_transactions, parent, false);
+        if (viewType == TYPE_ITEM) { // 加载我的理财：持有中列表 item 布局
+            View itemView = mInflater.inflate(R.layout.item_my_financial, parent, false);
 
             return new ItemViewHolder(itemView);
         } else if (viewType == TYPE_FOOTER) {
@@ -64,20 +64,21 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             itemViewHolder.tv_financial_product_name.setText(list.get(position).name);
-            itemViewHolder.tv_product_holding_share.setText(list.get(position).holdingShare);
-            itemViewHolder.tv_product_expect_income.setText(list.get(position).expectedEarnings);
-            itemViewHolder.tv_product_expect_income.setText(list.get(position).expectedEarnings);
-            itemViewHolder.tv_product_cycle.setText(list.get(position).date);
+            itemViewHolder.tv_product_holding_share.setText(list.get(position).productSum);
+            itemViewHolder.tv_product_expect_income.setText(list.get(position).yuJiPoFit);
 
-            if (list.get(position).state.equals("one")) {
+            if (list.get(position).status.equals("tender")) { // 募集中
+                itemViewHolder.tv_product_cycle.setText("投资时间：" + list.get(position).createTime);
                 Glide.with(mContext).load(R.mipmap.img_finacial_state_one).into(itemViewHolder.iv_product_state);
-            } else if(list.get(position).state.equals("two")){
-                Glide.with(mContext).load(R.mipmap.img_finacial_state_two).into(itemViewHolder.iv_product_state);
-            }else if(list.get(position).state.equals("three")){
+            } else if (list.get(position).status.equals("success")) { // 已满标
+                itemViewHolder.tv_product_cycle.setText("投资时间：" + list.get(position).createTime);
                 Glide.with(mContext).load(R.mipmap.img_finacial_state_three).into(itemViewHolder.iv_product_state);
+            } else if (list.get(position).status.equals("repaying")) { // 计息中
+                itemViewHolder.tv_product_cycle.setText("产品周期：" + list.get(position).repayStartDate + "-" + list.get(position).repayEndDate);
+                Glide.with(mContext).load(R.mipmap.img_finacial_state_two).into(itemViewHolder.iv_product_state);
             }
 
-//            initListener(itemViewHolder.itemView,list.get(position).getQuestionId());
+            initListener(itemViewHolder.itemView, list.get(position).productId);
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
 
@@ -89,7 +90,7 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
 //                    footerViewHolder.tvLoadText.setText("正加载更多...");
 //                    break;
 //                case NO_LOAD_MORE:  //没有加载更多 隐藏
-                    //隐藏加载更多
+            //隐藏加载更多
 //                    footerViewHolder.loadLayout.setVisibility(View.GONE);
 //                    break;
 
@@ -100,7 +101,7 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public int getItemCount() {
-        return list == null ? 0 : list.size()+1;
+        return list == null ? 0 : list.size() + 1;
     }
 
     @Override
@@ -126,7 +127,7 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
             tv_product_holding_share = itemView.findViewById(R.id.tv_product_holding_share);
             tv_product_expect_income = itemView.findViewById(R.id.tv_product_expect_income);
             tv_product_cycle = itemView.findViewById(R.id.tv_product_cycle);
-            iv_product_state =  itemView.findViewById(R.id.iv_product_state);
+            iv_product_state = itemView.findViewById(R.id.iv_product_state);
 
         }
 
@@ -134,6 +135,7 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     /**
      * item 点击监听
+     *
      * @param itemView
      */
     private void initListener(View itemView, final String id) {
@@ -164,18 +166,19 @@ public class MyFinaciaHoldAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
 
-    public void AddHeaderItem(ArrayList<ProductModelTestData> items) {
+    public void AddHeaderItem(ArrayList<MyFinancialProductItemDataModel> items) {
         list.addAll(0, items);
         notifyDataSetChanged();
     }
 
-    public void AddFooterItem(ArrayList<ProductModelTestData> items) {
+    public void AddFooterItem(ArrayList<MyFinancialProductItemDataModel> items) {
         list.addAll(items);
         notifyDataSetChanged();
     }
 
     /**
      * 更新加载更多状态
+     *
      * @param status
      */
     public void changeMoreStatus(int status) {

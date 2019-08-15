@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
@@ -29,7 +30,7 @@
                     android:id="@+id/tv_regular_product_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="中铁三号"
+                    tools:text="中铁三号"
                     android:textColor="@color/txt_black_333333"
                     android:textSize="15sp"/>
 
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:includeFontPadding="false"
-                    android:text="6.12%"
+                    tools:text="6.12%"
                     android:textColor="@color/txt_red_fc514e"
                     android:textSize="32sp"/>
 
@@ -70,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:includeFontPadding="false"
-                        android:text="31"
+                        tools:text="31"
                         android:textColor="@color/txt_black_333333"
                         android:textSize="32sp"/>
 
@@ -88,13 +89,13 @@
                     android:id="@+id/tv_initial_investment_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10万元起投"
+                    tools:text="10万元起投"
                     android:textColor="@color/txt_black_333333"
                     android:textSize="12sp"/>
             </LinearLayout>
         </RelativeLayout>
 
-        <!-- 产品热卖中布局 -->
+        <!-- 产品募集中布局 -->
         <LinearLayout
             android:id="@+id/ll_best_sell"
             android:layout_width="match_parent"
@@ -114,8 +115,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingBottom="13dp"
-                android:paddingLeft="21dp"
-                android:paddingRight="21dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="15dp"
                 android:paddingTop="13dp">
 
                 <ImageView
@@ -128,14 +129,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="热卖中"
+                    android:text="募集中"
                     android:textColor="@color/txt_black_333333"
                     android:textSize="12sp"/>
 
                 <ProgressBar
                     android:id="@+id/progressbar"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="120dp"
+                    android:layout_width="110dp"
                     android:layout_height="6dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
@@ -206,7 +207,7 @@
                     android:layout_marginLeft="7dp"
                     android:layout_marginTop="15dp"
                     android:layout_toRightOf="@id/iv_left_state"
-                    android:text="2019-06-04 14:00"
+                    tools:text="2019-06-04 14:00"
                     android:textSize="12sp"/>
 
             </RelativeLayout>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,10 +16,11 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:background="@mipmap/img_bill_center_salary"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            tools:background="@mipmap/img_bill_center_salary"/>
 
         <LinearLayout
+            android:id="@+id/ll_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -29,29 +31,40 @@
                 android:id="@+id/tv_card_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="勘设联名卡 - 银行卡（ 2331）"
                 android:textColor="@color/txt_black_333333"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="勘设联名卡 - 银行卡（ 2331）"/>
 
             <TextView
                 android:id="@+id/tv_bill_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:text="今天  18:05"
                 android:textColor="@color/txt_black_333333"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="今天  18:05"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="18dp"
+            android:layout_toRightOf="@id/ll_content"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            tools:text="-5070000.00 "/>
+
+        <ImageView
+            android:id="@+id/iv_arrow_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="-5070000.00 "
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:src="@mipmap/img_arrow_right"
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
     <View
