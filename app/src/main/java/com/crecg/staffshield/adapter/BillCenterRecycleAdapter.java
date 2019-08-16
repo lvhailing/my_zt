@@ -11,11 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crecg.crecglibrary.network.model.BillCenterDataModel;
 import com.crecg.crecglibrary.network.model.BillCenterItemInnerDataModel;
 import com.crecg.crecglibrary.network.model.BillCenterItemOutDataModel;
-import com.crecg.crecglibrary.network.model.BillCenterListData;
-import com.crecg.crecglibrary.network.model.BillCenterModelData;
 import com.crecg.staffshield.R;
 
 import java.util.ArrayList;
@@ -30,6 +27,16 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
     //    private List<BillCenterListData> list;
     private Context mContext;
     private ArrayList<BillCenterItemOutDataModel> list;
+    private static final int TYPE_ITEM_ONE = 0; //  加载账单+时间布局
+    private static final int TYPE_FOOTER = 1; //
+    //上拉加载更多
+    public static final int PULLUP_LOAD_MORE = 0;
+    //正在加载中
+    public static final int LOADING_MORE = 1;
+    //没有加载更多 隐藏
+    public static final int NO_LOAD_MORE = 2;
+    //上拉加载更多状态-默认为0
+    private int mLoadMoreStatus = 0;
 
 
     public BillCenterRecycleAdapter(Context context, ArrayList<BillCenterItemOutDataModel> list) {
@@ -39,8 +46,14 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list2, parent, false);
-        return new BillCenterRecycleAdapter.ItemViewHolder(itemView);
+        if (viewType == TYPE_ITEM_ONE) {
+            View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list2, parent, false);
+            return new BillCenterRecycleAdapter.ItemViewHolder(itemView);
+        }else if (viewType == TYPE_FOOTER) {
+            View itemView = LayoutInflater.from(mContext).inflate(R.layout.load_more_footview_layout, parent, false);
+            return new BillCenterRecycleAdapter.FooterViewHolder(itemView);
+        }
+        return null;
     }
 
     @Override
@@ -49,8 +62,8 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
             for (BillCenterItemOutDataModel item : list) {
                 View monthView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_time, null);
-                TextView tv_time = monthView.findViewById(R.id.tv_time);
-                tv_time.setText(item.month);
+                TextView tv_month = monthView.findViewById(R.id.tv_month);
+                tv_month.setText(item.month);
                 viewHolder.ll_container.addView(monthView);
 
                 List<BillCenterItemInnerDataModel> neiList = item.data;
@@ -92,12 +105,15 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
                         tv_card_title.setText("工资宝收益");
                         tv_money.setTextColor(mContext.getResources().getColor(R.color.txt_red_fc514e));
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_income);
-                        iv_arrow_right.setVisibility(View.GONE);
+                        iv_arrow_right.setVisibility(View.INVISIBLE);
 
                     } else if ("CPDJ".equals(typeCode)) {
                         tv_card_title.setText("勘设联名卡 - 理财");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_buy);
-                    } else if ("".equals(typeCode)) {
+                    } else if ("CPJD".equals(typeCode)) { // 流标 = 回款
+                        tv_card_title.setText("理财 - 勘设联名卡");
+                        iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_money_back);
+                    }else if ("CPHK".equals(typeCode)) { // 回款
                         tv_card_title.setText("理财 - 勘设联名卡");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_money_back);
                     }
@@ -108,6 +124,21 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
 
                     initListener(viewHolder.itemView, neiItem.id);
                 }
+            }
+        }else if (holder instanceof BillCenterRecycleAdapter.FooterViewHolder) {
+            BillCenterRecycleAdapter.FooterViewHolder footerViewHolder = (BillCenterRecycleAdapter.FooterViewHolder) holder;
+
+            switch (mLoadMoreStatus) {
+                case PULLUP_LOAD_MORE: //上拉加载更多
+                    footerViewHolder.tvLoadText.setText("数据加载中...");
+                    break;
+                case LOADING_MORE: //正在加载中
+                    footerViewHolder.tvLoadText.setText("正加载更多...");
+                    break;
+                case NO_LOAD_MORE:  //没有加载更多 隐藏
+                    footerViewHolder.loadLayout.setVisibility(View.GONE);
+                    break;
+
             }
         }
     }
@@ -134,15 +165,15 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
         public FooterViewHolder(View itemView) {
             super(itemView);
 
-            pbLoad = (ProgressBar) itemView.findViewById(R.id.pbLoad);
-            tvLoadText = (TextView) itemView.findViewById(R.id.tvLoadText);
-            loadLayout = (LinearLayout) itemView.findViewById(R.id.loadLayout);
+            pbLoad = itemView.findViewById(R.id.pbLoad);
+            tvLoadText = itemView.findViewById(R.id.tvLoadText);
+            loadLayout = itemView.findViewById(R.id.loadLayout);
         }
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return list == null ? 0 : list.size()+1;
     }
 
     @Override
@@ -174,6 +205,7 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
      * @param status
      */
     public void changeMoreStatus(int status) {
+        mLoadMoreStatus = status;
         notifyDataSetChanged();
     }
 }

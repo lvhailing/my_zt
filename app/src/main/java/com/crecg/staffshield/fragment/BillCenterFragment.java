@@ -31,6 +31,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -226,15 +227,15 @@ public class BillCenterFragment extends Fragment {
         initLoadMoreListener();
     }
 
-    private void initPullRefresh() {
-        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {  // 下拉刷新
-                currentPage = 1;
-                requestBillCenterAData();
-            }
-        });
-    }
+//    private void initPullRefresh() {
+//        swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {  // 下拉刷新
+//                currentPage = 1;
+//                requestBillCenterAData();
+//            }
+//        });
+//    }
 
     private void initLoadMoreListener() {
         recycler_view.setOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -245,8 +246,8 @@ public class BillCenterFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 //判断RecyclerView的状态 是空闲时，同时，是最后一个可见的ITEM时才加载
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == billCenterAllRecycleAdapter.getItemCount() && firstVisibleItem != 0) {
-                    if (list.size() == 0) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == billCenterRecycleAdapter.getItemCount() && firstVisibleItem != 0) {
+                    if (totalList.size() == 0) {
                         return;
                     }
                     currentPage++;
@@ -276,7 +277,11 @@ public class BillCenterFragment extends Fragment {
 
         HashMap<String, Object> paramWrapper = new HashMap<>();
         paramWrapper.put("requestKey", data);
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getBillCenterListData(paramWrapper).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String, BillCenterDataModel>() {
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getBillCenterListData(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, BillCenterDataModel>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("账单中心数据失败");
@@ -289,9 +294,24 @@ public class BillCenterFragment extends Fragment {
                 }
                 CommonResultModel<BillCenterDataModel> billDataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<BillCenterDataModel>>() {
                 }.getType());
-                if (billDataModel == null) {
+                BillCenterDataModel billCenterData = billDataModel.data;
+                if (billCenterData == null) {
                     return;
                 }
+                List<BillCenterItemOutDataModel> everyList = billCenterData.billList;
+                if (everyList == null) {
+                    return;
+                }
+                if (everyList.size() == 0 && currentPage != 1) {
+                    ToastUtil.showCustom("已显示全部");
+                    billCenterRecycleAdapter.changeMoreStatus(billCenterRecycleAdapter.NO_LOAD_MORE);
+                }
+                if (currentPage == 1) {
+                    //刚进来时 加载第一页数据，或下拉刷新 重新加载数据 。这两种情况之前的数据都清掉
+                    totalList.clear();
+                }
+                totalList.addAll(everyList);
+                billCenterRecycleAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -302,11 +322,11 @@ public class BillCenterFragment extends Fragment {
         if (currentTabPosition == 0) {
             type = "all";  //默认请求"全部"的数据
         } else if (currentTabPosition == 1) {
-            type = "bankCard "; // 银行卡
+            type = "bankCard"; // 银行卡
         } else if (currentTabPosition == 2) {
-            type = "fund ";  // 工资宝
+            type = "fund";  // 工资宝
         } else if (currentTabPosition == 3) {
-            type = "product "; // 定期理财
+            type = "product"; // 定期理财
         }
     }
 

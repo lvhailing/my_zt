@@ -26,7 +26,6 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
 
     private final ArrayList<HomeAndFinancialProductItemDataModel> list;
     Context mContext;
-    LayoutInflater mInflater;
     private static final int TYPE_ITEM_ONE = 0; // 热卖中或即将开售的产品布局
     private static final int TYPE_ITEM_TWO = 1; // 已售罄、计息中、已回款等产品布局
     private static final int TYPE_FOOTER = 2;

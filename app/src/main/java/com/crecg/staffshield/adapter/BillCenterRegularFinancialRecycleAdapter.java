@@ -74,7 +74,7 @@ public class BillCenterRegularFinancialRecycleAdapter extends RecyclerView.Adapt
 
         public ItemTimeViewHolder(View itemView) {
             super(itemView);
-            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_time = itemView.findViewById(R.id.tv_month);
         }
     }
 

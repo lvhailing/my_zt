@@ -2,7 +2,6 @@ package com.crecg.staffshield.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.crecg.crecglibrary.network.model.BillCenterListData;
 import com.crecg.crecglibrary.network.model.BillCenterModelData;
-import com.crecg.crecglibrary.network.model.ProductModelTestData;
 import com.crecg.staffshield.R;
 
 import java.util.ArrayList;
@@ -63,7 +60,7 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
 
         public ItemTimeViewHolder(View itemView) {
             super(itemView);
-            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_time = itemView.findViewById(R.id.tv_month);
         }
     }
 

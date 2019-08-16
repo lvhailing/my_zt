@@ -2,6 +2,7 @@ package com.crecg.staffshield.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
     private ImageView iv_back;
     private TextView tv_common_title;
     private XTabLayout tab_layout;
+    private TabLayout sliding_tabs;
     private ViewPager viewpager;
     private String[] titles;
     private BillCenterVpAdapter billCenterVpAdapter; // viewPager 的adapter
@@ -41,6 +43,7 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
         setTitle();
 
         tab_layout = findViewById(R.id.tab_layout);
+//        sliding_tabs = findViewById(R.id.sliding_tabs);
         viewpager = findViewById(R.id.viewpager);
 
         iv_back.setOnClickListener(this);
@@ -58,6 +61,7 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
         titles = new String[]{"全部", "银行卡", "工资宝", "定期理财"};
         billCenterVpAdapter = new BillCenterVpAdapter(getSupportFragmentManager(), titles, this);
         ((BillCenterFragment) billCenterVpAdapter.getItem(0)).setUserId(userId);
+        ((BillCenterFragment)billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
         viewpager.setAdapter(billCenterVpAdapter);
 
         //将TabLayout和ViewPager关联起来
@@ -70,15 +74,16 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onPageSelected(int position) {
-//                if (position == 0) {
-//                    BillCenterFragment billCenterAllFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
-//                    billCenterAllFragment.getTabTitleCurrentPosition(position);
-//                } else if (position == 1) {
-//                    BillCenterBankCardFragment billCenterBankCardFragment = (BillCenterBankCardFragment) billCenterVpAdapter.getItem(position);
-//                    billCenterBankCardFragment.getCurrentTab(position);
-//                } else if (position == 2) {
-//                } else if (position == 3) {
-//                }
+                Log.i("bb","viewpager -- onPageSelected方法");
+                if (position == 0) {
+                    BillCenterFragment billCenterAllFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
+                    billCenterAllFragment.getTabTitleCurrentPosition(position);
+                } else if (position == 1) {
+                    BillCenterFragment billCenterBankCardFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
+                    billCenterBankCardFragment.getTabTitleCurrentPosition(position);
+                } else if (position == 2) {
+                } else if (position == 3) {
+                }
             }
 
             @Override
@@ -86,24 +91,45 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
             }
         });
 
+//        sliding_tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                Log.i("hh", " onTabSelected --- " + tab);
+//                currentTabPosition = tab.getPosition();
+//                Log.i("hh", " currentTabPosition = " + currentTabPosition);
+//                ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).setUserId(userId);
+//                ((BillCenterFragment)billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//                Log.i("bb", " onTabUnselected --- " + tab);
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//                Log.i("bb", " onTabReselected --- " + tab);
+//            }
+//        });
+
         tab_layout.setOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(XTabLayout.Tab tab) {
-                Log.i("hh", " onTabSelected --- " + tab);
+                Log.i("bb", " onTabSelected --- ");
                 currentTabPosition = tab.getPosition();
-                Log.i("hh", " currentTabPosition = " + currentTabPosition);
+                Log.i("bb", " currentTabPosition = " + currentTabPosition);
                 ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).setUserId(userId);
                 ((BillCenterFragment)billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
             }
 
             @Override
             public void onTabUnselected(XTabLayout.Tab tab) {
-                Log.i("hh", " onTabUnselected --- " + tab);
+                Log.i("bb", " onTabUnselected --- ");
             }
 
             @Override
             public void onTabReselected(XTabLayout.Tab tab) {
-                Log.i("hh", " onTabReselected --- " + tab);
+                Log.i("bb", " onTabReselected --- ");
             }
         });
     }

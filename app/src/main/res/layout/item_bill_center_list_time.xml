@@ -6,7 +6,7 @@
     android:background="@color/bg_common_gray_f9f9f9">
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_month"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:paddingLeft="15dp"

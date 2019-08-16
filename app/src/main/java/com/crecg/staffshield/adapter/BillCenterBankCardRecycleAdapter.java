@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.crecg.crecglibrary.network.model.BillCenterListData;
 import com.crecg.staffshield.R;
 
@@ -75,7 +74,7 @@ public class BillCenterBankCardRecycleAdapter extends RecyclerView.Adapter<Recyc
 
         public ItemTimeViewHolder(View itemView) {
             super(itemView);
-            tv_time = itemView.findViewById(R.id.tv_time);
+            tv_time = itemView.findViewById(R.id.tv_month);
         }
     }
 
