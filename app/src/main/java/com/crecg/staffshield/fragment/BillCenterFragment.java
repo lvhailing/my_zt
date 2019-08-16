@@ -311,6 +311,20 @@ public class BillCenterFragment extends Fragment {
                     totalList.clear();
                 }
                 totalList.addAll(everyList);
+                if (totalList.size() > 0) {
+                    String lastMonthName = totalList.get(totalList.size() - 1).month;
+                    if (everyList.size() > 0) {
+                        String firstMonthName = everyList.get(0).month;
+                        if (lastMonthName.equals(firstMonthName)) {
+                            //如果totalList的最后一个月和everyList的第一个月是同一个名称，则说明这两个月是同一个月，只不过因为分页断开了
+                            //将everyList的第一个月的数据移入totalList的最后一个月
+                            totalList.get(totalList.size() - 1).data.addAll(everyList.get(0).data);
+                            everyList.remove(0);
+                        }
+
+                    }
+                }
+
                 billCenterRecycleAdapter.notifyDataSetChanged();
             }
         });
