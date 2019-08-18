@@ -49,7 +49,7 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
         if (viewType == TYPE_ITEM_ONE) {
             View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list2, parent, false);
             return new BillCenterRecycleAdapter.ItemViewHolder(itemView);
-        }else if (viewType == TYPE_FOOTER) {
+        } else if (viewType == TYPE_FOOTER) {
             View itemView = LayoutInflater.from(mContext).inflate(R.layout.load_more_footview_layout, parent, false);
             return new BillCenterRecycleAdapter.FooterViewHolder(itemView);
         }
@@ -74,19 +74,6 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
                     TextView tv_money = itemView.findViewById(R.id.tv_money);
                     ImageView iv_arrow_right = itemView.findViewById(R.id.iv_arrow_right);
                     ImageView iv_left_category_card = itemView.findViewById(R.id.iv_left_category_card);
-
-                    /**
-                     * WTHI = 勘设联名卡-银行卡 (提现)  对应收款账号：withdradalNo    -6000.00
-                     * RCGI = 银行卡-勘设联名卡(充值)  对应收款账号：payNo     +1000.00
-                     *
-                     * XYSG = 工资宝买入(勘设联名卡买入工资宝)  -5000.00
-                     * XYSH = 工资宝赎回 (工资宝赎回到勘设联名卡) +6000.00
-                     * XYSY = 工资宝收益   +10.00
-                     *
-                     * CPDJ = 勘设联名卡-理财（投标）  -5000.00
-                     * CPJD = 理财-勘设联名卡（流标）
-                     * CPHK = 理财-勘设联名卡（回款）  +6000.00
-                     */
                     String typeCode = neiItem.rtxnTypeCode;
                     if ("WTHI".equals(typeCode)) {
                         tv_card_title.setText("勘设联名卡 - 银行卡 (" + neiItem.withdradalNo + ")");
@@ -94,26 +81,24 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
                     } else if ("RCGI".equals(typeCode)) {
                         tv_card_title.setText("银行卡 - 勘设联名卡 (" + neiItem.payNo + ")");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_bank_card_into);
-
                     } else if ("XYSG".equals(typeCode)) { // 工资宝买入
                         tv_card_title.setText("勘设联名卡 - 工资宝");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_buy);
-                    }else if ("XYSH".equals(typeCode)) { // 工资宝赎回
+                    } else if ("XYSH".equals(typeCode)) { // 工资宝赎回
                         tv_card_title.setText("工资宝 - 勘设联名卡");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_redeem);
-                    }else if ("XYSY".equals(typeCode)) { // 工资宝收益
+                    } else if ("XYSY".equals(typeCode)) { // 工资宝收益
                         tv_card_title.setText("工资宝收益");
                         tv_money.setTextColor(mContext.getResources().getColor(R.color.txt_red_fc514e));
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_income);
                         iv_arrow_right.setVisibility(View.INVISIBLE);
-
                     } else if ("CPDJ".equals(typeCode)) {
                         tv_card_title.setText("勘设联名卡 - 理财");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_buy);
                     } else if ("CPJD".equals(typeCode)) { // 流标 = 回款
                         tv_card_title.setText("理财 - 勘设联名卡");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_money_back);
-                    }else if ("CPHK".equals(typeCode)) { // 回款
+                    } else if ("CPHK".equals(typeCode)) { // 回款
                         tv_card_title.setText("理财 - 勘设联名卡");
                         iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_money_back);
                     }
@@ -125,7 +110,7 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
                     initListener(viewHolder.itemView, neiItem.id);
                 }
             }
-        }else if (holder instanceof BillCenterRecycleAdapter.FooterViewHolder) {
+        } else if (holder instanceof BillCenterRecycleAdapter.FooterViewHolder) {
             BillCenterRecycleAdapter.FooterViewHolder footerViewHolder = (BillCenterRecycleAdapter.FooterViewHolder) holder;
 
             switch (mLoadMoreStatus) {
@@ -141,6 +126,19 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
 
             }
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return list == null ? 0 : list.size() + 1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position < list.size()) {
+            return TYPE_ITEM_ONE;
+        }
+        return TYPE_ITEM_ONE;
     }
 
     /**
@@ -169,16 +167,6 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
             tvLoadText = itemView.findViewById(R.id.tvLoadText);
             loadLayout = itemView.findViewById(R.id.loadLayout);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return list == null ? 0 : list.size()+1;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
     }
 
     /**

@@ -61,7 +61,7 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
         titles = new String[]{"全部", "银行卡", "工资宝", "定期理财"};
         billCenterVpAdapter = new BillCenterVpAdapter(getSupportFragmentManager(), titles, this);
         ((BillCenterFragment) billCenterVpAdapter.getItem(0)).setUserId(userId);
-        ((BillCenterFragment)billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
+        ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
         viewpager.setAdapter(billCenterVpAdapter);
 
         //将TabLayout和ViewPager关联起来
@@ -74,7 +74,6 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onPageSelected(int position) {
-                Log.i("bb","viewpager -- onPageSelected方法");
                 if (position == 0) {
                     BillCenterFragment billCenterAllFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
                     billCenterAllFragment.getTabTitleCurrentPosition(position);
@@ -119,7 +118,7 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
                 currentTabPosition = tab.getPosition();
                 Log.i("bb", " currentTabPosition = " + currentTabPosition);
                 ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).setUserId(userId);
-                ((BillCenterFragment)billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
+                ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
             }
 
             @Override
