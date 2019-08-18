@@ -194,6 +194,6 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
      */
     public void changeMoreStatus(int status) {
         mLoadMoreStatus = status;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 }
