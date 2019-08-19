@@ -49,7 +49,7 @@ public class BillCenterFragment extends Fragment {
     private String mParam1;
     private SwipeRefreshLayout swipe_refresh;
     private RecyclerView recycler_view;
-    private int currentPage = -1;    //当前页
+    private int currentPage = 1;    //当前页
     private int currentPosition; // 当前tab位置
     private String userId;
     private ViewSwitcher vs;
@@ -65,6 +65,22 @@ public class BillCenterFragment extends Fragment {
         bundle.putString(KEY, param1);
         fragment.setArguments(bundle);
         return fragment;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            map.clear();
+//            currentPage = 1;
+//            requestBillCenterData();
+//        } else {
+//            if (adapter != null) {
+//                map.clear();
+//                currentPage = 1;
+//                adapter.changeMoreStatus(adapter.NO_LOAD_MORE);
+//            }
+//        }
     }
 
     @Override
@@ -138,24 +154,25 @@ public class BillCenterFragment extends Fragment {
      * 获取“全部”列表数据
      */
     public void requestBillCenterData() {
-        String result = "";
-        if (currentPage == 1) {
-            result = DataUtil.getBankInfo1();
-        } else if (currentPage == 2) {
-            result = DataUtil.getBankInfo2();
-        } else if (currentPage == 3) {
-            result = DataUtil.getBankInfo3();
-        } else if (currentPage == 4) {
-            result = DataUtil.getBankInfo4();
-        } else if (currentPage == -1 || currentPage == 0) {
-            result = DataUtil.getBankInfo0();
-        }
-
+        // 模拟数据
+//        String result = "";
+//        if (currentPage == 1) {
+//            result = DataUtil.getBankInfo1();
+//        } else if (currentPage == 2) {
+//            result = DataUtil.getBankInfo2();
+//        } else if (currentPage == 3) {
+//            result = DataUtil.getBankInfo3();
+//        } else if (currentPage == 4) {
+//            result = DataUtil.getBankInfo4();
+//        } else if (currentPage == -1 || currentPage == 0) {
+//            result = DataUtil.getBankInfo0();
+//        }
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("userId", "26");
         param.put("pageNum", currentPage);
         param.put("type", type);
+        Log.i("hh", "type = " + type + "  pageNum = " + currentPage);
         String data = DESUtil.encMap(param);
 
         HashMap<String, Object> paramWrapper = new HashMap<>();
@@ -183,13 +200,13 @@ public class BillCenterFragment extends Fragment {
                         if (result == null) {
                             return;
                         }
-                        BillCenterDataModel billDataModel = new Gson().fromJson(result, new TypeToken<BillCenterDataModel>() {
+                        CommonResultModel<BillCenterDataModel> billModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<BillCenterDataModel>>() {
                         }.getType());
-                        if (billDataModel == null) {
+                        if (billModel == null || billModel.data == null) {
                             return;
                         }
-                        List<BillCenterItemOutDataModel> everyList = billDataModel.billList;
-                        if ((everyList == null || everyList.size() == 0) && currentPage == 0) {
+                        List<BillCenterItemOutDataModel> everyList = billModel.data.billList;
+                        if ((everyList == null || everyList.size() == 0) && currentPage == 1) {
                             //当前是第一页，且无数据，则显示无数据页面
                             vs.setDisplayedChild(1);
                             return;
@@ -201,7 +218,7 @@ public class BillCenterFragment extends Fragment {
                         }
                         //方便计算本次加载的数据里有几个item
                         everyListOriginal.clear();
-                        everyListOriginal.addAll(billDataModel.billList);
+                        everyListOriginal.addAll(everyList);
 
                         if (currentPage == 1) {
                             //刚进来时 加载第一页数据，或下拉刷新 重新加载数据 。这两种情况之前的数据都清掉

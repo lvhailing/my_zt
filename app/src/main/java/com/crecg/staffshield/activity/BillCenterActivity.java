@@ -74,15 +74,15 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) {
-                    BillCenterFragment billCenterAllFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
-                    billCenterAllFragment.getTabTitleCurrentPosition(position);
-                } else if (position == 1) {
-                    BillCenterFragment billCenterBankCardFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
-                    billCenterBankCardFragment.getTabTitleCurrentPosition(position);
-                } else if (position == 2) {
-                } else if (position == 3) {
-                }
+//                if (position == 0) {
+//                    BillCenterFragment billCenterAllFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
+//                    billCenterAllFragment.getTabTitleCurrentPosition(position);
+//                } else if (position == 1) {
+//                    BillCenterFragment billCenterBankCardFragment = (BillCenterFragment) billCenterVpAdapter.getItem(position);
+//                    billCenterBankCardFragment.getTabTitleCurrentPosition(position);
+//                } else if (position == 2) {
+//                } else if (position == 3) {
+//                }
             }
 
             @Override
@@ -114,21 +114,20 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
         tab_layout.setOnTabSelectedListener(new XTabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(XTabLayout.Tab tab) {
-                Log.i("bb", " onTabSelected --- ");
+                Log.i("hh", " onTabSelected --- ");
                 currentTabPosition = tab.getPosition();
-                Log.i("bb", " currentTabPosition = " + currentTabPosition);
                 ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).setUserId(userId);
                 ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
             }
 
             @Override
             public void onTabUnselected(XTabLayout.Tab tab) {
-                Log.i("bb", " onTabUnselected --- ");
+                Log.i("hh", " onTabUnselected --- ");
             }
 
             @Override
             public void onTabReselected(XTabLayout.Tab tab) {
-                Log.i("bb", " onTabReselected --- ");
+                Log.i("hh", " onTabReselected --- ");
             }
         });
     }

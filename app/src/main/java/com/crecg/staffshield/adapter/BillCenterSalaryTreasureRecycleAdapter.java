@@ -48,7 +48,7 @@ public class BillCenterSalaryTreasureRecycleAdapter extends RecyclerView.Adapter
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_TIME) { // 加载时间节点布局
-            View itemView = mInflater.inflate(R.layout.item_bill_center_list_time, parent, false);
+            View itemView = mInflater.inflate(R.layout.item_bill_center_list_month, parent, false);
 
             return new ItemTimeViewHolder(itemView);
         } else if (viewType == TYPE_ITEM) { // 加载账单布局

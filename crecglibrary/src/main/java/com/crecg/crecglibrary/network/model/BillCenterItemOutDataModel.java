@@ -8,5 +8,5 @@ import java.util.List;
 
 public class BillCenterItemOutDataModel {
     public String month;
-    public List<BillCenterItemInnerDataModel> data;
+    public List<BillCenterItemInnerDataModel> data; // 内层list
 }

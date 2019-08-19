@@ -61,7 +61,7 @@ public class BillCenterRecycleAdapter extends RecyclerView.Adapter<RecyclerView.
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
             for (BillCenterItemOutDataModel item : list) {
-                View monthView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_time, null);
+                View monthView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_month, null);
                 TextView tv_month = monthView.findViewById(R.id.tv_month);
                 tv_month.setText(item.month);
                 viewHolder.ll_container.addView(monthView);

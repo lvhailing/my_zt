@@ -40,7 +40,7 @@ public class BillCenterAllRecycleAdapter extends RecyclerView.Adapter<RecyclerVi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_TIME) { // 加载时间节点布局
-            View itemView = mInflater.inflate(R.layout.item_bill_center_list_time, parent, false);
+            View itemView = mInflater.inflate(R.layout.item_bill_center_list_month, parent, false);
 
             return new BillCenterAllRecycleAdapter.ItemTimeViewHolder(itemView);
         }

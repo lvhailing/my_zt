@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.crecg.crecglibrary.network.model.BillCenterItemInnerDataModel;
 import com.crecg.staffshield.R;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM_ONE) {
             //月条目
-            View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_time, parent, false);
+            View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_month, parent, false);
             return new ItemOneViewHolder(itemView);
         } else if (viewType == TYPE_ITME_TWO) {
             //账单条目
@@ -87,16 +86,9 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
             }
         }
-        List<String> list=new ArrayList<>();
-        list.add("aa");
-        list.add("bb");
-        list.add("cc");
-        for (String item : list) {
-
-        }
         if (holder instanceof ItemOneViewHolder) {
             ItemOneViewHolder viewHolder = (ItemOneViewHolder) holder;
-            viewHolder.tv_time.setText(itemOneData);
+            viewHolder.tv_month.setText(itemOneData);
         } else if (holder instanceof ItemTwoViewHolder) {
             if (itemTwoData == null) {
                 return;
@@ -155,7 +147,7 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         if (map != null) {
-            Log.i("aaa", "total count " + map.keySet().size() + getTotalCount() + 1);
+            Log.i("hh", "total count " +"map.keySet().size = " + map.keySet().size() + " -- getTotalCount() = "+getTotalCount() + " -- Footer:-- "+1);
         }
         return map == null ? 0 : map.keySet().size() + getTotalCount() + 1;
     }
@@ -182,19 +174,19 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     /**
-     * 时间节点布局 viewHolder
+     * 月份节点布局 viewHolder
      */
     public class ItemOneViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tv_time; // 显示的交易 时间
+        private final TextView tv_month; // 显示的交易 时间
 
         public ItemOneViewHolder(View itemView) {
             super(itemView);
-            tv_time = itemView.findViewById(R.id.tv_month);
+            tv_month = itemView.findViewById(R.id.tv_month);
         }
     }
 
     /**
-     * 账单+时间布局 viewHolder
+     * 具体账单交易内容布局 viewHolder
      */
     public class ItemTwoViewHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_left_category_card; // 左侧卡的图标
@@ -213,8 +205,10 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    /**
+     *  Footer布局
+     */
     public class FooterViewHolder extends RecyclerView.ViewHolder {
-
         private final ProgressBar pbLoad;
         private final TextView tvLoadText;
         private final LinearLayout loadLayout;
@@ -228,6 +222,10 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    /**
+     * 获取到内层List集合item 个数
+     * @return count
+     */
     private int getTotalCount() {
         int count = 0;
         for (Map.Entry<String, List<BillCenterItemInnerDataModel>> entry : map.entrySet()) {
@@ -241,8 +239,6 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     /**
      * item 点击监听
-     *
-     * @param itemView
      */
     private void initListener(View itemView, final String id) {
         itemView.setOnClickListener(new View.OnClickListener() {
@@ -259,8 +255,6 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     /**
      * 更新加载更多状态
-     *
-     * @param status
      */
     public void changeMoreStatus(int status) {
         mLoadMoreStatus = status;

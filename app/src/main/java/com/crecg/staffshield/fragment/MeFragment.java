@@ -83,7 +83,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i("hh", "onCreateView --- 方法执行了");
+//        Log.i("hh", "onCreateView --- 方法执行了");
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_me, container, false);
             try {
@@ -134,7 +134,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("hh", "onResume -- 方法执行了");
+//        Log.i("hh", "onResume -- 方法执行了");
         requestData();
     }
 

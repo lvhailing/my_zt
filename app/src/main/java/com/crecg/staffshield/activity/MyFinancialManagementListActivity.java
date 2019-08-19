@@ -113,7 +113,6 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
     }
 
     public void setAboutMoneyData(String waitingIncome, String accumulatedIncome, String totalHoldings) {
-        Log.i("hh", "setAboutMoneyData()");
         this.waitingIncome = waitingIncome;
         this.accumulatedIncome = accumulatedIncome;
         this.totalHoldings = totalHoldings;

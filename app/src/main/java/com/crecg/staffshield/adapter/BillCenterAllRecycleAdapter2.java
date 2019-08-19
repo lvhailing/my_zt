@@ -44,7 +44,7 @@ public class BillCenterAllRecycleAdapter2 extends RecyclerView.Adapter<RecyclerV
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder viewHolder = (ItemViewHolder) holder;
             for (BillCenterListData item : list) {
-                View timeView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_time, null);
+                View timeView = LayoutInflater.from(mContext).inflate(R.layout.item_bill_center_list_month, null);
                 TextView tv_time = timeView.findViewById(R.id.tv_month);
                 tv_time.setText(item.time);
                 viewHolder.ll_container.addView(timeView);
