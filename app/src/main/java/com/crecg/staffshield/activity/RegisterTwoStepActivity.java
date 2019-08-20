@@ -2,6 +2,7 @@ package com.crecg.staffshield.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -39,12 +40,12 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
     private EditText et_register_two_step_name; // 姓名
     private EditText et_register_two_step_id; // 身份证号
     private EditText et_register_two_step_login_password; //  登录密码
+    private TextView tv_registration_agreement; // 注册协议
     private Button btn_register_next_step; // 完成注册
     private String userName;
     private String userIdNo;
     private String loginPwd;
     private String mobile;
-    private LinearLayout ll_upload_work_proof; // 请上传工作证明
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +57,28 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
 
     private void initView() {
         mobile = getIntent().getStringExtra("mobile");
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText("注册");
+
+        setTitle();
 
         et_register_two_step_name = findViewById(R.id.et_register_two_step_name);
         et_register_two_step_id = findViewById(R.id.et_register_two_step_id);
         et_register_two_step_login_password = findViewById(R.id.et_register_two_step_login_password);
+        tv_registration_agreement = findViewById(R.id.tv_registration_agreement);
+        String str = "1、注册表示同意<font color = '#4A67F5'>《注册协议》</font>";
+        tv_registration_agreement.setText(Html.fromHtml(str));
         btn_register_next_step = findViewById(R.id.btn_register_next_step);
 
         iv_back.setOnClickListener(this);
+        tv_registration_agreement.setOnClickListener(this);
         btn_register_next_step.setOnClickListener(this);
+    }
+
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("注册");
     }
 
     @Override
@@ -76,10 +87,10 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
             case R.id.iv_back:
                 finish();
                 break;
-//            case R.id.ll_upload_work_proof: // 上传工作证明
-//                Intent intent = new Intent(this, UploadWorkProofActivity.class);
-//                startActivity(intent);
-//                break;
+            case R.id.tv_registration_agreement: // 注册协议
+                Intent intent = new Intent(this, UploadWorkProofActivity.class);
+                startActivity(intent);
+                break;
             case R.id.btn_register_next_step: // 完成注册
                 checkNull();
                 break;
@@ -112,6 +123,9 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
         getRegisterTwoByPost();
     }
 
+    /**
+     * 获取 注册--身份认证 接口数据
+     */
     private void getRegisterTwoByPost() {
         HashMap<String, Object> param = new HashMap<>();
         param.put("userName", userName);
@@ -128,7 +142,7 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
             @Override
             public void onMyError() {
-                ToastUtil.showCustom("获取数据失败");
+                ToastUtil.showCustom("注册接口二获取数据失败");
             }
 
             @Override

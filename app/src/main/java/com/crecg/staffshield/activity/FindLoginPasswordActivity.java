@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
     private MyHandler mHandler;
     private String btnString;
     private boolean flag;
+    private TextView tv_go_register; //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +64,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
     }
 
     protected void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText(getResources().getString(R.string.title_find_login_password));
+        setTitle();
 
         et_find_password_phone = findViewById(R.id.et_find_password_phone);
         et_find_password_verify_code = findViewById(R.id.et_find_password_verify_code);
@@ -73,17 +72,29 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
         iv_find_password_delete_phone = findViewById(R.id.iv_fine_password_delete_phone);
         iv_find_password_delete_verify_code = findViewById(R.id.iv_find_password_delete_verify_code);
         tv_find_password_get_verify_code = findViewById(R.id.tv_find_password_get_verify_code);
+        tv_go_register = findViewById(R.id.tv_go_register);
+        String str ="手机号未注册，<font color ='#4A67F5'>可以直接注册</font>";
+        tv_go_register.setText(Html.fromHtml(str));
         btn_sure = findViewById(R.id.btn_sure);
 
         iv_back.setOnClickListener(this);
         iv_find_password_delete_phone.setOnClickListener(this);
         iv_find_password_delete_verify_code.setOnClickListener(this);
         tv_find_password_get_verify_code.setOnClickListener(this);
+        tv_go_register.setOnClickListener(this);
         btn_sure.setOnClickListener(this);
 
         mHandler = new MyHandler();
         btnString = getResources().getString(R.string.get_verify_code_again);
 
+    }
+
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText(getResources().getString(R.string.title_find_login_password));
     }
 
     @Override
@@ -111,6 +122,10 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.btn_sure: // 确定
                 checkDataNull();
+                break;
+            case R.id.tv_go_register: // 未注册，跳转注册页
+                Intent intent = new Intent(this, RegisterOneStepActivity.class);
+                startActivity(intent);
                 break;
         }
 

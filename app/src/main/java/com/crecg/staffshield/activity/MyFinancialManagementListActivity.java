@@ -49,7 +49,6 @@ public class MyFinancialManagementListActivity extends BaseActivity implements V
     }
 
     private void initView() {
-        Log.i("hh", "initView()");
         setTitle();
 
         iv_eye_state = findViewById(R.id.iv_eye_state);

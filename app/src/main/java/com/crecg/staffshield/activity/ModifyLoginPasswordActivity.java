@@ -56,11 +56,7 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title.setText(getResources().getString(R.string.title_modify_login_password));
+        setTitle();
 
         et_old_password = findViewById(R.id.et_old_password);
         et_new_password = findViewById(R.id.et_new_password);
@@ -73,6 +69,14 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
 
         iv_back.setOnClickListener(this);
         btn_sure.setOnClickListener(this);
+    }
+
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText(getResources().getString(R.string.title_modify_login_password));
     }
 
     @Override

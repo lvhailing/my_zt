@@ -36,10 +36,11 @@ public interface CommonRequestProxy {
     //测试接口
     @GET("book/receipts/nav1/getgoodslist")
     Observable<CommonResultModel<DataWrapper<DataModel>>> getDeliveryReceiptDetail(@Query("receipt_id") String id, @Query("shop_id") String shopId);
-/*************************************************************************************************************************************************/
+
     // 自己修改的接口
     @POST("toutiao/index")
     Observable<String> getZt(@FieldMap Map<String, Object> params);
+/*************************************************************************************************************************************************/
 
     //注册一（手机号认证）
     @FormUrlEncoded
@@ -110,4 +111,9 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("type/billCenterList")
     Observable<String> getBillCenterListData(@FieldMap Map<String, Object> param);
+
+    //上传图片
+    @FormUrlEncoded
+    @POST("android/account/photo/upload")
+    Observable<String> uploadImage(@FieldMap Map<String, Object> param);
 }

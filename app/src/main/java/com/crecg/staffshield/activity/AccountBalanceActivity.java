@@ -35,13 +35,7 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        tv_right_txt = findViewById(R.id.tv_right_txt);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText("账户余额");
-        tv_right_txt.setVisibility(View.VISIBLE);
-        tv_right_txt.setText("明细");
+        setTitle();
 
         rl_tied_card = findViewById(R.id.rl_tied_card);
         rl_untied_card = findViewById(R.id.rl_untied_card);
@@ -55,6 +49,17 @@ public class AccountBalanceActivity extends BaseActivity implements View.OnClick
         rl_untied_card.setOnClickListener(this);
         btn_turn_out.setOnClickListener(this);
         btn_turn_into.setOnClickListener(this);
+    }
+
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        tv_right_txt = findViewById(R.id.tv_right_txt);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("账户余额");
+        tv_right_txt.setVisibility(View.VISIBLE);
+        tv_right_txt.setText("明细");
     }
 
     @Override

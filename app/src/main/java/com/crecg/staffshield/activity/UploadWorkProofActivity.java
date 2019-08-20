@@ -25,10 +25,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
+import com.crecg.crecglibrary.network.model.LoginModel;
+import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
+import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 import com.crecg.staffshield.dialog.SelectPhotoDialog;
 import com.crecg.staffshield.utils.PhotoUtils;
+import com.crecg.staffshield.utils.PreferenceUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,12 +51,17 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 上传工作证明
  */
 
 public class UploadWorkProofActivity extends BaseActivity implements View.OnClickListener {
+
     private TextView tv_name;  // 姓名
     private TextView tv_id_card;  // 身份证号
     private TextView tv_phone_number;  // 电话
@@ -83,10 +99,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setImageResource(R.mipmap.img_close);
-        tv_common_title.setText(getResources().getString(R.string.title_work_certificate));
+        setTitle();
 
         tv_name = findViewById(R.id.tv_name);
         tv_id_card = findViewById(R.id.tv_id_card);
@@ -122,10 +135,16 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
         btn_join_immediately.setOnClickListener(this);
     }
 
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_back.setImageResource(R.mipmap.img_close);
+        tv_common_title.setText(getResources().getString(R.string.title_work_certificate));
+    }
+
     /**
      * 获取网落图片资源
-     *
-     * @return
      */
     class ImageViewService extends AsyncTask<String, Void, Bitmap> {
 
@@ -146,7 +165,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 //                iv_work_certificate.setImageDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
 //            }
         }
-
     }
 
     private Uri saveBitmap2(Bitmap bm) {
@@ -241,8 +259,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
         //执行拍照前，应该先判断SD卡是否存在
         String sdState = Environment.getExternalStorageState();
         if (sdState.equals(Environment.MEDIA_MOUNTED)) {
-
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//"android.media.action.IMAGE_CAPTURE"
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // "android.media.action.IMAGE_CAPTURE"
             /***
              * 需要说明一下，以下操作使用照相机拍照，拍照后的图片会存放在相册中的
              * 这里使用的这种方式有一个好处就是获取的图片是拍照后的原图
@@ -291,13 +308,11 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                         dialog.setmLoadingTip("正在上传照片，请稍后……");
                         startLoading();
                     }
-
                     newZoomImage = newbitmap;
                     sendImage(newbitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         } else if (requestCode == GALLERY_REQUEST_CODE) {  // 表示用的相册
             if (data == null) {
@@ -308,7 +323,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
             Uri mImageCaptureUri = data.getData();
 
             Bitmap photoBmp = null;
-
             if (mImageCaptureUri != null) {
                 try {
                     photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, mImageCaptureUri);
@@ -339,10 +353,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 
     /**
      * 通过Uri获取文件
-     *
-     * @param ac
-     * @param uri
-     * @return
      */
     public static File getFileFromMediaUri(Context ac, Uri uri) {
         if (uri.getScheme().toString().compareTo("content") == 0) {
@@ -364,8 +374,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 
     /**
      * 通过uri获取图片并进行压缩
-     *
-     * @param uri
      */
     public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
         InputStream input = ac.getContentResolver().openInputStream(uri);
@@ -422,25 +430,25 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
         return bitmap;
     }
 
+    private static Bitmap bitmap;
+
     public static Bitmap zoomImage(Bitmap bgimage, double newWidth, double newHeight) {
-        // 获取这个图片的宽和高
-        float width = bgimage.getWidth();
-        float height = bgimage.getHeight();
-        // 创建操作图片用的matrix对象
-        Matrix matrix = new Matrix();
-        // 计算宽高缩放率
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        // 缩放图片动作
-        matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap bitmap = Bitmap.createBitmap(bgimage, 0, 0, (int) width, (int) height, matrix, true);
+        double targetwidth = Math.sqrt(200.00 * 1000);
+        if (bgimage.getWidth() > targetwidth || bgimage.getHeight() > targetwidth) {
+            // 创建操作图片用的matrix对象
+            Matrix matrix = new Matrix();
+            // 计算宽高缩放率
+            double x = Math.max(targetwidth / bgimage.getWidth(), targetwidth / bgimage.getHeight());
+            // 缩放图片动作
+            matrix.postScale((float) x, (float) x);
+            bitmap = Bitmap.createBitmap(bgimage, 0, 0, (int) bgimage.getWidth(), (int) bgimage.getHeight(), matrix, true);
+            Log.i("hh", "zoomImage = " + bitmap);
+        }
         return bitmap;
     }
 
     /**
      * 调接口，上传图片到服务器
-     *
-     * @param bm
      */
     private void sendImage(Bitmap bm) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -449,30 +457,43 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 
         String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
 
-//        try {
-//            AsyncHttpClient client = new AsyncHttpClient();
-//            RequestParams params = new RequestParams();
-//            params.add("photo", img);
-//            params.add("name", "headPhoto.jpg");
-//            params.add("id", userId);
-//            params.add("photoType", "headPhoto");
-//            String url = Urls.URL_SUBMIT_PHOTO;
-//            client.post(url, params, new AsyncHttpResponseHandler() {
-//                @Override
-//                public void onSuccess(int statusCode, Header[] headers, String content) {
-//                    super.onSuccess(statusCode, headers, content);
-//                    stopLoading();
-//                    newZoomImage = ImageUtils.toRoundBitmap(newZoomImage); // 把图片处理成圆形
-//                    img_photo.setImageBitmap(newZoomImage);
-//                }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("photo", img);
+        param.put("id", "8");
+        param.put("name", "workCertificatePhoto.jpg");
+        param.put("photoType", "gzzm"); // 身份证正面照-zmz，身份证反面照-fmz，工作证明-gzzm，　工会盖章证明-ghzm
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", param);
 
-//                @Override
-//                public void onFailure(Throwable error, String content) {
-//                    super.onFailure(error, content);
-//                }
-//            });
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .uploadImage(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+            @Override
+            public void onMyError() {
+                ToastUtil.showCustom("登录接口获取数据失败");
+                stopLoading();
+            }
+
+            @Override
+            public void onMySuccess(String result) {
+                if (result == null) {
+                    return;
+                }
+                CommonResultModel<ReturnOnlyTrueOrFalseModel> upLoadImgModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                }.getType());
+                if (upLoadImgModel.data == null) {
+                    return;
+                }
+                if (Boolean.parseBoolean(upLoadImgModel.data.flag)) {
+                    stopLoading();
+                    iv_work_certificate.setImageBitmap(newZoomImage);
+                    ToastUtil.showCustom(upLoadImgModel.data.message);
+                } else {
+                    ToastUtil.showCustom(upLoadImgModel.data.message);
+                }
+            }
+        });
     }
 }

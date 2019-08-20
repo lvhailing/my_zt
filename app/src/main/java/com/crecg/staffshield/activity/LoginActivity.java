@@ -138,7 +138,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      */
     private void getLoginByPost() {
         HashMap<String, Object> param = new HashMap<>();
-        param.put("mobile", "13593262371");
+        param.put("mobile", loginPhone); // 测试号："13593262371"
         param.put("password", loginPassword);
         String  data = DESUtil.encMap(param);
 
@@ -152,7 +152,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 .subscribe(new CommonObserverAdapter<String, LoginModel>() {
             @Override
             public void onMyError() {
-                ToastUtil.showCustom("获取数据失败");
+                ToastUtil.showCustom("登录接口获取数据失败");
             }
 
             @Override
@@ -177,6 +177,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         if (Boolean.parseBoolean(loginModel.data.flag)) {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            finish();
                             ToastUtil.showCustom(loginModel.data.message);
                         } else {
                             ToastUtil.showCustom(loginModel.data.message);
