@@ -78,7 +78,8 @@
                 android:id="@+id/iv_work_certificate"
                 android:layout_width="wrap_content"
                 android:layout_height="110dp"
-                android:background="@mipmap/bg_upload"/>
+                android:background="@mipmap/bg_upload"
+                android:scaleType="fitXY"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -105,7 +106,8 @@
                 android:id="@+id/iv_trade_union_certificate"
                 android:layout_width="wrap_content"
                 android:layout_height="110dp"
-                android:background="@mipmap/bg_upload"/>
+                android:background="@mipmap/bg_upload"
+                android:scaleType="fitXY"/>
 
             <Button
                 android:layout_width="match_parent"

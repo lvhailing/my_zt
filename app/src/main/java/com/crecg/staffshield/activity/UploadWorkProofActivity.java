@@ -305,7 +305,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                         dialog.setmLoadingTip("正在上传照片，请稍后……");
                         startLoading();
                     }
-//                    newZoomImage = newBitmap;
+                    newZoomImage = newBitmap;
                     sendImage(newBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -323,7 +323,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
             if (mImageCaptureUri != null) {
                 try {
                     photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, mImageCaptureUri);
-//                    newZoomImage = photoBmp;
+                    newZoomImage = photoBmp;
                     sendImage(photoBmp);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -341,10 +341,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 //            newZoomImage = zoomImage(bm, 600, 300);
 			sendImage( bm);
         }
-//        else if (requestCode == SALES_RETURN) {
-//            //销售认证界面返回，刷新数据
-//            requestUserInfo();
-//        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -447,32 +443,29 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
         return bitmap;
     }
 
-    private static Bitmap bitmap;
-
-    public static Bitmap zoomImage(Bitmap bgimage, double newWidth, double newHeight) {
-        double targetwidth = Math.sqrt(200.00 * 1000);
-        if (bgimage.getWidth() > targetwidth || bgimage.getHeight() > targetwidth) {
-            // 创建操作图片用的matrix对象
-            Matrix matrix = new Matrix();
-            // 计算宽高缩放率
-            double x = Math.max(targetwidth / bgimage.getWidth(), targetwidth / bgimage.getHeight());
-            // 缩放图片动作
-            matrix.postScale((float) x, (float) x);
-            bitmap = Bitmap.createBitmap(bgimage, 0, 0, (int) bgimage.getWidth(), (int) bgimage.getHeight(), matrix, true);
-            Log.i("hh", "zoomImage = " + bitmap);
-        }
-        return bitmap;
-    }
-
     /**
      * 调接口，上传图片到服务器
      */
     private void sendImage(Bitmap bm) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//        bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+//        byte[] bytes = stream.toByteArray();
+//        String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
+
+        int options = 100;
+        bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//质量压缩方法，把压缩后的数据存放到baos中 (100表示不压缩，0表示压缩到最小)
+        while (stream.toByteArray().length > 200 * 1024) {//循环判断如果压缩后图片是否大于指定大小,大于继续压缩
+            stream.reset();//重置baos即让下一次的写入覆盖之前的内容
+            options -= 5;//图片质量每次减少5
+            if (options <= 5) options = 5;//如果图片质量小于5，为保证压缩后的图片质量，图片最底压缩质量为5
+            bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//将压缩后的图片保存到baos中
+            if (options == 5) break;//如果图片的质量已降到最低则，不再进行压缩
+        }
         byte[] bytes = stream.toByteArray();
         String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
+        Log.i("hh", "bytes = " + bytes.length);
         Log.i("hh", "img = " + img.length());
+
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("photo", img);
