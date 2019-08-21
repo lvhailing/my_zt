@@ -29,7 +29,6 @@ import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
-import com.crecg.crecglibrary.network.model.LoginModel;
 import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
@@ -37,7 +36,6 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
 import com.crecg.staffshield.dialog.SelectPhotoDialog;
 import com.crecg.staffshield.utils.PhotoUtils;
-import com.crecg.staffshield.utils.PreferenceUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -117,7 +115,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 
         if (!TextUtils.isEmpty(workCertificate)) {
             File file = new File(IMG_PATH);
-
             if (file.exists()) {
                 Bitmap bitmap = BitmapFactory.decodeFile(IMG_PATH + "Test.png");
                 iv_work_certificate.setImageBitmap(bitmap);
@@ -303,13 +300,13 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                     int degree = PhotoUtils.readPictureDegree(file.getAbsolutePath());
 //                    Log.i("aaa", "degree:  " + degree);
                     // 把图片旋转为正的方向
-                    Bitmap newbitmap = PhotoUtils.rotateBitmap(photoBmp, degree);
-                    if (newbitmap != null) {
+                    Bitmap newBitmap = PhotoUtils.rotateBitmap(photoBmp, degree);
+                    if (newBitmap != null) {
                         dialog.setmLoadingTip("正在上传照片，请稍后……");
                         startLoading();
                     }
-                    newZoomImage = newbitmap;
-                    sendImage(newbitmap);
+//                    newZoomImage = newBitmap;
+                    sendImage(newBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -326,13 +323,13 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
             if (mImageCaptureUri != null) {
                 try {
                     photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, mImageCaptureUri);
-                    newZoomImage = photoBmp;
+//                    newZoomImage = photoBmp;
                     sendImage(photoBmp);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        } else if (requestCode == CROP_REQUEST_CODE) {
+        } else if (requestCode == CROP_REQUEST_CODE) { // 裁剪
             if (data == null) {
                 return;
             }
@@ -341,8 +338,8 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                 return;
             }
             Bitmap bm = extras.getParcelable("data");
-            newZoomImage = zoomImage(bm, 600, 300);
-//			sendImage(newZoomImage);
+//            newZoomImage = zoomImage(bm, 600, 300);
+			sendImage( bm);
         }
 //        else if (requestCode == SALES_RETURN) {
 //            //销售认证界面返回，刷新数据
@@ -383,47 +380,67 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
         onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//optional
         BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
         input.close();
+        //开始按比例缩放图片
+        onlyBoundsOptions.inJustDecodeBounds = false;
         int originalWidth = onlyBoundsOptions.outWidth;
         int originalHeight = onlyBoundsOptions.outHeight;
-        if ((originalWidth == -1) || (originalHeight == -1)) return null;
-        //图片分辨率以480x800为标准
-        float hh = 800f;//这里设置高度为800f
-        float ww = 480f;//这里设置宽度为480f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
-            be = (int) (originalWidth / ww);
-        } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放
-            be = (int) (originalHeight / hh);
+        float maxSize = 1200;
+        int be = 1;
+        if (originalWidth >= originalHeight && originalWidth > maxSize) {//缩放比,用高或者宽其中较大的一个数据进行计算
+            be = (int) (onlyBoundsOptions.outWidth / maxSize);
+            be++;
+        } else if (originalWidth < originalHeight && originalHeight > maxSize) {
+            be = (int) (onlyBoundsOptions.outHeight / maxSize);
+            be++;
         }
-        if (be <= 0) be = 1;
+//        if ((originalWidth == -1) || (originalHeight == -1)){
+//            return null;
+//        }
+        //图片分辨率以480x800为标准
+//        float hh = 800f;//这里设置高度为800f
+//        float ww = 480f;//这里设置宽度为480f
+        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
+//        int be = 1;//be=1表示不缩放
+//        if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
+//            be = (int) (originalWidth / ww);
+//        } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放
+//            be = (int) (originalHeight / hh);
+//        }
+//        if (be <= 0){
+//            be = 1;
+//        }
         //比例压缩
-        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-        bitmapOptions.inSampleSize = be;//设置缩放比例
-        bitmapOptions.inDither = true;//optional
-        bitmapOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//optional
+//        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+        onlyBoundsOptions.inSampleSize = be;//设置缩放比例
+        onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//该模式是默认的,可不设
+        onlyBoundsOptions.inPurgeable = true;// 同时设置才会有效
+        onlyBoundsOptions.inInputShareable = true;//当系统内存不够时候图片自动被回收
         input = ac.getContentResolver().openInputStream(uri);
-        Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
+        Bitmap bitmap = BitmapFactory.decodeStream(input, null, onlyBoundsOptions);
         input.close();
-
         return compressImage(bitmap);//再进行质量压缩
     }
 
     /**
      * 质量压缩方法
-     *
      * @param image
      * @return
      */
     public static Bitmap compressImage(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
-        while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
+        image.compress(Bitmap.CompressFormat.JPEG, options, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        while (baos.toByteArray().length >200 *1024) {  //循环判断如果压缩后图片是否大于200kb,大于继续压缩
             baos.reset();//重置baos即清空baos
+            options -= 5;//图片质量每次减少5
+            if (options <= 5) {
+                options = 5;//如果图片质量小于5，为保证压缩后的图片质量，图片最底压缩质量为5
+            }
             //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
             image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
-            options -= 10;//每次都减少10
+            if (options == 5){
+                break;//如果图片的质量已降到最低则，不再进行压缩
+            }
         }
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据保存放到ByteArrayInputStream中
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
@@ -454,25 +471,27 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] bytes = stream.toByteArray();
-
         String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
+        Log.i("hh", "img = " + img.length());
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("photo", img);
         param.put("id", "8");
-        param.put("name", "workCertificatePhoto.jpg");
-        param.put("photoType", "gzzm"); // 身份证正面照-zmz，身份证反面照-fmz，工作证明-gzzm，　工会盖章证明-ghzm
-        HashMap<String, Object> paramWrapper = new HashMap<>();
-        paramWrapper.put("requestKey", param);
+        param.put("name", "workPhoto.jpg");
+        param.put("photoType", "gzzm");  // 身份证正面照-zmz，身份证反面照-fmz，工作证明-gzzm，　工会盖章证明-ghzm
+        String data = DESUtil.encMap(param);
 
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+//                .uploadImage1(img,"8","workPhoto.jpg","gzzm")
                 .uploadImage(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
             @Override
             public void onMyError() {
-                ToastUtil.showCustom("登录接口获取数据失败");
+                ToastUtil.showCustom("上传图片接口获取数据失败");
                 stopLoading();
             }
 
@@ -489,6 +508,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                 if (Boolean.parseBoolean(upLoadImgModel.data.flag)) {
                     stopLoading();
                     iv_work_certificate.setImageBitmap(newZoomImage);
+                    saveBitmap2(newZoomImage);
                     ToastUtil.showCustom(upLoadImgModel.data.message);
                 } else {
                     ToastUtil.showCustom(upLoadImgModel.data.message);
@@ -496,4 +516,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
             }
         });
     }
+
+
 }

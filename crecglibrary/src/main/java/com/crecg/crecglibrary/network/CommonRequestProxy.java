@@ -8,6 +8,7 @@ import com.crecg.crecglibrary.network.model.DataWrapper;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -116,4 +117,9 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("android/account/photo/upload")
     Observable<String> uploadImage(@FieldMap Map<String, Object> param);
+
+    //上传图片
+    @FormUrlEncoded
+    @POST("android/account/photo/upload")
+    Observable<String> uploadImage1(@Field("photo") String photo, @Field("id") String userId, @Field("name") String name, @Field("photoType") String photoType);
 }

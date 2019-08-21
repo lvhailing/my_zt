@@ -26,7 +26,7 @@ public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
     @Override
     public void onNext(T1 result) {
         String encStr = (String) result; // 后台返回的加密数据
-//        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
+        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
         if (TextUtils.isEmpty(encStr)) {
             onMyError();
         } else {
