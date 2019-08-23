@@ -131,7 +131,7 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
                 .getFastPaymentVerifyCode(paramWrapper).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("获取数据失败");
@@ -174,7 +174,7 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
                 .getFastPaymentSubmit(paramWrapper).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("获取数据失败");

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bg_gray"
     android:scrollbars="none">
 
@@ -94,9 +94,9 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:includeFontPadding="false"
-                        tools:text="270024.99"
                         android:textColor="@color/white"
-                        android:textSize="34sp"/>
+                        android:textSize="34sp"
+                        tools:text="270024.99"/>
 
                     <ImageView
                         android:id="@+id/iv_eye_state"
@@ -286,9 +286,9 @@
                         android:includeFontPadding="false"
                         android:maxLength="16"
                         android:maxLines="1"
-                        tools:text="112000.00"
                         android:textColor="@color/txt_black_333333"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        tools:text="112000.00"/>
                 </RelativeLayout>
 
                 <View
@@ -405,9 +405,9 @@
                             android:includeFontPadding="false"
                             android:maxLength="16"
                             android:maxLines="1"
-                            tools:text="112000.00"
                             android:textColor="@color/txt_black_333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp"
+                            tools:text="112000.00"/>
                     </RelativeLayout>
 
                     <View
@@ -461,9 +461,9 @@
                                 android:includeFontPadding="false"
                                 android:maxLength="16"
                                 android:maxLines="1"
-                                tools:text="112000.00"
                                 android:textColor="@color/txt_black_333333"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp"
+                                tools:text="112000.00"/>
                         </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
@@ -473,8 +473,8 @@
                     android:layout_height="1dp"
                     android:background="@color/bg_line"/>
             </LinearLayout>
-            <!--定期理财 start-->
 
+            <!--定期理财 start-->
             <LinearLayout
                 android:id="@+id/ll_conduct_financial_transactions"
                 android:layout_width="wrap_content"
@@ -547,9 +547,9 @@
                             android:includeFontPadding="false"
                             android:maxLength="16"
                             android:maxLines="1"
-                            tools:text="112000.00"
                             android:textColor="@color/txt_black_333333"
-                            android:textSize="14sp"/>
+                            android:textSize="14sp"
+                            tools:text="112000.00"/>
                     </RelativeLayout>
 
                     <View
@@ -603,9 +603,9 @@
                                 android:includeFontPadding="false"
                                 android:maxLength="16"
                                 android:maxLines="1"
-                                tools:text="112000.00"
                                 android:textColor="@color/txt_black_333333"
-                                android:textSize="14sp"/>
+                                android:textSize="14sp"
+                                tools:text="112000.00"/>
                         </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
@@ -614,11 +614,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/bg_line"/>
-
             </LinearLayout>
-
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_my_insurance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="13dp"
+            android:paddingTop="13dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/me_tv_my_insurance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/me_my_insurance"
+                android:textColor="@color/txt_black_333333"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/img_arrow_right"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_line"/>
 
         <RelativeLayout
             android:id="@+id/rl_invite_colleagues"
@@ -644,11 +672,5 @@
                 android:layout_marginRight="15dp"
                 android:src="@mipmap/img_arrow_right"/>
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:background="@color/white"/>
-
     </LinearLayout>
 </ScrollView>

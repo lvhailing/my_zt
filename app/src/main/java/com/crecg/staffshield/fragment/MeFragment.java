@@ -28,6 +28,7 @@ import com.crecg.staffshield.activity.AccountBalanceActivity;
 import com.crecg.staffshield.activity.EntityBankToElectronicBankActivity;
 import com.crecg.staffshield.activity.ElectronicBankToEntityBankActivity;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
+import com.crecg.staffshield.activity.MyInsuranceActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.SettingActivity;
 import com.google.gson.Gson;
@@ -56,6 +57,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private Button btn_turn_out; // 转出
     private LinearLayout ll_salary_treasure; // 工资宝 布局
     private LinearLayout ll_conduct_financial_transactions; // 定期理财 布局
+    private RelativeLayout rl_my_insurance; // 我的保险
     private RelativeLayout rl_invite_colleagues; // 邀请同事
     private RelativeLayout rl_account_balance; // 账户余额
 
@@ -73,7 +75,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            Log.i("hh", getClass() + "--- isVisibleToUser = " + isVisibleToUser);
+//            Log.i("hh", "MeFragment --- isVisibleToUser = " + isVisibleToUser);
             if (context != null) {
                 requestData();
             }
@@ -83,7 +85,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//        Log.i("hh", "onCreateView --- 方法执行了");
         if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_me, container, false);
             try {
@@ -117,6 +118,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         rl_account_balance = mView.findViewById(R.id.rl_account_balance);
         ll_salary_treasure = mView.findViewById(R.id.ll_salary_treasure);
         ll_conduct_financial_transactions = mView.findViewById(R.id.ll_conduct_financial_transactions);
+        rl_my_insurance = mView.findViewById(R.id.rl_my_insurance);
         rl_invite_colleagues = mView.findViewById(R.id.rl_invite_colleagues);
 //        me_rl_customer_service_center = mView.findViewById(R.id.me_rl_customer_service_center);
 
@@ -128,6 +130,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         btn_turn_out.setOnClickListener(this);
         ll_salary_treasure.setOnClickListener(this);
         ll_conduct_financial_transactions.setOnClickListener(this);
+        rl_my_insurance.setOnClickListener(this);
         rl_invite_colleagues.setOnClickListener(this);
     }
 
@@ -151,7 +154,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getMyData(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, MyDataModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("我的模块数据失败");
@@ -245,6 +248,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_conduct_financial_transactions: // 定期理财
                 intent = new Intent(context, MyFinancialManagementListActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.rl_my_insurance: // 我的保险
+                intent = new Intent(context, MyInsuranceActivity.class);
                 startActivity(intent);
                 break;
             case R.id.rl_invite_colleagues: // 邀请同事（跳H5）

@@ -175,7 +175,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
                 .getVerifyCodeByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("获取数据失败");
@@ -255,7 +255,7 @@ public class FindLoginPasswordActivity extends BaseActivity implements View.OnCl
                 .getFindPwdByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
                         ToastUtil.showCustom("获取数据失败");

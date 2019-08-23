@@ -137,7 +137,7 @@ public class ModifyLoginPasswordActivity extends BaseActivity implements View.On
                 .modifyPasswordByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
                         ToastUtil.showCustom("获取数据失败");

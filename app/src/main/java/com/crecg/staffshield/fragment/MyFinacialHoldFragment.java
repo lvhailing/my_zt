@@ -186,7 +186,7 @@ public class MyFinacialHoldFragment extends Fragment {
                 .getMyFinancialListData(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, MyFinancialDataModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
                         ToastUtil.showCustom("我的理财列表获取数据失败");

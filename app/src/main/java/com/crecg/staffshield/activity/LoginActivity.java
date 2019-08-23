@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 .getLoginByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, LoginModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("登录接口获取数据失败");

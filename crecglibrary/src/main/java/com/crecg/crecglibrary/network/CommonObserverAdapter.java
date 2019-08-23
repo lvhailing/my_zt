@@ -16,7 +16,7 @@ import io.reactivex.disposables.Disposable;
  *
  * T1：观察者期望观察的项的类型
  */
-public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
+public abstract class CommonObserverAdapter<T1> implements Observer<T1> {
     public static final String TAG = CommonObserverAdapter.class.getSimpleName();
 
     @Override
@@ -26,7 +26,7 @@ public abstract class CommonObserverAdapter<T1, T2> implements Observer<T1> {
     @Override
     public void onNext(T1 result) {
         String encStr = (String) result; // 后台返回的加密数据
-        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
+//        Log.i("hh", "后台返回的加密数据 -- encStr：" + encStr);
         if (TextUtils.isEmpty(encStr)) {
             onMyError();
         } else {

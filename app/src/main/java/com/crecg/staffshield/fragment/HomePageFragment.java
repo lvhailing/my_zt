@@ -262,7 +262,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 .getHomePicListByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, HomePicListModelData>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("轮播图获取数据失败");
@@ -301,7 +301,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 .requestHomeAndFinancialData(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, HomeAndFinancialDataModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("首页获取数据失败");

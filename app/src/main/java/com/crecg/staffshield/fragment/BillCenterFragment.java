@@ -48,11 +48,11 @@ public class BillCenterFragment extends Fragment {
     private static final String KEY = "param1";
     private String mParam1;
     private SwipeRefreshLayout swipe_refresh;
+    private ViewSwitcher vs;
     private RecyclerView recycler_view;
     private int currentPage = 1;    //当前页
     private int currentPosition; // 当前tab位置
     private String userId;
-    private ViewSwitcher vs;
 
     private String type;
     private BillCenterRVAdapter adapter;
@@ -70,17 +70,17 @@ public class BillCenterFragment extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-//        if (isVisibleToUser) {
-//            map.clear();
-//            currentPage = 1;
-//            requestBillCenterData();
-//        } else {
-//            if (adapter != null) {
-//                map.clear();
-//                currentPage = 1;
-//                adapter.changeMoreStatus(adapter.NO_LOAD_MORE);
-//            }
-//        }
+        if (isVisibleToUser) {
+            map.clear();
+            currentPage = 1;
+            requestBillCenterData();
+        } else {
+            if (adapter != null) {
+                map.clear();
+                currentPage = 1;
+                adapter.changeMoreStatus(adapter.NO_LOAD_MORE);
+            }
+        }
     }
 
     @Override
@@ -96,9 +96,8 @@ public class BillCenterFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recycle_layout, container, false); // Todo need modify
 
         initView(view);
-        initLoadMoreListener();
-        initPullRefreshListener();
-        requestBillCenterData();
+        initListener();
+//        requestBillCenterData();
 
         return view;
     }
@@ -113,6 +112,11 @@ public class BillCenterFragment extends Fragment {
         recycler_view.setAdapter(adapter);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
 
+    }
+
+    private void initListener() {
+        initLoadMoreListener();
+        initPullRefreshListener();
     }
 
     private void initLoadMoreListener() {
@@ -167,7 +171,7 @@ public class BillCenterFragment extends Fragment {
 //        } else if (currentPage == -1 || currentPage == 0) {
 //            result = DataUtil.getBankInfo0();
 //        }
-
+        Log.i("hh", "调接口的方法：requestBillCenterData()");
         HashMap<String, Object> param = new HashMap<>();
         param.put("userId", "26");
         param.put("pageNum", currentPage);
@@ -181,7 +185,7 @@ public class BillCenterFragment extends Fragment {
                 .getBillCenterListData(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, BillCenterDataModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
                         if (swipe_refresh.isRefreshing()) {
@@ -270,6 +274,7 @@ public class BillCenterFragment extends Fragment {
         } else if (currentTabPosition == 3) {
             type = "product"; // 定期理财
         }
+        Log.i("hh", "type = " + type);
     }
 
     public String setUserId(String userId) {

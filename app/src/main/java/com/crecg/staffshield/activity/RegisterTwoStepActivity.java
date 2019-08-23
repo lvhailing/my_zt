@@ -139,7 +139,7 @@ public class RegisterTwoStepActivity extends BaseActivity implements View.OnClic
 
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
                 .getRegisterTwoStepByPost(paramWrapper).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("注册接口二获取数据失败");

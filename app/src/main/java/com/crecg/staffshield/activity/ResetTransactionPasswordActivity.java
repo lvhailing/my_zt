@@ -141,7 +141,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
                 .getVerifyCodeByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
                         ToastUtil.showCustom("获取数据失败");
@@ -247,7 +247,7 @@ public class ResetTransactionPasswordActivity extends BaseActivity implements Vi
                 .resetTransactionPwdByPost(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
                         ToastUtil.showCustom("获取数据失败");

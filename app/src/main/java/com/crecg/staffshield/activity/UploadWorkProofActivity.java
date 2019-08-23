@@ -83,7 +83,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
     //使用相册中的图片
     public static final int SELECT_PIC_BY_PICK_PHOTO = 2;
     private String workCertificate;
-    private Bitmap newZoomImage;
+    private Bitmap newZoomImage; // ImageView最终要展示的bitmap
     private ImageView iv_back;
     private TextView tv_common_title;
 
@@ -216,6 +216,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                 selectPhoto();
                 break;
             case R.id.ll_upload_right: // 上传工会盖章证明材料
+                selectPhoto();
                 break;
             case R.id.btn_join_immediately: // 立即加入
 
@@ -296,7 +297,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 
             if (photoUri != null) {
                 try {
-                    photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, Uri.fromFile(file));
+                    photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, photoUri);
                     int degree = PhotoUtils.readPictureDegree(file.getAbsolutePath());
 //                    Log.i("aaa", "degree:  " + degree);
                     // 把图片旋转为正的方向
@@ -318,12 +319,13 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
             dialog.setmLoadingTip("正在上传照片，请稍后……");
             startLoading();
             Uri mImageCaptureUri = data.getData();
-
             Bitmap photoBmp = null;
             if (mImageCaptureUri != null) {
                 try {
                     photoBmp = getBitmapFormUri(UploadWorkProofActivity.this, mImageCaptureUri);
                     newZoomImage = photoBmp;
+
+                    // 图片上传到服务器
                     sendImage(photoBmp);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -369,6 +371,11 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
      * 通过uri获取图片并进行压缩
      */
     public static Bitmap getBitmapFormUri(Activity ac, Uri uri) throws FileNotFoundException, IOException {
+//        InputStream input = ac.getContentResolver().openInputStream(uri);
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inPreferredConfig = Bitmap.Config.RGB_565;
+//        return BitmapFactory.decodeStream(input, null, options);
+
         InputStream input = ac.getContentResolver().openInputStream(uri);
         BitmapFactory.Options onlyBoundsOptions = new BitmapFactory.Options();
         onlyBoundsOptions.inJustDecodeBounds = true;
@@ -389,24 +396,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
             be = (int) (onlyBoundsOptions.outHeight / maxSize);
             be++;
         }
-//        if ((originalWidth == -1) || (originalHeight == -1)){
-//            return null;
-//        }
-        //图片分辨率以480x800为标准
-//        float hh = 800f;//这里设置高度为800f
-//        float ww = 480f;//这里设置宽度为480f
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-//        int be = 1;//be=1表示不缩放
-//        if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
-//            be = (int) (originalWidth / ww);
-//        } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放
-//            be = (int) (originalHeight / hh);
-//        }
-//        if (be <= 0){
-//            be = 1;
-//        }
         //比例压缩
-//        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
         onlyBoundsOptions.inSampleSize = be;//设置缩放比例
         onlyBoundsOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;//该模式是默认的,可不设
         onlyBoundsOptions.inPurgeable = true;// 同时设置才会有效
@@ -454,12 +444,18 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
 
         int options = 100;
         bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//质量压缩方法，把压缩后的数据存放到baos中 (100表示不压缩，0表示压缩到最小)
+            Log.i("hh", "options1 = " + options);
         while (stream.toByteArray().length > 200 * 1024) {//循环判断如果压缩后图片是否大于指定大小,大于继续压缩
             stream.reset();//重置baos即让下一次的写入覆盖之前的内容
             options -= 5;//图片质量每次减少5
-            if (options <= 5) options = 5;//如果图片质量小于5，为保证压缩后的图片质量，图片最底压缩质量为5
+            if (options <= 5) { //如果图片质量小于5，为保证压缩后的图片质量，图片最底压缩质量为5
+                options = 5;
+            }
             bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//将压缩后的图片保存到baos中
-            if (options == 5) break;//如果图片的质量已降到最低则，不再进行压缩
+            Log.i("hh", "options2 = " + options);
+            if (options == 5) { //如果图片的质量已降到最低则，不再进行压缩
+                break;
+            }
         }
         byte[] bytes = stream.toByteArray();
         String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
@@ -481,7 +477,7 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
                 .uploadImage(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new CommonObserverAdapter<String, ReturnOnlyTrueOrFalseModel>() {
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("上传图片接口获取数据失败");

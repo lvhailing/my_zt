@@ -13,31 +13,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.androidkun.xtablayout.XTabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            app:xTabIndicatorColor="@color/main_blue_4A67F5"
-            app:xTabIndicatorHeight="2dp"
-            app:xTabIndicatorWidth="35dp"
-            app:xTabMode="scrollable"
-            app:xTabSelectedTextColor="@color/main_blue_4A67F5"
-            app:xTabSelectedTextSize="18sp"
-            app:xTabTextBold="true"
-            app:xTabTextColor="@color/txt_black_333333"
-            app:xTabTextSize="15sp"/>
-
-        <!--<android.support.design.widget.TabLayout-->
-            <!--android:id="@+id/sliding_tabs"-->
+        <!--<com.androidkun.xtablayout.XTabLayout-->
+            <!--android:id="@+id/tab_layout"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="54dp"-->
-            <!--android:background="@color/white"-->
-            <!--app:tabContentStart="18dp"-->
-            <!--app:tabGravity="center"-->
-            <!--app:tabSelectedTextColor="@color/main_blue_4A67F5"-->
-            <!--app:tabTextColor="@color/txt_black_333333"-->
-            <!--app:tabIndicatorColor="@color/main_blue_4A67F5"-->
-            <!--app:tabMode="scrollable"/>-->
+            <!--app:xTabIndicatorColor="@color/main_blue_4A67F5"-->
+            <!--app:xTabIndicatorHeight="2dp"-->
+            <!--app:xTabIndicatorWidth="35dp"-->
+            <!--app:xTabMode="scrollable"-->
+            <!--app:xTabSelectedTextColor="@color/main_blue_4A67F5"-->
+            <!--app:xTabSelectedTextSize="18sp"-->
+            <!--app:xTabTextBold="true"-->
+            <!--app:xTabTextColor="@color/txt_black_333333"-->
+            <!--app:xTabTextSize="15sp"/>-->
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="@color/white"
+            app:tabContentStart="18dp"
+            app:tabGravity="center"
+            app:tabSelectedTextColor="@color/main_blue_4A67F5"
+            app:tabTextColor="@color/txt_black_333333"
+            app:tabIndicatorColor="@color/main_blue_4A67F5"
+            app:tabMode="scrollable"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"

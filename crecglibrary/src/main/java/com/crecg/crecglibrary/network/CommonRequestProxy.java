@@ -113,13 +113,23 @@ public interface CommonRequestProxy {
     @POST("type/billCenterList")
     Observable<String> getBillCenterListData(@FieldMap Map<String, Object> param);
 
-    //上传图片
+    //上传图片 (参数加密，返回数据也加密)
     @FormUrlEncoded
     @POST("android/account/photo/upload")
     Observable<String> uploadImage(@FieldMap Map<String, Object> param);
 
-    //上传图片
+    //上传图片(入参和返回数据都未加密)
     @FormUrlEncoded
     @POST("android/account/photo/upload")
     Observable<String> uploadImage1(@Field("photo") String photo, @Field("id") String userId, @Field("name") String name, @Field("photoType") String photoType);
+
+    // 获取保险列表数据
+    @FormUrlEncoded
+    @POST("myInsuranceOrder/list/get")
+    Observable<String>getInsuranceListData(@FieldMap Map<String, Object> param);
+
+    // 充值和提现详情接口
+    @FormUrlEncoded
+    @POST("userInfo/transaction/order/detail")
+    Observable<String>getRechargeWithdrawalData(@FieldMap Map<String, Object> param);
 }

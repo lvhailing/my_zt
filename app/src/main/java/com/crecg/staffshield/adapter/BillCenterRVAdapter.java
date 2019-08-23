@@ -147,7 +147,7 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         if (map != null) {
-            Log.i("hh", "total count " +"map.keySet().size = " + map.keySet().size() + " -- getTotalCount() = "+getTotalCount() + " -- Footer:-- "+1);
+//            Log.i("hh", "total count " +"map.keySet().size = " + map.keySet().size() + " -- getTotalCount() = "+getTotalCount() + " -- Footer:-- "+1);
         }
         return map == null ? 0 : map.keySet().size() + getTotalCount() + 1;
     }
