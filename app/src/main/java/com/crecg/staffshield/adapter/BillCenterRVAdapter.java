@@ -1,6 +1,7 @@
 package com.crecg.staffshield.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import com.crecg.crecglibrary.network.model.BillCenterItemInnerDataModel;
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.AllKindsOfDetailsActivity;
+import com.crecg.staffshield.activity.BankBillDetailActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -95,37 +98,50 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
             ItemTwoViewHolder viewHolder = (ItemTwoViewHolder) holder;
             String typeCode = itemTwoData.rtxnTypeCode;
-            if ("WTHI".equals(typeCode)) {
-                viewHolder.tv_card_title.setText("勘设联名卡 - 银行卡 (" + itemTwoData.withdradalNo + ")");
+            /**
+             *  WTHI=勘设联名卡-银行卡 (提现)
+             *  RCGI=银行卡-勘设联名卡(充值)
+             *
+             *   XYSG=工资宝买入
+             *   XYSH=工资宝赎回
+             *   XYSY=工资宝收益
+             *
+             *   CPDJ=勘设联名卡-理财（投标）
+             *   CPJD=理财-勘设联名卡（流标）
+             *   CPHK=理财-勘设联名卡（回款）
+             */
+            if ("WTHI".equals(typeCode)) { // 勘设联名卡-银行卡 (提现)
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_bank_card_out);
-            } else if ("RCGI".equals(typeCode)) {
-                viewHolder.tv_card_title.setText("银行卡 - 勘设联名卡 (" + itemTwoData.payNo + ")");
+                viewHolder.tv_card_title.setText("勘设联名卡 - 银行卡 (" + itemTwoData.withdradalNo + ")");
+            } else if ("RCGI".equals(typeCode)) { // 银行卡-勘设联名卡(充值)
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_bank_card_into);
+                viewHolder.tv_card_title.setText("银行卡 - 勘设联名卡 (" + itemTwoData.payNo + ")");
             } else if ("XYSG".equals(typeCode)) { // 工资宝买入
-                viewHolder.tv_card_title.setText("勘设联名卡 - 工资宝");
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_buy);
+                viewHolder.tv_card_title.setText("勘设联名卡 - 工资宝");
             } else if ("XYSH".equals(typeCode)) { // 工资宝赎回
-                viewHolder.tv_card_title.setText("工资宝 - 勘设联名卡");
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_redeem);
+                viewHolder.tv_card_title.setText("工资宝 - 勘设联名卡");
             } else if ("XYSY".equals(typeCode)) { // 工资宝收益
+                viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_income);
                 viewHolder.tv_card_title.setText("工资宝收益");
                 viewHolder.tv_money.setTextColor(mContext.getResources().getColor(R.color.txt_red_fc514e));
-                viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_salary_income);
                 viewHolder.iv_arrow_right.setVisibility(View.INVISIBLE);
-            } else if ("CPDJ".equals(typeCode)) {
-                viewHolder.tv_card_title.setText("勘设联名卡 - 理财");
+            } else if ("CPDJ".equals(typeCode)) { // 勘设联名卡-理财（投标）
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_buy);
-            } else if ("CPJD".equals(typeCode)) { // 流标 = 回款
-                viewHolder.tv_card_title.setText("理财 - 勘设联名卡");
+                viewHolder.tv_card_title.setText("勘设联名卡 - 理财");
+            } else if ("CPJD".equals(typeCode)) { // 理财-勘设联名卡（流标）流标 = 回款
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_money_back);
+                viewHolder.tv_card_title.setText("理财 - 勘设联名卡");
             } else if ("CPHK".equals(typeCode)) { // 回款
-                viewHolder.tv_card_title.setText("理财 - 勘设联名卡");
                 viewHolder.iv_left_category_card.setBackgroundResource(R.mipmap.img_bill_center_financial_money_back);
+                viewHolder.tv_card_title.setText("理财 - 勘设联名卡");
             }
-            viewHolder.tv_bill_time.setText(itemTwoData.createTime);
-            viewHolder.tv_money.setText(itemTwoData.billTrsAmount);
+            viewHolder.tv_bill_time.setText(itemTwoData.createTime); // 账单交易时间
+            viewHolder.tv_money.setText(itemTwoData.billTrsAmount); // 账单交易金额
 
-            initListener(viewHolder.itemView, itemTwoData.id);
+            // item 点击监听
+            initListener(viewHolder.itemView,itemTwoData.transId );
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
             switch (mLoadMoreStatus) {
@@ -190,8 +206,8 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      */
     public class ItemTwoViewHolder extends RecyclerView.ViewHolder {
         private final ImageView iv_left_category_card; // 左侧卡的图标
-        private final ImageView iv_arrow_right; // 左侧卡的图标
-        private final TextView tv_card_title; //
+        private final ImageView iv_arrow_right; // 右侧箭头
+        private final TextView tv_card_title; // 账单标题
         private final TextView tv_bill_time; // 账单时间
         private final TextView tv_money; // 收益（元）
 
@@ -243,11 +259,11 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private void initListener(View itemView, final String id) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { // 跳转到问题详情
-//                Intent intent = new Intent(mContext, TrainingAskDetailsActivity.class);
-//                intent.putExtra("questionId", id);
-//                Log.i("hh","我参与的---提问列表Item的questionId:"+id);
-//                mContext.startActivity(intent);
+            public void onClick(View v) { // 跳转到账单详情
+                Intent intent = new Intent(mContext, BankBillDetailActivity.class);
+                intent.putExtra("transId", id);
+                Log.i("hh","当前记录id = " + id);
+                mContext.startActivity(intent);
                 Toast.makeText(mContext, "click: " + id, Toast.LENGTH_SHORT).show();
             }
         });

@@ -171,7 +171,7 @@ public class BillCenterFragment extends Fragment {
 //        } else if (currentPage == -1 || currentPage == 0) {
 //            result = DataUtil.getBankInfo0();
 //        }
-        Log.i("hh", "调接口的方法：requestBillCenterData()");
+//        Log.i("hh", "调接口的方法：requestBillCenterData()");
         HashMap<String, Object> param = new HashMap<>();
         param.put("userId", "26");
         param.put("pageNum", currentPage);
@@ -209,7 +209,7 @@ public class BillCenterFragment extends Fragment {
                         if (billModel == null || billModel.data == null) {
                             return;
                         }
-                        List<BillCenterItemOutDataModel> everyList = billModel.data.billList;
+                        List<BillCenterItemOutDataModel> everyList = billModel.data.billList; // 此处获取到的是第一层list
                         if ((everyList == null || everyList.size() == 0) && currentPage == 1) {
                             //当前是第一页，且无数据，则显示无数据页面
                             vs.setDisplayedChild(1);

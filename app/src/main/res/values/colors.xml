@@ -10,6 +10,7 @@
 
     <!-- 临时写的颜色 -->
     <color name="gray_light">#F2F2F2</color>
+    <color name="gray_light_FFFEFF">#FFFEFF</color>
     <color name="white">#ffffff</color>
 
     <color name="bg_line">#eaeaea</color>

@@ -52,6 +52,7 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
      * 11：定期理财赎回账单详情；
      */
     private int fromFlag = 0;
+    private String transId; // 渠道流水号（充值或提现成功后返回）
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,9 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
+        initTitle();
+
+        transId = getIntent().getStringExtra("transId");
 
         tv_title_category = findViewById(R.id.tv_title_category);
         tv_transfer_amount = findViewById(R.id.tv_transfer_amount);
@@ -76,6 +78,20 @@ public class AllKindsOfDetailsActivity extends BaseActivity implements View.OnCl
         tv_bank_flow_num = findViewById(R.id.tv_bank_flow_num);
         btn_complete = findViewById(R.id.btn_complete);
         recycler_view = findViewById(R.id.recycler_view);
+    }
+
+    private void initTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("账单详情");
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {

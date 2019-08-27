@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_bg_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="26dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/txt_black_999999"
+            android:textSize="12sp"
+            tools:text="勘设联名卡-银行卡(2321)"/>
+
+        <TextView
+            android:id="@+id/tv_transfer_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="18dp"
+            android:includeFontPadding="false"
+            android:textColor="@color/txt_black_333333"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="50000.00"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="26dp"
+            android:background="@color/bg_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_notes_transfer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="16dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/txt_black_999999"
+                android:textSize="15sp"
+                android:text="账单进度"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_top_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:background="@mipmap/img_check_mark"/>
+
+                    <ImageView
+                        android:id="@+id/iv_top_line"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        tools:background="@color/main_blue_4A67F5"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_top_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/main_blue_4A67F5"
+                        android:textSize="15sp"
+                        tools:text="买入成功"/>
+
+                    <TextView
+                        android:id="@+id/tv_top_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/txt_black_999999"
+                        android:textSize="12sp"
+                        tools:text="11-28 17:12"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_down_line"
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        tools:background="@color/bg_line"/>
+
+                    <ImageView
+                        android:id="@+id/iv_down_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:background="@mipmap/img_circle_gray"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="26dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tv_down_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/txt_black_999999"
+                        android:textSize="15sp"
+                        tools:text="预计到账时间"/>
+
+                    <TextView
+                        android:id="@+id/tv_down_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/txt_black_999999"
+                        android:textSize="12sp"
+                        tools:text="11-28 17:12"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_about_bank_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_line"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/tv_turn_into_or_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="转出到"
+                    android:textColor="@color/txt_black_999999"
+                    android:textSize="15sp"/>
+
+                <TextView
+                    android:id="@+id/tv_bank_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    tools:text="招商银行(0123)张三"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bg_line"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="创建时间"
+                    android:textColor="@color/txt_black_999999"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_creation_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    tools:text="2019-07-17  00:00"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="流水号"
+                    android:textColor="@color/txt_black_999999"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_bank_flow_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    tools:text="2018112810500201010233232321"
+                    android:textColor="@color/txt_black_333333"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
