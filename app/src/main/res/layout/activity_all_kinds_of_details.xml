@@ -62,7 +62,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="16dp"
                     android:includeFontPadding="false"
-                    tools:text="账单进度"
+                    android:text="账单进度"
                     android:textColor="@color/txt_black_999999"
                     android:textSize="15sp"/>
 
@@ -74,13 +74,12 @@
                     android:layout_marginLeft="45dp"
                     android:layout_marginRight="15dp"/>
 
-                <!-- 只有跟联名卡相关时才显示此布局 -->
                 <LinearLayout
                     android:id="@+id/ll_about_bank_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <View
                         android:layout_width="match_parent"
@@ -98,7 +97,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:text="转出到"
+                            tools:text="转出到"
                             android:textColor="@color/txt_black_999999"
                             android:textSize="15sp"/>
 

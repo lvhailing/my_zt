@@ -19,7 +19,7 @@ import com.crecg.staffshield.fragment.BillCenterFragment;
  * 账单中心
  */
 
-public class BillCenterActivity extends BaseActivity implements View.OnClickListener {
+public class BillCenterActivity extends BaseActivity {
 
     private ImageView iv_back;
     private TextView tv_common_title;
@@ -45,8 +45,6 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
 //        XTab_layout = findViewById(R.id.tab_layout);
         sliding_tabs = findViewById(R.id.sliding_tabs);
         viewpager = findViewById(R.id.viewpager);
-
-        iv_back.setOnClickListener(this);
     }
 
     private void setTitle() {
@@ -55,6 +53,13 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
 
         iv_back.setImageResource(R.mipmap.img_arrow_left2);
         tv_common_title.setText("账单中心");
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initData() {
@@ -106,32 +111,23 @@ public class BillCenterActivity extends BaseActivity implements View.OnClickList
         sliding_tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.i("hh", " onTabSelected --- " + tab);
+//                Log.i("hh", " onTabSelected --- " + tab);
                 currentTabPosition = tab.getPosition();
-                Log.i("hh", " currentTabPosition = " + currentTabPosition);
+//                Log.i("hh", " currentTabPosition = " + currentTabPosition);
                 ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).setUserId(userId);
                 ((BillCenterFragment) billCenterVpAdapter.getItem(currentTabPosition)).getTabTitleCurrentPosition(currentTabPosition);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                Log.i("bb", " onTabUnselected --- " + tab);
+//                Log.i("bb", " onTabUnselected --- " + tab);
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                Log.i("bb", " onTabReselected --- " + tab);
+//                Log.i("bb", " onTabReselected --- " + tab);
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()) {
-            case R.id.iv_back:
-                finish();
-                break;
-        }
-    }
 }

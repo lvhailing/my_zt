@@ -98,6 +98,16 @@ public interface CommonRequestProxy {
     @POST("userInfo/paySigned/submit")
     Observable<String> getFastPaymentSubmit(@FieldMap Map<String, Object> param);
 
+    //绑定银行卡接口(注册电子账户)
+    @FormUrlEncoded
+    @POST("balance/appBindCard")
+    Observable<String> addBankCardData(@FieldMap Map<String, Object> param);
+
+    //实名认证接口(身份证 正反面认证) (未调试)
+    @FormUrlEncoded
+    @POST("balance/eleAccountAut")
+    Observable<String> getAuthenticationData(@FieldMap Map<String, Object> param);
+
     //我的理财接口
     @FormUrlEncoded
     @POST("userBalance/myProductTender")
@@ -128,8 +138,18 @@ public interface CommonRequestProxy {
     @POST("myInsuranceOrder/list/get")
     Observable<String>getInsuranceListData(@FieldMap Map<String, Object> param);
 
-    // 充值和提现详情接口
+    // 银行卡充值和提现详情接口
     @FormUrlEncoded
     @POST("userInfo/transaction/order/detail")
     Observable<String>getRechargeWithdrawalData(@FieldMap Map<String, Object> param);
+
+    // (从账单中心跳转详情)工资宝-资金转入详情接口
+    @FormUrlEncoded
+    @POST("userBalance/fundTransferRoll")
+    Observable<String>getFundDetailData(@FieldMap Map<String, Object> param);
+
+    // (从账单中心跳转详情)理财产品详情接口
+    @FormUrlEncoded
+    @POST("userBalance/fundTransferRollInfo")
+    Observable<String>getFinancialDetailData(@FieldMap Map<String, Object> param);
 }

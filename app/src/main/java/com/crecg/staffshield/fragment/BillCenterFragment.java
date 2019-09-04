@@ -103,6 +103,7 @@ public class BillCenterFragment extends Fragment {
     }
 
     private void initView(View view) {
+        Log.i("hh", "BillCenterFragment -- initView");
         vs = view.findViewById(R.id.vs);
         swipe_refresh = view.findViewById(R.id.swipe_refresh);
         recycler_view = view.findViewById(R.id.recycler_view);

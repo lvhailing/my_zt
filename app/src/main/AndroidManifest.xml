@@ -176,6 +176,14 @@
             android:name=".activity.BankBillDetailActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.FundBillDetailActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.FinancialBillDetailActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

@@ -46,8 +46,10 @@ public class BankBillDetailActivity extends BaseActivity {
     private TextView tv_bank_name;
     private TextView tv_creation_date;
     private TextView tv_bank_flow_num;
+    private String type; // 交易类型
     private String transId;  // 渠道流水号（充值或提现成功后返回）
     private BankBillDetailDataModel billDetailData;
+    private TextView tv_turn_into_or_out; // 转出到or转入到
 
 
     @Override
@@ -62,6 +64,7 @@ public class BankBillDetailActivity extends BaseActivity {
     private void initView() {
         initTitle();
 
+        type = getIntent().getStringExtra("type");
         transId = getIntent().getStringExtra("transId");
         Log.i("hh","transId = " + transId);
         tv_title_category = findViewById(R.id.tv_title_category);
@@ -74,6 +77,7 @@ public class BankBillDetailActivity extends BaseActivity {
         iv_down_circle = findViewById(R.id.iv_down_circle);
         tv_down_title = findViewById(R.id.tv_down_title);
         tv_down_date = findViewById(R.id.tv_down_date);
+        tv_turn_into_or_out = findViewById(R.id.tv_turn_into_or_out);
         tv_bank_name = findViewById(R.id.tv_bank_name);
         tv_creation_date = findViewById(R.id.tv_creation_date);
         tv_bank_flow_num = findViewById(R.id.tv_bank_flow_num);
@@ -137,6 +141,7 @@ public class BankBillDetailActivity extends BaseActivity {
            String bankName = billDetailData.bankName;
             if (type.equals("RCGI")) { // 充值（即从银行卡转钱到联名卡）
                 tv_title_category.setText(bankName + "-勘设联名卡");
+                tv_turn_into_or_out.setText("转入到");
                 iv_top_circle.setBackground(getResources().getDrawable(R.mipmap.img_check_mark));
                 iv_top_line.setBackground(getResources().getDrawable(R.color.main_blue_4A67F5));
                 tv_top_title.setText("转入申请已提交，银行处理中");
@@ -160,6 +165,7 @@ public class BankBillDetailActivity extends BaseActivity {
                 }
             } else if(type.equals("WTHI")){ // 提现（即从联名卡转出到银行卡）
                 tv_title_category.setText("勘设联名卡-" + bankName);
+                tv_turn_into_or_out.setText("转出到");
                 iv_top_circle.setBackground(getResources().getDrawable(R.mipmap.img_check_mark));
                 iv_top_line.setBackground(getResources().getDrawable(R.color.main_blue_4A67F5));
                 tv_top_title.setText("转出申请已提交，银行处理中");

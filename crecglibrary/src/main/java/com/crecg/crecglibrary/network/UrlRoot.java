@@ -20,7 +20,7 @@ public class UrlRoot {
     public static final String RETPWD = "retpwd"; // 登录密码找回
     public static final String RESETPWD = "resetpwd"; // 重置交易密码
 
-    private static final int mEnvironment = 4;  //1测试环境，2正式环境 ,3和4均为个人服务器地址
+    private static final int mEnvironment = 3;  //1测试环境，2正式环境 ,3和4均为个人服务器地址
 
     static {
         switch (mEnvironment) {

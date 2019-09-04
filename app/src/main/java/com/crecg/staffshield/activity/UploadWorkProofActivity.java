@@ -438,10 +438,6 @@ public class UploadWorkProofActivity extends BaseActivity implements View.OnClic
      */
     private void sendImage(Bitmap bm) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-//        byte[] bytes = stream.toByteArray();
-//        String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
-
         int options = 100;
         bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//质量压缩方法，把压缩后的数据存放到baos中 (100表示不压缩，0表示压缩到最小)
             Log.i("hh", "options1 = " + options);

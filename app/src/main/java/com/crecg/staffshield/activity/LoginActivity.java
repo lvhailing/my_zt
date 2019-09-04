@@ -170,9 +170,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         String encUserId = DESUtil.encrypt(loginModel.data.userId);
                         String mobile = DESUtil.encrypt(loginModel.data.mobile);
                         String idNo = DESUtil.encrypt(loginModel.data.idNo);
+                        String userName = DESUtil.encrypt(loginModel.data.userName);
                         PreferenceUtil.setUserId(encUserId);
                         PreferenceUtil.setPhone(mobile);
                         PreferenceUtil.setIdNo(idNo);
+                        PreferenceUtil.setUserRealName(userName);
 
                         if (Boolean.parseBoolean(loginModel.data.flag)) {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

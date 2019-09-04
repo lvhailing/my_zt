@@ -12,10 +12,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.AddBankCardAndAuthenticationDataModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
+import com.crecg.crecglibrary.network.model.ReturnOnlyTrueOrFalseModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
+import com.crecg.staffshield.utils.PreferenceUtil;
 import com.crecg.staffshield.utils.StringUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 添加银行卡
@@ -47,6 +62,8 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
     private String verifyCode;
     private String transactionPassword;
     private String transactionPasswordConfirm;
+    private String userName;
+    private String idNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +90,15 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
         tv_agreement1 = findViewById(R.id.tv_agreement1);
         tv_agreement2 = findViewById(R.id.tv_agreement2);
         btn_next_step = findViewById(R.id.btn_next_step);
+
+        try {
+            userName = DESUtil.decrypt( PreferenceUtil.getUserRealName());
+            idNo = DESUtil.decrypt( PreferenceUtil.getIdNo());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        tv_cardholder.setText(userName);
+        tv_id_num.setText(idNo);
 
         tv_get_verify_code.setOnClickListener(this);
         btn_next_step.setOnClickListener(this);
@@ -163,9 +189,6 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.btn_next_step: // 下一步
                 checkDataNull();
-                Intent intent = new Intent(this, RealNameAuthenticationActivity.class);
-                intent.putExtra("userName", "问**");
-                startActivity(intent);
                 break;
         }
     }
@@ -200,5 +223,53 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
             ToastUtil.showCustom("请输入确认交易密码");
             return;
         }
+
+        requestData();
+    }
+
+    /**
+     *  获取添加银行卡接口数据
+     */
+
+    private void requestData() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "8");
+        param.put("acNo", "6226221234213412"); // 银行卡号
+        param.put("mobile", "13593262370");
+        param.put("validateCode", "666666");
+        param.put("userName", "李四");
+        param.put("idNo", "110101199003078750");
+        param.put("trsPassword", transactionPasswordConfirm);
+        String data = DESUtil.encMap(param);
+
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .addBankCardData(paramWrapper).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String>() {
+                    @Override
+                    public void onMyError() {
+                        ToastUtil.showCustom("获取数据失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (result == null) {
+                            return;
+                        }
+                        CommonResultModel<AddBankCardAndAuthenticationDataModel> dataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<AddBankCardAndAuthenticationDataModel>>() {
+                        }.getType());
+                        if (dataModel.data == null) {
+                            return;
+                        }
+                        if (dataModel.data.flag.equals("true")){ // flag = true 表示绑卡成功
+                            Intent intent = new Intent(AddBankCardActivity.this, RealNameAuthenticationActivity.class);
+                            intent.putExtra("userName", userName);
+                            Log.i("hh", "userName = " + userName);
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 }

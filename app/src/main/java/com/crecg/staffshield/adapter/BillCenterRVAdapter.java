@@ -17,6 +17,8 @@ import com.crecg.crecglibrary.network.model.BillCenterItemInnerDataModel;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.AllKindsOfDetailsActivity;
 import com.crecg.staffshield.activity.BankBillDetailActivity;
+import com.crecg.staffshield.activity.FinancialBillDetailActivity;
+import com.crecg.staffshield.activity.FundBillDetailActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,7 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public static final int NO_LOAD_MORE = 2;   //没有加载更多 隐藏
     //上拉加载更多状态-默认为0
     private int mLoadMoreStatus = 0;
+
 
 
     public BillCenterRVAdapter(Context context, Map<String, List<BillCenterItemInnerDataModel>> map) {
@@ -141,7 +144,7 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             viewHolder.tv_money.setText(itemTwoData.billTrsAmount); // 账单交易金额
 
             // item 点击监听
-            initListener(viewHolder.itemView,itemTwoData.transId );
+            initListener(viewHolder.itemView,itemTwoData.transId ,itemTwoData.rtxnTypeCode);
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
             switch (mLoadMoreStatus) {
@@ -256,18 +259,32 @@ public class BillCenterRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     /**
      * item 点击监听
      */
-    private void initListener(View itemView, final String id) {
+    private void initListener(View itemView, final String id,final String type) {
         itemView.setOnClickListener(new View.OnClickListener() {
+            public Intent intent;
+
             @Override
-            public void onClick(View v) { // 跳转到账单详情
-                Intent intent = new Intent(mContext, BankBillDetailActivity.class);
-                intent.putExtra("transId", id);
-                Log.i("hh","当前记录id = " + id);
+            public void onClick(View v) { // 跳转到对应的账单详情
+                if (type.equals("WTHI") || type.equals("RCGI")) {
+                    intent = new Intent(mContext, BankBillDetailActivity.class);
+//                    intent.putExtra("type", type);
+                    intent.putExtra("transId", id);
+//                    Log.i("hh","当前记录id = " + id);
+                } else if (type.equals("XYSG") || type.equals("XYSH")) {
+                    intent = new Intent(mContext, FundBillDetailActivity.class);
+                    intent.putExtra("type", type);
+                    intent.putExtra("transId", id);
+                } else if (type.equals("CPDJ") || type.equals("CPJD") || type.equals("CPHK")) {
+                    intent = new Intent(mContext, FinancialBillDetailActivity.class);
+                    intent.putExtra("type", type);
+                    intent.putExtra("transId", id);
+                }
                 mContext.startActivity(intent);
                 Toast.makeText(mContext, "click: " + id, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     /**
      * 更新加载更多状态

@@ -25,6 +25,7 @@ import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.AccountBalanceActivity;
+import com.crecg.staffshield.activity.AddBankCardActivity;
 import com.crecg.staffshield.activity.EntityBankToElectronicBankActivity;
 import com.crecg.staffshield.activity.ElectronicBankToEntityBankActivity;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
@@ -69,6 +70,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private TextView tv_fund_yesterday_earnings; // 基金昨日收益
     private TextView tv_financial_total_holding; // 定期理财持仓总额
     private TextView tv_financial_waiting_income; // 定期理财待收收益
+    private String acNo;
+    private String electronicAccount;
 
 
     @Override
@@ -171,6 +174,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 myData = myDataModel.data;
+                acNo = myData.acNo;
+                electronicAccount = myData.account;
                 setData(myData);
             }
         });
@@ -216,11 +221,11 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     showOrHideFlag = true;
                 }
                 break;
-            case R.id.rl_account_balance: // (联名卡)账户余额  跳转前需要先判断用户是否绑卡，没绑卡先跳绑卡页，反之则跳账户余额页
-                intent = new Intent(context, AccountBalanceActivity.class);
-                startActivity(intent);
+            case R.id.rl_account_balance: // 跳账户余额页
+                    intent = new Intent(context, AccountBalanceActivity.class);
+                    startActivity(intent);
                 break;
-            case R.id.btn_change_into: // (联名卡)转入
+            case R.id.btn_change_into: // (联名卡)转入  需要判断是否绑卡
                 if ("2".equals(btnFlag)) {
                     btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
                     btn_change_into.setTextColor(getResources().getColor(R.color.white));
@@ -231,7 +236,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, EntityBankToElectronicBankActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.btn_turn_out: // (联名卡)转出
+            case R.id.btn_turn_out: // (联名卡)转出  需要判断是否绑卡
                 if ("1".equals(btnFlag)) {
                     btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
                     btn_turn_out.setTextColor(getResources().getColor(R.color.white));
