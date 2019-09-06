@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="53dp"
+        android:background="@drawable/dialog_bg_white_solid_corner"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:gravity="center_horizontal"
+            android:text="实名认证审核中，请稍后再试"
+            android:textColor="@color/txt_black_666666"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/btn_know"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="27dp"
+            android:background="@drawable/shape_rect_btn_blue"
+            android:text="我知道了"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+</LinearLayout>

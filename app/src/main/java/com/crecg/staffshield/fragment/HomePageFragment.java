@@ -395,6 +395,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
                 intent.putExtra("prodId",homeData.prodId ); // 基金代码
                 intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
+                intent.putExtra("prodName",homeData.prodName ); // 基金名称
                 startActivity(intent);
                 break;
             case R.id.ll_home_manage_money:  // 理财

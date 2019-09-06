@@ -188,6 +188,9 @@ public class AddBankCardActivity extends BaseActivity implements View.OnClickLis
             case R.id.tv_get_verify_code: // 获取验证码
                 break;
             case R.id.btn_next_step: // 下一步
+                Intent intent = new Intent(AddBankCardActivity.this, RealNameAuthenticationActivity.class);
+                intent.putExtra("userName", userName);
+                startActivity(intent);
                 checkDataNull();
                 break;
         }

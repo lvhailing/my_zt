@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.crecg.staffshield.R;
@@ -17,85 +18,60 @@ import com.crecg.staffshield.R;
 import java.util.ArrayList;
 
 /**
- * 选择图片 对话框
+ * 实名认证中 弹框
  */
-public class SelectPhotoDialog extends Dialog implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
+public class RealNameAuthenticationDialog extends Dialog implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
 
     private Context mContext;
     private LayoutInflater inflater;
     private LayoutParams lp;
     private int percentageH = 4;
     private int percentageW = 8;
-    private TextView txtAblum = null;
-    private TextView txtCamera = null;
-    private TextView txtCancel = null;
+    private Button btn_know = null; // 我知道了
 
     ArrayList<OnCancelListener> m_arrCancelListeners = new ArrayList<OnCancelListener>();
     ArrayList<OnDismissListener> m_arrDismissListeners = new ArrayList<OnDismissListener>();
-    private OnSelectPhotoChanged onChanged = null;
 
-    public SelectPhotoDialog(Context context, OnSelectPhotoChanged onChanged) {
-        super(context, R.style.Dialog);
+    public RealNameAuthenticationDialog(Context context) {
+        super(context, R.style.UpdateDialog);
         this.mContext = context;
-        this.onChanged = onChanged;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View mView = inflater.inflate(R.layout.dialog_select_photo, null);
+        View mView = inflater.inflate(R.layout.dialog_real_name_authenticacion, null);
         setContentView(mView);
         // 设置window属性
         lp = getWindow().getAttributes();
-        lp.gravity = Gravity.BOTTOM;
+        lp.gravity = Gravity.CENTER;
         lp.dimAmount = 0.6f; // 去背景遮盖
         lp.alpha = 1.0f;
         int[] wh = initWithScreenWidthAndHeight(mContext);
         lp.width = wh[0] - wh[0] / percentageW;
         lp.height = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
         getWindow().setAttributes(lp);
-        setCanceledOnTouchOutside(true);
+        setCanceledOnTouchOutside(false);
         setOnDismissListener(this);
         setOnCancelListener(this);
-        initView(mView);
 
+        initView(mView);
     }
 
     private void initView(View mView) {
-        txtAblum = mView.findViewById(R.id.dialog_tv_album);
-        txtCamera = mView.findViewById(R.id.dialog_tv_camera);
-        txtCancel = mView.findViewById(R.id.dialog_tv_cancel);
+        btn_know = mView.findViewById(R.id.btn_know);
 
-        txtAblum.setOnClickListener(albumListener);
-        txtCamera.setOnClickListener(cameraListener);
-        txtCancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                onDismiss();
-            }
-        });
+        btn_know.setOnClickListener(confirmListener);
     }
 
-    private View.OnClickListener albumListener = new View.OnClickListener() {
+    private View.OnClickListener confirmListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            onChanged.onAlbum();
+            // Todo ??
             onDismiss();
         }
-
-    };
-    private View.OnClickListener cameraListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            onChanged.onCamera();
-            onDismiss();
-        }
-
     };
 
     private View.OnClickListener cancelListener = new View.OnClickListener() {
@@ -106,17 +82,12 @@ public class SelectPhotoDialog extends Dialog implements DialogInterface.OnCance
         }
     };
 
-    private void ondismiss() {
-
-    }
-
     @Override
     public void onDismiss(DialogInterface dialog) {
         if (m_arrDismissListeners != null) {
             for (int x = 0; x < m_arrDismissListeners.size(); x++)
                 m_arrDismissListeners.get(x).onDismiss(dialog);
         }
-        ondismiss();
     }
 
     @Override
@@ -134,6 +105,7 @@ public class SelectPhotoDialog extends Dialog implements DialogInterface.OnCance
 
     public void removeListeners(OnCancelListener c, OnDismissListener d) {
         m_arrDismissListeners.remove(d);
+
         m_arrCancelListeners.remove(c);
     }
 
@@ -141,14 +113,10 @@ public class SelectPhotoDialog extends Dialog implements DialogInterface.OnCance
         if (this.isShowing()) {
             this.dismiss();
         }
-
     }
 
     /**
      * 获取当前window width,height
-     *
-     * @param context
-     * @return
      */
     private static int[] initWithScreenWidthAndHeight(Context context) {
         int[] wh = new int[2];
@@ -159,11 +127,8 @@ public class SelectPhotoDialog extends Dialog implements DialogInterface.OnCance
         return wh;
     }
 
-    public interface OnSelectPhotoChanged {
-        public void onAlbum();
-
-        public void onCamera();
-
+    public interface OnClickBtn {
+        void onConfirm();
     }
 
 }

@@ -12,7 +12,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +32,7 @@ import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
+import com.crecg.staffshield.dialog.RealNameAuthenticationDialog;
 import com.crecg.staffshield.dialog.SelectPhotoDialog;
 import com.crecg.staffshield.utils.PhotoUtils;
 import com.google.gson.Gson;
@@ -72,6 +75,9 @@ public class RealNameAuthenticationActivity extends BaseActivity implements View
     private final static String IMG_PATH = Environment.getExternalStorageDirectory() + "/jiaokan/imgs/";
     private Uri photoUri;
     private Bitmap newZoomImage; // ImageView最终要展示的bitmap
+    private String photoType = "";
+    private boolean isEmptyIdCardPositive = false; // 身份证正面是否为空
+    private boolean isEmptyIdCardBack = false; // 身份证反面是否为空
 
 
     @Override
@@ -116,14 +122,77 @@ public class RealNameAuthenticationActivity extends BaseActivity implements View
                 finish();
                 break;
             case R.id.iv_id_card_positive: // 身份证正面
+                photoType = "zmz";
                 selectPhoto();
                 break;
             case R.id.iv_id_card_back: // 身份证反面
+                photoType = "fmz";
                 selectPhoto();
                 break;
             case R.id.btn_upload: // 确认上传
+                if (!isEmptyIdCardPositive) {
+                    ToastUtil.showCustom("请上传身份证正面");
+                    return;
+                }
+                if (!isEmptyIdCardBack) {
+                    ToastUtil.showCustom("请上传身份证反面");
+                    return;
+                }
+                requestAuthenticationData();
                 break;
         }
+    }
+
+    /**
+     *  实名认证接口
+     */
+    private void requestAuthenticationData() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "8");
+        String data = DESUtil.encMap(param);
+
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getAuthenticationData(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String>() {
+                    @Override
+                    public void onMyError() {
+                        ToastUtil.showCustom("上传图片接口获取数据失败");
+                        stopLoading();
+                    }
+
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (result == null) {
+                            return;
+                        }
+                        CommonResultModel<ReturnOnlyTrueOrFalseModel> upLoadImgModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<ReturnOnlyTrueOrFalseModel>>() {
+                        }.getType());
+                        if (upLoadImgModel.data == null) {
+                            return;
+                        }
+                        if (Boolean.parseBoolean(upLoadImgModel.data.flag)) {
+                            if (upLoadImgModel.data.uploadIdentity.equals("T")) { // 认证中
+                                showRealNameAuthenticationDialog();
+                                finish();
+                            } else if (upLoadImgModel.data.uploadIdentity.equals("S")) { // 认证成功
+                                Intent intent = new Intent(RealNameAuthenticationActivity.this, FastPaymentActivity.class);
+                                startActivity(intent);
+                            }
+                            ToastUtil.showCustom(upLoadImgModel.data.message);
+                        } else {
+                            ToastUtil.showCustom(upLoadImgModel.data.message);
+                        }
+                    }
+                });
+    }
+
+    private void showRealNameAuthenticationDialog() {
+        RealNameAuthenticationDialog dialog = new RealNameAuthenticationDialog(this);
+        dialog.show();
     }
 
 
@@ -334,33 +403,12 @@ public class RealNameAuthenticationActivity extends BaseActivity implements View
      * 调接口，上传图片到服务器
      */
     private void sendImage(Bitmap bm) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        int options = 100;
-        bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//质量压缩方法，把压缩后的数据存放到baos中 (100表示不压缩，0表示压缩到最小)
-        Log.i("hh", "options1 = " + options);
-        while (stream.toByteArray().length > 200 * 1024) {//循环判断如果压缩后图片是否大于指定大小,大于继续压缩
-            stream.reset();//重置baos即让下一次的写入覆盖之前的内容
-            options -= 5;//图片质量每次减少5
-            if (options <= 5) { //如果图片质量小于5，为保证压缩后的图片质量，图片最底压缩质量为5
-                options = 5;
-            }
-            bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//将压缩后的图片保存到baos中
-            Log.i("hh", "options2 = " + options);
-            if (options == 5) { //如果图片的质量已降到最低则，不再进行压缩
-                break;
-            }
-        }
-        byte[] bytes = stream.toByteArray();
-        String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
-        Log.i("hh", "bytes = " + bytes.length);
-        Log.i("hh", "img = " + img.length());
-
-
+        String img = getStringImage(bm);
         HashMap<String, Object> param = new HashMap<>();
         param.put("photo", img);
         param.put("id", "8");
         param.put("name", "idPhoto1.jpg");
-        param.put("photoType", "zmz");  // 身份证正面照-zmz，身份证反面照-fmz，工作证明-gzzm，　工会盖章证明-ghzm
+        param.put("photoType",photoType);  // 身份证正面照-zmz，身份证反面照-fmz，工作证明-gzzm，　工会盖章证明-ghzm
         String data = DESUtil.encMap(param);
 
         HashMap<String, Object> paramWrapper = new HashMap<>();
@@ -389,7 +437,13 @@ public class RealNameAuthenticationActivity extends BaseActivity implements View
                         }
                         if (Boolean.parseBoolean(upLoadImgModel.data.flag)) {
                             stopLoading();
-                            iv_id_card_positive.setImageBitmap(newZoomImage);
+                            if (photoType.equals("zmz")) {
+                                iv_id_card_positive.setImageBitmap(newZoomImage);
+                                isEmptyIdCardPositive = true;
+                            } else if (photoType.equals("fmz")) {
+                                iv_id_card_back.setImageBitmap(newZoomImage);
+                                isEmptyIdCardBack = true;
+                            }
                             saveBitmap2(newZoomImage);
                             ToastUtil.showCustom(upLoadImgModel.data.message);
                         } else {
@@ -397,6 +451,31 @@ public class RealNameAuthenticationActivity extends BaseActivity implements View
                         }
                     }
                 });
+    }
+
+    @NonNull
+    private String getStringImage(Bitmap bm) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        int options = 100;
+        bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//质量压缩方法，把压缩后的数据存放到baos中 (100表示不压缩，0表示压缩到最小)
+        Log.i("hh", "options1 = " + options);
+        while (stream.toByteArray().length > 200 * 1024) {//循环判断如果压缩后图片是否大于指定大小,大于继续压缩
+            stream.reset();//重置baos即让下一次的写入覆盖之前的内容
+            options -= 5;//图片质量每次减少5
+            if (options <= 5) { //如果图片质量小于5，为保证压缩后的图片质量，图片最底压缩质量为5
+                options = 5;
+            }
+            bm.compress(Bitmap.CompressFormat.JPEG, options, stream);//将压缩后的图片保存到baos中
+            Log.i("hh", "options2 = " + options);
+            if (options == 5) { //如果图片的质量已降到最低则，不再进行压缩
+                break;
+            }
+        }
+        byte[] bytes = stream.toByteArray();
+        String img = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
+        Log.i("hh", "bytes = " + bytes.length);
+        Log.i("hh", "img = " + img.length());
+        return img;
     }
 
     private Uri saveBitmap2(Bitmap bm) {

@@ -9,9 +9,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.AccountInfoModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 工资宝买入
@@ -35,6 +48,7 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
 
     private String prodId; // 基金代码
     private String prodSubId; // 基金标识码
+    private String prodName; // 基金名称
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +56,14 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
         setContentView(R.layout.activity_wage_treasure_buying);
 
         initView();
+        requestData();
     }
 
     private void initView() {
         whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
         prodId = getIntent().getStringExtra("prodId");
         prodSubId = getIntent().getStringExtra("prodSubId");
+        prodName = getIntent().getStringExtra("prodName");
 
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
@@ -63,13 +79,44 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
         iv_selected_or_unselected = findViewById(R.id.iv_selected_or_unselected);
         btn_buy = findViewById(R.id.btn_buy);
 
-        tv_money_amount.setText("201222.00");
         iv_back.setOnClickListener(this);
         tv_transfer_of_funds.setOnClickListener(this);
         tv_all.setOnClickListener(this);
         iv_selected_or_unselected.setOnClickListener(this);
         tv_about_agreement.setOnClickListener(this);
         btn_buy.setOnClickListener(this);
+    }
+
+    /**
+     * 请求接口数据，获取页面数据信息
+     */
+    private void requestData() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "8");
+        String data = DESUtil.encMap(param);
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getAccountInfoData(paramWrapper).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String>() {
+            @Override
+            public void onMyError() {
+                ToastUtil.showCustom("获取数据失败");
+            }
+
+            @Override
+            public void onMySuccess(String result) {
+                if (result == null) {
+                    return;
+                }
+                CommonResultModel<AccountInfoModel> dataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<AccountInfoModel>>() {
+                }.getType());
+                AccountInfoModel accountInfoData = dataModel.data;
+                if (dataModel.data == null) {
+                    return;
+                }
+                tv_money_amount.setText(accountInfoData.localDepositAvailbal); // 账户余额
+                tv_date_start_accruing_interest.setText(accountInfoData.bearTime + "开始计息");
+            }
+        });
     }
 
     @Override
@@ -107,12 +154,22 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 String moneyAmount = et_all_money_amount.getText().toString();
                 if (TextUtils.isEmpty(moneyAmount)) {
                     ToastUtil.showCustom("买入金额不能为空");
-                } else {
-                    intent = new Intent(this, TransactionPasswordActivity.class);
-                    intent.putExtra("fromFlag", "wageTreasureBuy");
-                    intent.putExtra("whereToEnterFlag", whereToEnterFlag);
-                    startActivity(intent);
+                    return;
                 }
+                if (!isCheckedFlag) {
+                    ToastUtil.showCustom("请勾选协议");
+                    return;
+                }
+
+                intent = new Intent(this, TransactionPasswordActivity.class);
+                intent.putExtra("fromFlag", "wageTreasureBuy");
+                intent.putExtra("whereToEnterFlag", whereToEnterFlag);
+                intent.putExtra("prodId", prodId); // 基金代码
+                intent.putExtra("prodSubId", prodSubId); // 基金标识码
+                intent.putExtra("trsAmount", et_all_money_amount.getText().toString()); // 工资宝买入的金额
+                intent.putExtra("prodName", prodName); // 工资宝买入的金额
+                startActivity(intent);
+
                 break;
         }
     }

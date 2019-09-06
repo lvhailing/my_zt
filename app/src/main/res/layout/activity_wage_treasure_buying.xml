@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="11月26日开始计息"
+            tools:text="11月26日开始计息"
             android:textColor="@color/txt_black_999999"
             android:textSize="12sp"/>
     </RelativeLayout>

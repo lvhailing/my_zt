@@ -184,6 +184,10 @@
             android:name=".activity.FinancialBillDetailActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".activity.WageTreasureTurnSuccessActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

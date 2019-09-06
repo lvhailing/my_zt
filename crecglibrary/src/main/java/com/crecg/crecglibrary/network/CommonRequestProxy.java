@@ -103,7 +103,7 @@ public interface CommonRequestProxy {
     @POST("balance/appBindCard")
     Observable<String> addBankCardData(@FieldMap Map<String, Object> param);
 
-    //实名认证接口(身份证 正反面认证) (未调试)
+    //实名认证接口(身份证 正反面认证)
     @FormUrlEncoded
     @POST("balance/eleAccountAut")
     Observable<String> getAuthenticationData(@FieldMap Map<String, Object> param);
@@ -152,4 +152,14 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("userBalance/fundTransferRollInfo")
     Observable<String>getFinancialDetailData(@FieldMap Map<String, Object> param);
+
+    // 用户持仓信息
+    @FormUrlEncoded
+    @POST("userBalance/goTrsBalanceTime")
+    Observable<String>getAccountInfoData(@FieldMap Map<String, Object> param);
+
+    // 转入工资宝
+    @FormUrlEncoded
+    @POST("userBalance/TransferFundIn")
+    Observable<String>getBuyFundData(@FieldMap Map<String, Object> param);
 }
