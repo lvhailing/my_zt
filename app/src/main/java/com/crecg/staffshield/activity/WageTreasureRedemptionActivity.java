@@ -10,9 +10,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.crecg.crecglibrary.RemoteFactory;
+import com.crecg.crecglibrary.network.CommonObserverAdapter;
+import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.AccountInfoModel;
+import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
+import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.common.BaseActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * (工资宝)赎回至堪设联名卡
@@ -22,15 +35,21 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
 
     private ImageView iv_back;
     private TextView tv_common_title;
-    private EditText et_money;
+    private EditText et_money; // 可赎回金额
     private TextView tv_all;
     private ImageView iv1;
     private ImageView iv2;
     private Button btn_confirm_redeem; // 确认赎回
-    private String flag = "1"; // 1:实时赎回  2：普通到账
+    private String flag = "n"; // n:实时赎回  y：普通到账
     private String money;
     private LinearLayout ll_up_selected;
     private LinearLayout ll_down_unselected;
+    private String userProdAmount;
+
+    private String whereToEnterFlag; // 1:首页进   2：工资宝详情页进
+    private String prodId; // 基金代码
+    private String prodSubId; // 基金标识码
+    private String prodName; // 基金名称
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +57,15 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
         baseSetContentView(R.layout.activity_redeemption_of_electronic_bank_card);
 
         initView();
+        requestData();
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText("赎回至堪设联名卡");
+        initTitle();
+        whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
+//        prodId = getIntent().getStringExtra("prodId");
+//        prodSubId = getIntent().getStringExtra("prodSubId");
+//        prodName = getIntent().getStringExtra("prodName");
 
         et_money = findViewById(R.id.et_money);
         tv_all = findViewById(R.id.tv_all);
@@ -54,11 +75,56 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
         ll_down_unselected = findViewById(R.id.ll_down_unselected);
         btn_confirm_redeem = findViewById(R.id.btn_confirm_redeem);
 
-        iv_back.setOnClickListener(this);
         tv_all.setOnClickListener(this);
         ll_up_selected.setOnClickListener(this);
         ll_down_unselected.setOnClickListener(this);
         btn_confirm_redeem.setOnClickListener(this);
+    }
+
+    private void initTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("赎回至堪设联名卡");
+
+        iv_back.setOnClickListener(this);
+    }
+
+    /**
+     * 请求接口数据，获取页面数据信息
+     */
+    private void requestData() {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "8");
+        String data = DESUtil.encMap(param);
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getAccountInfoData(paramWrapper).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).
+                subscribe(new CommonObserverAdapter<String>() {
+            @Override
+            public void onMyError() {
+                ToastUtil.showCustom("获取数据失败");
+            }
+
+            @Override
+            public void onMySuccess(String result) {
+                if (result == null) {
+                    return;
+                }
+                CommonResultModel<AccountInfoModel> dataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<AccountInfoModel>>() {
+                }.getType());
+                AccountInfoModel accountInfoData = dataModel.data;
+                if (dataModel.data == null) {
+                    return;
+                }
+                userProdAmount = accountInfoData.userProdAmount;
+                et_money.setHint("可赎回" + userProdAmount);
+            }
+        });
     }
 
     @Override
@@ -68,20 +134,20 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
                 finish();
                 break;
             case R.id.tv_all: // 全部
-                et_money.setText("2225.00");
+                et_money.setText(userProdAmount);
                 break;
             case R.id.ll_up_selected:
-                if ("2".equals(flag)) {
+                if ("y".equals(flag)) { // 普通到账
                     iv1.setBackgroundResource(R.mipmap.img_redeem_selected);
                     iv2.setBackgroundResource(R.mipmap.img_redeem_unselected);
-                    flag = "1";
+                    flag = "n";
                 }
-                    break;
+                break;
             case R.id.ll_down_unselected:
-                if ("1".equals(flag)) {
+                if ("n".equals(flag)) { // 实时赎回
                     iv2.setBackgroundResource(R.mipmap.img_redeem_selected);
                     iv1.setBackgroundResource(R.mipmap.img_redeem_unselected);
-                    flag = "2";
+                    flag = "y";
                 }
                 break;
 
@@ -92,9 +158,17 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
                     return;
                 }
                 Intent intent = new Intent(WageTreasureRedemptionActivity.this, TransactionPasswordActivity.class);
-                intent.putExtra("fromFlag", "wageTreasureRedeem");
+                intent.putExtra("fromFlag", "wageTreasureRedeem"); // 表示工资宝的赎回
+                intent.putExtra("whereToEnterFlag", whereToEnterFlag);
+//                intent.putExtra("prodId", prodId); // 基金代码
+//                intent.putExtra("prodSubId", prodSubId); // 基金标识码
+//                intent.putExtra("prodName", prodName); // 工资宝买入的金额
+                intent.putExtra("trsAmount", money); // 工资宝赎回的金额
+                intent.putExtra("redemptionFlag", flag); // 工资宝赎回方式
                 startActivity(intent);
                 break;
         }
     }
+
+
 }

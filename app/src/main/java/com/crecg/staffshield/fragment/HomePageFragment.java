@@ -387,15 +387,20 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         Intent intent;
         switch (view.getId()) {
             case R.id.ll_home_salary_treasure:  // 工资宝
-                intent = new Intent(context, SalaryTreasureDetailActivity.class);
-                startActivity(intent);
+                ToastUtil.showCustom("工资宝被点击了");
+//                intent = new Intent(context, SalaryTreasureDetailActivity.class);
+//                intent.putExtra("prodId",homeData.prodId ); // 基金代码
+//                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
+//                intent.putExtra("prodName",homeData.prodName ); // 基金名称
+//                startActivity(intent);
                 break;
             case R.id.tv_transfer_immediately:  // (工资宝)立即转入 （已经开户跳转工资宝买入页）
                 // Todo 点立即转入时，需要先判断用户是否开通联名卡账户
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
-                intent.putExtra("prodId",homeData.prodId ); // 基金代码
-                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
-                intent.putExtra("prodName",homeData.prodName ); // 基金名称
+                intent.putExtra("whereToEnterFlag", "1");
+//                intent.putExtra("prodId",homeData.prodId ); // 基金代码
+//                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
+//                intent.putExtra("prodName",homeData.prodName ); // 基金名称
                 startActivity(intent);
                 break;
             case R.id.ll_home_manage_money:  // 理财
@@ -412,6 +417,9 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.ll_go_to_salary_treasure:  // 活期 工资宝布局 (跳转工资宝详情页H5)
                 intent = new Intent(context, SalaryTreasureDetailActivity.class);
+                intent.putExtra("prodId",homeData.prodId ); // 基金代码
+                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
+                intent.putExtra("prodName",homeData.prodName ); // 基金名称
                 startActivity(intent);
                 break;
             case R.id.tv_home_more: // 更多 （跳转到定期理财列表页）

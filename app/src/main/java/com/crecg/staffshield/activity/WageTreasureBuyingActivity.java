@@ -61,9 +61,9 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
 
     private void initView() {
         whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
-        prodId = getIntent().getStringExtra("prodId");
-        prodSubId = getIntent().getStringExtra("prodSubId");
-        prodName = getIntent().getStringExtra("prodName");
+//        prodId = getIntent().getStringExtra("prodId");
+//        prodSubId = getIntent().getStringExtra("prodSubId");
+//        prodName = getIntent().getStringExtra("prodName");
 
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
@@ -96,7 +96,11 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
         String data = DESUtil.encMap(param);
         HashMap<String, Object> paramWrapper = new HashMap<>();
         paramWrapper.put("requestKey", data);
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getAccountInfoData(paramWrapper).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CommonObserverAdapter<String>() {
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getAccountInfoData(paramWrapper)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
                 ToastUtil.showCustom("获取数据失败");
@@ -162,12 +166,12 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 }
 
                 intent = new Intent(this, TransactionPasswordActivity.class);
-                intent.putExtra("fromFlag", "wageTreasureBuy");
+                intent.putExtra("fromFlag", "wageTreasureBuy"); // 表示是工资宝的买入
                 intent.putExtra("whereToEnterFlag", whereToEnterFlag);
-                intent.putExtra("prodId", prodId); // 基金代码
-                intent.putExtra("prodSubId", prodSubId); // 基金标识码
+//                intent.putExtra("prodId", prodId); // 基金代码
+//                intent.putExtra("prodSubId", prodSubId); // 基金标识码
+//                intent.putExtra("prodName", prodName); // 工资宝买入的金额
                 intent.putExtra("trsAmount", et_all_money_amount.getText().toString()); // 工资宝买入的金额
-                intent.putExtra("prodName", prodName); // 工资宝买入的金额
                 startActivity(intent);
 
                 break;

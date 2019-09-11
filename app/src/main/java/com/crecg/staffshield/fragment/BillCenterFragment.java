@@ -174,7 +174,7 @@ public class BillCenterFragment extends Fragment {
 //        }
 //        Log.i("hh", "调接口的方法：requestBillCenterData()");
         HashMap<String, Object> param = new HashMap<>();
-        param.put("userId", "26");
+        param.put("userId", "8");
         param.put("pageNum", currentPage);
         param.put("type", type);
         Log.i("hh", "type = " + type + "  pageNum = " + currentPage);

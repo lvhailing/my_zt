@@ -30,6 +30,11 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
     private Button btn_buy;
     private String btnFlag = "0"; // 0:默认选中买入   1：赎回
 
+    private String whereToEnterFlag; // 1:首页进   2：工资宝详情页进
+    private String prodId; // 基金代码
+    private String prodSubId; // 基金标识码
+    private String prodName; // 基金名称
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +45,11 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        tv_right_txt = findViewById(R.id.tv_right_txt);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText("我的工资宝");
-        tv_right_txt.setVisibility(View.VISIBLE);
-        tv_right_txt.setText("明细");
+        initTitle();
+
+        prodId = getIntent().getStringExtra("prodId");
+        prodSubId = getIntent().getStringExtra("prodSubId");
+        prodName = getIntent().getStringExtra("prodName");
 
         webView = findViewById(R.id.web_view);
         btn_redeem = findViewById(R.id.btn_redeem);
@@ -75,12 +78,24 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
 //        webView.addJavascriptInterface(new WebActivity.MyJavaScriptinterface(), "click");
-        webView.loadUrl("https://www.baidu.com/");
+//        webView.loadUrl("https://www.baidu.com/");
+        webView.loadUrl("http://192.168.1.246:83/myGongZiBao/8");
 
         iv_back.setOnClickListener(this);
         tv_right_txt.setOnClickListener(this);
         btn_redeem.setOnClickListener(this);
         btn_buy.setOnClickListener(this);
+    }
+
+    private void initTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+        tv_right_txt = findViewById(R.id.tv_right_txt);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("我的工资宝");
+        tv_right_txt.setVisibility(View.VISIBLE);
+        tv_right_txt.setText("明细");
     }
 
     @Override
@@ -103,6 +118,10 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                     btnFlag = "1";
                 }
                 intent = new Intent(SalaryTreasureDetailActivity.this, WageTreasureRedemptionActivity.class);
+                intent.putExtra("whereToEnterFlag", "2");
+//                intent.putExtra("prodId",prodId ); // 基金代码
+//                intent.putExtra("prodSubId",prodSubId ); // 基金标识码
+//                intent.putExtra("prodName",prodName ); // 基金名称
                 startActivity(intent);
                 break;
             case R.id.btn_buy: // 买入 (买入时需要判断是否开户，开户的话直接跳买入页，没开户的话需要先跳绑卡页开户再进买入页)
@@ -114,7 +133,10 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                     btnFlag = "0";
                 }
                 intent = new Intent(SalaryTreasureDetailActivity.this, WageTreasureBuyingActivity.class);
-                intent.putExtra("whereToEnterFlag", "2");
+                intent.putExtra("whereToEnterFlag", "2"); // 表示从工资宝详情页进
+//                intent.putExtra("prodId",prodId ); // 基金代码
+//                intent.putExtra("prodSubId",prodSubId ); // 基金标识码
+//                intent.putExtra("prodName",prodName ); // 基金名称
                 startActivity(intent);
                 break;
         }

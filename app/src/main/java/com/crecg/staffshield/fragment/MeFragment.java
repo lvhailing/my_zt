@@ -154,7 +154,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
 
         HashMap<String, Object> paramWrapper = new HashMap<>();
         paramWrapper.put("requestKey", data);
-        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).getMyData(paramWrapper)
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class).
+                getMyData(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String>() {

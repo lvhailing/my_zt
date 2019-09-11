@@ -162,4 +162,9 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("userBalance/TransferFundIn")
     Observable<String>getBuyFundData(@FieldMap Map<String, Object> param);
+
+    // 转出工资宝
+    @FormUrlEncoded
+    @POST("userBalance/payrollTransfer")
+    Observable<String>getFundData(@FieldMap Map<String, Object> param);
 }

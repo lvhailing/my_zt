@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
     >
 
@@ -47,7 +48,7 @@
             android:layout_marginRight="100dp"
             android:layout_toRightOf="@id/iv_money_logo"
             android:background="@color/transparent"
-            android:hint="可赎回23000.00"
+            tools:hint="可赎回23000.00"
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
             android:textSize="15sp"/>

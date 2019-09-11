@@ -65,6 +65,7 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
 
     private void initView() {
         setTitle();
+
         vs = findViewById(R.id.vs);
         swipe_refresh = findViewById(R.id.swipe_refresh);
         recycler_view = findViewById(R.id.recycler_view);
@@ -141,8 +142,8 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
         });
     }
 
+    // 模拟数据
     private void initData() {
-        // 模拟数据
         ProductModelTestData product1 = new ProductModelTestData();
         product1.annualizedReturn = "6.12%";
         product1.date = "2019-06-04 14:00";
@@ -210,7 +211,7 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
     private void requestRegularFinancialListData() {
         HashMap<String, Object> param = new HashMap<>();
         param.put("pageNum", currentPage + ""); // 页码不传默认为1
-        param.put("pageSize", ""); // 页码不传默认为3条
+        param.put("pageSize", ""); // 页码不传 默认10条
         param.put("listType", "product"); // 定期理财传 product
         String data = DESUtil.encMap(param);
 

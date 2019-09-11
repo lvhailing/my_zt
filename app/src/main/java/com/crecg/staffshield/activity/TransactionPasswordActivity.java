@@ -10,9 +10,12 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.model.AccountInfoModel;
 import com.crecg.crecglibrary.network.model.BuyFundModel;
 import com.crecg.crecglibrary.network.model.BuyFundProgressModel;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
+import com.crecg.crecglibrary.network.model.FundBillDetailDataModel;
+import com.crecg.crecglibrary.network.model.FundDetailListModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialDataModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialProductItemDataModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
@@ -24,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 import com.xnumberkeyboard.android.OnNumberKeyboardListener;
 import com.xnumberkeyboard.android.XNumberKeyboardView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,12 +51,13 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
     private XNumberKeyboardView view_keyboard;
     private List<String> transactionPwdList = new ArrayList<>();
     private TextView tv_forget_transaction_pwd;
-    private String fromFlag; // wageTreasureRedeem:工资宝赎回  wageTreasureBuy:工资宝买入
+    private String fromFlag; // wageTreasureRedeem:工资宝赎回     wageTreasureBuy:工资宝买入
     private String whereToEnterFlag; //  1:首页进   2：工资宝详情页进
     private String prodId; // 基金代码
     private String prodSubId; // 基金标识码
     private String trsAmount; // 充值金额（保留两位小数）
     private String prodName; // 基金名称
+    private String redemptionFlag; // 工资宝赎回方式  n:实时赎回  y：普通到账
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +70,11 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
     private void initView() {
         fromFlag = getIntent().getStringExtra("fromFlag");
         whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
-        prodId = getIntent().getStringExtra("prodId");
-        prodSubId = getIntent().getStringExtra("prodSubId");
+//        prodId = getIntent().getStringExtra("prodId");
+//        prodSubId = getIntent().getStringExtra("prodSubId");
+//        prodName = getIntent().getStringExtra("prodName");
         trsAmount = getIntent().getStringExtra("trsAmount");
-        prodName = getIntent().getStringExtra("prodName");
+        redemptionFlag = getIntent().getStringExtra("redemptionFlag");
 
         iv_close_keyboard = findViewById(R.id.iv_close_keyboard);
         view_keyboard = findViewById(R.id.view_keyboard);
@@ -151,23 +157,31 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
 
             // Todo 调后台接口成功后跳转到成功状态页
 
-            requestData();
+            if (fromFlag.equals("wageTreasureRedeem")) { // 工资宝赎回
+                requestFundRedemptionData();
+            } else if (fromFlag.equals("wageTreasureBuy")) { // 工资宝买入（一：从工资宝详情页进的买入，二：从首页点“立即买入”进）
+                requestData();
+            }
 
             // 删除键不可点
             view_keyboard.setDelBtnEnable(false);
+
         }
 
     }
 
+    /**
+     *   工资宝买入调的接口
+     */
     private void requestData() {
         String trsPwd = listToString(transactionPwdList);
         HashMap<String, Object> param = new HashMap<>();
         param.put("userId", "8");
-        param.put("trsAmount", trsAmount); // 充值金额（保留两位小数）
+        param.put("trsAmount", trsAmount); // 基金买入金额（保留两位小数）
         param.put("eaccountTrsPwd", trsPwd); // 交易密码  "123456 "
-        param.put("prodId", prodId); // 基金代码
-        param.put("prodSubId", prodSubId); // 基金标识码
-        param.put("prodName", prodName); // 基金名称
+//        param.put("prodId", prodId); // 基金代码
+//        param.put("prodSubId", prodSubId); // 基金标识码
+//        param.put("prodName", prodName); // 基金名称
         String data = DESUtil.encMap(param);
 
         HashMap<String, Object> paramWrapper = new HashMap<>();
@@ -179,7 +193,7 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
                 .subscribe(new CommonObserverAdapter<String>() {
             @Override
             public void onMyError() {
-                ToastUtil.showCustom("首页获取数据失败");
+                ToastUtil.showCustom("基金买入获取数据失败");
             }
 
             @Override
@@ -193,22 +207,70 @@ public class TransactionPasswordActivity extends BaseActivity implements OnNumbe
                 if (buyFundInfoData == null) {
                     return;
                 }
-
                 String trsAmount = buyFundInfoData.trsAmount;
                 List<BuyFundProgressModel> prodList = buyFundInfoData.prodList;
                 if (buyFundInfoData.flag.equals("true")) {
-                    if (fromFlag.equals("wageTreasureRedeem")) { // 工资宝赎回
-                        Intent intent = new Intent(TransactionPasswordActivity.this, WageTreasureTurnSuccessActivity.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    } else if (fromFlag.equals("wageTreasureBuy")) { // 工资宝买入（一：从工资宝详情页进的买入，二：从首页点“立即买入”进）
-                        Intent intent = new Intent(TransactionPasswordActivity.this, WageTreasureTurnSuccessActivity.class);
-                        intent.putExtra("whereToEnterFlag", whereToEnterFlag);
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(TransactionPasswordActivity.this, WageTreasureTurnSuccessActivity.class);
+                    intent.putExtra("fromFlag", fromFlag); // 再次把工资宝的买入或赎回类别传到详情页，来区分是买入详情还是赎回详情
+                    intent.putExtra("whereToEnterFlag", whereToEnterFlag);
+                    intent.putExtra("trsAmount",trsAmount);
+                    intent.putExtra("prodList", (Serializable) prodList);
+                    startActivity(intent);
                 }
             }
         });
+    }
+
+    /**
+     *  工资宝赎回时调的接口
+     */
+    private void requestFundRedemptionData() {
+        String trsPwd = listToString(transactionPwdList);
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "8");
+        param.put("trsAmount", trsAmount); // 基金买入金额（保留两位小数）
+        param.put("eaccountTrsPwd", trsPwd); // 交易密码  "123456 "
+//        param.put("prodId", prodId); // 基金代码
+//        param.put("prodSubId", prodSubId); // 基金标识码
+//        param.put("prodName", prodName); // 基金名称
+        param.put("appointFlg", redemptionFlag); // 赎回标志: y普通赎回  n实时赎回
+        String data = DESUtil.encMap(param);
+        HashMap<String, Object> paramWrapper = new HashMap<>();
+        paramWrapper.put("requestKey", data);
+        RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
+                .getFundData(paramWrapper).
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).
+                subscribe(new CommonObserverAdapter<String>() {
+                    @Override
+                    public void onMyError() {
+                        ToastUtil.showCustom("获取数据失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(String result) {
+                        if (result == null) {
+                            return;
+                        }
+                        CommonResultModel<BuyFundModel> dataModel = new Gson().fromJson(result, new TypeToken<CommonResultModel<BuyFundModel>>() {
+                        }.getType());
+                        BuyFundModel redeemptionInfoData = dataModel.data;
+                        if (redeemptionInfoData == null) {
+                            return;
+                        }
+                        String trsAmount = redeemptionInfoData.trsAmount;
+                        List<BuyFundProgressModel> prodList = redeemptionInfoData.prodList;
+                        if (redeemptionInfoData.flag.equals("true")) {
+                            Intent intent = new Intent(TransactionPasswordActivity.this, WageTreasureTurnSuccessActivity.class);
+                            intent.putExtra("fromFlag", fromFlag); // 再次把工资宝的买入或赎回类别传到详情页，来区分是买入详情还是赎回详情
+                            intent.putExtra("whereToEnterFlag", whereToEnterFlag);
+                            intent.putExtra("trsAmount",trsAmount);
+                            intent.putExtra("prodList", (Serializable) prodList);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 
     public static String listToString(List<String> list) {

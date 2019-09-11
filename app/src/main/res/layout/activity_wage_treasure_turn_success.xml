@@ -19,11 +19,12 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_title_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            android:text="转入金额（元）"
+            tools:text="转入金额（元）"
             android:textColor="@color/txt_black_999999"
             android:textSize="12sp"/>
 
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="20dp"
-            android:text="转入进度"
+            tools:text="转入进度"
             android:textColor="@color/txt_black_999999"
             android:textSize="15sp"/>
 
