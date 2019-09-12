@@ -31,6 +31,7 @@ import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
+import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
 import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
 import com.crecg.staffshield.activity.TestActivity1;
@@ -235,8 +236,8 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         ll_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context, RegularFinancialManagementBuyingActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(context, RegularFinancialManagementBuyingActivity.class);
+                startActivity(intent);
             }
         });
         return ll_item;

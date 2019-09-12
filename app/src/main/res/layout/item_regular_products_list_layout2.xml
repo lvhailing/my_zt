@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:background="@drawable/shape_bg_white_down_shadow"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/ll_left_product_name"

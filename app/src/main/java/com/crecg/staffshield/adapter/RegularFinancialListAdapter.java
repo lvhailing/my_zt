@@ -64,6 +64,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Log.i("hh", " onBindViewHolder -- 方法执行了");
         String status = list.get(position).status;
         /**
          *  init：初始状态--即将开卖
@@ -74,18 +75,18 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
          *  repayed：已还清--已回款
          *  prepayed: 提前还款结清--已回款
          */
-        if (holder instanceof ItemViewHolder1) {
+        if (holder instanceof ItemViewHolder1) { // 热卖中、即将开售
             ItemViewHolder1 itemViewHolder1 = (ItemViewHolder1) holder;
             itemViewHolder1.tv_regular_product_name.setText(list.get(position).name);
-            itemViewHolder1.tv_product_annualized_return.setText(list.get(position).annualRate);
+            itemViewHolder1.tv_product_annualized_return.setText(list.get(position).annualRate + "%"); // 年化收益率
             itemViewHolder1.tv_product_cycle.setText(list.get(position).timeLimit.toString());
             itemViewHolder1.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投");
             if ("init".equals(status)) { // 即将开售布局
                 itemViewHolder1.fl_start_sell.setVisibility(View.VISIBLE); // 即将开售布局显示
                 itemViewHolder1.ll_best_sell.setVisibility(View.GONE); // 募集中布局隐藏
                 itemViewHolder1.tv_start_sale_time.setText(list.get(position).tenderStartTime); // 即将开售时间
-            }else if ("tender".equals(status)) { // 募集中布局
-                itemViewHolder1.ll_best_sell.setVisibility(View.VISIBLE); // 募集中布局显示
+            }else if ("tender".equals(status)) { // 热卖中中布局
+                itemViewHolder1.ll_best_sell.setVisibility(View.VISIBLE); // 显示热卖中布局
                 itemViewHolder1.fl_start_sell.setVisibility(View.GONE); // 即将开售布局隐藏
                 float fCurrentProgress = Float.parseFloat(list.get(position).bfbAmount);
                 itemViewHolder1.progressbar.setProgress((int)fCurrentProgress); // 产品募集中的进度
@@ -93,7 +94,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
             }
             // item 点击监听
             initListener(itemViewHolder1.itemView, list.get(position).id);
-        } else if (holder instanceof ItemViewHolder2) {
+        } else if (holder instanceof ItemViewHolder2) {  // 已售罄、计息中、已回款
             ItemViewHolder2 itemViewHolder2 = (ItemViewHolder2) holder;
             if ("success".equals(status)) { // 已满标
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
@@ -103,7 +104,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_sell_out);
             } else if ("fail".equals(status)) { // 募集失败
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name); // 产品名称
-                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate); // 产口预期年化收益率
+                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate); // 产品预期年化收益率
                 itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString()); // 产品期限
                 itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投"); // 产品起投金额
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_sell_fail);
@@ -128,7 +129,6 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
                     itemViewHolder2.tv_day.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
                 }
             }
-
             // item 点击监听
             initListener(itemViewHolder2.itemView, list.get(position).id);
         } else if (holder instanceof FooterViewHolder) {
@@ -251,9 +251,9 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
         public FooterViewHolder(View itemView) {
             super(itemView);
 
-            pbLoad = (ProgressBar) itemView.findViewById(R.id.pbLoad);
-            tvLoadText = (TextView) itemView.findViewById(R.id.tvLoadText);
-            loadLayout = (LinearLayout) itemView.findViewById(R.id.loadLayout);
+            pbLoad = itemView.findViewById(R.id.pbLoad);
+            tvLoadText = itemView.findViewById(R.id.tvLoadText);
+            loadLayout = itemView.findViewById(R.id.loadLayout);
         }
     }
 

@@ -270,6 +270,7 @@ public class RegularFinancialManagementListActivity extends BaseActivity impleme
                         if (totalList.size() != 0 && totalList.size() % 10 == 0) {
                             vs.setDisplayedChild(0);
                             regularFinancialListAdapter.changeMoreStatus(regularFinancialListAdapter.PULLUP_LOAD_MORE);
+//                            regularFinancialListAdapter.notifyDataSetChanged();
                         } else {
                             regularFinancialListAdapter.changeMoreStatus(regularFinancialListAdapter.NO_LOAD_MORE);
                         }
