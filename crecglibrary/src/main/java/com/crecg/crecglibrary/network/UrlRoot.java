@@ -22,6 +22,11 @@ public class UrlRoot {
 
     private static final int mEnvironment = 3;  //1测试环境，2正式环境 ,3和4均为个人服务器地址
 
+    // H5 页面地址
+
+    // 工资宝详情
+    public static final String URL_SALARY_TREASURE_DETAIL = "http://192.168.1.246:83/" + "myGongZiBao/";
+
     static {
         switch (mEnvironment) {
             case ENV_DEV: // 测试环境

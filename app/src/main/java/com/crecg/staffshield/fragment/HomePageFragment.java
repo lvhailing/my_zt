@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
+import com.crecg.crecglibrary.network.UrlRoot;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialDataModel;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialProductItemDataModel;
@@ -33,9 +34,10 @@ import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
-import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
+import com.crecg.staffshield.activity.SalaryTreasureDetailWebActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
+import com.crecg.staffshield.activity.WebActivity;
 import com.crecg.staffshield.widget.MyRollViewPager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -247,7 +249,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
 //        Log.i("hh", "首页 onResume方法：" + getClass());
-        initData();
+//        initData();
     }
 
     /**
@@ -389,7 +391,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.ll_home_salary_treasure:  // 工资宝
                 ToastUtil.showCustom("工资宝被点击了");
-//                intent = new Intent(context, SalaryTreasureDetailActivity.class);
+//                intent = new Intent(context, SalaryTreasureDetailWebActivity.class);
 //                intent.putExtra("prodId",homeData.prodId ); // 基金代码
 //                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
 //                intent.putExtra("prodName",homeData.prodName ); // 基金名称
@@ -417,11 +419,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.ll_go_to_salary_treasure:  // 活期 工资宝布局 (跳转工资宝详情页H5)
-                intent = new Intent(context, SalaryTreasureDetailActivity.class);
-                intent.putExtra("prodId",homeData.prodId ); // 基金代码
-                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
-                intent.putExtra("prodName",homeData.prodName ); // 基金名称
+                intent = new Intent(context, WebActivity.class);
+                intent.putExtra("type", WebActivity.WEB_TYPE_SALARY_TREASURE_DETAIL);
+                intent.putExtra("url", UrlRoot.URL_SALARY_TREASURE_DETAIL + "8");
+                intent.putExtra("title", "我的资宝");
                 startActivity(intent);
+
                 break;
             case R.id.tv_home_more: // 更多 （跳转到定期理财列表页）
                 intent = new Intent(context, RegularFinancialManagementListActivity.class);

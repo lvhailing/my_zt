@@ -121,7 +121,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.SalaryTreasureDetailActivity"
+            android:name=".activity.SalaryTreasureDetailWebActivity"
             android:screenOrientation="portrait"/>
 
         <activity
@@ -186,6 +186,14 @@
 
         <activity
             android:name=".activity.WageTreasureTurnSuccessActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.RegularFinancingDetailWebActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activity.WebActivity"
             android:screenOrientation="portrait"/>
 
 

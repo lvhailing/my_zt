@@ -29,7 +29,10 @@ public class WebActivity extends Activity implements View.OnClickListener {
     private WebView mWebview;
     private String type = null;
     private String url = null;
-    public static final String WEBTYPE_BANNER = "banner";            //轮播图
+    public static final String WEB_TYPE_SALARY_TREASURE_DETAIL = "salary_treasure_detail";  // 工资宝详情
+
+
+
     public static final String WEBTYPE_PLAN_BOOK = "plan_book";            //计划书
     public static final String WEBTYPE_BUY = "buy";            //购买链接
     public static final String WEB_TYPE_NOTICE = "notice_detail "; // 公告详情/其他消息详情
@@ -61,8 +64,10 @@ public class WebActivity extends Activity implements View.OnClickListener {
         }*/
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_web);
+
         type = getIntent().getStringExtra("type");
         url = getIntent().getStringExtra("url");
+
         initView();
     }
 
@@ -72,10 +77,10 @@ public class WebActivity extends Activity implements View.OnClickListener {
         ActivityStack stack = ActivityStack.getActivityManage();
         stack.addActivity(this);
 
-        mWebview = (WebView) findViewById(R.id.web_view);
-        tv_web_title = (TextView) findViewById(R.id.tv_web_title);
-        iv_back = (ImageView) findViewById(R.id.iv_back);
-        iv_btn_share = (ImageView) findViewById(R.id.iv_btn_share);
+        mWebview = findViewById(R.id.web_view);
+        tv_web_title = findViewById(R.id.tv_web_title);
+        iv_back = findViewById(R.id.iv_back);
+        iv_btn_share = findViewById(R.id.iv_btn_share);
 
         iv_back.setOnClickListener(this);
         iv_btn_share.setOnClickListener(this);
@@ -104,32 +109,32 @@ public class WebActivity extends Activity implements View.OnClickListener {
         mWebview.getSettings().setDomStorageEnabled(true);
         mWebview.addJavascriptInterface(new MyJavaScriptinterface(), "click");
 
-        if (type.equals(WEBTYPE_BANNER)) {// 轮播图
+        if (type.equals(WEB_TYPE_SALARY_TREASURE_DETAIL)) {// 工资宝详情
             tv_web_title.setText(getIntent().getExtras().getString("title"));
-        }else if (type.equals(WEB_TYPE_NOTICE)) { // 公告详情
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-        } else if (type.equals(WEBTYPE_SERVICE_AGREEMENT)) {
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-        } else if (type.equals(WEB_TYPE_ABOUT_US)) { // 关于我们
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-
-        }else if (type.equals(WEB_TYPE_SING)) { // 注册协议
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-
-        } else if (type.equals(WEB_TYPE_SIGN_AGREEMENT)) { // 国恒保险协议
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-        } else if (type.equals(WEBTYPE_VERSION)) { // 版本号
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-        } else if (type.equals(WEBTYPE_PROJECT_MATERIAL_DETAIL)) {
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-
-        }else if (type.equals(WEBTYPE_PLAN_BOOK)) {//计划书
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-
-        }else if (type.equals(WEBTYPE_BUY)) {//购买链接
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
-
         }
+//        else if (type.equals(WEB_TYPE_NOTICE)) { // 公告详情
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//        } else if (type.equals(WEBTYPE_SERVICE_AGREEMENT)) {
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//        } else if (type.equals(WEB_TYPE_ABOUT_US)) { // 关于我们
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//
+//        }else if (type.equals(WEB_TYPE_SING)) { // 注册协议
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//
+//        } else if (type.equals(WEB_TYPE_SIGN_AGREEMENT)) { // 国恒保险协议
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//        } else if (type.equals(WEBTYPE_VERSION)) { // 版本号
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//        } else if (type.equals(WEBTYPE_PROJECT_MATERIAL_DETAIL)) {
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//
+//        }else if (type.equals(WEBTYPE_PLAN_BOOK)) {//计划书
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//
+//        }else if (type.equals(WEBTYPE_BUY)) {//购买链接
+//            tv_web_title.setText(getIntent().getExtras().getString("title"));
+//        }
 
 
 //        HtmlRequest.synCookies(this, url);

@@ -9,13 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crecg.crecglibrary.network.model.BuyFundProgressModel;
-import com.crecg.crecglibrary.network.model.FundDetailListModel;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.BuyFundDetailAdapter;
-import com.crecg.staffshield.adapter.FundDetailAdapter;
 import com.crecg.staffshield.common.BaseActivity;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -76,7 +73,7 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
                     intent.putExtra("goBackFlag", "1"); // 返回到首页
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 } else if ("2".equals(whereToEnterFlag)) { // 表示从工资宝详情页进
-                    intent = new Intent(WageTreasureTurnSuccessActivity.this, SalaryTreasureDetailActivity.class);
+                    intent = new Intent(WageTreasureTurnSuccessActivity.this, SalaryTreasureDetailWebActivity.class);
                     intent.putExtra("goBackFlag", "2"); // 返回到工资宝详情页
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 }

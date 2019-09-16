@@ -20,7 +20,7 @@ import com.crecg.staffshield.common.BaseActivity;
  * Created by junde on 2019/7/4.
  */
 
-public class SalaryTreasureDetailActivity extends BaseActivity implements View.OnClickListener {
+public class SalaryTreasureDetailWebActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView iv_back;
     private TextView tv_common_title;
@@ -31,9 +31,6 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
     private String btnFlag = "0"; // 0:默认选中买入   1：赎回
 
     private String whereToEnterFlag; // 1:首页进   2：工资宝详情页进
-    private String prodId; // 基金代码
-    private String prodSubId; // 基金标识码
-    private String prodName; // 基金名称
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +43,6 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
 
     private void initView() {
         initTitle();
-
-        prodId = getIntent().getStringExtra("prodId");
-        prodSubId = getIntent().getStringExtra("prodSubId");
-        prodName = getIntent().getStringExtra("prodName");
 
         webView = findViewById(R.id.web_view);
         btn_redeem = findViewById(R.id.btn_redeem);
@@ -106,7 +99,7 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                 finish();
                 break;
             case R.id.tv_right_txt: // 明细
-                intent = new Intent(SalaryTreasureDetailActivity.this, BillCenterActivity.class);
+                intent = new Intent(SalaryTreasureDetailWebActivity.this, BillCenterActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_redeem: // 赎回
@@ -117,7 +110,7 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                     btn_buy.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "1";
                 }
-                intent = new Intent(SalaryTreasureDetailActivity.this, WageTreasureRedemptionActivity.class);
+                intent = new Intent(SalaryTreasureDetailWebActivity.this, WageTreasureRedemptionActivity.class);
                 intent.putExtra("whereToEnterFlag", "2");
 //                intent.putExtra("prodId",prodId ); // 基金代码
 //                intent.putExtra("prodSubId",prodSubId ); // 基金标识码
@@ -132,7 +125,7 @@ public class SalaryTreasureDetailActivity extends BaseActivity implements View.O
                     btn_redeem.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
                     btnFlag = "0";
                 }
-                intent = new Intent(SalaryTreasureDetailActivity.this, WageTreasureBuyingActivity.class);
+                intent = new Intent(SalaryTreasureDetailWebActivity.this, WageTreasureBuyingActivity.class);
                 intent.putExtra("whereToEnterFlag", "2"); // 表示从工资宝详情页进
 //                intent.putExtra("prodId",prodId ); // 基金代码
 //                intent.putExtra("prodSubId",prodSubId ); // 基金标识码

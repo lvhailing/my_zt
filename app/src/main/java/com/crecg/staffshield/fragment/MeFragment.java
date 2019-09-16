@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +19,15 @@ import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.MyDataModel;
-import com.crecg.crecglibrary.network.model.MyFinancialDataModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.AccountBalanceActivity;
-import com.crecg.staffshield.activity.AddBankCardActivity;
 import com.crecg.staffshield.activity.EntityBankToElectronicBankActivity;
 import com.crecg.staffshield.activity.ElectronicBankToEntityBankActivity;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
 import com.crecg.staffshield.activity.MyInsuranceActivity;
-import com.crecg.staffshield.activity.SalaryTreasureDetailActivity;
+import com.crecg.staffshield.activity.SalaryTreasureDetailWebActivity;
 import com.crecg.staffshield.activity.SettingActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -249,7 +246,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.ll_salary_treasure: // 工资宝
-                intent = new Intent(context, SalaryTreasureDetailActivity.class);
+                intent = new Intent(context, SalaryTreasureDetailWebActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ll_conduct_financial_transactions: // 定期理财
