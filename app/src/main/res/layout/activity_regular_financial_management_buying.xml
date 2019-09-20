@@ -46,8 +46,7 @@
             android:background="@color/transparent"
             android:textColor="@color/txt_black_999999"
             android:textSize="15sp"
-            tools:text="201222.12"
-            />
+            tools:text="201222.12"/>
 
         <TextView
             android:id="@+id/tv_transfer_of_funds"
@@ -96,11 +95,11 @@
             android:layout_marginLeft="13dp"
             android:layout_toRightOf="@id/iv_money_logo"
             android:background="@color/transparent"
-            android:hint="请输入最低10W的购买金额"
             android:text=""
             android:textColor="@color/txt_black_333333"
             android:textColorHint="@color/txt_gray_ccc"
             android:textSize="15sp"
+            tools:hint="10万元起投,单笔限购100万元"
             />
 
         <TextView
@@ -117,12 +116,11 @@
             android:textColor="@color/main_blue_4A67F5"
             android:textSize="16sp"/>
 
-
         <View
             android:layout_width="1dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="45dp"
+            android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/tv_all"
             android:background="@color/bg_line"/>
     </RelativeLayout>
@@ -132,7 +130,7 @@
         android:layout_height="1dp"
         android:background="@color/bg_line"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -143,22 +141,27 @@
         android:paddingTop="12dp">
 
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/tv_incremental_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="单笔上线100万元"
-            android:textColor="@color/txt_black_999999"
+            android:text="递增金额1万元"
             android:textSize="12sp"/>
 
+        <View
+            android:id="@+id/v_vertical_line"
+            android:layout_width="1dp"
+            android:layout_height="13dp"
+            android:layout_marginLeft="14dp"
+            android:background="@color/bg_line"/>
+
         <TextView
-            android:id="@+id/tv_date_start_accruing_interest"
+            android:id="@+id/tv_surplus_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_marginLeft="14dp"
             android:text="剩余可购买金额201万元"
-            android:textColor="@color/txt_black_999999"
             android:textSize="12sp"/>
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -183,6 +186,7 @@
         android:textSize="16sp"/>
 
     <RelativeLayout
+        android:id="@+id/rl_agree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"

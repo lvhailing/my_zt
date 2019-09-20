@@ -3,7 +3,6 @@ package com.crecg.staffshield.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.FundBillDetailDataModel;
-import com.crecg.crecglibrary.network.model.FundDetailListModel;
+import com.crecg.crecglibrary.network.model.TransactionDetailListModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
@@ -46,8 +45,8 @@ public class FinancialBillDetailActivity extends BaseActivity {
     private TextView tv_flow_num; // 流水号
     private String mType;
     private String transId;  // 渠道流水号（充值或提现成功后返回）
-    private ArrayList<FundDetailListModel> totalList = new ArrayList<>();
-    private List<FundDetailListModel> everyList;
+    private ArrayList<TransactionDetailListModel> totalList = new ArrayList<>();
+    private List<TransactionDetailListModel> everyList;
     private FundDetailAdapter adapter;
 
 
@@ -104,7 +103,7 @@ public class FinancialBillDetailActivity extends BaseActivity {
      */
     private void requestData() {
         HashMap<String, Object> param = new HashMap<>();
-        param.put("userId", "26");
+        param.put("userId", "8");
         param.put("oriJnlNo", transId);
         String data = DESUtil.encMap(param);
 

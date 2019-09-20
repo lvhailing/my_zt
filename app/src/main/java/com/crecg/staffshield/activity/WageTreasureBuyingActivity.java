@@ -42,13 +42,9 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
     private TextView tv_about_agreement; // 相关协议
     private Button btn_buy; // 确认买入
     private ImageView iv_selected_or_unselected; // 相关协议未选中状态
-    private String whereToEnterFlag; // 1:首页进   2：工资宝详情页进
+    private String whereToEnterFlag; // 1:首页进   2：工资宝详情页进     3:充值成功后进
     private boolean isCheckedFlag = false;
     private boolean isOpenFastPayment = false;
-
-    private String prodId; // 基金代码
-    private String prodSubId; // 基金标识码
-    private String prodName; // 基金名称
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +57,6 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
 
     private void initView() {
         whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
-//        prodId = getIntent().getStringExtra("prodId");
-//        prodSubId = getIntent().getStringExtra("prodSubId");
-//        prodName = getIntent().getStringExtra("prodName");
 
         iv_back = findViewById(R.id.iv_back);
         tv_common_title = findViewById(R.id.tv_common_title);
@@ -168,12 +161,9 @@ public class WageTreasureBuyingActivity extends BaseActivity implements View.OnC
                 intent = new Intent(this, TransactionPasswordActivity.class);
                 intent.putExtra("fromFlag", "wageTreasureBuy"); // 表示是工资宝的买入
                 intent.putExtra("whereToEnterFlag", whereToEnterFlag);
-//                intent.putExtra("prodId", prodId); // 基金代码
-//                intent.putExtra("prodSubId", prodSubId); // 基金标识码
-//                intent.putExtra("prodName", prodName); // 工资宝买入的金额
                 intent.putExtra("trsAmount", et_all_money_amount.getText().toString()); // 工资宝买入的金额
                 startActivity(intent);
-
+                finish();
                 break;
         }
     }

@@ -78,22 +78,12 @@ public interface CommonRequestProxy {
     @POST("userinfo/trspwd/reset")
     Observable<String> resetTransactionPwdByPost(@FieldMap Map<String, Object> param);
 
-    // 首页轮播图 6.1.1
-    @FormUrlEncoded
-    @POST("homePage/rotaryPlantingMap")
-    Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
-
-    // 首页数据&&定期理财列表数据 6.1.2
-    @FormUrlEncoded
-    @POST("homePage")
-    Observable<String>requestHomeAndFinancialData(@FieldMap Map<String,Object>param);
-
     //快捷支付签约短信验证码获取 3.3 (未调试)
     @FormUrlEncoded
     @POST("userInfo/paySigned/send/verifyCode")
     Observable<String> getFastPaymentVerifyCode(@FieldMap Map<String, Object> param);
 
-    //快捷支付签约（点下一步按钮调此接口）3.4 (未调试)
+    //快捷支付签约（点下一步按钮调此接口）3.4
     @FormUrlEncoded
     @POST("userInfo/paySigned/submit")
     Observable<String> getFastPaymentSubmit(@FieldMap Map<String, Object> param);
@@ -108,15 +98,25 @@ public interface CommonRequestProxy {
     @POST("balance/eleAccountAut")
     Observable<String> getAuthenticationData(@FieldMap Map<String, Object> param);
 
-    //我的理财接口 6.7
-    @FormUrlEncoded
-    @POST("userBalance/myProductTender")
-    Observable<String> getMyFinancialListData(@FieldMap Map<String, Object> param);
-
     //我的模块接口 2.9
     @FormUrlEncoded
     @POST("myBalance/myEAccount")
     Observable<String> getMyData(@FieldMap Map<String, Object> param);
+
+    // 首页轮播图 6.1.1
+    @FormUrlEncoded
+    @POST("homePage/rotaryPlantingMap")
+    Observable<String> getHomePicListByPost(@FieldMap Map<String, Object> param);
+
+    // 首页数据&&定期理财列表数据 6.1.2
+    @FormUrlEncoded
+    @POST("homePage")
+    Observable<String>requestHomeAndFinancialData(@FieldMap Map<String,Object>param);
+
+    //我的理财接口 6.7
+    @FormUrlEncoded
+    @POST("userBalance/myProductTender")
+    Observable<String> getMyFinancialListData(@FieldMap Map<String, Object> param);
 
     //账单中心接口 6.8
     @FormUrlEncoded
@@ -138,20 +138,20 @@ public interface CommonRequestProxy {
     @POST("myInsuranceOrder/list/get")
     Observable<String>getInsuranceListData(@FieldMap Map<String, Object> param);
 
+    // 充值页面接口 4.1
+    @FormUrlEncoded
+    @POST("userInfo/recharge/add")
+    Observable<String>getRechargeData(@FieldMap Map<String, Object> param);
+
     // 银行卡充值和提现详情接口 4.2
     @FormUrlEncoded
     @POST("userInfo/transaction/order/detail")
-    Observable<String>getRechargeWithdrawalData(@FieldMap Map<String, Object> param);
+    Observable<String> getRechargeWithdrawalDetailData(@FieldMap Map<String, Object> param);
 
-    // (从账单中心跳转详情)工资宝-资金转入详情接口 5.4
+    // 提现接口 4.3
     @FormUrlEncoded
-    @POST("userBalance/fundTransferRoll")
-    Observable<String>getFundDetailData(@FieldMap Map<String, Object> param);
-
-    // (从账单中心跳转详情)理财产品详情接口 7.3
-    @FormUrlEncoded
-    @POST("userBalance/fundTransferRollInfo")
-    Observable<String>getFinancialDetailData(@FieldMap Map<String, Object> param);
+    @POST("userInfo/bankCard/transferOut")
+    Observable<String> getCashWithdrawalData(@FieldMap Map<String, Object> param);
 
     // 用户持仓信息 5.1
     @FormUrlEncoded
@@ -167,4 +167,25 @@ public interface CommonRequestProxy {
     @FormUrlEncoded
     @POST("userBalance/payrollTransfer")
     Observable<String>getFundData(@FieldMap Map<String, Object> param);
+
+    // (从账单中心跳转详情)工资宝-资金转入详情接口 5.4
+    @FormUrlEncoded
+    @POST("userBalance/fundTransferRoll")
+    Observable<String>getFundDetailData(@FieldMap Map<String, Object> param);
+
+    // 理财产品买入信息接口(进到买入页先调这个接口来获取页面信息) 7.1
+    @FormUrlEncoded
+    @POST("userBalance/myProductTenderInfo")
+    Observable<String>getProductTenderInfoData(@FieldMap Map<String, Object> param);
+
+    // 理财产品买入接口(进到买入页点确认买入按钮调这个接口) 7.2
+    @FormUrlEncoded
+    @POST("android/rotaryPlantingMap")
+    Observable<String>getPurchaseFinanceData(@FieldMap Map<String, Object> param);
+
+    // (从账单中心跳转详情)理财产品详情接口 7.3
+    @FormUrlEncoded
+    @POST("userBalance/fundTransferRollInfo")
+    Observable<String>getFinancialDetailData(@FieldMap Map<String, Object> param);
+
 }

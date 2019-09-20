@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.crecg.crecglibrary.network.model.BankProgressModel;
-import com.crecg.crecglibrary.network.model.FundDetailListModel;
+import com.crecg.crecglibrary.network.model.TransactionDetailListModel;
 import com.crecg.staffshield.R;
 
 import java.util.List;
@@ -19,11 +18,11 @@ import java.util.List;
  * 基金、理财账单进度 adapter
  */
 public class FundDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<FundDetailListModel> list;
+    private List<TransactionDetailListModel> list;
     private Context mContext;
 
 
-    public FundDetailAdapter(Context context, List<FundDetailListModel> list) {
+    public FundDetailAdapter(Context context, List<TransactionDetailListModel> list) {
         mContext = context;
         this.list = list;
     }
@@ -37,7 +36,7 @@ public class FundDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ItemViewHolder viewHolder = (ItemViewHolder) holder;
-        FundDetailListModel item = list.get(position);
+        TransactionDetailListModel item = list.get(position);
 
         //设置显示隐藏
         if (position == 0) {

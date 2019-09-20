@@ -32,9 +32,7 @@ import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.activity.MyFinancialManagementListActivity;
-import com.crecg.staffshield.activity.RegularFinancialManagementBuyingActivity;
 import com.crecg.staffshield.activity.RegularFinancialManagementListActivity;
-import com.crecg.staffshield.activity.SalaryTreasureDetailWebActivity;
 import com.crecg.staffshield.activity.TestActivity1;
 import com.crecg.staffshield.activity.WageTreasureBuyingActivity;
 import com.crecg.staffshield.activity.WebActivity;
@@ -109,9 +107,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
                 ((ViewGroup) mView.getParent()).removeView(mView);
             }
         }
-
         return mView;
-
     }
 
     private void initData() {
@@ -137,7 +133,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         context = getContext();
         ll_container = mView.findViewById(R.id.ll_container);
 //        for (ProductModelTestData product : list) {
-//            ll_container.addView(getItemData(product));
+//            ll_container.addView(setItemData(product));
 //        }
 
         swipe_refresh = mView.findViewById(R.id.swipe_refresh);
@@ -166,11 +162,15 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
         tv_home_more.setOnClickListener(this);
     }
 
-    private View getItemData(final HomeAndFinancialProductItemDataModel product) {
+    /**
+     * 设置定期产品数据
+     */
+    private View setItemData(final HomeAndFinancialProductItemDataModel product) {
         final String status = product.status;
         View ll_item;
         // 加载 item 布局
         ll_item = LayoutInflater.from(context).inflate(R.layout.item_regular_products2, null);
+
         if (status.equals("init") || status.equals("tender")) { // 即将开售、募集中
             LinearLayout ll_container1 = ll_item.findViewById(R.id.ll_container1);
             ll_container1.setVisibility(View.VISIBLE);
@@ -185,6 +185,7 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             ImageView iv_will_sell_state1 = ll_item.findViewById(R.id.iv_will_sell_state); // 产品即将开售状态
             FrameLayout fl_start_sell1 = ll_item.findViewById(R.id.fl_start_sell);
             LinearLayout ll_best_sell1 = ll_item.findViewById(R.id.ll_best_sell);
+
             tv_regular_product_name1.setText(product.name);
             tv_product_annualized_return1.setText(product.annualRate + "%");
             tv_product_cycle1.setText(product.timeLimit.toString() + "天");
@@ -234,11 +235,16 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             }
         }
 
-        // item 点击跳转定期理财购买页
+        // item 点击跳转定期理财详情页
         ll_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, RegularFinancialManagementBuyingActivity.class);
+//                Log.i("hh", "当前点击的view = " + v);
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("type",WebActivity.WEB_TYPE_REGULAR_FINANCING_DETAIL);
+                intent.putExtra("url",UrlRoot.URL_REGULAR_FINANCING_DETAIL + product.id);
+                intent.putExtra("productId",product.id);
+                intent.putExtra("title",product.name);
                 startActivity(intent);
             }
         });
@@ -324,11 +330,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
 
                 setFundData();
                 productList = homeData.productList;
+
                 if (productList == null) {
                     return;
                 }
                 for (HomeAndFinancialProductItemDataModel productItem : productList) {
-                    ll_container.addView(getItemData(productItem));
+                    ll_container.addView(setItemData(productItem));
                 }
             }
         });
@@ -392,18 +399,12 @@ public class HomePageFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_home_salary_treasure:  // 工资宝
                 ToastUtil.showCustom("工资宝被点击了");
 //                intent = new Intent(context, SalaryTreasureDetailWebActivity.class);
-//                intent.putExtra("prodId",homeData.prodId ); // 基金代码
-//                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
-//                intent.putExtra("prodName",homeData.prodName ); // 基金名称
 //                startActivity(intent);
                 break;
             case R.id.tv_transfer_immediately:  // (工资宝)立即转入 （已经开户跳转工资宝买入页）
                 // Todo 点立即转入时，需要先判断用户是否开通联名卡账户
                 intent = new Intent(context, WageTreasureBuyingActivity.class);
                 intent.putExtra("whereToEnterFlag", "1");
-//                intent.putExtra("prodId",homeData.prodId ); // 基金代码
-//                intent.putExtra("prodSubId",homeData.prodSubId ); // 基金标识码
-//                intent.putExtra("prodName",homeData.prodName ); // 基金名称
                 startActivity(intent);
                 break;
             case R.id.ll_home_manage_money:  // 理财

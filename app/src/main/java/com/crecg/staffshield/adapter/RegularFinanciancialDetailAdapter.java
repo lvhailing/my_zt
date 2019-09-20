@@ -16,14 +16,14 @@ import java.util.List;
 
 
 /**
- * 基金买入与赎回进度 adapter
+ * 理财买入进度 adapter
  */
-public class BuyFundDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RegularFinanciancialDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<TransactionDetailListModel> list;
     private Context mContext;
 
 
-    public BuyFundDetailAdapter(Context context, List<TransactionDetailListModel> list) {
+    public RegularFinanciancialDetailAdapter(Context context, List<TransactionDetailListModel> list) {
         mContext = context;
         this.list = list;
     }
@@ -31,7 +31,7 @@ public class BuyFundDetailAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.item_all_kinds_of_details, parent, false);
-        return new BuyFundDetailAdapter.ItemViewHolder(itemView);
+        return new RegularFinanciancialDetailAdapter.ItemViewHolder(itemView);
     }
 
     @Override

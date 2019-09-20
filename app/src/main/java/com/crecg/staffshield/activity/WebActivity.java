@@ -2,6 +2,7 @@ package com.crecg.staffshield.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Build;
@@ -16,7 +17,9 @@ import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 //import com.lzy.imagepicker.view.SystemBarTintManager;
@@ -30,7 +33,7 @@ public class WebActivity extends Activity implements View.OnClickListener {
     private String type = null;
     private String url = null;
     public static final String WEB_TYPE_SALARY_TREASURE_DETAIL = "salary_treasure_detail";  // 工资宝详情
-
+    public static final String WEB_TYPE_REGULAR_FINANCING_DETAIL = "regular_financing_detail";  // 定期理财详情
 
 
     public static final String WEBTYPE_PLAN_BOOK = "plan_book";            //计划书
@@ -47,21 +50,16 @@ public class WebActivity extends Activity implements View.OnClickListener {
     private TextView tv_web_title; // 标题
     private ImageView iv_back; // 返回按钮
     private ImageView iv_btn_share; // 分享按钮
+    private TextView tv_right_txt; // 标题右侧文字
+    private LinearLayout ll_salary_treasure_btn; // 工资宝详情页买入与赎回布局
+    private Button btn_redeem; // 赎回
+    private Button btn_buy; // 买入
+    private String btnFlag = "0"; // 0:默认选中买入   1：赎回
+    private String productId; // 理财产品id
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* //设置状态栏为透明
-        initSystemBarTint();
-        //设置状态栏为字体黑色
-        OSUtils.ROM_TYPE romType =  OSUtils.getRomType();
-        if (romType== OSUtils.ROM_TYPE.MIUI){
-            StatusBarUtil.statusBarDarkMode(this,MIUI);
-        }else if (romType== OSUtils.ROM_TYPE.FLYME){
-            StatusBarUtil.statusBarDarkMode(this,FLYME);
-        }else if (romType== OSUtils.ROM_TYPE.ANDROID_M){
-            StatusBarUtil.statusBarDarkMode(this,ANDROID_M);
-        }*/
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_web);
 
@@ -80,10 +78,17 @@ public class WebActivity extends Activity implements View.OnClickListener {
         mWebview = findViewById(R.id.web_view);
         tv_web_title = findViewById(R.id.tv_web_title);
         iv_back = findViewById(R.id.iv_back);
+        tv_right_txt = findViewById(R.id.tv_right_txt);
         iv_btn_share = findViewById(R.id.iv_btn_share);
+        ll_salary_treasure_btn = findViewById(R.id.ll_salary_treasure_btn);
+        btn_redeem = findViewById(R.id.btn_redeem);
+        btn_buy = findViewById(R.id.btn_buy);
 
         iv_back.setOnClickListener(this);
         iv_btn_share.setOnClickListener(this);
+        tv_right_txt.setOnClickListener(this);
+        btn_redeem.setOnClickListener(this);
+        btn_buy.setOnClickListener(this);
 
         mWebview.getSettings().setSupportZoom(true);
         // 设置出现缩放工具
@@ -94,6 +99,7 @@ public class WebActivity extends Activity implements View.OnClickListener {
                 view.loadUrl(url);
                 return true;
             }
+
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
                 handler.proceed();
@@ -107,14 +113,20 @@ public class WebActivity extends Activity implements View.OnClickListener {
         mWebview.getSettings().setTextZoom(100);
         mWebview.getSettings().setJavaScriptEnabled(true);
         mWebview.getSettings().setDomStorageEnabled(true);
-        mWebview.addJavascriptInterface(new MyJavaScriptinterface(), "click");
+        mWebview.addJavascriptInterface(new MyJavaScriptinterface(), "NativeApp");
 
         if (type.equals(WEB_TYPE_SALARY_TREASURE_DETAIL)) {// 工资宝详情
-            tv_web_title.setText(getIntent().getExtras().getString("title"));
+            title = getIntent().getExtras().getString("title");
+            tv_web_title.setText(title);
+            tv_right_txt.setVisibility(View.VISIBLE);
+            tv_right_txt.setText("明细");
+            ll_salary_treasure_btn.setVisibility(View.VISIBLE);
+        } else if (type.equals(WEB_TYPE_REGULAR_FINANCING_DETAIL)) { // 定期理财详情
+            title = getIntent().getExtras().getString("title");
+            tv_web_title.setText(title);
+            productId = getIntent().getStringExtra("productId");
         }
-//        else if (type.equals(WEB_TYPE_NOTICE)) { // 公告详情
-//            tv_web_title.setText(getIntent().getExtras().getString("title"));
-//        } else if (type.equals(WEBTYPE_SERVICE_AGREEMENT)) {
+// else if (type.equals(WEBTYPE_SERVICE_AGREEMENT)) {
 //            tv_web_title.setText(getIntent().getExtras().getString("title"));
 //        } else if (type.equals(WEB_TYPE_ABOUT_US)) { // 关于我们
 //            tv_web_title.setText(getIntent().getExtras().getString("title"));
@@ -153,13 +165,13 @@ public class WebActivity extends Activity implements View.OnClickListener {
         }
 
         @JavascriptInterface
-        public void login() {
-//            if (type.equals(WEBTYPE_ADVERTIS_2)) {
-//                Intent i_login = new Intent();
-//                i_login.setClass(WebActivity.this, LoginActivity.class);
-//                startActivity(i_login);
-//            }
-//            WebActivity.this.finish();
+        public void buyRegularFinacial() {
+            if (type.equals(WEB_TYPE_REGULAR_FINANCING_DETAIL)) {
+                Intent intent = new Intent(WebActivity.this, RegularFinancialManagementBuyingActivity.class);
+                intent.putExtra("productId", productId);
+                intent.putExtra("title", title);
+                startActivity(intent);
+            }
         }
     }
 
@@ -175,12 +187,42 @@ public class WebActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        Intent intent;
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
+            case R.id.tv_right_txt: // (工资宝详情页头部右侧)明细
+                intent = new Intent(WebActivity.this, BillCenterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_redeem: // 赎回
+                if ("0".equals(btnFlag)) {
+                    btn_redeem.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue2));
+                    btn_redeem.setTextColor(getResources().getColor(R.color.white));
+                    btn_buy.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_white));
+                    btn_buy.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
+                    btnFlag = "1";
+                }
+                intent = new Intent(WebActivity.this, WageTreasureRedemptionActivity.class);
+                intent.putExtra("whereToEnterFlag", "2");
+                startActivity(intent);
+                break;
+            case R.id.btn_buy: // 买入 (买入时需要判断是否开户，开户的话直接跳买入页，没开户的话需要先跳绑卡页开户再进买入页)
+                if ("1".equals(btnFlag)) {
+                    btn_buy.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue2));
+                    btn_buy.setTextColor(getResources().getColor(R.color.white));
+                    btn_redeem.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_white));
+                    btn_redeem.setTextColor(getResources().getColor(R.color.main_blue_4A67F5));
+                    btnFlag = "0";
+                }
+                intent = new Intent(WebActivity.this, WageTreasureBuyingActivity.class);
+                intent.putExtra("whereToEnterFlag", "2"); // 表示从工资宝详情页进
+                startActivity(intent);
+                break;
         }
     }
+
 
     @Override
     protected void onPause() {
@@ -195,50 +237,4 @@ public class WebActivity extends Activity implements View.OnClickListener {
         stack.removeActivity(this);
     }
 
-    /** 子类可以重写改变状态栏颜色 GApp*/
-    protected int setStatusBarColor() {
-        return getColorPrimary();
-    }
-
-    /** 子类可以重写决定是否使用透明状态栏 */
-    protected boolean translucentStatusBar() {
-        return false;
-    }
-
-    /** 设置状态栏颜色 */
-    protected void initSystemBarTint() {
-        Window window = getWindow();
-        if (translucentStatusBar()) {
-            // 设置状态栏全透明
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.TRANSPARENT);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
-            return;
-        }
-        // 沉浸式状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //5.0以上使用原生方法
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(setStatusBarColor());
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //4.4-5.0使用三方工具类，有些4.4的手机有问题，这里为演示方便，不使用沉浸式
-            //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//            tintManager.setStatusBarTintEnabled(true);
-//            tintManager.setStatusBarTintColor(setStatusBarColor());
-        }
-    }
-
-    /** 获取主题色 */
-    public int getColorPrimary() {
-        TypedValue typedValue = new TypedValue();
-        getTheme().resolveAttribute(R.attr.colorPrimary, typedValue, true);
-        return typedValue.data;
-    }
 }

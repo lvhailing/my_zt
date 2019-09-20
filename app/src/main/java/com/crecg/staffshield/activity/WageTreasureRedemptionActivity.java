@@ -160,12 +160,10 @@ public class WageTreasureRedemptionActivity extends BaseActivity implements View
                 Intent intent = new Intent(WageTreasureRedemptionActivity.this, TransactionPasswordActivity.class);
                 intent.putExtra("fromFlag", "wageTreasureRedeem"); // 表示工资宝的赎回
                 intent.putExtra("whereToEnterFlag", whereToEnterFlag);
-//                intent.putExtra("prodId", prodId); // 基金代码
-//                intent.putExtra("prodSubId", prodSubId); // 基金标识码
-//                intent.putExtra("prodName", prodName); // 工资宝买入的金额
                 intent.putExtra("trsAmount", money); // 工资宝赎回的金额
                 intent.putExtra("redemptionFlag", flag); // 工资宝赎回方式
                 startActivity(intent);
+                finish();
                 break;
         }
     }

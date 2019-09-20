@@ -38,7 +38,7 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
     private TextView tv_common_title;
 
     private String btnFlag = "1"; // 1:转出     2:转入
-    private TextView tv_tips;
+    private TextView tv_tips; // 请输入招商银行尾号(1101)的银行短信验证码
     private EditText et_fast_payment_verify_code; // 银行验证码
     private TextView tv_get_verify_code; // 获取验证码
     private Button btn_next_step; // 下一步
@@ -59,10 +59,7 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void initView() {
-        iv_back = findViewById(R.id.iv_back);
-        tv_common_title = findViewById(R.id.tv_common_title);
-        iv_back.setImageResource(R.mipmap.img_arrow_left2);
-        tv_common_title.setText("快捷支付-签约");
+        setTitle();
 
         tv_tips = findViewById(R.id.tv_tips);
         et_fast_payment_verify_code = findViewById(R.id.et_fast_payment_verify_code);
@@ -75,6 +72,14 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
 
         mHandler = new MyHandler();
         btnString = getResources().getString(R.string.get_verify_code_again);
+    }
+
+    private void setTitle() {
+        iv_back = findViewById(R.id.iv_back);
+        tv_common_title = findViewById(R.id.tv_common_title);
+
+        iv_back.setImageResource(R.mipmap.img_arrow_left2);
+        tv_common_title.setText("快捷支付-签约");
     }
 
     private class MyHandler extends Handler {
@@ -106,7 +111,8 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.tv_get_verify_code: // 获取验证码
-                getBankVerifyCode();
+//                getBankVerifyCode(); 测试暂且不调接口
+                et_fast_payment_verify_code.setText("123456");
                 break;
             case R.id.btn_next_step: // 下一步
                 verifyCode = et_fast_payment_verify_code.getText().toString();
@@ -165,8 +171,8 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
      */
     private void checkPaymentIsSuccessful() {
         HashMap<String, Object> param = new HashMap<>();
-        param.put("userId", userId);
-        param.put("smsCode", verifyCode);
+        param.put("userId", "8"); // 测试userId,传8或26
+        param.put("smsCode", verifyCode); // 测试 随便传的验证码
         String data = DESUtil.encMap(param);
 
         HashMap<String, Object> paramWrapper = new HashMap<>();
@@ -190,9 +196,12 @@ public class FastPaymentActivity extends BaseActivity implements View.OnClickLis
                 if (checkIsSuccessfulDataModel.data == null) {
                     return;
                 }
-                if (Boolean.parseBoolean(checkIsSuccessfulDataModel.data.flag)) {
-                    ToastUtil.showCustom(checkIsSuccessfulDataModel.data.message);
+                if (Boolean.parseBoolean(checkIsSuccessfulDataModel.data.flag)) { // flag为true表示用户未签约过，签约成功后跳转充值页面
+                    Intent intent = new Intent(FastPaymentActivity.this, EntityBankToElectronicBankActivity.class);
+                    startActivity(intent);
                 } else {
+                    Intent intent = new Intent(FastPaymentActivity.this, EntityBankToElectronicBankActivity.class);
+                    startActivity(intent);
                     ToastUtil.showCustom(checkIsSuccessfulDataModel.data.message);
                 }
             }

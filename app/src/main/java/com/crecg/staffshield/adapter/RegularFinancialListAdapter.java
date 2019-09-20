@@ -1,6 +1,7 @@
 package com.crecg.staffshield.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.crecg.crecglibrary.network.UrlRoot;
 import com.crecg.crecglibrary.network.model.HomeAndFinancialProductItemDataModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.staffshield.R;
+import com.crecg.staffshield.activity.WebActivity;
 
 import java.util.ArrayList;
 
@@ -93,32 +96,32 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
                 itemViewHolder1.tv_surplus_money.setText(list.get(position).syAmount); // 剩余可投金额
             }
             // item 点击监听
-            initListener(itemViewHolder1.itemView, list.get(position).id);
+            initListener(itemViewHolder1.itemView, list.get(position).id,list.get(position).name);
         } else if (holder instanceof ItemViewHolder2) {  // 已售罄、计息中、已回款
             ItemViewHolder2 itemViewHolder2 = (ItemViewHolder2) holder;
             if ("success".equals(status)) { // 已满标
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
-                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate);
+                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate + "%");
                 itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString());
                 itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投");
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_sell_out);
             } else if ("fail".equals(status)) { // 募集失败
                 itemViewHolder2.tv_regular_product_name.setText(list.get(position).name); // 产品名称
-                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate); // 产品预期年化收益率
+                itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate + "%"); // 产品预期年化收益率
                 itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString()); // 产品期限
                 itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString()+"元起投"); // 产品起投金额
                 itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_sell_fail);
             } else {
                 if ("repaying".equals(status)) { // 计息中
                     itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
-                    itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate);
+                    itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate + "%");
                     itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString());
                     itemViewHolder2.tv_initial_investment_amount.setText(list.get(position).tenderInitAmount.toString() + "元起投");
                     itemViewHolder2.iv_product_state.setBackgroundResource(R.mipmap.img_regular_product_interest_bearing);
                 } else if ("repayed".equals(status) || "prepayed".equals(status)) { // 已回款
                     itemViewHolder2.tv_regular_product_name.setText(list.get(position).name);
                     itemViewHolder2.tv_regular_product_name.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
-                    itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate);
+                    itemViewHolder2.tv_product_annualized_return.setText(list.get(position).annualRate + "%");
                     itemViewHolder2.tv_product_annualized_return.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
                     itemViewHolder2.tv_product_cycle.setText(list.get(position).timeLimit.toString());
                     itemViewHolder2.tv_product_cycle.setTextColor(mContext.getResources().getColor(R.color.txt_black_999999));
@@ -130,7 +133,7 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
                 }
             }
             // item 点击监听
-            initListener(itemViewHolder2.itemView, list.get(position).id);
+            initListener(itemViewHolder2.itemView, list.get(position).id,list.get(position).name);
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
 
@@ -144,11 +147,8 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
                 case NO_LOAD_MORE:  //没有加载更多 隐藏
                     footerViewHolder.loadLayout.setVisibility(View.GONE);
                     break;
-
             }
         }
-
-
     }
 
     @Override
@@ -229,15 +229,16 @@ public class RegularFinancialListAdapter extends RecyclerView.Adapter<RecyclerVi
      * item 点击监听
      * @param itemView
      */
-    private void initListener(View itemView, final String id) {
+    private void initListener(View itemView, final String id,final String name) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { // 跳转到问题详情
-//                Intent intent = new Intent(mContext, TrainingAskDetailsActivity.class);
-//                intent.putExtra("questionId", id);
-//                Log.i("hh","我参与的---提问列表Item的questionId:"+id);
-//                mContext.startActivity(intent);
-                ToastUtil.showCustom("当前item的flag = "+id);
+            public void onClick(View v) { // 跳转到定期理财详情
+//                ToastUtil.showCustom("当前item的flag = "+id);
+                Intent intent = new Intent(mContext, WebActivity.class);
+                intent.putExtra("type",WebActivity.WEB_TYPE_REGULAR_FINANCING_DETAIL);
+                intent.putExtra("url", UrlRoot.URL_REGULAR_FINANCING_DETAIL +id);
+                intent.putExtra("title",name);
+                mContext.startActivity(intent);
             }
         });
     }

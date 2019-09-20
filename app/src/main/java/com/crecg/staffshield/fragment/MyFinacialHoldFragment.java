@@ -53,6 +53,7 @@ public class MyFinacialHoldFragment extends Fragment {
     private int currentPage = 1;    //当前页
     private int currentPosition; // 当前tab位置（0：持有中，1：已回款）
     private String userId;
+    private SwipeRefreshLayout swipe_refresh;
     private ViewSwitcher vs;
     private ArrayList<ProductModelTestData> list; // 模拟数据
 
@@ -100,7 +101,7 @@ public class MyFinacialHoldFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        initData();
+//        initData();
         View view = inflater.inflate(R.layout.fragment_recycle_layout, container, false); // Todo need modify
         initView(view);
         initListener();
@@ -156,7 +157,8 @@ public class MyFinacialHoldFragment extends Fragment {
     private void initView(View view) {
         context = getActivity();
 
-//        vs = (ViewSwitcher) view.findViewById(R.id.vs);
+        vs = (ViewSwitcher) view.findViewById(R.id.vs);
+        swipe_refresh = view.findViewById(R.id.swipe_refresh);
         recycler_view = view.findViewById(R.id.recycler_view);
 
         initRecyclerView();
@@ -189,11 +191,19 @@ public class MyFinacialHoldFragment extends Fragment {
                 .subscribe(new CommonObserverAdapter<String>() {
                     @Override
                     public void onMyError() {
+                        if (swipe_refresh.isRefreshing()) {
+                            //请求返回后，无论本次请求成功与否，都关闭下拉旋转
+                            swipe_refresh.setRefreshing(false);
+                        }
                         ToastUtil.showCustom("我的理财列表获取数据失败");
                     }
 
                     @Override
                     public void onMySuccess(String result) {
+                        if (swipe_refresh.isRefreshing()) {
+                            //请求返回后，无论本次请求成功与否，都关闭下拉旋转
+                            swipe_refresh.setRefreshing(false);
+                        }
                         if (result == null) {
                             return;
                         }
@@ -221,19 +231,19 @@ public class MyFinacialHoldFragment extends Fragment {
                             totalList.clear();
                         }
                         totalList.addAll(everyList);
-                        myFinaciaHoldAdapter.notifyDataSetChanged();
+//                        myFinaciaHoldAdapter.notifyDataSetChanged();
 //                         0:从后台获取到数据展示的布局；1：从后台没有获取到数据时展示的布局；
-//                        if (totalList.size() == 0) {
-//                            vs.setDisplayedChild(1);
-//                        } else {
-//                            vs.setDisplayedChild(0);
-//                        }
-//                        if (totalList.size() != 0 && totalList.size() % 10 == 0) {
-//                            vs.setDisplayedChild(0);
-//                            myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.PULLUP_LOAD_MORE);
-//                        } else {
-//                            myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.NO_LOAD_MORE);
-//                        }
+                        if (totalList.size() == 0) {
+                            vs.setDisplayedChild(1);
+                        } else {
+                            vs.setDisplayedChild(0);
+                        }
+                        if (totalList.size() != 0 && totalList.size() % 10 == 0) {
+                            vs.setDisplayedChild(0);
+                            myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.PULLUP_LOAD_MORE);
+                        } else {
+                            myFinaciaHoldAdapter.changeMoreStatus(myFinaciaHoldAdapter.NO_LOAD_MORE);
+                        }
 
                     }
                 });

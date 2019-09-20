@@ -11,7 +11,6 @@ import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
 import com.crecg.crecglibrary.network.model.BankBillDetailDataModel;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
-import com.crecg.crecglibrary.network.model.MyDataModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
@@ -67,6 +66,7 @@ public class BankBillDetailActivity extends BaseActivity {
         type = getIntent().getStringExtra("type");
         transId = getIntent().getStringExtra("transId");
         Log.i("hh","transId = " + transId);
+
         tv_title_category = findViewById(R.id.tv_title_category);
         tv_transfer_amount = findViewById(R.id.tv_transfer_amount);
         iv_top_circle = findViewById(R.id.iv_top_circle);
@@ -109,7 +109,7 @@ public class BankBillDetailActivity extends BaseActivity {
         HashMap<String, Object> paramWrapper = new HashMap<>();
         paramWrapper.put("requestKey", data);
         RemoteFactory.getInstance().getProxy(CommonRequestProxy.class)
-                .getRechargeWithdrawalData(paramWrapper)
+                .getRechargeWithdrawalDetailData(paramWrapper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CommonObserverAdapter<String>() {

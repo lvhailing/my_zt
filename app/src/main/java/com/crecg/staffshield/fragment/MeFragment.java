@@ -223,7 +223,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     intent = new Intent(context, AccountBalanceActivity.class);
                     startActivity(intent);
                 break;
-            case R.id.btn_change_into: // (联名卡)转入  需要判断是否绑卡
+            case R.id.btn_change_into: // (联名卡)转入即充值  需要判断是否绑卡
                 if ("2".equals(btnFlag)) {
                     btn_change_into.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
                     btn_change_into.setTextColor(getResources().getColor(R.color.white));
@@ -232,9 +232,10 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     btnFlag = "1";
                 }
                 intent = new Intent(context, EntityBankToElectronicBankActivity.class);
+                intent.putExtra("fromFlag", "meFragment");
                 startActivity(intent);
                 break;
-            case R.id.btn_turn_out: // (联名卡)转出  需要判断是否绑卡
+            case R.id.btn_turn_out: // (联名卡)转出即提现  需要判断是否绑定银行卡
                 if ("1".equals(btnFlag)) {
                     btn_turn_out.setBackground(getResources().getDrawable(R.drawable.shape_rect_btn_blue));
                     btn_turn_out.setTextColor(getResources().getColor(R.color.white));

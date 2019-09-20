@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crecg.crecglibrary.network.model.BuyFundProgressModel;
+import com.crecg.crecglibrary.network.model.TransactionDetailListModel;
 import com.crecg.staffshield.R;
 import com.crecg.staffshield.adapter.BuyFundDetailAdapter;
 import com.crecg.staffshield.common.BaseActivity;
@@ -34,7 +35,7 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
     private String fromFlag; // wageTreasureRedeem:工资宝赎回     wageTreasureBuy:工资宝买入
     private String whereToEnterFlag; //  1:首页进   2：工资宝详情页进
     private String trsAmount;
-    private List<BuyFundProgressModel> prodList;
+    private List<TransactionDetailListModel> prodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
         fromFlag = getIntent().getStringExtra("fromFlag");
         whereToEnterFlag = getIntent().getStringExtra("whereToEnterFlag");
         trsAmount = getIntent().getStringExtra("trsAmount");
-        prodList = (List<BuyFundProgressModel>) getIntent().getSerializableExtra("prodList");
+        prodList = (List<TransactionDetailListModel>) getIntent().getSerializableExtra("prodList");
 
         initTitle();
 
@@ -71,13 +72,14 @@ public class WageTreasureTurnSuccessActivity extends BaseActivity {
                 if ("1".equals(whereToEnterFlag)) { // 表示从首页工资宝进
                     intent = new Intent(WageTreasureTurnSuccessActivity.this, MainActivity.class);
                     intent.putExtra("goBackFlag", "1"); // 返回到首页
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 } else if ("2".equals(whereToEnterFlag)) { // 表示从工资宝详情页进
-                    intent = new Intent(WageTreasureTurnSuccessActivity.this, SalaryTreasureDetailWebActivity.class);
-                    intent.putExtra("goBackFlag", "2"); // 返回到工资宝详情页
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    intent = new Intent(WageTreasureTurnSuccessActivity.this, SalaryTreasureDetailWebActivity.class);
+//                    intent.putExtra("goBackFlag", "2"); // 返回到工资宝详情页
+                    finish();
                 }
-                startActivity(intent);
+
             }
         });
 

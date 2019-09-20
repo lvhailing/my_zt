@@ -11,15 +11,12 @@ import android.widget.TextView;
 import com.crecg.crecglibrary.RemoteFactory;
 import com.crecg.crecglibrary.network.CommonObserverAdapter;
 import com.crecg.crecglibrary.network.CommonRequestProxy;
-import com.crecg.crecglibrary.network.model.BankBillDetailDataModel;
-import com.crecg.crecglibrary.network.model.BankProgressModel;
 import com.crecg.crecglibrary.network.model.CommonResultModel;
 import com.crecg.crecglibrary.network.model.FundBillDetailDataModel;
-import com.crecg.crecglibrary.network.model.FundDetailListModel;
+import com.crecg.crecglibrary.network.model.TransactionDetailListModel;
 import com.crecg.crecglibrary.utils.ToastUtil;
 import com.crecg.crecglibrary.utils.encrypt.DESUtil;
 import com.crecg.staffshield.R;
-import com.crecg.staffshield.adapter.BankInfoAdapter;
 import com.crecg.staffshield.adapter.FundDetailAdapter;
 import com.crecg.staffshield.common.BaseActivity;
 import com.google.gson.Gson;
@@ -49,8 +46,8 @@ public class FundBillDetailActivity extends BaseActivity {
     private TextView tv_flow_num; // 流水号
     private String type;
     private String transId;  // 渠道流水号（充值或提现成功后返回）
-    private ArrayList<FundDetailListModel> totalList = new ArrayList<>();
-    private List<FundDetailListModel> everyList;
+    private ArrayList<TransactionDetailListModel> totalList = new ArrayList<>();
+    private List<TransactionDetailListModel> everyList;
     private FundDetailAdapter adapter;
 
 

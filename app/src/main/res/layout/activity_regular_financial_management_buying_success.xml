@@ -45,7 +45,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="30dp"
                     android:layout_marginTop="22dp"
-                    android:text="50000.00"
+                    tools:text="50000.00"
                     android:textColor="@color/txt_black_333333"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
@@ -64,208 +64,14 @@
                     android:textColor="@color/txt_black_999999"
                     android:textSize="15sp"/>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:layout_marginTop="26dp"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="15dp"/>
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/img_check_mark"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:text="买入成功"
-                        android:textColor="@color/main_blue_4A67F5"
-                        android:textSize="15sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="46dp"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="43dp"
-                        android:background="@mipmap/img_vertical_line_blue_and_gray"/>
-
-                    <TextView
-                        android:id="@+id/tv_buying_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="22dp"
-                        android:layout_marginTop="5dp"
-                        android:text="11-11 17:12"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/img_circle_gray"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:text="开始计算收益"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="15sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="46dp"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="43dp"
-                        android:background="@color/bg_line"/>
-
-                    <TextView
-                        android:id="@+id/tv_start_calculating_earnings_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="22dp"
-                        android:layout_marginTop="5dp"
-                        android:text="11-30"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_start_calculating_earnings_week"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="5dp"
-                        android:text="周三"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/img_circle_gray"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:text="理财到期"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="15sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="46dp"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="43dp"
-                        android:background="@color/bg_line"/>
-
-                    <TextView
-                        android:id="@+id/tv_maturity_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="22dp"
-                        android:layout_marginTop="5dp"
-                        android:text="11-30"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_maturity_time_week"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="5dp"
-                        android:text="周三"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="34dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@mipmap/img_circle_gray"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
-                        android:text="本息到账"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="15sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="46dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_principal_and_interest_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="22dp"
-                        android:layout_marginTop="5dp"
-                        android:text="12-01"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:id="@+id/tv_principal_and_interest_week"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginTop="5dp"
-                        android:text="周四"
-                        android:textColor="@color/txt_black_999999"
-                        android:textSize="12sp"/>
-                </LinearLayout>
             </LinearLayout>
 
             <Button

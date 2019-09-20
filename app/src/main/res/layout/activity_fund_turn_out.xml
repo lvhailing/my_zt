@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include layout="@layout/title"/>
@@ -32,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="中铁"
+                android:text="堪设"
                 android:textColor="@color/txt_black_666666"
                 android:textSize="14sp"/>
 
@@ -96,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="5dp"
-                android:text="招商银行"
+                tools:text="招商银行"
                 android:textColor="@color/txt_black_666666"
                 android:textSize="14sp"/>
 
@@ -105,7 +106,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="（2321）"
+                tools:text="（2321）"
                 android:textColor="@color/txt_black_666666"
                 android:textSize="14sp"/>
         </LinearLayout>

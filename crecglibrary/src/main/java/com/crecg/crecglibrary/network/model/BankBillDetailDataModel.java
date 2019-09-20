@@ -1,6 +1,8 @@
 package com.crecg.crecglibrary.network.model;
 
-// 银行卡充值、提现详情页数据Model
+/**
+ *  银行卡充值、提现详情页数据Model
+ */
 public class BankBillDetailDataModel {
     public String flag; // true/false 获取成功或失败
     public String trsType; // 当flag为true时返回 交易类型: RCGI=充值  WTHI=提现

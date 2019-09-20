@@ -22,27 +22,30 @@ public class UrlRoot {
 
     private static final int mEnvironment = 3;  //1测试环境，2正式环境 ,3和4均为个人服务器地址
 
-    // H5 页面地址
-
-    // 工资宝详情
-    public static final String URL_SALARY_TREASURE_DETAIL = "http://192.168.1.246:83/" + "myGongZiBao/";
-
     static {
         switch (mEnvironment) {
-            case ENV_DEV: // 测试环境
-                ROOT_URL = "http://123.126.102.219:30093/";
+            case ENV_DEV: // 测试环境 1
+                ROOT_URL = "http://192.168.1.38:83/";
                 break;
-            case ENV_PRODUCT: // 正式环境
+            case ENV_PRODUCT: // 正式环境 2
                 ROOT_URL = "http://v.juhe.cn/";
                 break;
-            case ENV_LVJ: // 吕剑
+            case ENV_LVJ: // 吕剑 3
                 ROOT_URL = "http://192.168.1.246:83/";
                 break;
-            case ENV_LHB: // 李红彬
+            case ENV_LHB: // 李红彬 4
                 ROOT_URL = "http://192.168.1.241:83/";
                 break;
             default:
                 break;
         }
     }
+
+    // 以下均为H5 页面地址
+
+    // 工资宝详情
+    public static final String URL_SALARY_TREASURE_DETAIL = ROOT_URL + "myGongZiBao/";
+
+    // 工资宝详情
+    public static final String URL_REGULAR_FINANCING_DETAIL = ROOT_URL + "finaProductKanSe/";
 }
